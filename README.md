@@ -110,8 +110,16 @@ codex plugin marketplace upgrade abp-agent-skills   # refresh the snapshot later
 
 ### Cursor
 
-Install from the marketplace panel, or import a local checkout to
-`~/.cursor/plugins/local/` for development.
+Add this repository as a marketplace, then install the plugins you want:
+
+1. Open **Browse Marketplace** and click **Add Marketplace → Import from GitHub**
+   (*Add a marketplace from a repository*).
+2. Paste the repo URL: `https://github.com/abpframework/abp-skills`
+3. Back in **Customize**, install plugins from the **Abp Agent Skills** section
+   (skills appear in chat as `/skill-name`, or set them to *Agent Decides*).
+
+The marketplace is added to your Cursor account and reads
+`.cursor-plugin/marketplace.json` from the repo — no separate publishing needed.
 
 ### VS Code / Copilot (Preview)
 
