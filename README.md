@@ -73,6 +73,21 @@ plugins are installed, so install by **profile** rather than one isolated plugin
   `abp-runtime` for distributed concerns).
 - **Everything** — all 15, if you'd rather not think about it. (On Codex, a full install can truncate the skill menu; a smaller profile is safer there.)
 
+### Install everything at once
+
+To pull in all 15 without repeating the install command, the repo ships
+convenience scripts that add the marketplace and install every plugin in one go:
+
+```bash
+scripts/install-all-plugins.sh          # Claude Code
+scripts/install-all-plugins-codex.sh    # Codex CLI
+scripts/install-all-plugins.ps1         # Windows (PowerShell)
+```
+
+They default to the `abpframework/abp-skills` marketplace; override the source
+with `ABP_SKILLS_REPO=owner/repo`. Restart the tool (or run `/reload-plugins` in
+Claude Code) afterward to load the skills.
+
 ### Claude Code
 
 ```bash
