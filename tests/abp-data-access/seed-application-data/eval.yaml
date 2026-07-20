@@ -1,0 +1,34 @@
+scenarios:
+  - name: "Seed idempotent host and tenant data"
+    prompt: "Create src/Data/BookStoreDataSeedContributor.cs that ABP discovers through DI. Seed one default Book idempotently in the DataSeedContext tenant, explain the host case, and show how the DbMigrator can pass AdminEmail and AdminPassword properties through IDataSeeder."
+    expect_activation: true
+    assertions:
+      - type: "file_exists"
+        path: "src/Data/BookStoreDataSeedContributor.cs"
+      - type: "output_contains"
+        value: "IDataSeedContributor"
+      - type: "output_contains"
+        value: "ITransientDependency"
+      - type: "output_matches"
+        pattern: "CurrentTenant\\.Change\\(context\\??\\.TenantId\\)|_currentTenant\\.Change\\(context\\??\\.TenantId\\)"
+      - type: "output_contains"
+        value: "GetCountAsync"
+      - type: "output_contains"
+        value: "WithProperty"
+    rubric:
+      - "Makes the contributor safe to run repeatedly and changes the current tenant to DataSeedContext.TenantId, where null represents host data."
+      - "Uses IDataSeeder/DataSeedContext properties from the DbMigrator boundary rather than EF Core HasData."
+    timeout: 240
+
+  - name: "Route schema migration seeding to EF Core integration"
+    prompt: "Add fixed lookup rows to an EF Core model with modelBuilder.Entity<Country>().HasData(...) and generate the database migration that inserts them."
+    expect_activation: false
+    assertions:
+      - type: "output_contains"
+        value: "HasData"
+      - type: "output_matches"
+        pattern: "migration|Add-Migration|dotnet ef migrations add"
+    rubric:
+      - "Routes EF Core model seeding and migrations to ef-core-integration."
+      - "Does not replace an explicit HasData migration request with IDataSeedContributor."
+    timeout: 120

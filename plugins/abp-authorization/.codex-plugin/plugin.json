@@ -1,0 +1,14 @@
+{
+  "name": "abp-authorization",
+  "version": "1.0.0",
+  "description": "Authorization in ABP: permission definitions, authorization checks, current user, and resource-based authorization.",
+  "author": {
+    "name": "abpframework"
+  },
+  "interface": {
+    "displayName": "ABP Authorization"
+  },
+  "skills": [
+    "./skills/"
+  ]
+}

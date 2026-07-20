@@ -1,0 +1,14 @@
+{
+  "name": "abp-ui",
+  "version": "1.0.0",
+  "description": "ABP UI development for Blazor, Angular, and MVC/Razor: pages, lists and forms, module UI extensions, menus, theming, localization, bundling, and browser JS API consumption.",
+  "author": {
+    "name": "abpframework"
+  },
+  "interface": {
+    "displayName": "ABP UI"
+  },
+  "skills": [
+    "./skills/"
+  ]
+}

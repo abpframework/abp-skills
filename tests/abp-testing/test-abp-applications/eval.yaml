@@ -1,0 +1,75 @@
+scenarios:
+  - name: "Write provider-shared ABP integration tests"
+    prompt: "Create test/Application/IssueAppService_Tests.cs as an abstract ABP application test and describe the concrete EF Core and MongoDB subclasses. Resolve the real app service, query seeded data, and explain when WithUnitOfWorkAsync is required."
+    expect_activation: true
+    assertions:
+      - type: "file_exists"
+        path: "test/Application/IssueAppService_Tests.cs"
+      - type: "output_matches"
+        pattern: "(AbpIntegratedTest|ApplicationTestBase)"
+      - type: "output_contains"
+        value: "GetRequiredService"
+      - type: "output_contains"
+        value: "WithUnitOfWorkAsync"
+      - type: "output_matches"
+        pattern: "(EntityFrameworkCoreTestModule|MongoDbTestModule)"
+    rubric:
+      - "Keeps the shared test abstract over TStartupModule and provides concrete provider test classes for discovery."
+      - "Uses real DI services and template seed data instead of mocking ABP persistence."
+      - "Requires an explicit test UOW for direct DbContext access or materializing a repository IQueryable, not for ordinary app-service calls."
+    timeout: 240
+
+  - name: "Prove authorization denial and transaction rollback"
+    prompt: "Design ABP integration tests that prove [Authorize] denies DeleteAsync and that a flushed insert rolls back for both generated EF Core and MongoDB test providers. Account for the generated test modules' authorization and transaction defaults."
+    expect_activation: true
+    assertions:
+      - type: "output_contains"
+        value: "AddAlwaysAllowAuthorization"
+      - type: "output_contains"
+        value: "IMethodInvocationAuthorizationService"
+      - type: "output_contains"
+        value: "AddAlwaysDisableUnitOfWorkTransaction"
+      - type: "output_contains"
+        value: "SaveChangesAsync"
+      - type: "output_contains"
+        value: "UseSingleNodeReplicaSet"
+    rubric:
+      - "Restores the real method-invocation authorization path before substituting a deterministic permission denial and asserts protected state is unchanged."
+      - "Restores UnitOfWorkManager for the EF rollback-specific base, requests a transaction, flushes before throwing, and verifies absence in a new UOW."
+      - "Uses the generated MongoSandbox single-node replica set for MongoDB transaction support without applying the EF-only manager replacement there."
+    timeout: 240
+
+  - name: "Route production UOW policy away from testing"
+    prompt: "Configure production HTTP transaction defaults with AbpUnitOfWorkDefaultOptions, add a requiresNew transactional scope in a background job, and explain CompleteAsync and SaveChangesAsync semantics."
+    expect_activation: false
+    assertions:
+      - type: "output_contains"
+        value: "AbpUnitOfWorkDefaultOptions"
+      - type: "output_matches"
+        pattern: 'requiresNew\s*:\s*true'
+      - type: "output_contains"
+        value: "CompleteAsync"
+    rubric:
+      - "Routes runtime transaction and unit-of-work configuration to manage-units-of-work."
+      - "Does not introduce generated test bases or test-only service replacements into production configuration."
+    timeout: 120
+
+  - name: "Route Angular component test out of application testing"
+    prompt: "Write a unit test for my ABP Angular BooksComponent with a TestBed and no backend."
+    expect_activation: false
+    assertions:
+      - type: "output_matches"
+        pattern: "(test-angular-ui|CoreTestingModule|TestBed)"
+    rubric:
+      - "Angular component tests are test-angular-ui, not the server-side integration test skill."
+    timeout: 120
+
+  - name: "Route MVC/Razor page test to test-mvc-razor-ui"
+    prompt: "Write a test that requests an ABP Razor page over HTTP and asserts on the returned HTML."
+    expect_activation: false
+    assertions:
+      - type: "output_matches"
+        pattern: "(test-mvc-razor-ui|AbpWebApplicationFactoryIntegratedTest|GetResponseAsStringAsync)"
+    rubric:
+      - "HTTP/Razor page tests are test-mvc-razor-ui, not the server-side application-layer integration test skill."
+    timeout: 120

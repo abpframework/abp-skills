@@ -1,0 +1,58 @@
+scenarios:
+  - name: "Server-side paged list with ListService"
+    prompt: "Build an ABP Angular BooksComponent that shows a server-side paged, sortable, searchable list from BookService.getList, and refreshes after a delete. Handle loading state and the total count the ABP way, and make sure the query state doesn't leak when leaving the page."
+    expect_activation: true
+    assertions:
+      - type: "output_contains"
+        value: "ListService"
+      - type: "output_matches"
+        pattern: "providers:\\s*\\[\\s*ListService"
+      - type: "output_contains"
+        value: "hookToQuery"
+      - type: "output_contains"
+        value: "PagedResultDto"
+      - type: "output_contains"
+        value: "requestStatus$"
+      - type: "output_contains"
+        value: "res.totalCount"
+    rubric:
+      - "Provides ListService at the component level (not root) and uses hookToQuery, not hand-rolled paging state."
+      - "Reads totalCount off the response and uses requestStatus$ rather than the deprecated isLoading$ or a non-existent totalCount$."
+      - "Refreshes with list.get() after mutations."
+    timeout: 240
+
+  - name: "Reactive form with ABP automatic validation"
+    prompt: "Create an ABP Angular reactive create form for a Book (name required, price >= 0). Show the framework's localized validation messages without writing per-field error markup, and mention how to override a validation message and how to opt a field out of validation."
+    expect_activation: true
+    assertions:
+      - type: "output_matches"
+        pattern: "(ngx-validate|DEFAULT_VALIDATION_BLUEPRINTS|withValidationBluePrint)"
+      - type: "output_contains"
+        value: "Validators.required"
+      - type: "output_contains"
+        value: "skipValidation"
+    rubric:
+      - "Relies on @ngx-validate/core automatic messages instead of hand-written *ngIf error blocks."
+      - "Overrides messages via the validation blueprints and opts out with skipValidation."
+    timeout: 180
+
+  - name: "Route proxy generation to abp-cli-commands"
+    prompt: "I changed a DTO on my ABP backend. Regenerate just the Angular service and model proxies — only the generation step."
+    expect_activation: false
+    assertions:
+      - type: "output_matches"
+        pattern: "(abp-cli-commands|generate-proxy -t ng|nx.generators:generate-proxy)"
+    rubric:
+      - "Pure proxy generation/regeneration belongs to abp-cli-commands (it owns generate-proxy and the NX generator), not to building lists and forms or to angular-ui."
+      - "Does not pivot into ListService or form validation."
+    timeout: 120
+
+  - name: "Route module-page extension away to extend-angular-module-ui"
+    prompt: "Add a custom 'Last login' column and a row action to the shipped ABP Identity users grid."
+    expect_activation: false
+    assertions:
+      - type: "output_matches"
+        pattern: "(extend-angular-module-ui|entityPropContributors|EntityProp)"
+    rubric:
+      - "Adding columns/actions to a shipped module's page is the extension system (extend-angular-module-ui), a different API from building your own list."
+    timeout: 120

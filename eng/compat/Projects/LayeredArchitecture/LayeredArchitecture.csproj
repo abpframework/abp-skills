@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <Compile Include="../../Skills/LayeredArchitecture.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.Ddd.Application.Contracts" />
+    <PackageReference Include="Volo.Abp.Ddd.Domain" />
+  </ItemGroup>
+</Project>

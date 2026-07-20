@@ -1,0 +1,53 @@
+scenarios:
+  - name: "Design a full CRUD application service contract"
+    prompt: "Design the ABP application contract and service for Book with distinct detail, list, create, and update DTOs. Explain the generic base types, repository dependency, mappings, and authorization policy properties."
+    expect_activation: true
+    assertions:
+      - type: "output_matches"
+        pattern: "ICrudAppService<|CrudAppService<"
+      - type: "output_contains"
+        value: "GetPolicyName"
+      - type: "output_matches"
+        pattern: "(GetList|Create|Update|Delete)PolicyName"
+    rubric:
+      - "Selects the widest CRUD contract/base overload because the public DTO shapes are distinct."
+      - "Covers entity-to-detail, entity-to-list, create-to-entity, and update-onto-entity mapping paths."
+      - "Assigns all five CRUD policy properties rather than relying on null policy names."
+    timeout: 180
+
+  - name: "Implement filtered CRUD service without corrupting pagination"
+    prompt: "Create src/Books/BookCrudAppService.cs for a standard Book CRUD service. Add a title filter in CreateFilteredQueryAsync, but leave sorting and paging to the ABP base pipeline. Summarize how the base pipeline handles sorting, paging, and total count."
+    expect_activation: true
+    setup:
+      files:
+        - path: "src/Books/Book.cs"
+          content: |
+            public class Book : AggregateRoot<Guid>
+            {
+                public string Title { get; private set; } = string.Empty;
+            }
+    assertions:
+      - type: "file_exists"
+        path: "src/Books/BookCrudAppService.cs"
+      - type: "output_contains"
+        value: "CreateFilteredQueryAsync"
+      - type: "output_matches"
+        pattern: "(sorting|Sorting|paging|Paging|ApplySorting|ApplyPaging)"
+    rubric:
+      - "The implementation derives from the matching CrudAppService overload and injects IRepository<Book, Guid>."
+      - "CreateFilteredQueryAsync adds only filtering and does not apply Skip, Take, or OrderBy."
+      - "The response explains that total count is computed before sorting and paging."
+    timeout: 240
+
+  - name: "Route workflow command away from CRUD skill"
+    prompt: "Implement an ApproveInvoiceAsync command that validates a pending invoice, invokes domain behavior, publishes an event, and returns a result. This is not a get/list/create/update/delete resource."
+    expect_activation: false
+    assertions:
+      - type: "output_matches"
+        pattern: "(ApplicationService|ApproveInvoiceAsync|explicit method)"
+      - type: "output_matches"
+        pattern: "(domain|workflow|command)"
+    rubric:
+      - "Routes the request to the general application-services workflow instead of forcing it into CrudAppService."
+      - "Keeps the non-CRUD command explicit and preserves domain behavior."
+    timeout: 120

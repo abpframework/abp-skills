@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <Compile Include="../../Skills/BlazorUi.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.AspNetCore.Components" />
+    <PackageReference Include="Volo.Abp.BlazoriseUI" />
+    <PackageReference Include="Volo.Abp.Ddd.Application.Contracts" />
+    <PackageReference Include="Volo.Abp.Timing" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,32 @@
+scenarios:
+  - name: "Load runtime plug-in modules from a recursive folder"
+    prompt: "Add runtime plug-ins to an ABP ASP.NET Core host. Load module DLLs recursively from a PlugIns folder through the AddApplicationAsync options callback, and show the minimum plug-in module class. The host must not take a compile-time reference to the plug-in assembly."
+    expect_activation: true
+    assertions:
+      - type: "output_contains"
+        value: "options.PlugInSources.AddFolder"
+      - type: "output_contains"
+        value: "SearchOption.AllDirectories"
+      - type: "output_contains"
+        value: "AbpModule"
+      - type: "output_contains"
+        value: "AddApplicationAsync"
+    rubric:
+      - "Configures AbpApplicationCreationOptions.PlugInSources rather than adding a project reference or DependsOn edge to the host."
+      - "Uses SearchOption.AllDirectories explicitly because folder plug-in loading is non-recursive by default."
+    timeout: 180
+
+  - name: "Route an ordinary referenced module to module definition"
+    prompt: "Create a normal reusable Inventory module that is referenced at compile time, derives from AbpModule, declares DependsOn dependencies, and registers services in ConfigureServices. It is not loaded from a DLL folder."
+    expect_activation: false
+    assertions:
+      - type: "output_contains"
+        value: "AbpModule"
+      - type: "output_matches"
+        pattern: "\\[DependsOn\\("
+      - type: "output_contains"
+        value: "ConfigureServices"
+    rubric:
+      - "Routes ordinary compile-time module creation to define-application-modules."
+      - "Does not add PlugInSources when runtime plug-in discovery was not requested."
+    timeout: 120

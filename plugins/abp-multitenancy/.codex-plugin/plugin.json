@@ -1,0 +1,14 @@
+{
+  "name": "abp-multitenancy",
+  "version": "1.0.0",
+  "description": "ABP multi-tenancy: tenant-aware entities, current tenant resolution, tenant switching, per-tenant databases, and data isolation.",
+  "author": {
+    "name": "abpframework"
+  },
+  "interface": {
+    "displayName": "ABP Multitenancy"
+  },
+  "skills": [
+    "./skills/"
+  ]
+}

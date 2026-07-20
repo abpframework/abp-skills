@@ -1,0 +1,34 @@
+scenarios:
+  - name: "Extend Identity user and replace its application service"
+    prompt: "Customize the packaged ABP Identity module without editing its source. Add a required SocialSecurityNumber to IdentityUser plus create, update, and output DTOs, map it to a 64-character EF Core column, and replace IIdentityUserAppService by inheriting IdentityUserAppService while keeping every expected injection path working."
+    expect_activation: true
+    assertions:
+      - type: "output_contains"
+        value: "ObjectExtensionManager.Instance.Modules()"
+      - type: "output_contains"
+        value: "AddOrUpdateProperty"
+      - type: "output_contains"
+        value: "MapEfCoreProperty<IdentityUser, string>"
+      - type: "output_matches"
+        pattern: "Dependency\\(ReplaceServices\\s*=\\s*true\\)"
+      - type: "output_matches"
+        pattern: "ExposeServices\\([^\\n]*IIdentityUserAppService[^\\n]*IdentityUserAppService"
+    rubric:
+      - "Defines the extra property separately for the entity and each exposed DTO, then maps a dedicated EF Core column and calls for a migration."
+      - "Replaces the service explicitly and exposes the interface, base class, and custom class so all documented injection paths resolve the override."
+    timeout: 300
+
+  - name: "Route a brand-new module class to module definition"
+    prompt: "Build a new reusable Payments module from scratch with its own AbpModule class, DependsOn dependencies, options, and startup hook. No pre-built module is being overridden."
+    expect_activation: false
+    assertions:
+      - type: "output_contains"
+        value: "AbpModule"
+      - type: "output_matches"
+        pattern: "\\[DependsOn\\("
+      - type: "output_contains"
+        value: "ConfigureServices"
+    rubric:
+      - "Routes creation and wiring of a new module to define-application-modules."
+      - "Does not introduce ObjectExtensionManager or replacement services without a consumed module to customize."
+    timeout: 120

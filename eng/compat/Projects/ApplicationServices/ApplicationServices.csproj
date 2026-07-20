@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <Compile Include="../../Skills/ApplicationServices.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.Ddd.Application" />
+    <PackageReference Include="Volo.Abp.Ddd.Domain" />
+    <PackageReference Include="Volo.Abp.ObjectMapping" />
+    <PackageReference Include="Volo.Abp.Uow" />
+    <PackageReference Include="Volo.Abp.Validation" />
+  </ItemGroup>
+</Project>

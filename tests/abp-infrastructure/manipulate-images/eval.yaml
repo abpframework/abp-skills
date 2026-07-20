@@ -1,0 +1,38 @@
+scenarios:
+  - name: "Compress a JPEG byte array with a provider"
+    prompt: "In my ABP media module, compress an uploaded JPEG byte array using ABP's image abstractions with the ImageSharp provider, and handle the result state correctly."
+    expect_activation: true
+    assertions:
+      - type: "output_contains"
+        value: "IImageCompressor"
+      - type: "output_contains"
+        value: "AbpImagingImageSharpModule"
+      - type: "output_matches"
+        pattern: "ImageProcessState\\.(Done|Canceled|Unsupported)"
+    rubric:
+      - "Uses IImageCompressor.CompressAsync and depends on a concrete provider module (ImageSharp/MagickNet/SkiaSharp), not only the abstractions."
+      - "Checks result.State (Done/Canceled/Unsupported) before consuming Result."
+    timeout: 240
+  - name: "Resize an image with crop mode"
+    prompt: "Resize an image stream to 640x360 with crop mode using ABP's image resizer, and throw if the resize did not succeed."
+    expect_activation: true
+    assertions:
+      - type: "output_contains"
+        value: "IImageResizer"
+      - type: "output_contains"
+        value: "ImageResizeArgs"
+      - type: "output_matches"
+        pattern: "ImageResizeMode\\.Crop"
+    rubric:
+      - "Uses IImageResizer.ResizeAsync with ImageResizeArgs and ImageResizeMode.Crop."
+      - "Consumes result.Result only when State is Done."
+    timeout: 240
+  - name: "Cache processed image results"
+    prompt: "I want to cache the resized image bytes in a distributed cache so I don't reprocess the same image on every request."
+    expect_activation: false
+    assertions:
+      - type: "output_contains"
+        value: "distributed-caching-and-locking"
+    rubric:
+      - "Routes to distributed-caching-and-locking for caching processed images instead of manipulate-images."
+    timeout: 120

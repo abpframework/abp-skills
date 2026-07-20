@@ -1,0 +1,48 @@
+scenarios:
+  - name: "Implement a non-CRUD application use case"
+    prompt: "Create src/Application/Invoices/InvoiceAppService.cs and describe its IInvoiceAppService contract for ApproveAsync. It must accept and return DTOs, load the aggregate through a repository, invoke domain behavior, and map the result without exposing entities."
+    expect_activation: true
+    assertions:
+      - type: "file_exists"
+        path: "src/Application/Invoices/InvoiceAppService.cs"
+      - type: "output_contains"
+        value: "ApplicationService"
+      - type: "output_contains"
+        value: "IApplicationService"
+      - type: "output_matches"
+        pattern: 'ObjectMapper\.Map|Map<'
+    rubric:
+      - "Places the DTO-only interface in Application.Contracts and the implementation in Application."
+      - "Uses the application service as an orchestration boundary and leaves the approval invariant on the domain aggregate or manager."
+      - "Relies on ApplicationService's ambient unit of work instead of manually saving the transaction."
+    timeout: 240
+
+  - name: "Use AbstractKeyCrudAppService for a composite key"
+    prompt: "Implement an ABP application service for TranslationEntry identified by a composite TranslationKey rather than IEntity<TKey>. Use the appropriate abstract CRUD base and explain exactly which key-resolution members must be implemented versus which mapping members already have defaults."
+    expect_activation: true
+    assertions:
+      - type: "output_contains"
+        value: "AbstractKeyCrudAppService"
+      - type: "output_contains"
+        value: "GetEntityByIdAsync"
+      - type: "output_contains"
+        value: "DeleteByIdAsync"
+      - type: "output_matches"
+        pattern: "(virtual|default).*(mapping|Map)|mapping.*(virtual|default)"
+    rubric:
+      - "Selects AbstractKeyCrudAppService because normal IEntity<TKey> repository lookup is unavailable."
+      - "Implements only GetEntityByIdAsync and DeleteByIdAsync as required abstract key operations and does not claim every mapping method is abstract."
+    timeout: 180
+
+  - name: "Route standard CRUD pipeline to the dedicated skill"
+    prompt: "Build a full standard-key Book ICrudAppService and CrudAppService with distinct get/list/create/update DTOs, all five policy names, filtering, sorting, paging, and mapping paths."
+    expect_activation: false
+    assertions:
+      - type: "output_matches"
+        pattern: "ICrudAppService<|CrudAppService<"
+      - type: "output_contains"
+        value: "GetPolicyName"
+    rubric:
+      - "Routes the complete standard-key CRUD workflow to build-crud-application-services."
+      - "Does not replace the dedicated CRUD overload and pipeline guidance with a generic ApplicationService implementation."
+    timeout: 120

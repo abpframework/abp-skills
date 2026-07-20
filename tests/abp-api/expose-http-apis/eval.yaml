@@ -1,0 +1,48 @@
+scenarios:
+  - name: "Expose application services with conventional controllers"
+    prompt: "Create src/HttpApi/BookStoreHttpApiModule.cs that exposes the BookStore application assembly through ABP conventional controllers. Summarize the registration and explain the default routes and verbs for GetAsync, GetListAsync, CreateAsync, UpdateAsync, and DeleteAsync."
+    expect_activation: true
+    assertions:
+      - type: "file_exists"
+        path: "src/HttpApi/BookStoreHttpApiModule.cs"
+      - type: "output_contains"
+        value: "ConventionalControllers.Create"
+      - type: "output_matches"
+        pattern: '/api/app/book(/\{id\})?'
+    rubric:
+      - "Registers the application module assembly with AbpAspNetCoreMvcOptions conventional controllers."
+      - "Maps get/list/create/update/delete to GET/GET/POST/PUT/DELETE and uses the id route where applicable."
+      - "Uses standard ASP.NET Core route attributes only when an override is requested."
+    timeout: 240
+
+  - name: "Expose an integration service deliberately"
+    prompt: "Explain how an [IntegrationService] application service behaves by default and how to expose it over HTTP. Include its URL prefix and audit-logging default."
+    expect_activation: true
+    assertions:
+      - type: "output_contains"
+        value: "ExposeIntegrationServices"
+      - type: "output_contains"
+        value: "/integration-api"
+      - type: "output_matches"
+        pattern: "(audit|Audit)( logging)? (is )?(disabled|off)"
+    rubric:
+      - "States that integration services are not exposed by default."
+      - "Uses ExposeIntegrationServices to expose them under /integration-api."
+      - "Keeps audit opt-in separate from the exposure switch."
+    timeout: 150
+
+  - name: "Route remote API consumption to client proxies"
+    prompt: "Call an existing remote ABP catalog API from a C# application using a generated/static client proxy and a named remote endpoint configured with AbpRemoteServiceOptions."
+    expect_activation: false
+    assertions:
+      - type: "output_contains"
+        value: "AbpRemoteServiceOptions"
+      - type: "output_matches"
+        pattern: "(client proxy|ClientProxy|remote endpoint)"
+      - type: "output_not_contains"
+        value: "ExposeIntegrationServices"
+    rubric:
+      - "Routes the request to consume-remote-services rather than controller exposure."
+      - "Does not answer with expose-http-apis's ExposeIntegrationServices."
+      - "Focuses on client proxy and remote endpoint configuration, not server route generation."
+    timeout: 120

@@ -1,0 +1,42 @@
+scenarios:
+  - name: "Implement a custom simple-state checker"
+    prompt: "Create a reusable ABP simple-state checker that disables a menu item in production. Implement ISimpleStateChecker<TState>, read IHostEnvironment from the checker context, and register it as a global checker for that state type."
+    expect_activation: true
+    assertions:
+      - type: "output_contains"
+        value: "ISimpleStateChecker<TState>"
+      - type: "output_contains"
+        value: "SimpleStateCheckerContext<TState>"
+      - type: "output_contains"
+        value: "context.ServiceProvider"
+      - type: "output_contains"
+        value: "AbpSimpleStateCheckerOptions<MyState>"
+    rubric:
+      - "Implements IsEnabledAsync taking SimpleStateCheckerContext<TState> and resolves services via context.ServiceProvider."
+      - "Registers the checker through AbpSimpleStateCheckerOptions.GlobalStateCheckers."
+    timeout: 240
+  - name: "Attach permission and authentication conditions to a permission definition"
+    prompt: "For a PermissionDefinition that implements IHasSimpleStateCheckers, attach a requirement that the user is authenticated and holds required permissions, then evaluate a batch of states with the manager."
+    expect_activation: true
+    assertions:
+      - type: "output_contains"
+        value: "RequireAuthenticated()"
+      - type: "output_contains"
+        value: "RequirePermissions"
+      - type: "output_contains"
+        value: "ISimpleStateCheckerManager<TState>"
+      - type: "output_matches"
+        pattern: "(IHasSimpleStateCheckers|SimpleStateCheckerResult)"
+    rubric:
+      - "Uses the built-in RequireAuthenticated() and RequirePermissions(...) extension methods."
+      - "Evaluates states through ISimpleStateCheckerManager<TState>."
+    timeout: 240
+  - name: "Route feature value definition away"
+    prompt: "Define a tenant feature value for MyModule and read its current value at runtime for the active edition."
+    expect_activation: false
+    assertions:
+      - type: "output_matches"
+        pattern: "(FeatureDefinition|IFeatureChecker|manage-settings-and-features)"
+    rubric:
+      - "Routes to manage-settings-and-features instead; FeatureDefinition does not implement IHasSimpleStateCheckers in ABP."
+    timeout: 120

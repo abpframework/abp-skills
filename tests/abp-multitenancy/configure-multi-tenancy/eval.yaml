@@ -1,0 +1,45 @@
+scenarios:
+  - name: "Distinguish host context from an all-tenant query"
+    prompt: "Explain the difference between CurrentTenant.Change(null), CurrentTenant.Change(tenantId), and disabling the IMultiTenant data filter. Include the separate-database limitation."
+    expect_activation: true
+    assertions:
+      - type: "output_contains"
+        value: "CurrentTenant.Change(null)"
+      - type: "output_matches"
+        pattern: "Disable<IMultiTenant>|Disable.*IMultiTenant"
+      - type: "output_matches"
+        pattern: "(separate database|separate databases|shared database)"
+    rubric:
+      - "Explains that a null current tenant is host context, not an all-tenant context."
+      - "Explains that disabling IMultiTenant removes the predicate only within the connected database."
+      - "Does not present tenant switching as an authorization mechanism."
+    timeout: 150
+
+  - name: "Implement isolated per-tenant background processing"
+    prompt: "Create src/Workers/CatalogMaintenanceWorker.cs that iterates active tenants in an ABP periodic worker. Enter each tenant before opening a requiresNew unit of work and resolve the database-bound processor from that unit of work. Summarize the tenant and unit-of-work scope order."
+    expect_activation: true
+    assertions:
+      - type: "file_exists"
+        path: "src/Workers/CatalogMaintenanceWorker.cs"
+      - type: "output_contains"
+        value: "CurrentTenant.Change"
+      - type: "output_matches"
+        pattern: 'requiresNew\s*:\s*true|requiresNew'
+    rubric:
+      - "Uses ITenantStore.GetListAsync and skips inactive tenants."
+      - "Enters the tenant scope before beginning a new unit of work for that tenant."
+      - "Resolves database-bound work from the new unit of work service provider."
+    timeout: 240
+
+  - name: "Route connection-string configuration to its sibling skill"
+    prompt: "Configure a global Default connection string, a module-specific AbpIdentity connection string, database mappings, and a per-tenant fallback order."
+    expect_activation: false
+    assertions:
+      - type: "output_matches"
+        pattern: "(ConnectionStrings|ConnectionStringName|AbpDbConnectionOptions)"
+      - type: "output_matches"
+        pattern: "(fallback|mapping|mapped database)"
+    rubric:
+      - "Treats this as connection-string configuration rather than general multi-tenancy setup."
+      - "Explains the requested resolution or fallback order without drifting into tenant worker design."
+    timeout: 120

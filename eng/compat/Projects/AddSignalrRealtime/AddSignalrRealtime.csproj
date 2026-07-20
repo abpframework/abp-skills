@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <Compile Include="../../Skills/AddSignalrRealtime.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.AspNetCore.SignalR" />
+    <PackageReference Include="Volo.Abp.Core" />
+  </ItemGroup>
+</Project>

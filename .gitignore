@@ -1,0 +1,27 @@
+# .NET build artifacts (compat/ compile-smoke project)
+bin/
+obj/
+*.user
+project.lock.json
+.vs/
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp
+
+# Node.js
+node_modules/
+
+# eval experiment artifacts
+eng/eval-results/
+eng/experiment/runs/
+eng/experiment/runs_glm/
+eng/experiment/runs_glm47/
+eng/experiment/runs_opus/
+eng/experiment/runs_gpt/

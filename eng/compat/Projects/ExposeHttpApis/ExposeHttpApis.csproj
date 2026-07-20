@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <Compile Include="../../Skills/ExposeHttpApis.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.AspNetCore.Mvc" />
+    <PackageReference Include="Volo.Abp.Core" />
+  </ItemGroup>
+</Project>

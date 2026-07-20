@@ -1,0 +1,32 @@
+scenarios:
+  - name: "Query an aggregate with eager loading and provider-neutral async"
+    prompt: "In a final (non-modular-library) ABP application's application service, load a Book aggregate by id and return 404 if it's missing, list books over a price with their chapters eager-loaded, and get the total count — without coupling the code to Entity Framework Core's async LINQ. Show the repository interface to inject."
+    expect_activation: true
+    assertions:
+      - type: "output_contains"
+        value: "IRepository"
+      - type: "output_contains"
+        value: "GetAsync"
+      - type: "output_contains"
+        value: "WithDetailsAsync"
+      - type: "output_contains"
+        value: "GetQueryableAsync"
+      - type: "output_matches"
+        pattern: "(AsyncExecuter|IAsyncQueryableExecuter)"
+    rubric:
+      - "Uses GetAsync for the 404 case, WithDetailsAsync for eager loading, and materializes GetQueryableAsync through AsyncExecuter / IAsyncQueryableExecuter rather than EF Core's ToListAsync."
+      - "Injects the default IRepository<Book, Guid> — appropriate for a final application; a reusable module would instead define a custom IBasicRepository interface."
+    timeout: 240
+
+  - name: "Route custom repository implementation to ef-core-integration"
+    prompt: "Define a custom IBookRepository interface with a GetBooksByAuthor method and implement it against Entity Framework Core using the DbContext and DbSet."
+    expect_activation: false
+    assertions:
+      - type: "output_contains"
+        value: "EfCoreRepository"
+      - type: "output_matches"
+        pattern: "(GetDbSetAsync|GetDbContextAsync)"
+    rubric:
+      - "Defining and implementing a custom repository against EF Core belongs to ef-core-integration, not use-abp-repositories."
+      - "Uses EfCoreRepository<TDbContext, TEntity, TKey> and GetDbSetAsync / GetDbContextAsync."
+    timeout: 120

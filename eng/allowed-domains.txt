@@ -1,0 +1,37 @@
+# Allowed external https:// domains for SKILL.md content.
+#
+# scan_external_refs() in eng/validate.py errors on any external https:// host
+# not listed here. localhost / 127.0.0.1 / 0.0.0.0 / dotless internal service
+# names / example.com placeholders are exempt and do not need an entry.
+#
+# Format: one domain per line. Lines starting with # are comments. A URL host
+# matches an entry if it equals it or is a subdomain of it (e.g. "learn.
+# microsoft.com" matches the entry "microsoft.com").
+#
+# To add a domain: include it here in the same PR as the skill that references
+# it, so a reviewer approves the domain alongside the content.
+
+# ABP
+abp.io
+docs.abp.io
+
+# Microsoft
+microsoft.com
+learn.microsoft.com
+
+# Source hosting
+github.com
+
+# Package registries
+nuget.org
+npmjs.com
+
+# Platform / vendor docs referenced by skills
+developer.android.com
+dapr.io
+documentation.openiddict.com
+jquery.com
+datatables.net
+
+# Community / governance
+contributor-covenant.org

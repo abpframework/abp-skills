@@ -1,0 +1,54 @@
+scenarios:
+  - name: "Build an ABP Razor modal form"
+    prompt: "Create Pages/Books/CreateModal.cshtml, Pages/Books/CreateModal.cshtml.cs, and Pages/Books/Index.cshtml.js for an ABP MVC UI. Use an AbpPageModel, an abp-dynamic-form around the complete modal, and abp.ModalManager with an onResult reload. Avoid nested forms."
+    expect_activation: true
+    assertions:
+      - type: "file_exists"
+        path: "Pages/Books/CreateModal.cshtml"
+      - type: "file_exists"
+        path: "Pages/Books/CreateModal.cshtml.cs"
+      - type: "file_exists"
+        path: "Pages/Books/Index.cshtml.js"
+      - type: "output_contains"
+        value: "AbpPageModel"
+      - type: "output_contains"
+        value: "abp-dynamic-form"
+      - type: "output_contains"
+        value: "abp.ModalManager"
+      - type: "output_contains"
+        value: "onResult"
+    rubric:
+      - "Uses abp-dynamic-form as the single outer form around the entire abp-modal and includes abp-form-content for generated fields."
+      - "Uses the modal manager result callback to refresh the calling page after a successful post."
+      - "Derives the page model from AbpPageModel and uses its lazily resolved UI/application services where relevant."
+    timeout: 240
+
+  - name: "Register page assets and a global bundle"
+    prompt: "Show how an ABP MVC Books page includes co-located Index.cshtml.js and Index.cshtml.css with cache busting, then add a site-wide script to StandardBundles.Scripts.Global. Explain the relevant tag helpers and AbpBundlingOptions."
+    expect_activation: true
+    assertions:
+      - type: "output_contains"
+        value: "abp-script"
+      - type: "output_contains"
+        value: "abp-style"
+      - type: "output_contains"
+        value: "AbpBundlingOptions"
+      - type: "output_contains"
+        value: "StandardBundles.Scripts.Global"
+    rubric:
+      - "Registers page-specific files in scripts/styles sections with ABP tag helpers rather than raw script/link tags."
+      - "Configures the global script through AbpBundlingOptions and distinguishes cache busting from conditional minification."
+    timeout: 180
+
+  - name: "Route an interactive component to Blazor"
+    prompt: "Build an interactive Blazor Web App component for editing Books with EditForm, validation, streaming rendering, and InteractiveServer render mode."
+    expect_activation: false
+    assertions:
+      - type: "output_matches"
+        pattern: '(EditForm|InteractiveServer|\.razor)'
+      - type: "output_matches"
+        pattern: "(Blazor|component)"
+    rubric:
+      - "Routes the component and render-mode request to blazor-ui."
+      - "Does not translate Blazor component requirements into Razor Pages, tag helpers, or ModalManager."
+    timeout: 120

@@ -1,0 +1,36 @@
+scenarios:
+  - name: "Define tenant features and layered settings"
+    prompt: "Add a hidden-to-clients DefaultPageSize setting and a tenant PDFReporting toggle feature in ABP. Show their definition providers, read the setting, protect a virtual application-service method with RequiresFeature, and explain the setting and feature provider precedence plus what persists changed values."
+    expect_activation: true
+    assertions:
+      - type: "output_contains"
+        value: "SettingDefinitionProvider"
+      - type: "output_contains"
+        value: "FeatureDefinitionProvider"
+      - type: "output_contains"
+        value: "ISettingProvider"
+      - type: "output_matches"
+        pattern: "\\[RequiresFeature\\("
+      - type: "output_matches"
+        pattern: "User.*Tenant.*Global.*Configuration.*Default"
+      - type: "output_matches"
+        pattern: "TenantFeatureValueProvider.*EditionFeatureValueProvider.*ConfigurationFeatureValueProvider.*DefaultValueFeatureValueProvider"
+    rubric:
+      - "Defines settings and features with stable names, uses the correct checker/provider APIs, and keeps the interceptable guarded method virtual."
+      - "Gives provider precedence and explains that database persistence comes from the Setting Management and Feature Management stores/modules."
+    timeout: 240
+
+  - name: "Route user authorization to permissions"
+    prompt: "Define Books.Create and Books.Delete rights, grant them to roles and users, and enforce them on BookAppService methods. This is about which users may act, not what a tenant subscription enables."
+    expect_activation: false
+    assertions:
+      - type: "output_contains"
+        value: "PermissionDefinitionProvider"
+      - type: "output_matches"
+        pattern: "IsGrantedAsync|CheckAsync|\\[Authorize\\("
+      - type: "output_matches"
+        pattern: "role|user"
+    rubric:
+      - "Routes user and role rights to permissions-and-authorization."
+      - "Does not model a user grant as a tenant feature or setting."
+    timeout: 120

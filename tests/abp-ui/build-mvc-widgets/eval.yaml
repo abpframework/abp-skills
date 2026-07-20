@@ -1,0 +1,26 @@
+scenarios:
+  - name: "Build a self-contained dashboard widget"
+    prompt: "Create an ABP MVC widget for a dashboard counter: a view component marked as a widget that declares its own script and style files, requires a permission, and can be server-refreshed. Explain how a consumer places and refreshes it."
+    expect_activation: true
+    assertions:
+      - type: "output_matches"
+        pattern: "\\[Widget"
+      - type: "output_contains"
+        value: "AbpViewComponent"
+      - type: "output_matches"
+        pattern: "(RefreshUrl|AutoInitialize|ScriptFiles|RequiredPolicies)"
+    rubric:
+      - "Marks the view component with the [Widget] attribute and declares ScriptFiles/StyleFiles so consumers do not manage the widget's assets manually."
+      - "Distinguishes server-side RefreshUrl refresh from a purely client-side refresh, and mentions the abp.widgets / WidgetManager client API."
+      - "Controls widget visibility with RequiresAuthentication / RequiredPolicies rather than ad-hoc checks."
+    timeout: 180
+
+  - name: "Route module UI overriding elsewhere"
+    prompt: "Replace the Identity module's built-in user management page with my own page while keeping the module upgradeable."
+    expect_activation: false
+    assertions:
+      - type: "output_not_contains"
+        value: "[Widget]"
+    rubric:
+      - "Overriding a built-in module's page is module customization (customize-application-modules), not building a widget; the [Widget] system should not be used here."
+    timeout: 120

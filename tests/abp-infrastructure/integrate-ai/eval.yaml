@@ -1,0 +1,40 @@
+scenarios:
+  - name: "Add AbpAIModule and pre-configure default chat client"
+    prompt: "Add ABP AI to my app module and pre-configure a default AI workspace so I can inject an IChatClient built from a ChatClientBuilder."
+    expect_activation: true
+    assertions:
+      - type: "output_contains"
+        value: "AbpAIModule"
+      - type: "output_contains"
+        value: "AbpAIWorkspaceOptions"
+      - type: "output_matches"
+        pattern: "PreConfigure<AbpAIWorkspaceOptions>"
+      - type: "output_contains"
+        value: "IChatClient"
+    rubric:
+      - "Depends on AbpAIModule from Volo.Abp.AI."
+      - "Uses PreConfigure<AbpAIWorkspaceOptions> with ConfigureDefault/ConfigureChatClient (not Configure)."
+    timeout: 240
+  - name: "Typed workspace accessor with fallback"
+    prompt: "I have a reusable module that needs optional AI. Wire a typed workspace using WorkspaceNameAttribute and inject IChatClientAccessor<TWorkspace>, null-checking ChatClient before use."
+    expect_activation: true
+    assertions:
+      - type: "output_contains"
+        value: "IChatClientAccessor"
+      - type: "output_contains"
+        value: "WorkspaceName"
+      - type: "output_matches"
+        pattern: "\\.ChatClient"
+    rubric:
+      - "Injects IChatClientAccessor<TWorkspace> and null-checks ChatClient."
+      - "Notes chat accessors fall back to the default while kernel accessors do not."
+    timeout: 240
+  - name: "Configure OpenTelemetry traces for AI calls"
+    prompt: "Configure OpenTelemetry traces and metrics exporters so I can observe my AI chat completion calls."
+    expect_activation: false
+    assertions:
+      - type: "output_matches"
+        pattern: "(OpenTelemetry|telemetry|tracing)"
+    rubric:
+      - "Treats OpenTelemetry/AI observability as out of scope for integrate-ai; ABP ships no OpenTelemetry framework module, so it does not activate this skill."
+    timeout: 120

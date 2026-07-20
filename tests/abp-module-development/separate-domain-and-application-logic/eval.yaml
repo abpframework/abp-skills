@@ -1,0 +1,39 @@
+scenarios:
+  - name: "Split a create use case between domain and application logic"
+    prompt: "In my ABP app, where should each step of creating an Organization go — the unique-name rule, the authorization check, charging payment, sending a notification email, and saving the record? Split them between an OrganizationManager domain service and the OrganizationAppService, and explain why each step lands where it does."
+    expect_activation: true
+    assertions:
+      - type: "output_contains"
+        value: "DomainService"
+      - type: "output_contains"
+        value: "ApplicationService"
+      - type: "output_matches"
+        pattern: "(\\[Authorize|IAuthorizationService|authorization)"
+    rubric:
+      - "Keeps the always-true rule (unique organization name) in the domain service and keeps authorization, payment, notification email and saving in the application service."
+      - "Explains that an application-service method is the unit-of-work boundary and returns a DTO rather than the entity."
+      - "Argues that payment is application logic (some use cases create an organization without payment), i.e. important is not the same as core domain."
+    timeout: 200
+  - name: "Keep use-case concerns out of a domain service"
+    prompt: "My ABP OrderManager domain service currently checks a permission, reads the current user, sends a confirmation email, and calls UpdateAsync to save. Which of these belong in the domain service and which should move to the application service, and why should a domain service not depend on the current user?"
+    expect_activation: true
+    assertions:
+      - type: "output_matches"
+        pattern: "(DomainService|domain service)"
+      - type: "output_matches"
+        pattern: "(CurrentUser|current user)"
+      - type: "output_matches"
+        pattern: "(application service|ApplicationService)"
+    rubric:
+      - "Moves authorization, current-user access, the email, and saving into the application service and explains a domain service must work with no active user (background jobs, imports)."
+      - "Notes that persisting is the application service's responsibility — if the domain service saves and the application service then makes further changes and saves again, that is a double database operation, so the application service should own persistence within its unit of work."
+    timeout: 180
+  - name: "Route HTTP-API exposure to expose-http-apis"
+    prompt: "Expose my OrganizationAppService as REST endpoints through ABP's auto/conventional controllers. Show the module configuration and the default routes."
+    expect_activation: false
+    assertions:
+      - type: "output_matches"
+        pattern: "(ConventionalControllers|auto controller|RemoteService)"
+    rubric:
+      - "Routes to the expose-http-apis skill for publishing an application service as HTTP endpoints, not the domain-vs-application-logic decision guide."
+    timeout: 120

@@ -1,0 +1,13 @@
+{
+  // Conservative markdown lint for SKILL.md and docs — structural rules only.
+  "config": {
+    "default": true,
+    "MD013": false, // line length — SKILL.md descriptions are intentionally long
+    "MD033": false, // inline HTML — allowed where needed
+    "MD041": false, // first line heading — SKILL.md starts with YAML front matter
+    "MD024": { "siblings_only": true }, // duplicate headings allowed across sections
+    "MD029": false  // ordered list numbering style
+  },
+  "globs": ["**/*.md"],
+  "ignores": ["node_modules", "eng/compat-ts/node_modules", "eng/compat-ts-extensible/node_modules", "eng/compat/**/bin", "eng/compat/**/obj"]
+}

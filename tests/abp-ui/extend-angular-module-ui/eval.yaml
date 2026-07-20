@@ -1,0 +1,52 @@
+scenarios:
+  - name: "Add a column and a row action to the Identity users grid"
+    prompt: "In an ABP Angular app, add a custom 'Name' column after userName and a 'Say Hi' row action to the shipped Identity users page, then register the contributors. Don't fork the module."
+    expect_activation: true
+    assertions:
+      - type: "output_matches"
+        pattern: "(entityPropContributors|entityActionContributors)"
+      - type: "output_contains"
+        value: "EntityProp"
+      - type: "output_contains"
+        value: "EntityAction"
+      - type: "output_matches"
+        pattern: "(addAfter|addByIndex|addTail)"
+      - type: "output_contains"
+        value: "createRoutes"
+    rubric:
+      - "Uses the contributor buckets keyed by the module component enum and the EntityProp/EntityAction factories."
+      - "Positions items with linked-list mutators (addAfter/addByIndex/addTail), not an invented patch/insert API."
+      - "Registers via createRoutes options in the lazy route."
+    timeout: 240
+
+  - name: "Patch an existing column"
+    prompt: "On the ABP Identity users grid, replace the rendering of the existing email column with a custom value resolver, using the Angular extension system."
+    expect_activation: true
+    assertions:
+      - type: "output_contains"
+        value: "dropByIndex"
+      - type: "output_contains"
+        value: "EntityProp"
+    rubric:
+      - "Patches by dropping the existing column and re-adding a reconstructed EntityProp — because there is no patch method."
+    timeout: 180
+
+  - name: "Route own-feature list to build-angular-lists-and-forms"
+    prompt: "Build a paged, searchable Angular list page for my own Books feature backed by BookService.getList."
+    expect_activation: false
+    assertions:
+      - type: "output_matches"
+        pattern: "(build-angular-lists-and-forms|ListService|hookToQuery)"
+    rubric:
+      - "A brand-new feature list is build-angular-lists-and-forms (ListService), not the shipped-module extension system."
+    timeout: 120
+
+  - name: "Route backend extra property away"
+    prompt: "Persist a new 'Title' property on the ABP IdentityUser entity and expose it on the DTO."
+    expect_activation: false
+    assertions:
+      - type: "output_matches"
+        pattern: "(extend-objects-with-extra-properties|GetProperty|SetProperty|ObjectExtensionManager)"
+    rubric:
+      - "Persisting an extra property on the entity/DTO is extend-objects-with-extra-properties, not the Angular UI contributor."
+    timeout: 120

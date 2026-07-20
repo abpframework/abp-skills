@@ -1,0 +1,24 @@
+scenarios:
+  - name: "Inject shell content via layout hooks and a global toolbar"
+    prompt: "In an ABP app, add a custom element into the layout's <head> and a button into the global application toolbar, without copying the theme's layout file. Cover both the MVC and Blazor mechanisms."
+    expect_activation: true
+    assertions:
+      - type: "output_contains"
+        value: "AbpLayoutHookOptions"
+      - type: "output_matches"
+        pattern: "(LayoutHooks\\.(Head|Body)|StandardToolbars\\.Main|IToolbarContributor)"
+    rubric:
+      - "Uses AbpLayoutHookOptions (LayoutHooks constants) instead of copying the theme layout, so the app stays upgradeable."
+      - "Adds to the global toolbar via IToolbarContributor + StandardToolbars.Main, and notes the MVC (ViewComponent) vs Blazor (Razor Component) hook difference."
+      - "Mentions that a Blazor <head> hook may need a LayoutHook placed in App.razor."
+    timeout: 180
+
+  - name: "Route menu contribution elsewhere"
+    prompt: "Add a new top-level navigation menu item with a required permission using IMenuContributor."
+    expect_activation: false
+    assertions:
+      - type: "output_not_contains"
+        value: "AbpLayoutHookOptions"
+    rubric:
+      - "Adding a navigation menu item is menu contribution (menus-and-localization), not shell/layout extension; layout hooks and toolbars should not be used here."
+    timeout: 120

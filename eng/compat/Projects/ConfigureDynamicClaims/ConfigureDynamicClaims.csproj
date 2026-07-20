@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <Compile Include="../../Skills/ConfigureDynamicClaims.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.AspNetCore.Authentication.JwtBearer" />
+    <PackageReference Include="Volo.Abp.Security" />
+  </ItemGroup>
+</Project>

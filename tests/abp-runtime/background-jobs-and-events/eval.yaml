@@ -1,0 +1,70 @@
+scenarios:
+  - name: "Queue a deferred background job"
+    prompt: "Create src/BackgroundJobs/GenerateInvoicePdfJob.cs and show how an application service queues it for 30 seconds later with high priority. Use ABP's async job base and explain retry/storage expectations for production."
+    expect_activation: true
+    assertions:
+      - type: "file_exists"
+        path: "src/BackgroundJobs/GenerateInvoicePdfJob.cs"
+      - type: "output_contains"
+        value: "AsyncBackgroundJob"
+      - type: "output_contains"
+        value: "IBackgroundJobManager"
+      - type: "output_contains"
+        value: "EnqueueAsync"
+      - type: "output_matches"
+        pattern: '(BackgroundJobPriority\.High|High priority)'
+      - type: "output_matches"
+        pattern: '(TimeSpan\.FromSeconds\(30\)|30 seconds)'
+    rubric:
+      - "Implements ExecuteAsync on AsyncBackgroundJob<TArgs> and enqueues the matching serializable args."
+      - "Treats the job as deferred one-shot work and requires a persistent provider beyond development."
+    timeout: 210
+
+  - name: "Build a periodic worker with scoped dependencies"
+    prompt: "Create src/BackgroundWorkers/StaleOrderCleanupWorker.cs that runs every minute. Resolve its repository from each run's service provider and register the worker during ABP application initialization. Explain the default in-memory scheduler's CronExpression limitation."
+    expect_activation: true
+    assertions:
+      - type: "file_exists"
+        path: "src/BackgroundWorkers/StaleOrderCleanupWorker.cs"
+      - type: "output_contains"
+        value: "AsyncPeriodicBackgroundWorkerBase"
+      - type: "output_contains"
+        value: "PeriodicBackgroundWorkerContext"
+      - type: "output_contains"
+        value: "AddBackgroundWorkerAsync"
+      - type: "output_matches"
+        pattern: 'Timer\.Period|Period'
+    rubric:
+      - "Sets the one-minute period and resolves scoped database services from workerContext.ServiceProvider."
+      - "Registers the worker from application initialization."
+      - "States that the default in-memory periodic worker schedules by Period and requires a scheduler-backed provider for cron behavior."
+    timeout: 240
+
+  - name: "Switch the distributed event bus to RabbitMQ"
+    prompt: "Switch our distributed event bus provider from the default in-memory one to RabbitMQ. Show the module dependency and the options block that sets this app's client (queue) name and exchange name."
+    expect_activation: true
+    assertions:
+      - type: "output_contains"
+        value: "AbpEventBusRabbitMqModule"
+      - type: "output_contains"
+        value: "AbpRabbitMqEventBusOptions"
+      - type: "output_matches"
+        pattern: 'ClientName|ExchangeName'
+    rubric:
+      - "Adds [DependsOn(typeof(AbpEventBusRabbitMqModule))] to the module."
+      - "Configures AbpRabbitMqEventBusOptions with ClientName and ExchangeName."
+      - "Keeps the existing IDistributedEventBus publish/subscribe code unchanged since only the provider changes."
+    timeout: 180
+
+  - name: "Route cross-instance exclusion to distributed locking"
+    prompt: "Ensure only one application instance rebuilds a shared cache at a time. Acquire an IAbpDistributedLock with a timeout and use a typed distributed cache for the result."
+    expect_activation: false
+    assertions:
+      - type: "output_contains"
+        value: "IAbpDistributedLock"
+      - type: "output_matches"
+        pattern: "IDistributedCache<|distributed cache"
+    rubric:
+      - "Routes cross-instance mutual exclusion and typed caching to distributed-caching-and-locking."
+      - "Does not use a background job or event handler as a substitute for a distributed critical section."
+    timeout: 120

@@ -1,0 +1,38 @@
+scenarios:
+  - name: "Replace a service registration"
+    prompt: "In my ABP module I want to replace the existing IInvoiceCalculator registration with a DiscountInvoiceCalculator, keeping the same lifetime, without editing the original module."
+    expect_activation: true
+    assertions:
+      - type: "output_contains"
+        value: "ExposeServices"
+      - type: "output_matches"
+        pattern: "(ReplaceServices|Services\\.Replace)"
+      - type: "output_contains"
+        value: "ITransientDependency"
+    rubric:
+      - "Uses [Dependency(ReplaceServices = true)] with [ExposeServices] or context.Services.Replace preserving the lifetime."
+      - "References the conventional lifetime markers correctly."
+    timeout: 200
+  - name: "Keyed services and lazy resolution"
+    prompt: "Register two ABP IInvoiceCalculator implementations under string keys and inject a specific one by key, and separately resolve an optional service lazily in an ABP class."
+    expect_activation: true
+    assertions:
+      - type: "output_contains"
+        value: "ExposeKeyedService"
+      - type: "output_matches"
+        pattern: "(FromKeyedServices|GetRequiredKeyedService)"
+      - type: "output_contains"
+        value: "ITransientCachedServiceProvider"
+    rubric:
+      - "Uses [ExposeKeyedService<T>(key)] and [FromKeyedServices]/GetRequiredKeyedService for keyed resolution."
+      - "Uses ITransientCachedServiceProvider or IAbpLazyServiceProvider for lazy resolution."
+    timeout: 200
+  - name: "Route method interception to sibling skill"
+    prompt: "I want to add a custom cross-cutting interceptor that wraps my ABP service methods with before/after logging using the dynamic proxy."
+    expect_activation: false
+    assertions:
+      - type: "output_contains"
+        value: "use-interceptors-and-dynamic-proxy"
+    rubric:
+      - "Routes to the use-interceptors-and-dynamic-proxy skill for method interception."
+    timeout: 120

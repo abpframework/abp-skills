@@ -1,0 +1,34 @@
+scenarios:
+  - name: "Place domain contracts and implementations in the correct layers"
+    prompt: "Design the project placement for a layered ABP Order module. Place Order, IOrderRepository, OrderManager, OrderDto, IOrderAppService, OrderAppService, EfCoreOrderRepository, OrderController, and the C# client proxy in the correct projects, and explain the allowed reference direction."
+    expect_activation: true
+    assertions:
+      - type: "output_matches"
+        pattern: "Order.*\\.Domain|\\.Domain.*Order"
+      - type: "output_matches"
+        pattern: "IOrderRepository.*\\.Domain|\\.Domain.*IOrderRepository"
+      - type: "output_matches"
+        pattern: "OrderDto.*Application\\.Contracts|Application\\.Contracts.*OrderDto"
+      - type: "output_matches"
+        pattern: "EfCoreOrderRepository.*EntityFrameworkCore|EntityFrameworkCore.*EfCoreOrderRepository"
+      - type: "output_matches"
+        pattern: "HttpApi\\.Client|HTTP API client"
+    rubric:
+      - "Places entities, domain services, and repository interfaces in Domain; DTOs and application-service interfaces in Application.Contracts; and implementations in Application or the provider-specific infrastructure project."
+      - "Keeps entities behind the application boundary and describes dependencies flowing inward rather than making Domain depend on Application or infrastructure."
+    timeout: 180
+
+  - name: "Route module dependency wiring to module definition"
+    prompt: "Create BlogApplicationModule.cs with AbpModule, DependsOn, ConfigureServices option registration, and an OnApplicationInitialization hook."
+    expect_activation: false
+    assertions:
+      - type: "output_contains"
+        value: "AbpModule"
+      - type: "output_matches"
+        pattern: "\\[DependsOn\\("
+      - type: "output_contains"
+        value: "ConfigureServices"
+    rubric:
+      - "Routes AbpModule lifecycle and dependency wiring to define-application-modules."
+      - "Does not turn a module-class wiring request into a project-layer placement exercise."
+    timeout: 120

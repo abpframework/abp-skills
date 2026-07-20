@@ -1,0 +1,32 @@
+# ABP APIs a skill deliberately documents that exist only from a specific ABP
+# version, newer than the stable baseline the C# compile-smoke is pinned to.
+#
+# Why this file exists: compat/ compiles against the pinned stable baseline
+# (compat/Directory.Packages.props AbpVersion). A version-specific API taught in
+# SKILL.md prose is therefore NOT exercised by that stable gate — a wrong signature
+# would slip through. Every "ABP <x.y>+" / "<x.y>-only" style annotation in a
+# SKILL.md must be registered here so each such claim is explicit and reviewable,
+# and a new, unregistered version-specific claim fails eng/check_version_annotations.py.
+#
+# `compat_source` names the compile-smoke file that references each symbol inside an
+# `#if ABP_NEXT` block — compiled only in the next-ABP build (-p:AbpNext=true) so the
+# signature is actually type-checked against the newer package, not just asserted in
+# prose. The checker requires each registered symbol's member to appear there.
+#
+# When the stable baseline moves past a `since`, drop the annotation from the prose
+# (the API is now baseline), move the smoke reference out of the `#if ABP_NEXT` block,
+# and remove its entry here.
+annotations:
+  - skill: abp-infrastructure/handle-dates-and-time
+    since: "10.6"
+    symbols:
+      - "ITimezoneProvider.ConvertUnspecifiedToUtc"
+    compat_source: eng/compat/Skills/HandleDatesAndTime.cs
+    note: "On 10.5 convert with TimeZoneInfo / ConvertToUtc instead."
+  - skill: abp-runtime/secure-web-requests
+    since: "10.6"
+    symbols:
+      - "AbpAntiForgeryOptions.NormalizeUserIdClaimIssuer"
+      - "AbpAntiforgery"
+    compat_source: eng/compat/Skills/SecureWebRequests.cs
+    note: "10.5 has neither the option nor the wrapper."

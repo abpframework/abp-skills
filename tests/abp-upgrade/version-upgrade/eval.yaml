@@ -1,0 +1,46 @@
+scenarios:
+  - name: "Plan a reviewable multi-hop ABP upgrade"
+    prompt: "Plan an upgrade of an existing ABP solution that is several minor versions behind and must cross one major-version boundary to reach a prerelease target. Include the ordered version hops, the classic CLI update command, migration guides, database/client follow-up, validation, and rollback."
+    expect_activation: true
+    assertions:
+      - type: "output_matches"
+        pattern: "(hop|version hops|step through each|ordered upgrade|one minor at a time)"
+      - type: "output_matches"
+        pattern: "abp update -v .*--old"
+      - type: "output_matches"
+        pattern: "(migration guide|migration guides)"
+    rubric:
+      - "Builds an ordered hop plan that crosses the major boundary and then steps through each intervening minor, rather than jumping straight to the target."
+      - "Inventories NuGet, CPM, NPM, CLI, SDK, UI, and database state before changes."
+      - "Reads every crossed adjacent migration guide and separates required guide review from optional physical hop-by-hop installs."
+      - "Covers migrations, proxies/assets, DbMigrator, tests, smoke checks, and source-plus-database rollback."
+    timeout: 240
+
+  - name: "Handle CPM packages during classic update"
+    prompt: "Our ABP solution uses versionless Volo.* PackageReference items with versions in Directory.Packages.props. Explain exactly what the classic abp update command does and what must be updated manually."
+    expect_activation: true
+    assertions:
+      - type: "output_contains"
+        value: "Directory.Packages.props"
+      - type: "output_matches"
+        pattern: "(versionless|without an inline Version|no inline Version)"
+      - type: "output_matches"
+        pattern: "(skip|skips|skipped)"
+    rubric:
+      - "States that the classic updater skips a Volo.* PackageReference without an inline Version."
+      - "Does not claim that the updater discovers or edits Directory.Packages.props."
+      - "Requires manual CPM version alignment followed by restore, build, and warning review."
+    timeout: 150
+
+  - name: "Route new solution creation to CLI command guidance"
+    prompt: "Create a brand-new ABP layered application named Acme.BookStore and explain the relevant abp new options. There is no existing solution to upgrade."
+    expect_activation: false
+    assertions:
+      - type: "output_matches"
+        pattern: "abp new|new command"
+      - type: "output_matches"
+        pattern: "(layered|template|solution)"
+    rubric:
+      - "Routes new-project creation to abp-cli-commands instead of treating it as a version upgrade."
+      - "Does not run or recommend abp update for a nonexistent solution."
+    timeout: 120

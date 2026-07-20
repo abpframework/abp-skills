@@ -1,0 +1,38 @@
+scenarios:
+  - name: "Replace DI provider with Autofac on the host"
+    prompt: "Switch my ABP web host to use Autofac as the service provider so property injection and interceptors work. Show the module dependency and the host wiring in Program.cs."
+    expect_activation: true
+    assertions:
+      - type: "output_contains"
+        value: "AbpAutofacModule"
+      - type: "output_contains"
+        value: "UseAutofac"
+      - type: "output_matches"
+        pattern: "builder\\.Host"
+    rubric:
+      - "Adds [DependsOn(typeof(AbpAutofacModule))] AND calls IHostBuilder.UseAutofac()."
+      - "Notes the module dependency alone does not replace the service provider."
+    timeout: 240
+  - name: "Autofac for direct application creation and container access"
+    prompt: "In a test that uses AbpApplicationFactory.CreateAsync (no generic host), enable Autofac and then verify the container builder is available via GetContainerBuilder."
+    expect_activation: true
+    assertions:
+      - type: "output_contains"
+        value: "AbpApplicationFactory"
+      - type: "output_contains"
+        value: "GetContainerBuilder"
+      - type: "output_matches"
+        pattern: "(options\\.UseAutofac|AutofacServiceProvider)"
+    rubric:
+      - "Uses the AbpApplicationCreationOptions.UseAutofac() overload for direct creation."
+      - "Notes GetContainerBuilder throws AbpException when UseAutofac was not called."
+    timeout: 240
+  - name: "Debug an interceptor not firing"
+    prompt: "My ABP interceptor isn't being invoked on a service method. Help me figure out the virtual/interface proxy rules so the interception fires."
+    expect_activation: false
+    assertions:
+      - type: "output_contains"
+        value: "use-interceptors-and-dynamic-proxy"
+    rubric:
+      - "Routes to use-interceptors-and-dynamic-proxy for interceptor debugging instead of integrate-autofac."
+    timeout: 120

@@ -1,0 +1,38 @@
+scenarios:
+  - name: "Grant and check access to one document instance"
+    prompt: "Implement admin-managed edit access for individual Document entities. Define the resource permission under Document's full type name and its management permission, then check Documents.Resources.Edit for the loaded document instance in an application service. Explain how the resource key is obtained."
+    expect_activation: true
+    assertions:
+      - type: "output_contains"
+        value: "AddResourcePermission"
+      - type: "output_contains"
+        value: "managementPermissionName"
+      - type: "output_matches"
+        pattern: 'typeof\(Document\)\.FullName|Document\.ResourceName'
+      - type: "output_matches"
+        pattern: "AuthorizationService\\.IsGrantedAsync\\(\\s*(document|resource)"
+      - type: "output_contains"
+        value: "IKeyedObject"
+      - type: "output_contains"
+        value: "AbpAuthorizationException"
+    rubric:
+      - "Defines a standard management permission plus a resource permission whose resource name matches the full runtime type name used by the keyed-object authorization handler."
+      - "Loads the entity and checks that exact instance; explains that ABP entities implement IKeyedObject so the authorization extension can read the resource key."
+    timeout: 240
+
+  - name: "Route global permission definitions to named authorization"
+    prompt: "Define global Books.Create, Books.Edit, and Books.Delete permissions, group and localize them, make Administration host-only, and protect BookAppService methods with Authorize attributes."
+    expect_activation: false
+    assertions:
+      - type: "output_contains"
+        value: "PermissionDefinitionProvider"
+      - type: "output_contains"
+        value: "AddGroup"
+      - type: "output_matches"
+        pattern: "\\[Authorize\\("
+      - type: "output_contains"
+        value: "MultiTenancySides.Host"
+    rubric:
+      - "Routes global named permission definition and declarative checks to permissions-and-authorization."
+      - "Does not introduce a resource key when the permission applies globally."
+    timeout: 120

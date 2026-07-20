@@ -1,0 +1,38 @@
+scenarios:
+  - name: "Embed read and live-edit module assets"
+    prompt: "Configure an ABP module to embed everything under MyResources, read /MyResources/js/site.js through the unified virtual file provider, override an upstream file at the exact same virtual path, and replace this module's embedded files with its physical folder only in Development."
+    expect_activation: true
+    assertions:
+      - type: "output_contains"
+        value: "EmbeddedResource"
+      - type: "output_contains"
+        value: "GenerateEmbeddedFilesManifest"
+      - type: "output_contains"
+        value: "AbpVirtualFileSystemOptions"
+      - type: "output_contains"
+        value: "AddEmbedded"
+      - type: "output_contains"
+        value: "IVirtualFileProvider"
+      - type: "output_contains"
+        value: "ReplaceEmbeddedByPhysical"
+      - type: "output_contains"
+        value: "IsDevelopment"
+    rubric:
+      - "Embeds and registers the assembly file set, reads a leading-slash virtual path, and checks file existence before reading when appropriate."
+      - "Explains last-registered file-set precedence and guards physical replacement to Development."
+    timeout: 240
+
+  - name: "Route user uploads to BLOB storage"
+    prompt: "Store user-uploaded profile photos in an Azure-backed, tenant-isolated container with save, nullable read, and delete operations. The files are runtime data, not assembly resources."
+    expect_activation: false
+    assertions:
+      - type: "output_contains"
+        value: "IBlobContainer"
+      - type: "output_contains"
+        value: "UseAzure"
+      - type: "output_contains"
+        value: "GetAllBytesOrNullAsync"
+    rubric:
+      - "Routes runtime user uploads and pluggable storage to store-blobs."
+      - "Does not embed mutable user data as an EmbeddedResource."
+    timeout: 120

@@ -1,0 +1,38 @@
+scenarios:
+  - name: "Generate an entity id at the creation boundary"
+    prompt: "In a ProductAppService create a new Product entity using an ABP-generated sequential GUID instead of Guid.NewGuid(), passing the id into the constructor before InsertAsync."
+    expect_activation: true
+    assertions:
+      - type: "output_contains"
+        value: "IGuidGenerator"
+      - type: "output_contains"
+        value: "GuidGenerator.Create()"
+      - type: "output_contains"
+        value: "SequentialGuidGenerator"
+    rubric:
+      - "Uses IGuidGenerator/GuidGenerator.Create() and passes the id into the entity constructor, avoiding Guid.NewGuid()."
+    timeout: 240
+  - name: "Choose the sequential GUID layout for the database provider"
+    prompt: "Configure AbpSequentialGuidGeneratorOptions to use the correct sequential GUID layout for MySQL/PostgreSQL storage, and explain the SequentialAtEnd default."
+    expect_activation: true
+    assertions:
+      - type: "output_contains"
+        value: "AbpSequentialGuidGeneratorOptions"
+      - type: "output_contains"
+        value: "DefaultSequentialGuidType"
+      - type: "output_contains"
+        value: "SequentialAsString"
+      - type: "output_matches"
+        pattern: "(SequentialAtEnd|SequentialAsBinary)"
+    rubric:
+      - "Sets AbpSequentialGuidGeneratorOptions.DefaultSequentialGuidType to SequentialAsString for MySQL/PostgreSQL and notes SequentialAtEnd is the fallback default."
+    timeout: 240
+  - name: "Route cache key generation away"
+    prompt: "Build a distributed cache key and coordinate cache invalidation for my product entities in ABP."
+    expect_activation: false
+    assertions:
+      - type: "output_matches"
+        pattern: "(cache-entities|IDistributedCache|cache key)"
+    rubric:
+      - "Routes to cache-entities instead; GUID generation is not for cache keys or invalidation."
+    timeout: 120

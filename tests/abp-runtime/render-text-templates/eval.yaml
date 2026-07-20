@@ -1,0 +1,32 @@
+scenarios:
+  - name: "Define and render a localized Scriban template"
+    prompt: "In ABP, define a localized Scriban PasswordReset text template stored in the virtual file system at /Demos/PasswordReset/PasswordReset.tpl, then render it to a string with a model and a specific culture. Include the template engine choice and the embedded virtual-file registration. I only need the rendered string, not sending it anywhere."
+    expect_activation: true
+    assertions:
+      - type: "output_contains"
+        value: "TemplateDefinitionProvider"
+      - type: "output_contains"
+        value: "WithScribanEngine"
+      - type: "output_contains"
+        value: "WithVirtualFilePath"
+      - type: "output_contains"
+        value: "ITemplateRenderer"
+      - type: "output_contains"
+        value: "AddEmbedded"
+    rubric:
+      - "Defines the named template before rendering, selects the Scriban engine, and registers its embedded content in the virtual file system."
+      - "Renders through ITemplateRenderer.RenderAsync with a model and culture; does not send the result."
+    timeout: 240
+
+  - name: "Route email delivery to send-emails"
+    prompt: "I already have the rendered HTML body string. Send it as an email to a user and queue it so the request isn't blocked, using the provider-independent ABP email API."
+    expect_activation: false
+    assertions:
+      - type: "output_contains"
+        value: "IEmailSender"
+      - type: "output_contains"
+        value: "QueueAsync"
+    rubric:
+      - "Sending/queuing an already-rendered body belongs to send-emails, not render-text-templates."
+      - "Does not define or render a template for a pure delivery request."
+    timeout: 120

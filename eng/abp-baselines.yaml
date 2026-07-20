@@ -1,0 +1,29 @@
+# ABP baselines this skill set is built and reviewed against.
+#
+# Branch names alone don't reproduce a review (branches move), so record the exact
+# commit each baseline was last verified at. Update the `commit` (and `verified`)
+# fields whenever the content is re-reviewed or a baseline moves.
+
+# Stable NuGet baseline the C# compile-smoke (compat/) and runtime tests pin.
+# This is the "compile-tested" version shown in the README table.
+stable_compile:
+  nuget_version: "10.5.0"        # compat/Directory.Packages.props <AbpVersion>
+  source_branch: "rel-10.5"
+
+# Next (prerelease) NuGet baseline the CI builds a second time against, so upcoming
+# API changes surface before the stable baseline moves.
+next_compile:
+  nuget_version: "10.6.0-rc.1"   # -p:AbpVersion=10.6.0-rc.1 -p:AbpNext=true
+
+# Content (prose / API names / behavior) was API-reviewed against this ABP source.
+content_review:
+  branch: "rel-10.6"
+  commit: "b5a7a36311a9f0c091ae321a187f1b2b24954214"
+  verified: "2026-07-16"
+
+# The `blob/rel-x.y/...` GitHub links embedded in SKILL.md prose pin this branch.
+# They resolve at the branch head; last confirmed to resolve at this commit.
+doc_source_links:
+  branch: "rel-10.5"
+  commit: "e50dc1afd902ac1df74d2d669cd3e7dc55f4d907"
+  verified: "2026-07-16"

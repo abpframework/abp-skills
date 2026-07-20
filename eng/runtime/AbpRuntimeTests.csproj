@@ -1,0 +1,50 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+  </PropertyGroup>
+
+  <!--
+    Runtime behavior tests: unlike compat/ (which only proves ABP APIs compile),
+    these boot a real ABP application and assert runtime semantics the compile-smoke
+    cannot reach (DI wiring, the permission-definition pipeline, clock normalization,
+    ambient current-user) plus DB-backed cases (soft-delete filter, uncompleted-UOW
+    rollback) behind an in-memory SQLite provider. Pinned to the same stable baseline
+    as compat/.
+  -->
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
+    <PackageReference Include="xunit" />
+    <PackageReference Include="xunit.runner.visualstudio" />
+    <PackageReference Include="Volo.Abp.Authorization" />
+    <PackageReference Include="Volo.Abp.Autofac" />
+    <PackageReference Include="Volo.Abp.AutoMapper" />
+    <PackageReference Include="Volo.Abp.Caching" />
+    <PackageReference Include="Volo.Abp.EntityFrameworkCore.Sqlite" />
+    <PackageReference Include="Volo.Abp.EventBus" />
+    <PackageReference Include="Volo.Abp.MultiTenancy" />
+    <PackageReference Include="Volo.Abp.Security" />
+    <PackageReference Include="Volo.Abp.Settings" />
+    <PackageReference Include="Volo.Abp.TestBase" />
+    <PackageReference Include="Volo.Abp.Validation" />
+    <PackageReference Include="Volo.Abp.AspNetCore.TestBase" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" />
+    <PackageReference Include="Volo.Abp.Timing" />
+  </ItemGroup>
+
+  <!-- The web system-under-test for the WebApplicationFactory (test-mvc-razor-ui) tests.
+       It lives under this project's folder, so exclude its sources from this project's glob;
+       only the SUT project compiles them, and we consume it via ProjectReference. -->
+  <ItemGroup>
+    <Compile Remove="webapp/**/*.cs" />
+    <Content Remove="webapp/**/*" />
+    <None Remove="webapp/**/*" />
+    <EmbeddedResource Remove="webapp/**/*" />
+    <ProjectReference Include="webapp/RuntimeWebApp.csproj" />
+  </ItemGroup>
+
+</Project>

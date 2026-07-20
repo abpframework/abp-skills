@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <Compile Include="../../Skills/UseAbpStandardEndpoints.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.AspNetCore.Mvc.Contracts" />
+    <PackageReference Include="Volo.Abp.ObjectExtending" />
+  </ItemGroup>
+</Project>

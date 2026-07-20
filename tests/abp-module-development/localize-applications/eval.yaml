@@ -1,0 +1,26 @@
+scenarios:
+  - name: "Define a localization resource with inheritance and culture files"
+    prompt: "Add framework-level localization to my ABP module: define a localization resource, register it with virtual json files per culture, inherit keys from a shared resource, and consume it from an application service. Also localize a business exception's error code."
+    expect_activation: true
+    assertions:
+      - type: "output_contains"
+        value: "AbpLocalizationOptions"
+      - type: "output_matches"
+        pattern: "(AddVirtualJson|LocalizationResourceName)"
+      - type: "output_matches"
+        pattern: "(IStringLocalizer|AddBaseTypes|InheritResource)"
+    rubric:
+      - "Defines a LocalizationResource (+ [LocalizationResourceName]) and registers it via AbpLocalizationOptions.Resources.Add<T>().AddVirtualJson with embedded per-culture json."
+      - "Inherits shared keys with AddBaseTypes / [InheritResource] and consumes strings with IStringLocalizer<T> (or the L property)."
+      - "Localizes the business exception by mapping its error-code namespace and using the full code as the localization key."
+    timeout: 180
+
+  - name: "Route navigation menu items elsewhere"
+    prompt: "Add a top-level navigation menu item with an icon and a required permission using IMenuContributor."
+    expect_activation: false
+    assertions:
+      - type: "output_not_contains"
+        value: "AbpLocalizationOptions"
+    rubric:
+      - "Adding navigation menu items is menu contribution (menus-and-localization), not defining localization resources."
+    timeout: 120

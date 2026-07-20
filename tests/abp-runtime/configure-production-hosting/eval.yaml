@@ -1,0 +1,26 @@
+scenarios:
+  - name: "Prepare an ABP app for a clustered production deployment"
+    prompt: "I'm deploying an ABP app as multiple instances behind an nginx reverse proxy. Cover forwarded headers, sharing Data Protection keys across instances, moving cache/lock to a distributed provider, and making sure background jobs/workers don't run duplicated on every instance."
+    expect_activation: true
+    assertions:
+      - type: "output_matches"
+        pattern: "(ForwardedHeaders|UseForwardedHeaders)"
+      - type: "output_matches"
+        pattern: "(Data ?Protection|PersistKeys)"
+      - type: "output_matches"
+        pattern: "(IsJobExecutionEnabled|IsEnabled|KeyPrefix|backplane|sticky)"
+    rubric:
+      - "Configures forwarded headers (ForwardedHeadersOptions + UseForwardedHeaders) so the proxy's scheme/host reach the app, and notes this is standard ASP.NET Core, not an ABP-specific API."
+      - "Persists Data Protection keys to shared storage (e.g. Redis/DB) so all instances share them, and switches cache/lock to a distributed provider."
+      - "Addresses running background jobs/workers on a single instance (AbpBackgroundJobOptions.IsJobExecutionEnabled / AbpBackgroundWorkerOptions.IsEnabled) and SignalR scale-out."
+    timeout: 200
+
+  - name: "Route distributed cache/lock mechanics elsewhere"
+    prompt: "Show me how to cache a value with IDistributedCache<T> and acquire a distributed lock with IAbpDistributedLock in my service code."
+    expect_activation: false
+    assertions:
+      - type: "output_not_contains"
+        value: "UseForwardedHeaders"
+    rubric:
+      - "Using the distributed cache/lock APIs in code is distributed-caching-and-locking, not production/cluster hosting configuration."
+    timeout: 120

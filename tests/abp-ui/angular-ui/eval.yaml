@@ -1,0 +1,53 @@
+scenarios:
+  - name: "Generate and consume Angular book proxies"
+    prompt: "Show the ABP Angular workflow for a Books feature. Generate typed proxies from a running backend, inject the generated BookService, guard optional list items, add a localized menu route through RoutesService, and gate the create button by BookStore.Books.Create. Also give the distinct proxy command for an ng-packs NX workspace."
+    expect_activation: true
+    assertions:
+      - type: "output_contains"
+        value: "abp generate-proxy -t ng"
+      - type: "output_contains"
+        value: "npx nx g @abp/nx.generators:generate-proxy"
+      - type: "output_contains"
+        value: "BookService"
+      - type: "output_contains"
+        value: "res.items ?? []"
+      - type: "output_contains"
+        value: "RoutesService"
+      - type: "output_contains"
+        value: "requiredPolicy"
+      - type: "output_contains"
+        value: "*abpPermission"
+      - type: "output_contains"
+        value: "abpLocalization"
+    rubric:
+      - "Requires a running backend, uses the plain CLI for a generated Angular app, and uses the NX generator for ng-packs."
+      - "Consumes the generated proxy service, handles optional ListResultDto items, and wires route, permission, and localization through @abp/ng.core APIs."
+    timeout: 240
+
+  - name: "Route pure Angular proxy generation to the CLI"
+    prompt: "I changed a DTO on my ABP backend. Regenerate just the Angular service and model proxies — only the generation step, nothing about consuming them."
+    expect_activation: false
+    assertions:
+      - type: "output_contains"
+        value: "abp generate-proxy -t ng"
+      - type: "output_contains"
+        value: "npx nx g @abp/nx.generators:generate-proxy"
+    rubric:
+      - "Pure proxy generation belongs to abp-cli-commands (plain CLI vs the NX generator), not angular-ui."
+      - "Does not pivot into consuming proxies, RoutesService, or permission directives."
+    timeout: 120
+
+  - name: "Route an ABP Blazor component to Blazor UI"
+    prompt: "Create a .razor Books component derived from AbpComponentBase, use CurrentUser and L, and call IBookAppService in OnInitializedAsync under InteractiveServer rendering."
+    expect_activation: false
+    assertions:
+      - type: "output_contains"
+        value: "AbpComponentBase"
+      - type: "output_contains"
+        value: "IBookAppService"
+      - type: "output_contains"
+        value: "InteractiveServer"
+    rubric:
+      - "Routes Razor component and render-mode work to blazor-ui."
+      - "Does not introduce Angular proxy services, directives, or RoutesService."
+    timeout: 120

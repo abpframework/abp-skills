@@ -1,0 +1,26 @@
+scenarios:
+  - name: "Add API versioning to auto controllers"
+    prompt: "Add API versioning to my ABP auto (conventional) controllers, expose a v2 of one service, and pick a version reader that stays compatible with the generated static C# client proxies."
+    expect_activation: true
+    assertions:
+      - type: "output_contains"
+        value: "AddAbpApiVersioning"
+      - type: "output_matches"
+        pattern: "(ConventionalControllers|ApiVersions)"
+      - type: "output_matches"
+        pattern: "(query.?string|ShouldSendInQueryString|ICurrentApiVersionInfo)"
+    rubric:
+      - "Registers versioning with AddAbpApiVersioning and attaches ApiVersions to the conventional-controller assembly registration."
+      - "Prefers query-string versioning and notes URL-path/segment versioning is incompatible with the static C# client proxies."
+      - "References the ABP-specific ICurrentApiVersionInfo for runtime version selection where relevant, without inventing ABP names for ASP.NET API Versioning library types."
+    timeout: 180
+
+  - name: "Route Swagger document setup elsewhere"
+    prompt: "Register Swagger UI with OAuth against the auth server and hide ABP's built-in endpoints from the OpenAPI document."
+    expect_activation: false
+    assertions:
+      - type: "output_not_contains"
+        value: "AddAbpApiVersioning"
+    rubric:
+      - "Swagger/OpenAPI document and UI setup is configure-swagger-openapi, not API versioning."
+    timeout: 120

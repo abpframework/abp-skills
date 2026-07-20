@@ -1,0 +1,40 @@
+scenarios:
+  - name: "Implement and register a custom interceptor"
+    prompt: "In my ABP module, add a reusable execution-time interceptor that logs how long each intercepted service method takes, and register it so it only attaches to services I opt in via a marker interface."
+    expect_activation: true
+    assertions:
+      - type: "output_contains"
+        value: "IAbpMethodInvocation"
+      - type: "output_matches"
+        pattern: "(AbpInterceptor|IAbpInterceptor)"
+      - type: "output_contains"
+        value: "ProceedAsync"
+      - type: "output_contains"
+        value: "OnRegistered"
+    rubric:
+      - "Derives from AbpInterceptor / implements IAbpInterceptor and calls ProceedAsync() once."
+      - "Registers via Services.OnRegistered checking ImplementationType in PreConfigureServices."
+    timeout: 200
+  - name: "Diagnose an interceptor that does not run"
+    prompt: "My [Authorize] and [UnitOfWork] attributes on an ABP domain service class are being ignored at runtime. Explain the ABP dynamic-proxy conditions I need to check for interception to fire."
+    expect_activation: true
+    assertions:
+      - type: "output_matches"
+        pattern: "(virtual|class proxy)"
+      - type: "output_contains"
+        value: "DynamicProxyIgnoreTypes"
+      - type: "output_matches"
+        pattern: "(dependency injection|from (the )?(DI|container)|\\bresolved?\\b)"
+    rubric:
+      - "Explains proxy conditions: resolved from DI (not new), interface path or virtual class method."
+      - "Mentions DynamicProxyIgnoreTypes / DisableAbpClassInterceptors as ignore causes."
+    timeout: 200
+  - name: "Route plain service replacement to sibling skill"
+    prompt: "I just want to replace an existing IInvoiceCalculator registration with my own implementation using [ExposeServices] and [Dependency]. No method interception needed."
+    expect_activation: false
+    assertions:
+      - type: "output_contains"
+        value: "register-and-replace-services"
+    rubric:
+      - "Routes to the register-and-replace-services skill since no interception is involved."
+    timeout: 120

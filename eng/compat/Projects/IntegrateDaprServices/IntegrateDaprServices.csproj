@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <Compile Include="../../Skills/IntegrateDaprServices.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.AspNetCore.Mvc.Dapr" />
+    <PackageReference Include="Volo.Abp.Core" />
+    <PackageReference Include="Volo.Abp.Dapr" />
+    <PackageReference Include="Volo.Abp.DistributedLocking.Abstractions" />
+    <PackageReference Include="Volo.Abp.DistributedLocking.Dapr" />
+    <PackageReference Include="Volo.Abp.EventBus.Dapr" />
+  </ItemGroup>
+</Project>

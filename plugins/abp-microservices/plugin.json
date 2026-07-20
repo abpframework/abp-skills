@@ -1,0 +1,8 @@
+{
+  "name": "abp-microservices",
+  "version": "1.0.0",
+  "description": "ABP microservice patterns: integration services vs distributed events, outbox/inbox, and Dapr integration.",
+  "skills": [
+    "./skills/"
+  ]
+}

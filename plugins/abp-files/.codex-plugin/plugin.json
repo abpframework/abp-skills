@@ -1,0 +1,14 @@
+{
+  "name": "abp-files",
+  "version": "1.0.0",
+  "description": "File handling in ABP: BLOB storing containers and providers, and the virtual file system.",
+  "author": {
+    "name": "abpframework"
+  },
+  "interface": {
+    "displayName": "ABP Files"
+  },
+  "skills": [
+    "./skills/"
+  ]
+}

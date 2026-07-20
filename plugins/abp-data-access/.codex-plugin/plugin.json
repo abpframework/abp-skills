@@ -1,0 +1,14 @@
+{
+  "name": "abp-data-access",
+  "version": "1.0.0",
+  "description": "Data access in ABP: EF Core and MongoDB integration, migrations, custom repositories, units of work, data filters, concurrency, connection strings, seeding, and Dapper.",
+  "author": {
+    "name": "abpframework"
+  },
+  "interface": {
+    "displayName": "ABP Data Access"
+  },
+  "skills": [
+    "./skills/"
+  ]
+}

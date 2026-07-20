@@ -1,0 +1,22 @@
+# Skills that legitimately have NO C# compile-smoke in compat/Skills/.
+# Every skill must EITHER have a compat/Skills/<PascalCase>.cs file OR appear
+# here with a reason. Enforced by eng/verify_compat_coverage.py.
+exempt:
+  - skill: abp-cli/abp-cli-commands
+    reason: CLI usage guidance, no C# API surface to compile-smoke.
+  - skill: abp-cli/choose-solution-architecture
+    reason: Architecture-decision and template-selection guidance; routes creation to abp-cli-commands. No C# API surface to compile-smoke.
+  - skill: abp-module-development/separate-domain-and-application-logic
+    reason: Decision guide for placing logic in the domain vs application layer; the ABP types it references (DomainService, ApplicationService, IEmailSender, ICurrentUser, IObjectMapper) are compile-smoked by other module-development skills. No new C# API surface to compile-smoke.
+  - skill: abp-ui/angular-ui
+    reason: TypeScript/Angular skill; API surface is covered by compat-ts, not C#.
+  - skill: abp-ui/build-angular-lists-and-forms
+    reason: TypeScript/Angular skill. compat-ts (list-service.ts) compiles the ListService surface only; the forms/validation and dynamic-form APIs are source-reviewed against rel-10.5, not compiled (they pull @abp/ng.theme.shared / @abp/ng.components, whose peers pin ngx-datatable to an older Angular).
+  - skill: abp-ui/extend-angular-module-ui
+    reason: TypeScript/Angular skill; the extension API is compile-smoked by the compat-ts-extensible/ workspace (a separate Angular-20 project, because @abp/ng.components transitively needs ngx-datatable, which caps at Angular 20). No C# surface.
+  - skill: abp-testing/test-angular-ui
+    reason: TypeScript/Angular skill. compat-ts (angular-testing.ts) compiles CoreTestingModule + clearPage + wait only; the ThemeShared/ThemeBasic testing modules and TestBed setup are source-reviewed against rel-10.5, not compiled.
+  - skill: abp-ui/use-mvc-javascript-apis
+    reason: Browser JavaScript skill (JS proxies, DataTables adapter, abp.* client APIs); no C# API surface to compile-smoke.
+  - skill: abp-upgrade/version-upgrade
+    reason: Process/CLI upgrade guidance, no stable C# API surface to compile-smoke.

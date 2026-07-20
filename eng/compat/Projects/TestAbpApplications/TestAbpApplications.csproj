@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <Compile Include="../../Skills/TestAbpApplications.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.Authorization" />
+    <PackageReference Include="Volo.Abp.Authorization.Abstractions" />
+    <PackageReference Include="Volo.Abp.Core" />
+    <PackageReference Include="Volo.Abp.Data" />
+    <PackageReference Include="Volo.Abp.MultiTenancy.Abstractions" />
+    <PackageReference Include="Volo.Abp.Security" />
+    <PackageReference Include="Volo.Abp.TestBase" />
+    <PackageReference Include="Volo.Abp.Uow" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,59 @@
+name: actionlint
+
+# Validates GitHub Actions workflow files with actionlint, which understands the
+# Actions schema and expression grammar. This catches bugs plain YAML linters miss
+# — most notably an unquoted `${{ }}` expression containing `#`, where YAML treats
+# ` #` as a comment and silently truncates the expression, producing a file that
+# parses as YAML but that GitHub Actions refuses to run.
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/**"
+      - ".github/actions/**"
+      - ".github/actionlint.yaml"
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/**"
+      - ".github/actions/**"
+      - ".github/actionlint.yaml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  actionlint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
+        with:
+          persist-credentials: false
+
+      - name: Run actionlint
+        env:
+          ACTIONLINT_VERSION: "1.7.7"
+          ACTIONLINT_SHA256: "023070a287cd8cccd71515fedc843f1985bf96c436b7effaecce67290e7e0757"
+        run: |
+          set -euo pipefail
+          curl -fsSLo actionlint.tar.gz \
+            "https://github.com/rhysd/actionlint/releases/download/v${ACTIONLINT_VERSION}/actionlint_${ACTIONLINT_VERSION}_linux_amd64.tar.gz"
+          # Verify the downloaded archive against the pinned checksum before
+          # extracting/executing it, so a compromised asset or transport can't
+          # run attacker-controlled code on the runner.
+          echo "${ACTIONLINT_SHA256}  actionlint.tar.gz" | sha256sum -c -
+          tar -xzf actionlint.tar.gz actionlint
+
+          # Rationale: ShellCheck stays on (workflow run: blocks are simple and
+          # quoted); pyflakes stays off since the inline Python is intentionally
+          # terse. If a confirmed-harmless rule fires, suppress it narrowly rather
+          # than disabling ShellCheck wholesale.
+          # (Keep the word "shellcheck" out of a comment's first token — ShellCheck
+          # reads a leading "# shellcheck ..." as a directive and errors on it.)
+          ./actionlint -pyflakes= -color

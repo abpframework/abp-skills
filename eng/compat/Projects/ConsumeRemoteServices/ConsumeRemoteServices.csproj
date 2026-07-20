@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <Compile Include="../../Skills/ConsumeRemoteServices.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.Http.Client" />
+    <PackageReference Include="Volo.Abp.Http.Client.IdentityModel" />
+    <PackageReference Include="Volo.Abp.Http.Client.IdentityModel.Web" />
+  </ItemGroup>
+</Project>

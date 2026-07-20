@@ -1,0 +1,26 @@
+scenarios:
+  - name: "Validate tokens on a resource server"
+    prompt: "Configure an ABP API host as a resource server that validates OpenIddict tokens issued by a separate auth server, forwarding bearer authentication and wiring the validation middleware in the right pipeline position."
+    expect_activation: true
+    assertions:
+      - type: "output_matches"
+        pattern: "(AddValidation|OpenIddictValidationBuilder|AddAbpJwtBearer)"
+      - type: "output_contains"
+        value: "UseAbpOpenIddictValidation"
+      - type: "output_matches"
+        pattern: "(ForwardIdentityAuthenticationForBearer|UseLocalServer|SetIssuer)"
+    rubric:
+      - "Configures the validation/resource-server side (AddValidation + OpenIddictValidationBuilder, or AddAbpJwtBearer for a remote authority), distinct from issuing tokens."
+      - "Distinguishes local (UseLocalServer, same process) from remote authority (Authority/Audience or SetIssuer + introspection)."
+      - "Places UseAbpOpenIddictValidation after UseAuthentication and before UseAuthorization, and forwards bearer auth with ForwardIdentityAuthenticationForBearer."
+    timeout: 180
+
+  - name: "Route auth-server token issuance elsewhere"
+    prompt: "Configure the OpenIddict server: enable the authorization-code and client-credentials flows, register scopes, and set token lifetimes."
+    expect_activation: false
+    assertions:
+      - type: "output_not_contains"
+        value: "UseAbpOpenIddictValidation"
+    rubric:
+      - "Configuring the token-issuing server (flows, scopes, lifetimes) is configure-openiddict-authentication, not token validation on a resource server."
+    timeout: 120

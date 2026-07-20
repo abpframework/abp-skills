@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <Compile Include="../../Skills/PropagateCorrelationId.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.AspNetCore" />
+    <PackageReference Include="Volo.Abp.Core" />
+  </ItemGroup>
+</Project>

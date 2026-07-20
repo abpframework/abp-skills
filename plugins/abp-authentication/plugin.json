@@ -1,0 +1,8 @@
+{
+  "name": "abp-authentication",
+  "version": "1.0.0",
+  "description": "ABP authentication: OpenIddict server/validation configuration, tokens, and dynamic claims.",
+  "skills": [
+    "./skills/"
+  ]
+}

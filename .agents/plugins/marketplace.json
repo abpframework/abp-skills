@@ -1,0 +1,102 @@
+{
+  "name": "abp-agent-skills",
+  "owner": {
+    "name": "abpframework"
+  },
+  "description": "ABP Framework development skills for AI coding tools \u2014 framework infrastructure, published as versioned per-domain plugins.",
+  "interface": {
+    "displayName": "ABP Agent Skills"
+  },
+  "plugins": [
+    {
+      "name": "abp-cli",
+      "source": "./plugins/abp-cli",
+      "description": "ABP CLI and ABP Studio CLI: choosing a solution architecture, creating solutions, updating packages, installing client libraries, and generating proxies.",
+      "version": "1.0.0"
+    },
+    {
+      "name": "abp-module-development",
+      "source": "./plugins/abp-module-development",
+      "description": "Building ABP modules with DDD layers: modules, aggregates, application services, DTOs, validation, error handling, object mapping, and module customization.",
+      "version": "1.0.0"
+    },
+    {
+      "name": "abp-data-access",
+      "source": "./plugins/abp-data-access",
+      "description": "Data access in ABP: EF Core and MongoDB integration, migrations, custom repositories, units of work, data filters, concurrency, connection strings, seeding, and Dapper.",
+      "version": "1.0.0"
+    },
+    {
+      "name": "abp-authorization",
+      "source": "./plugins/abp-authorization",
+      "description": "Authorization in ABP: permission definitions, authorization checks, current user, and resource-based authorization.",
+      "version": "1.0.0"
+    },
+    {
+      "name": "abp-authentication",
+      "source": "./plugins/abp-authentication",
+      "description": "ABP authentication: OpenIddict server/validation configuration, tokens, and dynamic claims.",
+      "version": "1.0.0"
+    },
+    {
+      "name": "abp-multitenancy",
+      "source": "./plugins/abp-multitenancy",
+      "description": "ABP multi-tenancy: tenant-aware entities, current tenant resolution, tenant switching, per-tenant databases, and data isolation.",
+      "version": "1.0.0"
+    },
+    {
+      "name": "abp-api",
+      "source": "./plugins/abp-api",
+      "description": "Exposing and consuming ABP HTTP APIs: conventional/auto controllers, integration services, dynamic and static C# client proxies, versioning, Swagger, and CORS.",
+      "version": "1.0.0"
+    },
+    {
+      "name": "abp-ui",
+      "source": "./plugins/abp-ui",
+      "description": "ABP UI development for Blazor, Angular, and MVC/Razor: pages, lists and forms, module UI extensions, menus, theming, localization, bundling, and browser JS API consumption.",
+      "version": "1.0.0"
+    },
+    {
+      "name": "abp-infrastructure",
+      "source": "./plugins/abp-infrastructure",
+      "description": "ABP cross-cutting infrastructure: configuration, logging, JSON serialization, GUIDs, date/time, string encryption, image processing, cancellation tokens, correlation IDs, Autofac & interceptors, settings/features, audit logging, and AI integration.",
+      "version": "1.0.0"
+    },
+    {
+      "name": "abp-runtime",
+      "source": "./plugins/abp-runtime",
+      "description": "ABP runtime services and hosting: distributed/hybrid/entity caching, distributed locking, background jobs/events/workers, email/SMS/text-templating, production & cluster hosting, web request security, and app URLs.",
+      "version": "1.0.0"
+    },
+    {
+      "name": "abp-files",
+      "source": "./plugins/abp-files",
+      "description": "File handling in ABP: BLOB storing containers and providers, and the virtual file system.",
+      "version": "1.0.0"
+    },
+    {
+      "name": "abp-realtime",
+      "source": "./plugins/abp-realtime",
+      "description": "Real-time features in ABP: SignalR hubs, automatic hub routes, authorization, and clients.",
+      "version": "1.0.0"
+    },
+    {
+      "name": "abp-microservices",
+      "source": "./plugins/abp-microservices",
+      "description": "ABP microservice patterns: integration services vs distributed events, outbox/inbox, and Dapr integration.",
+      "version": "1.0.0"
+    },
+    {
+      "name": "abp-testing",
+      "source": "./plugins/abp-testing",
+      "description": "Testing ABP applications: integration test infrastructure, UI and component tests (Angular, MVC/Razor), test data seeding, authorization, and multi-tenant test scenarios.",
+      "version": "1.0.0"
+    },
+    {
+      "name": "abp-upgrade",
+      "source": "./plugins/abp-upgrade",
+      "description": "Upgrading ABP applications across versions: the abp CLI update flow, migration guides, and handling breaking changes.",
+      "version": "1.0.0"
+    }
+  ]
+}

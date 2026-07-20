@@ -1,0 +1,36 @@
+scenarios:
+  - name: "Build a localized ABP Blazor books page"
+    prompt: "Create Pages/Books.razor for an ABP Blazor UI. Derive its code-behind from the correct ABP component base, set MyProjectResource for L, inject IBookAppService, load books asynchronously, and show the current user's name. Keep it compatible with both in-process Server resolution and WebAssembly HTTP client proxies."
+    expect_activation: true
+    assertions:
+      - type: "file_exists"
+        path: "Pages/Books.razor"
+      - type: "output_contains"
+        value: "AbpComponentBase"
+      - type: "output_contains"
+        value: "LocalizationResource = typeof(MyProjectResource)"
+      - type: "output_contains"
+        value: "IBookAppService"
+      - type: "output_contains"
+        value: "CurrentUser"
+      - type: "output_contains"
+        value: "OnInitializedAsync"
+    rubric:
+      - "Uses AbpComponentBase protected services and sets the localization resource instead of re-injecting framework services."
+      - "Calls the application-service interface so the same component can resolve in-process on Server or through dynamic CSharp proxies on WebAssembly."
+    timeout: 240
+
+  - name: "Route an Angular proxy and menu page to Angular UI"
+    prompt: "Generate Angular proxies for the running backend, inject BookService into a component, add a Books menu route with RoutesService, and hide the create button with the abpPermission directive."
+    expect_activation: false
+    assertions:
+      - type: "output_contains"
+        value: "abp generate-proxy -t ng"
+      - type: "output_contains"
+        value: "RoutesService"
+      - type: "output_contains"
+        value: "*abpPermission"
+    rubric:
+      - "Routes Angular proxy, route, and permission-directive work to angular-ui."
+      - "Does not translate TypeScript/Angular requirements into Razor components."
+    timeout: 120

@@ -1,0 +1,53 @@
+scenarios:
+  - name: "Store tenant-isolated profile pictures in a typed container"
+    prompt: "Implement a typed ABP BLOB container named profile-pictures, configure the file-system provider, and show save, nullable read, existence, and delete operations. Replacing an existing user's picture must be allowed, while tenant isolation remains enabled."
+    expect_activation: true
+    assertions:
+      - type: "output_contains"
+        value: "BlobContainerName(\"profile-pictures\")"
+      - type: "output_contains"
+        value: "IBlobContainer<ProfilePictureContainer>"
+      - type: "output_contains"
+        value: "UseFileSystem"
+      - type: "output_contains"
+        value: "overrideExisting: true"
+      - type: "output_contains"
+        value: "GetAllBytesOrNullAsync"
+      - type: "output_contains"
+        value: "DeleteAsync"
+    rubric:
+      - "Uses a stable typed container name and configures the matching file-system provider/module."
+      - "Uses nullable read semantics for missing blobs, explicit replacement, and preserves the default multi-tenant isolation."
+    timeout: 240
+
+  - name: "Configure Azure blob storage for the default container"
+    prompt: "Configure the ABP Blob Storing system to store BLOBs in Azure Blob Storage for the default container. Show the module dependency and the connection string plus container name configuration, creating the container if it does not exist."
+    expect_activation: true
+    assertions:
+      - type: "output_contains"
+        value: "UseAzure"
+      - type: "output_contains"
+        value: "AbpBlobStoringAzureModule"
+      - type: "output_contains"
+        value: "ConnectionString"
+      - type: "output_contains"
+        value: "ContainerName"
+    rubric:
+      - "Depends on AbpBlobStoringAzureModule and selects the Azure provider via UseAzure on the container configuration."
+      - "Sets the real Azure option properties (ConnectionString, ContainerName, CreateContainerIfNotExists) rather than fabricated names."
+    timeout: 240
+
+  - name: "Route embedded module assets to the virtual file system"
+    prompt: "Embed a reusable module's CSS and localization JSON into its assembly, expose them under virtual paths, and override a depended module's CSS by registering the same virtual path."
+    expect_activation: false
+    assertions:
+      - type: "output_contains"
+        value: "EmbeddedResource"
+      - type: "output_contains"
+        value: "AddEmbedded"
+      - type: "output_contains"
+        value: "AbpVirtualFileSystemOptions"
+    rubric:
+      - "Routes assembly-embedded static assets and overrides to manage-virtual-files."
+      - "Does not use IBlobContainer for build-time module resources."
+    timeout: 120

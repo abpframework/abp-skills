@@ -1,0 +1,8 @@
+{
+  "name": "abp-realtime",
+  "version": "1.0.0",
+  "description": "Real-time features in ABP: SignalR hubs, automatic hub routes, authorization, and clients.",
+  "skills": [
+    "./skills/"
+  ]
+}

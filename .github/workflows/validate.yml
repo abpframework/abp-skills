@@ -1,0 +1,105 @@
+name: Validate
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Python dependencies
+        run: pip install -r requirements.txt
+
+      - name: Validate marketplace and plugin layout
+        run: python3 eng/validate.py
+
+      - name: Validate eval manifests (schema + coverage only, not activation)
+        run: python3 eng/validate_evals.py
+
+      - name: Verify compat coverage
+        run: python3 eng/verify_compat_coverage.py
+
+      - name: Check version annotations
+        run: python3 eng/check_version_annotations.py
+
+      - name: Verify ABP baseline versions are consistent
+        run: python3 eng/verify_baselines.py
+
+      - name: Run unit tests
+        run: python3 -m unittest discover -s eng -p 'test_*.py'
+
+      - uses: actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9 # v4
+        with:
+          dotnet-version: "10.0.x"
+
+      - name: Compile-smoke (.NET, stable baseline)
+        run: dotnet build eng/compat/AbpSkillsCompat.slnx
+
+      # "Next" ABP prerelease: verify the compile-tested content still builds against
+      # the upcoming release, catching removed/renamed APIs before the baseline moves.
+      # Bump the pinned rc as newer prereleases ship (same cadence as the rel-x.y doc refs).
+      - name: Compile-smoke (.NET, next ABP prerelease)
+        run: dotnet build eng/compat/AbpSkillsCompat.slnx -p:AbpVersion=10.6.0-rc.1 -p:AbpNext=true
+
+      # Executable runtime behavior tests: boot a real ABP application and assert runtime
+      # semantics the compile-smoke can't reach (DI, permission-definition pipeline, clock,
+      # ambient current-user). Expand with DB-backed cases over time.
+      - name: Runtime behavior tests (.NET)
+        run: dotnet test eng/runtime/AbpRuntimeTests.csproj --nologo
+
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: "24"
+
+      - name: Compile-smoke (TypeScript)
+        run: |
+          cd eng/compat-ts
+          npm ci
+          npm ls @abp/ng.core @angular/core @angular/compiler @angular/animations
+          npm run build
+          # Angular-20 workspace for the extension API (ngx-datatable caps at Angular 20).
+          # No `npm ls` here: its ngx-datatable peer is invalid-but-harmless (we import only
+          # pure-TS classes from @abp/ng.components/extensible).
+          cd ../compat-ts-extensible
+          npm ci
+          npm run build
+
+      - name: Markdown lint
+        run: npx --yes markdownlint-cli2@0.23.0
+
+      - name: Lint workflows (actionlint + shellcheck)
+        env:
+          ACTIONLINT_VERSION: "1.7.7"
+          ACTIONLINT_SHA256: "023070a287cd8cccd71515fedc843f1985bf96c436b7effaecce67290e7e0757"
+        run: |
+          set -euo pipefail
+          curl -fsSLo actionlint.tar.gz \
+            "https://github.com/rhysd/actionlint/releases/download/v${ACTIONLINT_VERSION}/actionlint_${ACTIONLINT_VERSION}_linux_amd64.tar.gz"
+          echo "${ACTIONLINT_SHA256}  actionlint.tar.gz" | sha256sum -c -
+          tar -xzf actionlint.tar.gz actionlint
+          ./actionlint -pyflakes= -color
+
+      - name: Lint install scripts
+        run: |
+          set -euo pipefail
+          shellcheck scripts/install-all-plugins.sh scripts/install-all-plugins-codex.sh
+          pwsh -Command "Install-Module PSScriptAnalyzer -RequiredVersion 1.22.0 -Force -Scope CurrentUser; \$issues = Invoke-ScriptAnalyzer -Path scripts/install-all-plugins.ps1 -Severity Error; if (\$issues) { \$issues | Format-Table; exit 1 }"

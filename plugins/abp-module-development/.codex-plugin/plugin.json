@@ -1,0 +1,14 @@
+{
+  "name": "abp-module-development",
+  "version": "1.0.0",
+  "description": "Building ABP modules with DDD layers: modules, aggregates, application services, DTOs, validation, error handling, object mapping, and module customization.",
+  "author": {
+    "name": "abpframework"
+  },
+  "interface": {
+    "displayName": "ABP Module Development"
+  },
+  "skills": [
+    "./skills/"
+  ]
+}

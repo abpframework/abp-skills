@@ -1,0 +1,36 @@
+scenarios:
+  - name: "Read configuration in AbpModule"
+    prompt: "In my ABP module's ConfigureServices, read the ExternalApi:Endpoint value from the host configuration the ABP way."
+    expect_activation: true
+    assertions:
+      - type: "output_contains"
+        value: "ServiceConfigurationContext.Configuration"
+      - type: "output_matches"
+        pattern: "(GetConfiguration|context\\.Configuration)"
+    rubric:
+      - "Uses ServiceConfigurationContext.Configuration inside the AbpModule."
+      - "Mentions GetConfiguration()/GetConfigurationOrNull() semantics rather than rebuilding configuration."
+    timeout: 180
+  - name: "Bootstrap configuration without a host"
+    prompt: "Build IConfiguration for an ABP console app that has no .NET host, honoring ABP's appsettings and secrets conventions."
+    expect_activation: true
+    assertions:
+      - type: "output_contains"
+        value: "ConfigurationHelper.BuildConfiguration"
+      - type: "output_contains"
+        value: "AbpConfigurationBuilderOptions"
+      - type: "output_matches"
+        pattern: "(appsettings\\.secrets\\.json|AddAppSettingsSecretsJson)"
+    rubric:
+      - "Calls ConfigurationHelper.BuildConfiguration with AbpConfigurationBuilderOptions."
+      - "Does not use the nonexistent AbpConfigurationHelper name."
+    timeout: 180
+  - name: "Route to settings for tenant overrides"
+    prompt: "I need per-tenant and per-user values that admins can change at runtime, not appsettings values."
+    expect_activation: false
+    assertions:
+      - type: "output_contains"
+        value: "manage-settings-and-features"
+    rubric:
+      - "Routes to manage-settings-and-features for runtime tenant/user overrides instead of read-configuration."
+    timeout: 120

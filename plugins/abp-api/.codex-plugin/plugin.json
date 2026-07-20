@@ -1,0 +1,14 @@
+{
+  "name": "abp-api",
+  "version": "1.0.0",
+  "description": "Exposing and consuming ABP HTTP APIs: conventional/auto controllers, integration services, dynamic and static C# client proxies, versioning, Swagger, and CORS.",
+  "author": {
+    "name": "abpframework"
+  },
+  "interface": {
+    "displayName": "ABP API"
+  },
+  "skills": [
+    "./skills/"
+  ]
+}

@@ -1,0 +1,30 @@
+scenarios:
+  - name: "Send and queue email through IEmailSender with MailKit"
+    prompt: "In ABP, send an HTML email with a CC and a PDF attachment, and also queue an email so the web request isn't blocked, without coupling the application service to MailKit. Then show how to switch the SMTP provider to MailKit with the right TLS mode."
+    expect_activation: true
+    assertions:
+      - type: "output_contains"
+        value: "IEmailSender"
+      - type: "output_contains"
+        value: "QueueAsync"
+      - type: "output_contains"
+        value: "AdditionalEmailSendingArgs"
+      - type: "output_contains"
+        value: "AbpMailKitModule"
+    rubric:
+      - "Uses the provider-independent IEmailSender for send + queue, with CC/attachments via AdditionalEmailSendingArgs."
+      - "Switches the SMTP provider to MailKit (AbpMailKitModule / AbpMailKitOptions) without changing the calling code."
+    timeout: 240
+
+  - name: "Route template definition/rendering to render-text-templates"
+    prompt: "Define a Scriban text template in ABP and render it to a string with a model. I'm not sending anything yet, I just need the rendered content."
+    expect_activation: false
+    assertions:
+      - type: "output_contains"
+        value: "TemplateDefinitionProvider"
+      - type: "output_contains"
+        value: "ITemplateRenderer"
+    rubric:
+      - "Defining and rendering a template belongs to render-text-templates, not send-emails."
+      - "Does not introduce IEmailSender for a pure rendering request."
+    timeout: 120

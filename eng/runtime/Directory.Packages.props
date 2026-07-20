@@ -1,0 +1,38 @@
+<Project>
+
+  <!--
+    Central Package Management for the runtime behavior tests and their web system-under-test
+    (runtime/webapp). One <AbpVersion> drives every Volo.Abp.* version, mirroring compat/.
+    Enforced against the recorded baseline by eng/verify_baselines.py.
+  -->
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+    <AbpVersion>10.5.0</AbpVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />
+    <PackageVersion Include="xunit" Version="2.9.2" />
+    <PackageVersion Include="xunit.runner.visualstudio" Version="2.8.2" />
+    <PackageVersion Include="Microsoft.AspNetCore.Mvc.Testing" Version="10.0.9" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageVersion Include="Volo.Abp.Authorization" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.Autofac" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.AutoMapper" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.Caching" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.EntityFrameworkCore.Sqlite" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.EventBus" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.MultiTenancy" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.Security" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.Settings" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.TestBase" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.Timing" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.Validation" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.AspNetCore.Mvc" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.AspNetCore.TestBase" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.Ddd.Application" Version="$(AbpVersion)" />
+  </ItemGroup>
+
+</Project>

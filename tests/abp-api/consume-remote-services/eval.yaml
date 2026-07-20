@@ -1,0 +1,53 @@
+scenarios:
+  - name: "Register and call a named dynamic client proxy"
+    prompt: "Create an ABP C# client module that calls IBookAppService on a remote BookStore service through a dynamic proxy. Register the contracts assembly under the BookStore endpoint, configure its BaseUrl, inject and call the service, and explain the fallback when that endpoint name is absent."
+    expect_activation: true
+    assertions:
+      - type: "output_contains"
+        value: "AbpHttpClientModule"
+      - type: "output_matches"
+        pattern: "AddHttpClientProxies\\([^\\n]*BookStore"
+      - type: "output_contains"
+        value: "RemoteServices"
+      - type: "output_contains"
+        value: "BaseUrl"
+      - type: "output_matches"
+        pattern: "fallback|falls back"
+      - type: "output_contains"
+        value: "Default"
+    rubric:
+      - "Registers the proxy from the assembly that contains the IRemoteService contract and targets the matching named remote-service configuration."
+      - "Calls the injected application-service interface and states that a missing named endpoint falls back to Default."
+    timeout: 240
+
+  - name: "Authenticate remote client proxy calls"
+    prompt: "My ABP web app calls a remote API through a C# client proxy, but the protected endpoints return 401 — the request has no bearer token. Show how to forward the signed-in user's token, and separately how a back-end service would call with its own client-credentials identity."
+    expect_activation: true
+    assertions:
+      - type: "output_contains"
+        value: "AbpHttpClientIdentityModelWebModule"
+      - type: "output_contains"
+        value: "AbpHttpClientIdentityModelModule"
+      - type: "output_contains"
+        value: "IdentityClients"
+      - type: "output_matches"
+        pattern: "(client_credentials|UseCurrentAccessToken)"
+    rubric:
+      - "Explains that proxies attach no token by default; forwards the current user token via AbpHttpClientIdentityModelWebModule and uses client credentials (AbpHttpClientIdentityModelModule + IdentityClients) for server-to-server."
+      - "Does not claim AbpHttpClientModule alone authenticates the call."
+    timeout: 240
+
+  - name: "Route exposing local application services to HTTP APIs"
+    prompt: "Expose my local BookAppService as conventional REST endpoints, customize its root path and controller name, and document the generated routes and HTTP verbs."
+    expect_activation: false
+    assertions:
+      - type: "output_contains"
+        value: "ConventionalControllers.Create"
+      - type: "output_matches"
+        pattern: "RootPath|RemoteServiceName"
+      - type: "output_matches"
+        pattern: "GET|POST|PUT|DELETE"
+    rubric:
+      - "Routes server-side conventional controller exposure to expose-http-apis."
+      - "Does not add an HTTP client proxy when the request is to publish local services."
+    timeout: 120

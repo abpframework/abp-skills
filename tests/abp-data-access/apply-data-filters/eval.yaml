@@ -1,0 +1,54 @@
+scenarios:
+  - name: "Read soft-deleted data in a scoped query"
+    prompt: "Create src/Application/Books/DeletedBookReader.cs that returns soft-deleted and active Books for one operation without changing the global default. Show how the filter state is scoped, checked, and restored, and explain physical deletion separately."
+    expect_activation: true
+    assertions:
+      - type: "file_exists"
+        path: "src/Application/Books/DeletedBookReader.cs"
+      - type: "output_contains"
+        value: "IDataFilter"
+      - type: "output_matches"
+        pattern: "Disable<ISoftDelete>"
+      - type: "output_matches"
+        pattern: "IsEnabled<ISoftDelete>|IDataFilter<ISoftDelete>"
+      - type: "output_contains"
+        value: "HardDeleteAsync"
+    rubric:
+      - "Wraps Disable<ISoftDelete> in a using scope so the previous state is restored even when the operation fails."
+      - "Distinguishes temporarily including deleted rows from permanently removing one through HardDeleteAsync."
+    timeout: 210
+
+  - name: "Implement a custom MongoDB repository filter"
+    prompt: "Create src/MongoDB/Books/ActiveBookMongoDbRepositoryFilterer.cs for an IIsActive marker on Book. It must affect keyed repository IQueryable queries and allow IDataFilter.Disable<IIsActive>() to reveal inactive rows. Explain why AddGlobalFiltersAsync is not the queryable hook."
+    expect_activation: true
+    assertions:
+      - type: "file_exists"
+        path: "src/MongoDB/Books/ActiveBookMongoDbRepositoryFilterer.cs"
+      - type: "output_contains"
+        value: "MongoDbRepositoryFilterer<Book, Guid>"
+      - type: "output_contains"
+        value: "IMongoDbRepositoryFilterer<Book, Guid>"
+      - type: "output_contains"
+        value: "FilterQueryable"
+      - type: "output_matches"
+        pattern: "IsEnabled<IIsActive>"
+    rubric:
+      - "Exposes the keyed filterer service and overrides FilterQueryable for repository IQueryable operations."
+      - "Guards the predicate with the data-filter enabled state so scoped Disable calls work."
+      - "Separates FilterQueryable from AddGlobalFiltersAsync, which participates in native entity/id filter definitions."
+    timeout: 240
+
+  - name: "Route active tenant switching to multi-tenancy"
+    prompt: "Run an operation as tenant A, then tenant B, using ICurrentTenant.Change and explain host context plus separate-database connection selection. Do not change query-filter defaults."
+    expect_activation: false
+    assertions:
+      - type: "output_contains"
+        value: "ICurrentTenant"
+      - type: "output_contains"
+        value: "CurrentTenant.Change"
+      - type: "output_matches"
+        pattern: "(host context|separate database|connection)"
+    rubric:
+      - "Routes tenant context switching and database selection to configure-multi-tenancy."
+      - "Does not substitute Disable<IMultiTenant> for entering a tenant context."
+    timeout: 120

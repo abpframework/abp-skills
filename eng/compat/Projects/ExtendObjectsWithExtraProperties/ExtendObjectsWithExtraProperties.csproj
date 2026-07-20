@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <Compile Include="../../Skills/ExtendObjectsWithExtraProperties.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Riok.Mapperly" />
+    <PackageReference Include="Volo.Abp.AutoMapper" />
+    <PackageReference Include="Volo.Abp.Ddd.Application.Contracts" />
+    <PackageReference Include="Volo.Abp.Ddd.Domain" />
+    <PackageReference Include="Volo.Abp.EntityFrameworkCore" />
+    <PackageReference Include="Volo.Abp.Mapperly" />
+    <PackageReference Include="Volo.Abp.MongoDB" />
+    <PackageReference Include="Volo.Abp.ObjectExtending" />
+  </ItemGroup>
+</Project>

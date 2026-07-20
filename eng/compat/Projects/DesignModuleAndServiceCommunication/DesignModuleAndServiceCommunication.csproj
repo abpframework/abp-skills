@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <Compile Include="../../Skills/DesignModuleAndServiceCommunication.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.AspNetCore.Mvc" />
+    <PackageReference Include="Volo.Abp.Core" />
+    <PackageReference Include="Volo.Abp.Ddd.Application" />
+    <PackageReference Include="Volo.Abp.EventBus" />
+    <PackageReference Include="Volo.Abp.EventBus.Abstractions" />
+  </ItemGroup>
+</Project>

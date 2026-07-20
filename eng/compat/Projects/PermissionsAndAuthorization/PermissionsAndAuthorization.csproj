@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <Compile Include="../../Skills/PermissionsAndAuthorization.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.Authorization" />
+    <PackageReference Include="Volo.Abp.Authorization.Abstractions" />
+    <PackageReference Include="Volo.Abp.Core" />
+    <PackageReference Include="Volo.Abp.MultiTenancy.Abstractions" />
+    <PackageReference Include="Volo.Abp.Security" />
+  </ItemGroup>
+</Project>

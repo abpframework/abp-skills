@@ -1,0 +1,8 @@
+{
+  "name": "abp-runtime",
+  "version": "1.0.0",
+  "description": "ABP runtime services and hosting: distributed/hybrid/entity caching, distributed locking, background jobs/events/workers, email/SMS/text-templating, production & cluster hosting, web request security, and app URLs.",
+  "skills": [
+    "./skills/"
+  ]
+}

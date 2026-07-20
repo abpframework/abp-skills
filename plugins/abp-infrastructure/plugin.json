@@ -1,0 +1,8 @@
+{
+  "name": "abp-infrastructure",
+  "version": "1.0.0",
+  "description": "ABP cross-cutting infrastructure: configuration, logging, JSON serialization, GUIDs, date/time, string encryption, image processing, cancellation tokens, correlation IDs, Autofac & interceptors, settings/features, audit logging, and AI integration.",
+  "skills": [
+    "./skills/"
+  ]
+}

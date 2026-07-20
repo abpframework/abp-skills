@@ -1,0 +1,35 @@
+scenarios:
+  - name: "Enable a global feature at startup"
+    prompt: "Define an ABP global feature for a payment capability and enable it once before application startup, then guard a controller behind it."
+    expect_activation: true
+    assertions:
+      - type: "output_contains"
+        value: "GlobalFeatureManager"
+      - type: "output_matches"
+        pattern: "(GlobalFeatureName|RequiresGlobalFeature)"
+      - type: "output_matches"
+        pattern: "(PreConfigureServices|OneTimeRunner)"
+    rubric:
+      - "Uses GlobalFeatureManager.Instance.Enable and guards the controller with [RequiresGlobalFeature]."
+      - "Configures the feature once before startup via PreConfigureServices/OneTimeRunner."
+    timeout: 180
+  - name: "Group a reusable module's global features"
+    prompt: "I'm authoring a reusable ABP module and want a discoverable grouped API to enable all of its global feature switches."
+    expect_activation: true
+    assertions:
+      - type: "output_contains"
+        value: "GlobalModuleFeatures"
+      - type: "output_matches"
+        pattern: "(AddFeature|EnableAll)"
+    rubric:
+      - "Derives switches from GlobalFeature and a group from GlobalModuleFeatures using AddFeature/EnableAll."
+    timeout: 180
+  - name: "Route to tenant features"
+    prompt: "I need per-tenant and per-edition feature values gated with [RequiresFeature] that admins toggle per tenant."
+    expect_activation: false
+    assertions:
+      - type: "output_contains"
+        value: "manage-settings-and-features"
+    rubric:
+      - "Routes to manage-settings-and-features for tenant/edition [RequiresFeature] values instead of global features."
+    timeout: 120

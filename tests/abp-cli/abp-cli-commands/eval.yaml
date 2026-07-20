@@ -1,0 +1,64 @@
+scenarios:
+  - name: "Repair client libraries and generate a CSharp proxy"
+    prompt: "I cloned an ABP solution and the MVC host reports that the Libs folder is missing. Give me the exact ABP CLI workflow to restore the web assets, then generate CSharp proxies into MyProxies/Inner from a running host at https://localhost:44302 without regenerating contracts. Also show how to invoke the classic CLI through the Studio CLI."
+    expect_activation: true
+    assertions:
+      - type: "output_contains"
+        value: "abp install-libs"
+      - type: "output_contains"
+        value: "abp generate-proxy -t csharp"
+      - type: "output_contains"
+        value: "--without-contracts"
+      - type: "output_contains"
+        value: "--old"
+      - type: "output_contains"
+        value: "/api/abp/api-definition"
+    rubric:
+      - "Runs install-libs in or against the web project instead of disabling the Libs check."
+      - "Requires the HTTP API host to be running, uses the CSharp proxy target/folder options, and places --old at the end of a classic command."
+    timeout: 180
+
+  - name: "Generate Angular proxies for plain and NX workspaces"
+    prompt: "My ABP backend host is running. Generate the Angular service and model proxies for a standard Angular app, and separately show the command an ng-packs NX workspace uses instead."
+    expect_activation: true
+    assertions:
+      - type: "output_contains"
+        value: "abp generate-proxy -t ng"
+      - type: "output_contains"
+        value: "npx nx g @abp/nx.generators:generate-proxy"
+      - type: "output_contains"
+        value: "/api/abp/api-definition"
+    rubric:
+      - "Owns Angular proxy generation: plain CLI for a standard app, the NX generator for an ng-packs workspace; the API host must be running."
+      - "Stays on generation and does not drift into consuming the proxies in Angular components (that is angular-ui)."
+    timeout: 180
+
+  - name: "Create solutions with the Studio and classic CLIs"
+    prompt: "Using the ABP CLI, create a layered application solution with the Angular UI, and separately create a console application. Give the exact commands and note which CLI and parameters each needs."
+    expect_activation: true
+    assertions:
+      - type: "output_contains"
+        value: "abp new"
+      - type: "output_matches"
+        pattern: "(--ui-framework|-u angular)"
+      - type: "output_contains"
+        value: "--old"
+      - type: "output_matches"
+        pattern: "(install-old-cli|-t console)"
+    rubric:
+      - "Uses the Studio CLI (default) with real Studio parameters for the layered app; for the console app uses -t console with --old at the end of the command (and abp install-old-cli first)."
+      - "Does not mix classic-only parameters (--ui, --skip-installing-libs) into a non---old Studio command."
+    timeout: 180
+
+  - name: "Route a framework version migration to upgrade guidance"
+    prompt: "Upgrade my existing ABP solution to the latest version, align every Volo package, review breaking changes and migration guides, and verify the upgraded application."
+    expect_activation: false
+    assertions:
+      - type: "output_contains"
+        value: "abp update"
+      - type: "output_matches"
+        pattern: "(migration guide|breaking change|package version)"
+    rubric:
+      - "Routes the cross-version solution migration to version-upgrade rather than treating abp update as the complete workflow."
+      - "Includes package alignment, migration-guide review, and build/test verification."
+    timeout: 120

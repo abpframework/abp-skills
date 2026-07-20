@@ -1,0 +1,34 @@
+scenarios:
+  - name: "Cache Product DTOs with batched entity lookups"
+    prompt: "Configure ABP to cache Product entities as ProductDto by Guid, use a 30-minute sliding expiration, and implement a batch lookup that preserves cache-aware loading. Explain what happens after a Product update or delete and which generic cache type the consumer injects."
+    expect_activation: true
+    assertions:
+      - type: "output_contains"
+        value: "AddEntityCache<Product, ProductDto, Guid>"
+      - type: "output_contains"
+        value: "IEntityCache<ProductDto, Guid>"
+      - type: "output_contains"
+        value: "SlidingExpiration"
+      - type: "output_matches"
+        pattern: "(GetManyAsync|FindManyAsync|FindManyAsDictionaryAsync|GetManyAsDictionaryAsync)"
+      - type: "output_matches"
+        pattern: "(automatic invalidation|automatically invalidate|invalidated automatically)"
+    rubric:
+      - "Registers the three-generic entity cache, configures Product-to-ProductDto mapping, and injects the DTO cache item type."
+      - "Uses a batch API instead of looping over individual lookups and explains update/delete invalidation."
+    timeout: 240
+
+  - name: "Route arbitrary key-value caching and locking to distributed infrastructure"
+    prompt: "Cache an expensive report under an arbitrary string key with GetOrAddAsync and acquire a distributed lock named nightly-report across service instances. This cache is not tied to an entity repository."
+    expect_activation: false
+    assertions:
+      - type: "output_contains"
+        value: "IDistributedCache"
+      - type: "output_contains"
+        value: "IAbpDistributedLock"
+      - type: "output_contains"
+        value: "TryAcquireAsync"
+    rubric:
+      - "Routes general key/value caching and distributed locking to distributed-caching-and-locking."
+      - "Does not introduce AddEntityCache for a value unrelated to entity repository invalidation."
+    timeout: 120

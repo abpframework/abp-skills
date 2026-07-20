@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <Compile Include="../../Skills/ManipulateImages.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.Core" />
+    <PackageReference Include="Volo.Abp.Imaging.Abstractions" />
+    <PackageReference Include="Volo.Abp.Imaging.ImageSharp" />
+  </ItemGroup>
+</Project>

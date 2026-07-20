@@ -1,0 +1,8 @@
+{
+  "name": "abp-cli",
+  "version": "1.0.0",
+  "description": "ABP CLI and ABP Studio CLI: choosing a solution architecture, creating solutions, updating packages, installing client libraries, and generating proxies.",
+  "skills": [
+    "./skills/"
+  ]
+}

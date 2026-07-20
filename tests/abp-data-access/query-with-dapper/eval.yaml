@@ -1,0 +1,34 @@
+scenarios:
+  - name: "Share the ambient EF Core transaction with Dapper"
+    prompt: "Create src/EntityFrameworkCore/BookSalesDapperRepository.cs for a hot aggregate query in an ABP EF Core app. It must use the current unit-of-work connection and transaction, support DI/interception, parameterize SQL, and explain how to see EF Core writes made earlier in the same unit of work."
+    expect_activation: true
+    assertions:
+      - type: "file_exists"
+        path: "src/EntityFrameworkCore/BookSalesDapperRepository.cs"
+      - type: "output_matches"
+        pattern: "DapperRepository<[^>]+>"
+      - type: "output_contains"
+        value: "IDbContextProvider"
+      - type: "output_contains"
+        value: "GetDbConnectionAsync"
+      - type: "output_contains"
+        value: "GetDbTransactionAsync"
+      - type: "output_matches"
+        pattern: "public virtual async"
+    rubric:
+      - "Derives from DapperRepository<TDbContext>, uses virtual methods for interception, and passes the ambient transaction to the parameterized Dapper call."
+      - "Does not open a new connection and explains that pending EF Core changes must be flushed before Dapper can observe them."
+    timeout: 240
+
+  - name: "Route ordinary tracked CRUD to EF Core integration"
+    prompt: "Implement ordinary Book CRUD with LINQ filters, IncludeDetails, EF Core change tracking, entity mappings, and a migration. There is no measured SQL hot path requiring hand-written SQL."
+    expect_activation: false
+    assertions:
+      - type: "output_matches"
+        pattern: "IRepository<Book|DbSet<Book|GetQueryableAsync"
+      - type: "output_matches"
+        pattern: "migration|IEntityTypeConfiguration|OnModelCreating"
+    rubric:
+      - "Routes standard CRUD, LINQ, change tracking, entity mapping, and migrations to ef-core-integration."
+      - "Does not introduce Dapper when no raw-SQL hot path was requested."
+    timeout: 120

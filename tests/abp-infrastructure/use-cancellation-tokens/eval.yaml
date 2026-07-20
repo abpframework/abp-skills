@@ -1,0 +1,38 @@
+scenarios:
+  - name: "Propagate token through app service and repository"
+    prompt: "In my ABP ProductAppService, I have a RefreshAsync method that loads a product from an IRepository and calls an external catalog API. Wire cooperative cancellation through the whole call chain the ABP way."
+    expect_activation: true
+    assertions:
+      - type: "output_contains"
+        value: "CancellationToken"
+      - type: "output_matches"
+        pattern: "(cancellationToken\\s*=\\s*default|GetAsync)"
+      - type: "output_contains"
+        value: "IRepository"
+    rubric:
+      - "Passes an explicit CancellationToken parameter through the service and repository calls."
+      - "Does not replace the received token with CancellationToken.None."
+    timeout: 180
+  - name: "Reach ambient token when no parameter is available"
+    prompt: "I have a CatalogImporter called through ABP infrastructure that does not receive a CancellationToken parameter. How do I observe ABP's ambient cancellation and temporarily override it for a scoped operation?"
+    expect_activation: true
+    assertions:
+      - type: "output_contains"
+        value: "ICancellationTokenProvider"
+      - type: "output_matches"
+        pattern: "(\\.Token|\\.Use\\()"
+      - type: "output_contains"
+        value: "HttpContextCancellationTokenProvider"
+    rubric:
+      - "Uses ICancellationTokenProvider.Token to read the ambient token and Use() for a scoped override."
+      - "Mentions HttpContextCancellationTokenProvider / RequestAborted and the CancellationToken.None fallback."
+    timeout: 180
+  - name: "Route background job retry to sibling skill"
+    prompt: "Configure my ABP background job worker's retry policy and how many times it re-executes on failure."
+    expect_activation: false
+    assertions:
+      - type: "output_contains"
+        value: "background-jobs-and-events"
+    rubric:
+      - "Routes to the background-jobs-and-events skill instead of the cancellation-token skill."
+    timeout: 120

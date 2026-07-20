@@ -1,0 +1,52 @@
+scenarios:
+  - name: "Create a Mongo DbContext and repository registration"
+    prompt: "Create src/MongoDB/BookStoreMongoDbContext.cs and src/MongoDB/BookStoreMongoDbModule.cs for Book. Name its collection AppBooks, map it in CreateModel, register default repositories including all entities, and summarize why no EF migration is created."
+    expect_activation: true
+    assertions:
+      - type: "file_exists"
+        path: "src/MongoDB/BookStoreMongoDbContext.cs"
+      - type: "file_exists"
+        path: "src/MongoDB/BookStoreMongoDbModule.cs"
+      - type: "output_contains"
+        value: "AbpMongoDbContext"
+      - type: "output_contains"
+        value: "MongoCollection"
+      - type: "output_contains"
+        value: "AddMongoDbContext"
+      - type: "output_matches"
+        pattern: 'AddDefaultRepositories\s*\(\s*includeAllEntities\s*:\s*true'
+    rubric:
+      - "Exposes IMongoCollection<Book>, maps AppBooks, and registers the context through AddMongoDbContext."
+      - "States that MongoDB has no EF Core migrations and separates collection/index initialization from relational migration commands."
+    timeout: 240
+
+  - name: "Implement a custom Mongo repository"
+    prompt: "Design IBookRepository in Domain and MongoDbBookRepository in MongoDB with a normal LINQ author query plus a native aggregation path. Explain the context-provider dependency and the filtering difference between repository queries and raw collection access."
+    expect_activation: true
+    assertions:
+      - type: "output_contains"
+        value: "MongoDbRepository"
+      - type: "output_contains"
+        value: "IMongoDbContextProvider"
+      - type: "output_contains"
+        value: "GetQueryableAsync"
+      - type: "output_matches"
+        pattern: "(GetCollectionAsync|GetAggregateAsync)"
+    rubric:
+      - "Keeps the provider-neutral repository interface in Domain and the Mongo implementation in MongoDB."
+      - "Uses GetQueryableAsync for ordinary filtered LINQ and a native accessor only for a deliberate driver-level operation."
+      - "Warns that raw collection access bypasses the repository query-filter pipeline."
+    timeout: 210
+
+  - name: "Route relational migrations to EF Core"
+    prompt: "Add an AbpDbContext<BookStoreDbContext>, configure Book with ConfigureByConvention and ToTable, register AddAbpDbContext, and create a dotnet ef migration."
+    expect_activation: false
+    assertions:
+      - type: "output_contains"
+        value: "AbpDbContext"
+      - type: "output_matches"
+        pattern: "(ConfigureByConvention|dotnet ef)"
+    rubric:
+      - "Routes relational DbContext mapping and migrations to ef-core-integration."
+      - "Does not introduce MongoDB collections or claim MongoDB uses EF migrations."
+    timeout: 120

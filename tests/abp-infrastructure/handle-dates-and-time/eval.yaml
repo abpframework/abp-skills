@@ -1,0 +1,41 @@
+scenarios:
+  - name: "Configure UTC clock policy and normalize"
+    prompt: "In my ABP module, configure a UTC clock policy so I can serve multiple timezones, and add a service that normalizes inbound DateTime values instead of calling DateTime.UtcNow directly."
+    expect_activation: true
+    assertions:
+      - type: "output_contains"
+        value: "AbpClockOptions"
+      - type: "output_contains"
+        value: "IClock"
+      - type: "output_matches"
+        pattern: "DateTimeKind\\.Utc"
+      - type: "output_contains"
+        value: "Normalize"
+    rubric:
+      - "Uses IClock instead of DateTime.Now/DateTime.UtcNow."
+      - "Sets AbpClockOptions.Kind = DateTimeKind.Utc and explains SupportsMultipleTimezone is true only in UTC mode."
+      - "Uses Clock.Normalize for deliberate normalization."
+    timeout: 240
+  - name: "Convert UTC to user timezone and EF opt-out"
+    prompt: "Show me how to convert a stored UTC DateTime to the current request's timezone in ABP, and how to opt a single entity property out of the automatic EF Core DateTime normalization."
+    expect_activation: true
+    assertions:
+      - type: "output_contains"
+        value: "ConvertToUserTime"
+      - type: "output_contains"
+        value: "DisableDateTimeNormalization"
+      - type: "output_matches"
+        pattern: "(ICurrentTimezoneProvider|UseAbpTimeZone)"
+    rubric:
+      - "Uses IClock.ConvertToUserTime at the presentation boundary."
+      - "Applies [DisableDateTimeNormalization] to the property and notes it removes both read and write normalization."
+    timeout: 240
+  - name: "Define timezone setting value providers"
+    prompt: "I want to define the Abp.Timing.TimeZone setting and its value-provider hierarchy (default, tenant, user) for my application."
+    expect_activation: false
+    assertions:
+      - type: "output_contains"
+        value: "manage-settings-and-features"
+    rubric:
+      - "Routes to manage-settings-and-features instead of this timing skill for defining setting values/providers."
+    timeout: 120

@@ -1,0 +1,14 @@
+{
+  "name": "abp-testing",
+  "version": "1.0.0",
+  "description": "Testing ABP applications: integration test infrastructure, UI and component tests (Angular, MVC/Razor), test data seeding, authorization, and multi-tenant test scenarios.",
+  "author": {
+    "name": "abpframework"
+  },
+  "interface": {
+    "displayName": "ABP Testing"
+  },
+  "skills": [
+    "./skills/"
+  ]
+}

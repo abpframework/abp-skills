@@ -1,0 +1,50 @@
+scenarios:
+  - name: "HTTP integration test for a Razor page"
+    prompt: "Write an ABP MVC/Razor integration test base and a test that requests the welcome page over HTTP and asserts on the HTML. Explain how the web test module and the response helpers are set up."
+    expect_activation: true
+    assertions:
+      - type: "output_contains"
+        value: "AbpWebApplicationFactoryIntegratedTest"
+      - type: "output_contains"
+        value: "GetResponseAsStringAsync"
+      - type: "output_contains"
+        value: "AbpAspNetCoreTestBaseModule"
+      - type: "output_matches"
+        pattern: "(CompiledRazorAssemblyPart|AllowAutoRedirect)"
+    rubric:
+      - "Subclasses AbpWebApplicationFactoryIntegratedTest with the SUT Program type and copies the GetResponseAs* helpers into the WebTestBase."
+      - "Sets up the web test module with AbpAspNetCoreTestBaseModule, the SUT web module, the CompiledRazorAssemblyPart, and the OpenIddict dev cert."
+    timeout: 240
+
+  - name: "Authenticated page test with faked user"
+    prompt: "In an ABP MVC integration test, request a protected page as a logged-in user, and show what an unauthenticated request returns."
+    expect_activation: true
+    assertions:
+      - type: "output_matches"
+        pattern: "(FakeUserClaims|FakeAuthentication|AddFakeAuthentication)"
+      - type: "output_contains"
+        value: "AbpClaimTypes.UserId"
+    rubric:
+      - "Fakes the user by pushing an AbpClaimTypes.UserId claim via the FakeAuthentication/FakeUserClaims pattern (not shipped in a package)."
+      - "Notes that with no claim the request is anonymous and returns 302 because Client has AllowAutoRedirect = false."
+    timeout: 180
+
+  - name: "Route app-service test to test-abp-applications"
+    prompt: "Write an integration test for my ABP BookAppService that resolves the real service and asserts on seeded data — no web host."
+    expect_activation: false
+    assertions:
+      - type: "output_matches"
+        pattern: "(test-abp-applications|AbpIntegratedTest)"
+    rubric:
+      - "Application-service/repository tests use test-abp-applications, not the web application factory."
+    timeout: 120
+
+  - name: "Route Angular component test to test-angular-ui"
+    prompt: "Unit-test an ABP Angular standalone component with a TestBed and no backend."
+    expect_activation: false
+    assertions:
+      - type: "output_matches"
+        pattern: "(test-angular-ui|CoreTestingModule|TestBed)"
+    rubric:
+      - "Angular component tests are test-angular-ui, not MVC/Razor HTTP tests."
+    timeout: 120

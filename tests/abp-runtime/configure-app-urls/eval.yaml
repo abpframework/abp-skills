@@ -1,0 +1,43 @@
+scenarios:
+  - name: "Configure named app roots and resolve a password-reset link"
+    prompt: "Configure AppUrlOptions for an MVC application with a tenant-aware RootUrl and a named PasswordReset URL, then resolve the absolute link through IAppUrlProvider inside an email link factory."
+    expect_activation: true
+    assertions:
+      - type: "output_contains"
+        value: "AppUrlOptions"
+      - type: "output_contains"
+        value: "options.Applications[\"MVC\"].RootUrl"
+      - type: "output_contains"
+        value: "IAppUrlProvider"
+      - type: "output_contains"
+        value: "GetUrlAsync"
+    rubric:
+      - "Configures AppUrlOptions.Applications with RootUrl and named Urls and resolves through IAppUrlProvider.GetUrlAsync."
+      - "Uses the Volo.Abp.UI.Navigation.Urls namespace."
+    timeout: 240
+  - name: "Tenant placeholders and redirect allow-list"
+    prompt: "Set up tenant placeholders in the configured RootUrl and add redirect allow-list entries in AppUrlOptions, then validate a redirect target using the provider."
+    expect_activation: true
+    assertions:
+      - type: "output_contains"
+        value: "{{tenantName}}"
+      - type: "output_contains"
+        value: "RedirectAllowedUrls"
+      - type: "output_contains"
+        value: "IsRedirectAllowedUrlAsync"
+    rubric:
+      - "Uses {{tenantName}}/{{tenantId}} placeholders and configures RedirectAllowedUrls separately from Applications."
+      - "Validates targets with IsRedirectAllowedUrlAsync."
+    timeout: 240
+  - name: "Route remote service base address away"
+    prompt: "Configure the base address for a remote HTTP service client and set AbpRemoteServiceOptions.BaseUrl so my app service proxy can call the backend API."
+    expect_activation: false
+    assertions:
+      - type: "output_contains"
+        value: "AbpRemoteServiceOptions"
+      - type: "output_not_contains"
+        value: "AppUrlOptions"
+    rubric:
+      - "Routes to consume-remote-services instead; that skill owns AbpRemoteServiceOptions.BaseUrl."
+      - "Does not answer with configure-app-urls's AppUrlOptions."
+    timeout: 120

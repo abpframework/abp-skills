@@ -1,0 +1,29 @@
+scenarios:
+  - name: "Set up Swagger with OIDC auth for an API host"
+    prompt: "In an ABP HTTP API host, register Swagger/OpenAPI and wire the Swagger UI to authenticate against the ABP auth server so the Authorize button gets a token. Hide ABP's built-in endpoints from the document."
+    expect_activation: true
+    assertions:
+      - type: "output_matches"
+        pattern: "AddAbpSwaggerGen(WithOAuth|WithOidc)?"
+      - type: "output_contains"
+        value: "UseAbpSwaggerUI"
+      - type: "output_matches"
+        pattern: "(HideAbpEndpoints|OAuthClientId)"
+      - type: "output_not_contains"
+        value: "OAuthClientSecret"
+    rubric:
+      - "Registers via AddAbpSwaggerGen / AddAbpSwaggerGenWithOAuth or WithOidc (not raw AddSwaggerGen), and serves the UI with UseAbpSwaggerUI."
+      - "Wires the Swagger UI OAuth flow (authority, scopes, OAuthClientId) so the Authorize button obtains a token; notes WithOidc when the metadata address differs from the issuer."
+      - "Treats the Swagger UI as a public browser client — authorization-code flow with OAuthClientId and scopes, no client secret."
+      - "Uses HideAbpEndpoints to keep ABP's built-in endpoints out of the document."
+    timeout: 180
+
+  - name: "Route API versioning strategy elsewhere"
+    prompt: "Choose between query-string and URL-path API versioning for my auto controllers and attach versions to a conventional controller assembly."
+    expect_activation: false
+    assertions:
+      - type: "output_not_contains"
+        value: "AddAbpSwaggerGen"
+    rubric:
+      - "Choosing a versioning reader/strategy is version-http-apis, not Swagger/OpenAPI document configuration."
+    timeout: 120

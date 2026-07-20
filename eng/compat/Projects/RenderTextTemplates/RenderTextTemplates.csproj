@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <Compile Include="../../Skills/RenderTextTemplates.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.TextTemplating.Core" />
+    <PackageReference Include="Volo.Abp.TextTemplating.Razor" />
+    <PackageReference Include="Volo.Abp.TextTemplating.Scriban" />
+  </ItemGroup>
+</Project>

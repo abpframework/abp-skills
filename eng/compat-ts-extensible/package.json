@@ -1,0 +1,28 @@
+{
+  "name": "abp-skills-compat-ts-extensible",
+  "version": "1.0.0",
+  "private": true,
+  "engines": {
+    "node": ">=24",
+    "npm": ">=11.13"
+  },
+  "scripts": {
+    "build": "tsc --noEmit"
+  },
+  "//": "Separate from compat-ts/ because @abp/ng.components pulls @abp/ng.theme.shared -> @swimlane/ngx-datatable, whose Angular peer tops out at 20. This workspace pins Angular 20 so the extension API (extend-angular-module-ui) can be compile-checked. It builds with `npm ci && npm run build` only (no `npm ls`, since the ngx-datatable peer is invalid-but-harmless here — the smoke imports only pure-TS classes from @abp/ng.components/extensible).",
+  "dependencies": {
+    "@abp/ng.core": "10.5.0",
+    "@abp/ng.components": "10.5.0",
+    "@angular/animations": "20.3.3",
+    "@angular/common": "20.3.3",
+    "@angular/core": "20.3.3",
+    "@angular/forms": "20.3.3",
+    "@angular/platform-browser": "20.3.3",
+    "@angular/router": "20.3.3",
+    "rxjs": "7.8.2",
+    "tslib": "2.8.1"
+  },
+  "devDependencies": {
+    "typescript": "5.9.3"
+  }
+}

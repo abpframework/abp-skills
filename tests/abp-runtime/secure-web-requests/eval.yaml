@@ -1,0 +1,38 @@
+scenarios:
+  - name: "Configure MVC antiforgery and issue token"
+    prompt: "Configure ABP MVC automatic antiforgery validation in my host module and add an endpoint that issues the CSRF token cookie for a JavaScript client."
+    expect_activation: true
+    assertions:
+      - type: "output_contains"
+        value: "AbpAntiForgeryOptions"
+      - type: "output_contains"
+        value: "IAbpAntiForgeryManager"
+      - type: "output_matches"
+        pattern: "(SetCookie|GenerateToken)"
+    rubric:
+      - "Configures AbpAntiForgeryOptions (AutoValidate) and uses IAbpAntiForgeryManager.SetCookie()."
+      - "Does not disable AutoValidate globally to fix a single client."
+    timeout: 180
+  - name: "Add ABP security headers and CSP"
+    prompt: "Add ABP browser security headers with a Content Security Policy and script nonces to my ASP.NET Core host."
+    expect_activation: true
+    assertions:
+      - type: "output_contains"
+        value: "AbpSecurityHeadersOptions"
+      - type: "output_contains"
+        value: "UseAbpSecurityHeaders"
+      - type: "output_matches"
+        pattern: "(UseContentSecurityPolicyHeader|GetScriptNonceAttribute)"
+    rubric:
+      - "Configures AbpSecurityHeadersOptions and calls UseAbpSecurityHeaders after routing."
+      - "Enables CSP/nonce via UseContentSecurityPolicyHeader and renders the nonce on scripts."
+    timeout: 180
+  - name: "Route to OpenIddict for API auth"
+    prompt: "Set up OpenIddict token issuance and bearer authentication for my API."
+    expect_activation: false
+    assertions:
+      - type: "output_contains"
+        value: "configure-openiddict-authentication"
+    rubric:
+      - "Routes to configure-openiddict-authentication instead of secure-web-requests."
+    timeout: 120

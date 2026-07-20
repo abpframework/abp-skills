@@ -1,0 +1,38 @@
+scenarios:
+  - name: "Send SMS through ISmsSender"
+    prompt: "Send a verification code text message to a phone number from an ABP application service, keeping the code provider-independent."
+    expect_activation: true
+    assertions:
+      - type: "output_contains"
+        value: "ISmsSender"
+      - type: "output_contains"
+        value: "SendAsync"
+      - type: "output_matches"
+        pattern: "(AbpSmsModule|Volo\\.Abp\\.Sms)"
+    rubric:
+      - "Injects ISmsSender and calls SendAsync, depending on AbpSmsModule."
+      - "Keeps callers provider-independent rather than hardcoding a gateway."
+    timeout: 180
+  - name: "Pass provider-specific properties on SmsMessage"
+    prompt: "I need to send an SMS via a Twilio provider and pass a provider-specific TemplateCode value along with the message text in ABP."
+    expect_activation: true
+    assertions:
+      - type: "output_contains"
+        value: "SmsMessage"
+      - type: "output_contains"
+        value: "Properties"
+      - type: "output_matches"
+        pattern: "(Volo\\.Abp\\.Sms\\.Twilio|NullSmsSender)"
+    rubric:
+      - "Constructs SmsMessage and uses Properties (IDictionary<string, object>) for provider values."
+      - "Notes NullSmsSender is only a fallback and a real provider package like Volo.Abp.Sms.Twilio is needed."
+    timeout: 180
+  - name: "Route to email skill"
+    prompt: "Render and send a templated email confirmation to a user in ABP."
+    expect_activation: false
+    assertions:
+      - type: "output_matches"
+        pattern: "(render-text-templates|send-emails)"
+    rubric:
+      - "Routes to send-emails (and render-text-templates for the body) instead of send-sms."
+    timeout: 120

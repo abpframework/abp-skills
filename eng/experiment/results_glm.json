@@ -1,0 +1,7031 @@
+{
+  "provenance": {
+    "model": "glm-4.7-flash",
+    "abp_version": "10.5.0",
+    "timestamp": "2026-07-17T17:22:30.479771+00:00",
+    "temperature": 0.8,
+    "mode": "single-shot chat"
+  },
+  "results": [
+    {
+      "skill": "abp-infrastructure/configure-audit-logging",
+      "baseline": [
+        {
+          "skill": "abp-infrastructure/configure-audit-logging",
+          "arm": "baseline",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 1,
+          "idiom_tot": 3,
+          "idiom_hits": [
+            "AbpAuditingOptions"
+          ],
+          "anti": 1,
+          "anti_hits": [
+            "SaveChangesAsync"
+          ]
+        },
+        {
+          "skill": "abp-infrastructure/configure-audit-logging",
+          "arm": "baseline",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 3,
+          "idiom_hits": [],
+          "anti": 2,
+          "anti_hits": [
+            "ChangeTracker.Entries",
+            "EntityState.Modified"
+          ]
+        },
+        {
+          "skill": "abp-infrastructure/configure-audit-logging",
+          "arm": "baseline",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 3,
+          "idiom_hits": [],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "baseline_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 0.33,
+        "anti_mean": 1.0
+      },
+      "skilled": [
+        {
+          "skill": "abp-infrastructure/configure-audit-logging",
+          "arm": "skilled",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 2,
+          "idiom_tot": 3,
+          "idiom_hits": [
+            "[Audited]",
+            "AbpAuditingOptions"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-infrastructure/configure-audit-logging",
+          "arm": "skilled",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 2,
+          "idiom_tot": 3,
+          "idiom_hits": [
+            "[Audited]",
+            "AbpAuditingOptions"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-infrastructure/configure-audit-logging",
+          "arm": "skilled",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 2,
+          "idiom_tot": 3,
+          "idiom_hits": [
+            "[Audited]",
+            "AbpAuditingOptions"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "skilled_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 2.0,
+        "anti_mean": 0.0
+      }
+    },
+    {
+      "skill": "abp-infrastructure/encrypt-strings",
+      "baseline": [
+        {
+          "skill": "abp-infrastructure/encrypt-strings",
+          "arm": "baseline",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 2,
+          "idiom_hits": [],
+          "anti": 4,
+          "anti_hits": [
+            "Aes.Create",
+            "RijndaelManaged",
+            "Rfc2898DeriveBytes",
+            "System.Security.Cryptography"
+          ]
+        },
+        {
+          "skill": "abp-infrastructure/encrypt-strings",
+          "arm": "baseline",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 2,
+          "idiom_hits": [],
+          "anti": 2,
+          "anti_hits": [
+            "Aes.Create",
+            "System.Security.Cryptography"
+          ]
+        },
+        {
+          "skill": "abp-infrastructure/encrypt-strings",
+          "arm": "baseline",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 2,
+          "idiom_hits": [],
+          "anti": 2,
+          "anti_hits": [
+            "Aes.Create",
+            "System.Security.Cryptography"
+          ]
+        }
+      ],
+      "baseline_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 0.0,
+        "anti_mean": 2.67
+      },
+      "skilled": [
+        {
+          "skill": "abp-infrastructure/encrypt-strings",
+          "arm": "skilled",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 2,
+          "idiom_tot": 2,
+          "idiom_hits": [
+            "IStringEncryptionService",
+            "AbpStringEncryptionOptions"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-infrastructure/encrypt-strings",
+          "arm": "skilled",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 2,
+          "idiom_tot": 2,
+          "idiom_hits": [
+            "IStringEncryptionService",
+            "AbpStringEncryptionOptions"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-infrastructure/encrypt-strings",
+          "arm": "skilled",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 2,
+          "idiom_tot": 2,
+          "idiom_hits": [
+            "IStringEncryptionService",
+            "AbpStringEncryptionOptions"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "skilled_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 2.0,
+        "anti_mean": 0.0
+      }
+    },
+    {
+      "skill": "abp-infrastructure/generate-guids",
+      "baseline": [
+        {
+          "skill": "abp-infrastructure/generate-guids",
+          "arm": "baseline",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 1,
+          "idiom_tot": 2,
+          "idiom_hits": [
+            "SequentialGuidGenerator"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-infrastructure/generate-guids",
+          "arm": "baseline",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 2,
+          "idiom_hits": [],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-infrastructure/generate-guids",
+          "arm": "baseline",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 2,
+          "idiom_hits": [],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "baseline_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 0.33,
+        "anti_mean": 0.0
+      },
+      "skilled": [
+        {
+          "skill": "abp-infrastructure/generate-guids",
+          "arm": "skilled",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 1,
+          "idiom_tot": 2,
+          "idiom_hits": [
+            "IGuidGenerator"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-infrastructure/generate-guids",
+          "arm": "skilled",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 1,
+          "idiom_tot": 2,
+          "idiom_hits": [
+            "IGuidGenerator"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-infrastructure/generate-guids",
+          "arm": "skilled",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 2,
+          "idiom_hits": [],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "skilled_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 0.67,
+        "anti_mean": 0.0
+      }
+    },
+    {
+      "skill": "abp-infrastructure/handle-dates-and-time",
+      "baseline": [
+        {
+          "skill": "abp-infrastructure/handle-dates-and-time",
+          "arm": "baseline",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 1,
+          "idiom_tot": 2,
+          "idiom_hits": [
+            "IClock"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-infrastructure/handle-dates-and-time",
+          "arm": "baseline",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 1,
+          "idiom_tot": 2,
+          "idiom_hits": [
+            "IClock"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-infrastructure/handle-dates-and-time",
+          "arm": "baseline",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 2,
+          "idiom_tot": 2,
+          "idiom_hits": [
+            "IClock",
+            "AbpClockOptions"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "baseline_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 1.33,
+        "anti_mean": 0.0
+      },
+      "skilled": [
+        {
+          "skill": "abp-infrastructure/handle-dates-and-time",
+          "arm": "skilled",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 2,
+          "idiom_tot": 2,
+          "idiom_hits": [
+            "IClock",
+            "AbpClockOptions"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-infrastructure/handle-dates-and-time",
+          "arm": "skilled",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 2,
+          "idiom_tot": 2,
+          "idiom_hits": [
+            "IClock",
+            "AbpClockOptions"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-infrastructure/handle-dates-and-time",
+          "arm": "skilled",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 2,
+          "idiom_tot": 2,
+          "idiom_hits": [
+            "IClock",
+            "AbpClockOptions"
+          ],
+          "anti": 1,
+          "anti_hits": [
+            "DateTime.Now"
+          ]
+        }
+      ],
+      "skilled_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 2.0,
+        "anti_mean": 0.33
+      }
+    },
+    {
+      "skill": "abp-infrastructure/manage-settings-and-features",
+      "baseline": [
+        {
+          "skill": "abp-infrastructure/manage-settings-and-features",
+          "arm": "baseline",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 2,
+          "idiom_hits": [],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-infrastructure/manage-settings-and-features",
+          "arm": "baseline",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 1,
+          "idiom_tot": 2,
+          "idiom_hits": [
+            "ISettingProvider"
+          ],
+          "anti": 1,
+          "anti_hits": [
+            "appsettings.json"
+          ]
+        },
+        {
+          "skill": "abp-infrastructure/manage-settings-and-features",
+          "arm": "baseline",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 2,
+          "idiom_tot": 2,
+          "idiom_hits": [
+            "SettingDefinitionProvider",
+            "ISettingProvider"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "baseline_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 1.0,
+        "anti_mean": 0.33
+      },
+      "skilled": [
+        {
+          "skill": "abp-infrastructure/manage-settings-and-features",
+          "arm": "skilled",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 2,
+          "idiom_tot": 2,
+          "idiom_hits": [
+            "SettingDefinitionProvider",
+            "ISettingProvider"
+          ],
+          "anti": 1,
+          "anti_hits": [
+            "appsettings.json"
+          ]
+        },
+        {
+          "skill": "abp-infrastructure/manage-settings-and-features",
+          "arm": "skilled",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 2,
+          "idiom_tot": 2,
+          "idiom_hits": [
+            "SettingDefinitionProvider",
+            "ISettingProvider"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-infrastructure/manage-settings-and-features",
+          "arm": "skilled",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 2,
+          "idiom_tot": 2,
+          "idiom_hits": [
+            "SettingDefinitionProvider",
+            "ISettingProvider"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "skilled_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 2.0,
+        "anti_mean": 0.33
+      }
+    },
+    {
+      "skill": "abp-infrastructure/manipulate-images",
+      "baseline": [
+        {
+          "skill": "abp-infrastructure/manipulate-images",
+          "arm": "baseline",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 3,
+          "idiom_hits": [],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-infrastructure/manipulate-images",
+          "arm": "baseline",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 3,
+          "idiom_hits": [],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-infrastructure/manipulate-images",
+          "arm": "baseline",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 3,
+          "idiom_hits": [],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "baseline_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 0.0,
+        "anti_mean": 0.0
+      },
+      "skilled": [
+        {
+          "skill": "abp-infrastructure/manipulate-images",
+          "arm": "skilled",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 3,
+          "idiom_tot": 3,
+          "idiom_hits": [
+            "IImageResizer",
+            "IImageCompressor",
+            "ImageResizeArgs"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-infrastructure/manipulate-images",
+          "arm": "skilled",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 3,
+          "idiom_tot": 3,
+          "idiom_hits": [
+            "IImageResizer",
+            "IImageCompressor",
+            "ImageResizeArgs"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-infrastructure/manipulate-images",
+          "arm": "skilled",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 3,
+          "idiom_tot": 3,
+          "idiom_hits": [
+            "IImageResizer",
+            "IImageCompressor",
+            "ImageResizeArgs"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "skilled_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 3.0,
+        "anti_mean": 0.0
+      }
+    },
+    {
+      "skill": "abp-infrastructure/propagate-correlation-id",
+      "baseline": [
+        {
+          "skill": "abp-infrastructure/propagate-correlation-id",
+          "arm": "baseline",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 2,
+          "idiom_hits": [],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-infrastructure/propagate-correlation-id",
+          "arm": "baseline",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 2,
+          "idiom_hits": [],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-infrastructure/propagate-correlation-id",
+          "arm": "baseline",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 2,
+          "idiom_hits": [],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "baseline_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 0.0,
+        "anti_mean": 0.0
+      },
+      "skilled": [
+        {
+          "skill": "abp-infrastructure/propagate-correlation-id",
+          "arm": "skilled",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 1,
+          "idiom_tot": 2,
+          "idiom_hits": [
+            "ICorrelationIdProvider"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-infrastructure/propagate-correlation-id",
+          "arm": "skilled",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 2,
+          "idiom_tot": 2,
+          "idiom_hits": [
+            "ICorrelationIdProvider",
+            "AbpCorrelationIdOptions"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-infrastructure/propagate-correlation-id",
+          "arm": "skilled",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 2,
+          "idiom_tot": 2,
+          "idiom_hits": [
+            "ICorrelationIdProvider",
+            "AbpCorrelationIdOptions"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "skilled_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 1.67,
+        "anti_mean": 0.0
+      }
+    },
+    {
+      "skill": "abp-infrastructure/serialize-json",
+      "baseline": [
+        {
+          "skill": "abp-infrastructure/serialize-json",
+          "arm": "baseline",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 1,
+          "idiom_tot": 1,
+          "idiom_hits": [
+            "IJsonSerializer"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-infrastructure/serialize-json",
+          "arm": "baseline",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 1,
+          "idiom_tot": 1,
+          "idiom_hits": [
+            "IJsonSerializer"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-infrastructure/serialize-json",
+          "arm": "baseline",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 1,
+          "idiom_tot": 1,
+          "idiom_hits": [
+            "IJsonSerializer"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "baseline_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 1.0,
+        "anti_mean": 0.0
+      },
+      "skilled": [
+        {
+          "skill": "abp-infrastructure/serialize-json",
+          "arm": "skilled",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 1,
+          "idiom_tot": 1,
+          "idiom_hits": [
+            "IJsonSerializer"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-infrastructure/serialize-json",
+          "arm": "skilled",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 1,
+          "idiom_tot": 1,
+          "idiom_hits": [
+            "IJsonSerializer"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-infrastructure/serialize-json",
+          "arm": "skilled",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 1,
+          "idiom_tot": 1,
+          "idiom_hits": [
+            "IJsonSerializer"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "skilled_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 1.0,
+        "anti_mean": 0.0
+      }
+    },
+    {
+      "skill": "abp-infrastructure/use-cancellation-tokens",
+      "baseline": [
+        {
+          "skill": "abp-infrastructure/use-cancellation-tokens",
+          "arm": "baseline",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 1,
+          "idiom_tot": 1,
+          "idiom_hits": [
+            "ICancellationTokenProvider"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-infrastructure/use-cancellation-tokens",
+          "arm": "baseline",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 1,
+          "idiom_tot": 1,
+          "idiom_hits": [
+            "ICancellationTokenProvider"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-infrastructure/use-cancellation-tokens",
+          "arm": "baseline",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 1,
+          "idiom_tot": 1,
+          "idiom_hits": [
+            "ICancellationTokenProvider"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "baseline_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 1.0,
+        "anti_mean": 0.0
+      },
+      "skilled": [
+        {
+          "skill": "abp-infrastructure/use-cancellation-tokens",
+          "arm": "skilled",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 1,
+          "idiom_tot": 1,
+          "idiom_hits": [
+            "ICancellationTokenProvider"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-infrastructure/use-cancellation-tokens",
+          "arm": "skilled",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 1,
+          "idiom_tot": 1,
+          "idiom_hits": [
+            "ICancellationTokenProvider"
+          ],
+          "anti": 1,
+          "anti_hits": [
+            "HttpContext.RequestAborted"
+          ]
+        },
+        {
+          "skill": "abp-infrastructure/use-cancellation-tokens",
+          "arm": "skilled",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 1,
+          "idiom_tot": 1,
+          "idiom_hits": [
+            "ICancellationTokenProvider"
+          ],
+          "anti": 1,
+          "anti_hits": [
+            "HttpContext.RequestAborted"
+          ]
+        }
+      ],
+      "skilled_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 1.0,
+        "anti_mean": 0.67
+      }
+    },
+    {
+      "skill": "abp-infrastructure/use-interceptors-and-dynamic-proxy",
+      "baseline": [
+        {
+          "skill": "abp-infrastructure/use-interceptors-and-dynamic-proxy",
+          "arm": "baseline",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 3,
+          "idiom_hits": [],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-infrastructure/use-interceptors-and-dynamic-proxy",
+          "arm": "baseline",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 3,
+          "idiom_hits": [],
+          "anti": 1,
+          "anti_hits": [
+            "IInvocation"
+          ]
+        },
+        {
+          "skill": "abp-infrastructure/use-interceptors-and-dynamic-proxy",
+          "arm": "baseline",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 3,
+          "idiom_hits": [],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "baseline_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 0.0,
+        "anti_mean": 0.33
+      },
+      "skilled": [
+        {
+          "skill": "abp-infrastructure/use-interceptors-and-dynamic-proxy",
+          "arm": "skilled",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 2,
+          "idiom_tot": 3,
+          "idiom_hits": [
+            "AbpInterceptor",
+            "IAbpMethodInvocation"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-infrastructure/use-interceptors-and-dynamic-proxy",
+          "arm": "skilled",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 2,
+          "idiom_tot": 3,
+          "idiom_hits": [
+            "AbpInterceptor",
+            "IAbpMethodInvocation"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-infrastructure/use-interceptors-and-dynamic-proxy",
+          "arm": "skilled",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 2,
+          "idiom_tot": 3,
+          "idiom_hits": [
+            "AbpInterceptor",
+            "IAbpMethodInvocation"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "skilled_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 2.0,
+        "anti_mean": 0.0
+      }
+    },
+    {
+      "skill": "abp-data-access/apply-data-filters",
+      "baseline": [
+        {
+          "skill": "abp-data-access/apply-data-filters",
+          "arm": "baseline",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 3,
+          "idiom_hits": [],
+          "anti": 2,
+          "anti_hits": [
+            "IgnoreQueryFilters",
+            ".Where(x => x.IsDeleted"
+          ]
+        },
+        {
+          "skill": "abp-data-access/apply-data-filters",
+          "arm": "baseline",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 1,
+          "idiom_tot": 3,
+          "idiom_hits": [
+            "ISoftDelete"
+          ],
+          "anti": 2,
+          "anti_hits": [
+            "IgnoreQueryFilters",
+            ".Where(x => x.IsDeleted"
+          ]
+        },
+        {
+          "skill": "abp-data-access/apply-data-filters",
+          "arm": "baseline",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 3,
+          "idiom_hits": [],
+          "anti": 1,
+          "anti_hits": [
+            ".Where(x => x.IsDeleted"
+          ]
+        }
+      ],
+      "baseline_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 0.33,
+        "anti_mean": 1.67
+      },
+      "skilled": [
+        {
+          "skill": "abp-data-access/apply-data-filters",
+          "arm": "skilled",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 3,
+          "idiom_tot": 3,
+          "idiom_hits": [
+            "IDataFilter",
+            "ISoftDelete",
+            "Disable<ISoftDelete>"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-data-access/apply-data-filters",
+          "arm": "skilled",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 3,
+          "idiom_tot": 3,
+          "idiom_hits": [
+            "IDataFilter",
+            "ISoftDelete",
+            "Disable<ISoftDelete>"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-data-access/apply-data-filters",
+          "arm": "skilled",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 2,
+          "idiom_tot": 3,
+          "idiom_hits": [
+            "IDataFilter",
+            "ISoftDelete"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "skilled_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 2.67,
+        "anti_mean": 0.0
+      }
+    },
+    {
+      "skill": "abp-data-access/ef-core-integration",
+      "baseline": [
+        {
+          "skill": "abp-data-access/ef-core-integration",
+          "arm": "baseline",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 1,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "AbpDbContext"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-data-access/ef-core-integration",
+          "arm": "baseline",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 3,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "AbpDbContext",
+            "AddAbpDbContext",
+            "EfCoreRepository"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-data-access/ef-core-integration",
+          "arm": "baseline",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 2,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "AbpDbContext",
+            "AddAbpDbContext"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "baseline_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 2.0,
+        "anti_mean": 0.0
+      },
+      "skilled": [
+        {
+          "skill": "abp-data-access/ef-core-integration",
+          "arm": "skilled",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 4,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "AbpDbContext",
+            "AddAbpDbContext",
+            "EfCoreRepository",
+            "ConfigureByConvention"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-data-access/ef-core-integration",
+          "arm": "skilled",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 4,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "AbpDbContext",
+            "AddAbpDbContext",
+            "EfCoreRepository",
+            "ConfigureByConvention"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-data-access/ef-core-integration",
+          "arm": "skilled",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 3,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "AbpDbContext",
+            "EfCoreRepository",
+            "ConfigureByConvention"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "skilled_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 3.67,
+        "anti_mean": 0.0
+      }
+    },
+    {
+      "skill": "abp-data-access/handle-optimistic-concurrency",
+      "baseline": [
+        {
+          "skill": "abp-data-access/handle-optimistic-concurrency",
+          "arm": "baseline",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 3,
+          "idiom_hits": [],
+          "anti": 2,
+          "anti_hits": [
+            "RowVersion",
+            "DbUpdateConcurrencyException"
+          ]
+        },
+        {
+          "skill": "abp-data-access/handle-optimistic-concurrency",
+          "arm": "baseline",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 3,
+          "idiom_hits": [],
+          "anti": 2,
+          "anti_hits": [
+            "RowVersion",
+            "DbUpdateConcurrencyException"
+          ]
+        },
+        {
+          "skill": "abp-data-access/handle-optimistic-concurrency",
+          "arm": "baseline",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 3,
+          "idiom_hits": [],
+          "anti": 1,
+          "anti_hits": [
+            "DbUpdateConcurrencyException"
+          ]
+        }
+      ],
+      "baseline_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 0.0,
+        "anti_mean": 1.67
+      },
+      "skilled": [
+        {
+          "skill": "abp-data-access/handle-optimistic-concurrency",
+          "arm": "skilled",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 3,
+          "idiom_tot": 3,
+          "idiom_hits": [
+            "IHasConcurrencyStamp",
+            "ConcurrencyStamp",
+            "AbpDbConcurrencyException"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-data-access/handle-optimistic-concurrency",
+          "arm": "skilled",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 2,
+          "idiom_tot": 3,
+          "idiom_hits": [
+            "IHasConcurrencyStamp",
+            "ConcurrencyStamp"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-data-access/handle-optimistic-concurrency",
+          "arm": "skilled",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 2,
+          "idiom_tot": 3,
+          "idiom_hits": [
+            "IHasConcurrencyStamp",
+            "ConcurrencyStamp"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "skilled_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 2.33,
+        "anti_mean": 0.0
+      }
+    },
+    {
+      "skill": "abp-data-access/manage-units-of-work",
+      "baseline": [
+        {
+          "skill": "abp-data-access/manage-units-of-work",
+          "arm": "baseline",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 1,
+          "idiom_tot": 3,
+          "idiom_hits": [
+            "IUnitOfWorkManager"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-data-access/manage-units-of-work",
+          "arm": "baseline",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 1,
+          "idiom_tot": 3,
+          "idiom_hits": [
+            "IUnitOfWorkManager"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-data-access/manage-units-of-work",
+          "arm": "baseline",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 3,
+          "idiom_tot": 3,
+          "idiom_hits": [
+            "IUnitOfWorkManager",
+            "CompleteAsync",
+            "requiresNew"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "baseline_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 1.67,
+        "anti_mean": 0.0
+      },
+      "skilled": [
+        {
+          "skill": "abp-data-access/manage-units-of-work",
+          "arm": "skilled",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 3,
+          "idiom_tot": 3,
+          "idiom_hits": [
+            "IUnitOfWorkManager",
+            "CompleteAsync",
+            "requiresNew"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-data-access/manage-units-of-work",
+          "arm": "skilled",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 3,
+          "idiom_tot": 3,
+          "idiom_hits": [
+            "IUnitOfWorkManager",
+            "CompleteAsync",
+            "requiresNew"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-data-access/manage-units-of-work",
+          "arm": "skilled",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 3,
+          "idiom_tot": 3,
+          "idiom_hits": [
+            "IUnitOfWorkManager",
+            "CompleteAsync",
+            "requiresNew"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "skilled_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 3.0,
+        "anti_mean": 0.0
+      }
+    },
+    {
+      "skill": "abp-data-access/mongodb-integration",
+      "baseline": [
+        {
+          "skill": "abp-data-access/mongodb-integration",
+          "arm": "baseline",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 4,
+          "idiom_hits": [],
+          "anti": 2,
+          "anti_hits": [
+            "IMongoClient",
+            "IMongoDatabase"
+          ]
+        },
+        {
+          "skill": "abp-data-access/mongodb-integration",
+          "arm": "baseline",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 3,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "AbpMongoDbContext",
+            "AddMongoDbContext",
+            "MongoDbRepository"
+          ],
+          "anti": 1,
+          "anti_hits": [
+            "IMongoClient"
+          ]
+        },
+        {
+          "skill": "abp-data-access/mongodb-integration",
+          "arm": "baseline",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 1,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "AddMongoDbContext"
+          ],
+          "anti": 2,
+          "anti_hits": [
+            "IMongoClient",
+            "IMongoDatabase"
+          ]
+        }
+      ],
+      "baseline_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 1.33,
+        "anti_mean": 1.67
+      },
+      "skilled": [
+        {
+          "skill": "abp-data-access/mongodb-integration",
+          "arm": "skilled",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 3,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "AbpMongoDbContext",
+            "MongoDbRepository",
+            "MongoCollection"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-data-access/mongodb-integration",
+          "arm": "skilled",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 4,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "AbpMongoDbContext",
+            "AddMongoDbContext",
+            "MongoDbRepository",
+            "MongoCollection"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-data-access/mongodb-integration",
+          "arm": "skilled",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 4,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "AbpMongoDbContext",
+            "AddMongoDbContext",
+            "MongoDbRepository",
+            "MongoCollection"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "skilled_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 3.67,
+        "anti_mean": 0.0
+      }
+    },
+    {
+      "skill": "abp-data-access/query-with-dapper",
+      "baseline": [
+        {
+          "skill": "abp-data-access/query-with-dapper",
+          "arm": "baseline",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 3,
+          "idiom_hits": [],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-data-access/query-with-dapper",
+          "arm": "baseline",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 3,
+          "idiom_hits": [],
+          "anti": 1,
+          "anti_hits": [
+            "OpenAsync"
+          ]
+        },
+        {
+          "skill": "abp-data-access/query-with-dapper",
+          "arm": "baseline",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 3,
+          "idiom_hits": [],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "baseline_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 0.0,
+        "anti_mean": 0.33
+      },
+      "skilled": [
+        {
+          "skill": "abp-data-access/query-with-dapper",
+          "arm": "skilled",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 3,
+          "idiom_tot": 3,
+          "idiom_hits": [
+            "DapperRepository",
+            "GetDbConnectionAsync",
+            "GetDbTransactionAsync"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-data-access/query-with-dapper",
+          "arm": "skilled",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 3,
+          "idiom_tot": 3,
+          "idiom_hits": [
+            "DapperRepository",
+            "GetDbConnectionAsync",
+            "GetDbTransactionAsync"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-data-access/query-with-dapper",
+          "arm": "skilled",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 3,
+          "idiom_tot": 3,
+          "idiom_hits": [
+            "DapperRepository",
+            "GetDbConnectionAsync",
+            "GetDbTransactionAsync"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "skilled_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 3.0,
+        "anti_mean": 0.0
+      }
+    },
+    {
+      "skill": "abp-data-access/seed-application-data",
+      "baseline": [
+        {
+          "skill": "abp-data-access/seed-application-data",
+          "arm": "baseline",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 2,
+          "idiom_tot": 3,
+          "idiom_hits": [
+            "IDataSeedContributor",
+            "DataSeedContext"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-data-access/seed-application-data",
+          "arm": "baseline",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 2,
+          "idiom_tot": 3,
+          "idiom_hits": [
+            "IDataSeedContributor",
+            "DataSeedContext"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-data-access/seed-application-data",
+          "arm": "baseline",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 2,
+          "idiom_tot": 3,
+          "idiom_hits": [
+            "IDataSeedContributor",
+            "DataSeedContext"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "baseline_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 2.0,
+        "anti_mean": 0.0
+      },
+      "skilled": [
+        {
+          "skill": "abp-data-access/seed-application-data",
+          "arm": "skilled",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 2,
+          "idiom_tot": 3,
+          "idiom_hits": [
+            "IDataSeedContributor",
+            "DataSeedContext"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-data-access/seed-application-data",
+          "arm": "skilled",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 2,
+          "idiom_tot": 3,
+          "idiom_hits": [
+            "IDataSeedContributor",
+            "DataSeedContext"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-data-access/seed-application-data",
+          "arm": "skilled",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 2,
+          "idiom_tot": 3,
+          "idiom_hits": [
+            "IDataSeedContributor",
+            "DataSeedContext"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "skilled_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 2.0,
+        "anti_mean": 0.0
+      }
+    },
+    {
+      "skill": "abp-data-access/use-abp-repositories",
+      "baseline": [
+        {
+          "skill": "abp-data-access/use-abp-repositories",
+          "arm": "baseline",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 2,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "IRepository",
+            "GetQueryableAsync"
+          ],
+          "anti": 1,
+          "anti_hits": [
+            ".Include("
+          ]
+        },
+        {
+          "skill": "abp-data-access/use-abp-repositories",
+          "arm": "baseline",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 3,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "IRepository",
+            "GetQueryableAsync",
+            "AsyncExecuter"
+          ],
+          "anti": 1,
+          "anti_hits": [
+            ".Include("
+          ]
+        },
+        {
+          "skill": "abp-data-access/use-abp-repositories",
+          "arm": "baseline",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 2,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "IRepository",
+            "GetQueryableAsync"
+          ],
+          "anti": 1,
+          "anti_hits": [
+            ".Include("
+          ]
+        }
+      ],
+      "baseline_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 2.33,
+        "anti_mean": 1.0
+      },
+      "skilled": [
+        {
+          "skill": "abp-data-access/use-abp-repositories",
+          "arm": "skilled",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 2,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "IRepository",
+            "WithDetailsAsync"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-data-access/use-abp-repositories",
+          "arm": "skilled",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 2,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "IRepository",
+            "WithDetailsAsync"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-data-access/use-abp-repositories",
+          "arm": "skilled",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 2,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "IRepository",
+            "WithDetailsAsync"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "skilled_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 2.0,
+        "anti_mean": 0.0
+      }
+    },
+    {
+      "skill": "abp-files/manage-virtual-files",
+      "baseline": [
+        {
+          "skill": "abp-files/manage-virtual-files",
+          "arm": "baseline",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 3,
+          "idiom_hits": [],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-files/manage-virtual-files",
+          "arm": "baseline",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 3,
+          "idiom_hits": [],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-files/manage-virtual-files",
+          "arm": "baseline",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 3,
+          "idiom_hits": [],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "baseline_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 0.0,
+        "anti_mean": 0.0
+      },
+      "skilled": [
+        {
+          "skill": "abp-files/manage-virtual-files",
+          "arm": "skilled",
+          "run": 1,
+          "status": "no_code",
+          "build": "not_run",
+          "idiom": 0,
+          "anti": 0
+        },
+        {
+          "skill": "abp-files/manage-virtual-files",
+          "arm": "skilled",
+          "run": 2,
+          "status": "no_code",
+          "build": "not_run",
+          "idiom": 0,
+          "anti": 0
+        },
+        {
+          "skill": "abp-files/manage-virtual-files",
+          "arm": "skilled",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 3,
+          "idiom_tot": 3,
+          "idiom_hits": [
+            "IVirtualFileProvider",
+            "AbpVirtualFileSystemOptions",
+            "AddEmbedded"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "skilled_agg": {
+        "runs": 3,
+        "scored": 1,
+        "build_pass": 0,
+        "idiom_mean": 3.0,
+        "anti_mean": 0.0
+      }
+    },
+    {
+      "skill": "abp-files/store-blobs",
+      "baseline": [
+        {
+          "skill": "abp-files/store-blobs",
+          "arm": "baseline",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 1,
+          "idiom_tot": 3,
+          "idiom_hits": [
+            "GetAllBytesOrNullAsync"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-files/store-blobs",
+          "arm": "baseline",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 3,
+          "idiom_hits": [],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-files/store-blobs",
+          "arm": "baseline",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 1,
+          "idiom_tot": 3,
+          "idiom_hits": [
+            "GetAllBytesOrNullAsync"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "baseline_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 0.67,
+        "anti_mean": 0.0
+      },
+      "skilled": [
+        {
+          "skill": "abp-files/store-blobs",
+          "arm": "skilled",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 3,
+          "idiom_tot": 3,
+          "idiom_hits": [
+            "IBlobContainer",
+            "GetAllBytesOrNullAsync",
+            "BlobContainerName"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-files/store-blobs",
+          "arm": "skilled",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 3,
+          "idiom_tot": 3,
+          "idiom_hits": [
+            "IBlobContainer",
+            "GetAllBytesOrNullAsync",
+            "BlobContainerName"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-files/store-blobs",
+          "arm": "skilled",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 3,
+          "idiom_tot": 3,
+          "idiom_hits": [
+            "IBlobContainer",
+            "GetAllBytesOrNullAsync",
+            "BlobContainerName"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "skilled_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 3.0,
+        "anti_mean": 0.0
+      }
+    },
+    {
+      "skill": "abp-multitenancy/configure-multi-tenancy",
+      "baseline": [
+        {
+          "skill": "abp-multitenancy/configure-multi-tenancy",
+          "arm": "baseline",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 3,
+          "idiom_tot": 3,
+          "idiom_hits": [
+            "IMultiTenant",
+            "ICurrentTenant",
+            ".Change("
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-multitenancy/configure-multi-tenancy",
+          "arm": "baseline",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 1,
+          "idiom_tot": 3,
+          "idiom_hits": [
+            "IMultiTenant"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-multitenancy/configure-multi-tenancy",
+          "arm": "baseline",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 3,
+          "idiom_tot": 3,
+          "idiom_hits": [
+            "IMultiTenant",
+            "ICurrentTenant",
+            ".Change("
+          ],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "baseline_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 2.33,
+        "anti_mean": 0.0
+      },
+      "skilled": [
+        {
+          "skill": "abp-multitenancy/configure-multi-tenancy",
+          "arm": "skilled",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 2,
+          "idiom_tot": 3,
+          "idiom_hits": [
+            "IMultiTenant",
+            ".Change("
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-multitenancy/configure-multi-tenancy",
+          "arm": "skilled",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 3,
+          "idiom_tot": 3,
+          "idiom_hits": [
+            "IMultiTenant",
+            "ICurrentTenant",
+            ".Change("
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-multitenancy/configure-multi-tenancy",
+          "arm": "skilled",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 2,
+          "idiom_tot": 3,
+          "idiom_hits": [
+            "IMultiTenant",
+            ".Change("
+          ],
+          "anti": 1,
+          "anti_hits": [
+            "TenantId == tenantId"
+          ]
+        }
+      ],
+      "skilled_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 2.33,
+        "anti_mean": 0.33
+      }
+    },
+    {
+      "skill": "abp-runtime/background-jobs-and-events",
+      "baseline": [
+        {
+          "skill": "abp-runtime/background-jobs-and-events",
+          "arm": "baseline",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 4,
+          "idiom_hits": [],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-runtime/background-jobs-and-events",
+          "arm": "baseline",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 1,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "IBackgroundJobManager"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-runtime/background-jobs-and-events",
+          "arm": "baseline",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 1,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "IBackgroundJobManager"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "baseline_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 0.67,
+        "anti_mean": 0.0
+      },
+      "skilled": [
+        {
+          "skill": "abp-runtime/background-jobs-and-events",
+          "arm": "skilled",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 3,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "AsyncPeriodicBackgroundWorkerBase",
+            "ILocalEventHandler",
+            "EntityCreatedEventData"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-runtime/background-jobs-and-events",
+          "arm": "skilled",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 3,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "AsyncPeriodicBackgroundWorkerBase",
+            "ILocalEventHandler",
+            "EntityCreatedEventData"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-runtime/background-jobs-and-events",
+          "arm": "skilled",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 3,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "AsyncPeriodicBackgroundWorkerBase",
+            "ILocalEventHandler",
+            "EntityCreatedEventData"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "skilled_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 3.0,
+        "anti_mean": 0.0
+      }
+    },
+    {
+      "skill": "abp-runtime/cache-entities",
+      "baseline": [
+        {
+          "skill": "abp-runtime/cache-entities",
+          "arm": "baseline",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 2,
+          "idiom_hits": [],
+          "anti": 1,
+          "anti_hits": [
+            "IDistributedCache"
+          ]
+        },
+        {
+          "skill": "abp-runtime/cache-entities",
+          "arm": "baseline",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 2,
+          "idiom_hits": [],
+          "anti": 1,
+          "anti_hits": [
+            "IDistributedCache"
+          ]
+        },
+        {
+          "skill": "abp-runtime/cache-entities",
+          "arm": "baseline",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 2,
+          "idiom_hits": [],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "baseline_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 0.0,
+        "anti_mean": 0.67
+      },
+      "skilled": [
+        {
+          "skill": "abp-runtime/cache-entities",
+          "arm": "skilled",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 2,
+          "idiom_tot": 2,
+          "idiom_hits": [
+            "IEntityCache",
+            "AddEntityCache"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-runtime/cache-entities",
+          "arm": "skilled",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 2,
+          "idiom_tot": 2,
+          "idiom_hits": [
+            "IEntityCache",
+            "AddEntityCache"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-runtime/cache-entities",
+          "arm": "skilled",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 2,
+          "idiom_tot": 2,
+          "idiom_hits": [
+            "IEntityCache",
+            "AddEntityCache"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "skilled_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 2.0,
+        "anti_mean": 0.0
+      }
+    },
+    {
+      "skill": "abp-runtime/configure-app-urls",
+      "baseline": [
+        {
+          "skill": "abp-runtime/configure-app-urls",
+          "arm": "baseline",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 3,
+          "idiom_hits": [],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-runtime/configure-app-urls",
+          "arm": "baseline",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 3,
+          "idiom_hits": [],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-runtime/configure-app-urls",
+          "arm": "baseline",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 3,
+          "idiom_hits": [],
+          "anti": 3,
+          "anti_hits": [
+            "IUrlHelper",
+            "Request.Scheme",
+            "Request.Host"
+          ]
+        }
+      ],
+      "baseline_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 0.0,
+        "anti_mean": 1.0
+      },
+      "skilled": [
+        {
+          "skill": "abp-runtime/configure-app-urls",
+          "arm": "skilled",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 3,
+          "idiom_tot": 3,
+          "idiom_hits": [
+            "IAppUrlProvider",
+            "AppUrlOptions",
+            "GetUrlAsync"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-runtime/configure-app-urls",
+          "arm": "skilled",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 2,
+          "idiom_tot": 3,
+          "idiom_hits": [
+            "IAppUrlProvider",
+            "GetUrlAsync"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-runtime/configure-app-urls",
+          "arm": "skilled",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 3,
+          "idiom_tot": 3,
+          "idiom_hits": [
+            "IAppUrlProvider",
+            "AppUrlOptions",
+            "GetUrlAsync"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "skilled_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 2.67,
+        "anti_mean": 0.0
+      }
+    },
+    {
+      "skill": "abp-runtime/distributed-caching-and-locking",
+      "baseline": [
+        {
+          "skill": "abp-runtime/distributed-caching-and-locking",
+          "arm": "baseline",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 1,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "GetOrAddAsync"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-runtime/distributed-caching-and-locking",
+          "arm": "baseline",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 2,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "IDistributedCache<",
+            "TryAcquireAsync"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-runtime/distributed-caching-and-locking",
+          "arm": "baseline",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 1,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "TryAcquireAsync"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "baseline_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 1.33,
+        "anti_mean": 0.0
+      },
+      "skilled": [
+        {
+          "skill": "abp-runtime/distributed-caching-and-locking",
+          "arm": "skilled",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 4,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "IDistributedCache<",
+            "GetOrAddAsync",
+            "IAbpDistributedLock",
+            "TryAcquireAsync"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-runtime/distributed-caching-and-locking",
+          "arm": "skilled",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 4,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "IDistributedCache<",
+            "GetOrAddAsync",
+            "IAbpDistributedLock",
+            "TryAcquireAsync"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-runtime/distributed-caching-and-locking",
+          "arm": "skilled",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 4,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "IDistributedCache<",
+            "GetOrAddAsync",
+            "IAbpDistributedLock",
+            "TryAcquireAsync"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "skilled_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 4.0,
+        "anti_mean": 0.0
+      }
+    },
+    {
+      "skill": "abp-runtime/render-text-templates",
+      "baseline": [
+        {
+          "skill": "abp-runtime/render-text-templates",
+          "arm": "baseline",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 3,
+          "idiom_hits": [],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-runtime/render-text-templates",
+          "arm": "baseline",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 1,
+          "idiom_tot": 3,
+          "idiom_hits": [
+            "ITemplateRenderer"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-runtime/render-text-templates",
+          "arm": "baseline",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 1,
+          "idiom_tot": 3,
+          "idiom_hits": [
+            "ITemplateRenderer"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "baseline_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 0.67,
+        "anti_mean": 0.0
+      },
+      "skilled": [
+        {
+          "skill": "abp-runtime/render-text-templates",
+          "arm": "skilled",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 3,
+          "idiom_tot": 3,
+          "idiom_hits": [
+            "ITemplateRenderer",
+            "TemplateDefinitionProvider",
+            "TemplateDefinition"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-runtime/render-text-templates",
+          "arm": "skilled",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 3,
+          "idiom_tot": 3,
+          "idiom_hits": [
+            "ITemplateRenderer",
+            "TemplateDefinitionProvider",
+            "TemplateDefinition"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-runtime/render-text-templates",
+          "arm": "skilled",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 3,
+          "idiom_tot": 3,
+          "idiom_hits": [
+            "ITemplateRenderer",
+            "TemplateDefinitionProvider",
+            "TemplateDefinition"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "skilled_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 3.0,
+        "anti_mean": 0.0
+      }
+    },
+    {
+      "skill": "abp-runtime/secure-web-requests",
+      "baseline": [
+        {
+          "skill": "abp-runtime/secure-web-requests",
+          "arm": "baseline",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 2,
+          "idiom_hits": [],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-runtime/secure-web-requests",
+          "arm": "baseline",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 2,
+          "idiom_hits": [],
+          "anti": 2,
+          "anti_hits": [
+            "Response.Headers.Append",
+            "app.Use(async"
+          ]
+        },
+        {
+          "skill": "abp-runtime/secure-web-requests",
+          "arm": "baseline",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 2,
+          "idiom_hits": [],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "baseline_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 0.0,
+        "anti_mean": 0.67
+      },
+      "skilled": [
+        {
+          "skill": "abp-runtime/secure-web-requests",
+          "arm": "skilled",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 2,
+          "idiom_tot": 2,
+          "idiom_hits": [
+            "UseAbpSecurityHeaders",
+            "AbpSecurityHeadersOptions"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-runtime/secure-web-requests",
+          "arm": "skilled",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 2,
+          "idiom_tot": 2,
+          "idiom_hits": [
+            "UseAbpSecurityHeaders",
+            "AbpSecurityHeadersOptions"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-runtime/secure-web-requests",
+          "arm": "skilled",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 2,
+          "idiom_tot": 2,
+          "idiom_hits": [
+            "UseAbpSecurityHeaders",
+            "AbpSecurityHeadersOptions"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "skilled_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 2.0,
+        "anti_mean": 0.0
+      }
+    },
+    {
+      "skill": "abp-runtime/send-emails",
+      "baseline": [
+        {
+          "skill": "abp-runtime/send-emails",
+          "arm": "baseline",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 2,
+          "idiom_hits": [],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-runtime/send-emails",
+          "arm": "baseline",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 2,
+          "idiom_hits": [],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-runtime/send-emails",
+          "arm": "baseline",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 1,
+          "idiom_tot": 2,
+          "idiom_hits": [
+            "IEmailSender"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "baseline_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 0.33,
+        "anti_mean": 0.0
+      },
+      "skilled": [
+        {
+          "skill": "abp-runtime/send-emails",
+          "arm": "skilled",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 2,
+          "idiom_tot": 2,
+          "idiom_hits": [
+            "IEmailSender",
+            "QueueAsync"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-runtime/send-emails",
+          "arm": "skilled",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 2,
+          "idiom_tot": 2,
+          "idiom_hits": [
+            "IEmailSender",
+            "QueueAsync"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-runtime/send-emails",
+          "arm": "skilled",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 2,
+          "idiom_tot": 2,
+          "idiom_hits": [
+            "IEmailSender",
+            "QueueAsync"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "skilled_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 2.0,
+        "anti_mean": 0.0
+      }
+    },
+    {
+      "skill": "abp-runtime/send-sms",
+      "baseline": [
+        {
+          "skill": "abp-runtime/send-sms",
+          "arm": "baseline",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 1,
+          "idiom_tot": 2,
+          "idiom_hits": [
+            "ISmsSender"
+          ],
+          "anti": 1,
+          "anti_hits": [
+            "Twilio"
+          ]
+        },
+        {
+          "skill": "abp-runtime/send-sms",
+          "arm": "baseline",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 1,
+          "idiom_tot": 2,
+          "idiom_hits": [
+            "ISmsSender"
+          ],
+          "anti": 1,
+          "anti_hits": [
+            "Twilio"
+          ]
+        },
+        {
+          "skill": "abp-runtime/send-sms",
+          "arm": "baseline",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 2,
+          "idiom_hits": [],
+          "anti": 1,
+          "anti_hits": [
+            "Twilio"
+          ]
+        }
+      ],
+      "baseline_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 0.67,
+        "anti_mean": 1.0
+      },
+      "skilled": [
+        {
+          "skill": "abp-runtime/send-sms",
+          "arm": "skilled",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 1,
+          "idiom_tot": 2,
+          "idiom_hits": [
+            "ISmsSender"
+          ],
+          "anti": 1,
+          "anti_hits": [
+            "Twilio"
+          ]
+        },
+        {
+          "skill": "abp-runtime/send-sms",
+          "arm": "skilled",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 1,
+          "idiom_tot": 2,
+          "idiom_hits": [
+            "ISmsSender"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-runtime/send-sms",
+          "arm": "skilled",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 1,
+          "idiom_tot": 2,
+          "idiom_hits": [
+            "ISmsSender"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "skilled_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 1.0,
+        "anti_mean": 0.33
+      }
+    },
+    {
+      "skill": "abp-runtime/use-hybrid-caching",
+      "baseline": [
+        {
+          "skill": "abp-runtime/use-hybrid-caching",
+          "arm": "baseline",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 3,
+          "idiom_hits": [],
+          "anti": 2,
+          "anti_hits": [
+            "IMemoryCache",
+            "IDistributedCache"
+          ]
+        },
+        {
+          "skill": "abp-runtime/use-hybrid-caching",
+          "arm": "baseline",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 3,
+          "idiom_hits": [],
+          "anti": 1,
+          "anti_hits": [
+            "IDistributedCache"
+          ]
+        },
+        {
+          "skill": "abp-runtime/use-hybrid-caching",
+          "arm": "baseline",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 3,
+          "idiom_hits": [],
+          "anti": 2,
+          "anti_hits": [
+            "IMemoryCache",
+            "IDistributedCache"
+          ]
+        }
+      ],
+      "baseline_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 0.0,
+        "anti_mean": 1.67
+      },
+      "skilled": [
+        {
+          "skill": "abp-runtime/use-hybrid-caching",
+          "arm": "skilled",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 2,
+          "idiom_tot": 3,
+          "idiom_hits": [
+            "IHybridCache",
+            "GetOrCreateAsync"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-runtime/use-hybrid-caching",
+          "arm": "skilled",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 3,
+          "idiom_tot": 3,
+          "idiom_hits": [
+            "IHybridCache",
+            "GetOrCreateAsync",
+            "AbpHybridCacheOptions"
+          ],
+          "anti": 1,
+          "anti_hits": [
+            "Microsoft.Extensions.Caching.Hybrid"
+          ]
+        },
+        {
+          "skill": "abp-runtime/use-hybrid-caching",
+          "arm": "skilled",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 3,
+          "idiom_tot": 3,
+          "idiom_hits": [
+            "IHybridCache",
+            "GetOrCreateAsync",
+            "AbpHybridCacheOptions"
+          ],
+          "anti": 2,
+          "anti_hits": [
+            "HybridCache",
+            "Microsoft.Extensions.Caching.Hybrid"
+          ]
+        }
+      ],
+      "skilled_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 2.67,
+        "anti_mean": 1.0
+      }
+    },
+    {
+      "skill": "abp-authentication/configure-dynamic-claims",
+      "baseline": [
+        {
+          "skill": "abp-authentication/configure-dynamic-claims",
+          "arm": "baseline",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 3,
+          "idiom_hits": [],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-authentication/configure-dynamic-claims",
+          "arm": "baseline",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 3,
+          "idiom_hits": [],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-authentication/configure-dynamic-claims",
+          "arm": "baseline",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 3,
+          "idiom_hits": [],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "baseline_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 0.0,
+        "anti_mean": 0.0
+      },
+      "skilled": [
+        {
+          "skill": "abp-authentication/configure-dynamic-claims",
+          "arm": "skilled",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 1,
+          "idiom_tot": 3,
+          "idiom_hits": [
+            "IAbpDynamicClaimsPrincipalContributor"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-authentication/configure-dynamic-claims",
+          "arm": "skilled",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 3,
+          "idiom_tot": 3,
+          "idiom_hits": [
+            "IAbpDynamicClaimsPrincipalContributor",
+            "UseDynamicClaims",
+            "AbpClaimsPrincipalFactoryOptions"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-authentication/configure-dynamic-claims",
+          "arm": "skilled",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 2,
+          "idiom_tot": 3,
+          "idiom_hits": [
+            "IAbpDynamicClaimsPrincipalContributor",
+            "AbpClaimsPrincipalFactoryOptions"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "skilled_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 2.0,
+        "anti_mean": 0.0
+      }
+    },
+    {
+      "skill": "abp-realtime/add-signalr-realtime",
+      "baseline": [
+        {
+          "skill": "abp-realtime/add-signalr-realtime",
+          "arm": "baseline",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 1,
+          "idiom_tot": 2,
+          "idiom_hits": [
+            "AbpAspNetCoreSignalRModule"
+          ],
+          "anti": 2,
+          "anti_hits": [
+            "services.AddSignalR",
+            "MapHub"
+          ]
+        },
+        {
+          "skill": "abp-realtime/add-signalr-realtime",
+          "arm": "baseline",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 2,
+          "idiom_hits": [],
+          "anti": 1,
+          "anti_hits": [
+            "MapHub"
+          ]
+        },
+        {
+          "skill": "abp-realtime/add-signalr-realtime",
+          "arm": "baseline",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 1,
+          "idiom_tot": 2,
+          "idiom_hits": [
+            "AbpHub"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "baseline_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 0.67,
+        "anti_mean": 1.0
+      },
+      "skilled": [
+        {
+          "skill": "abp-realtime/add-signalr-realtime",
+          "arm": "skilled",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 1,
+          "idiom_tot": 2,
+          "idiom_hits": [
+            "AbpHub"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-realtime/add-signalr-realtime",
+          "arm": "skilled",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 2,
+          "idiom_tot": 2,
+          "idiom_hits": [
+            "AbpHub",
+            "AbpAspNetCoreSignalRModule"
+          ],
+          "anti": 2,
+          "anti_hits": [
+            "services.AddSignalR",
+            "MapHub"
+          ]
+        },
+        {
+          "skill": "abp-realtime/add-signalr-realtime",
+          "arm": "skilled",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 1,
+          "idiom_tot": 2,
+          "idiom_hits": [
+            "AbpHub"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "skilled_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 1.33,
+        "anti_mean": 0.67
+      }
+    },
+    {
+      "skill": "abp-microservices/design-module-and-service-communication",
+      "baseline": [
+        {
+          "skill": "abp-microservices/design-module-and-service-communication",
+          "arm": "baseline",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 4,
+          "idiom_hits": [],
+          "anti": 1,
+          "anti_hits": [
+            "MassTransit"
+          ]
+        },
+        {
+          "skill": "abp-microservices/design-module-and-service-communication",
+          "arm": "baseline",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 1,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "IDistributedEventHandler"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-microservices/design-module-and-service-communication",
+          "arm": "baseline",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 4,
+          "idiom_hits": [],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "baseline_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 0.33,
+        "anti_mean": 0.33
+      },
+      "skilled": [
+        {
+          "skill": "abp-microservices/design-module-and-service-communication",
+          "arm": "skilled",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 3,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "IDistributedEventHandler",
+            "EventName",
+            "IntegrationService"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-microservices/design-module-and-service-communication",
+          "arm": "skilled",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 3,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "IDistributedEventHandler",
+            "EventName",
+            "IntegrationService"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-microservices/design-module-and-service-communication",
+          "arm": "skilled",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 4,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "IDistributedEventBus",
+            "IDistributedEventHandler",
+            "EventName",
+            "IntegrationService"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "skilled_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 3.33,
+        "anti_mean": 0.0
+      }
+    },
+    {
+      "skill": "abp-microservices/integrate-dapr-services",
+      "baseline": [
+        {
+          "skill": "abp-microservices/integrate-dapr-services",
+          "arm": "baseline",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 3,
+          "idiom_hits": [],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-microservices/integrate-dapr-services",
+          "arm": "baseline",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 3,
+          "idiom_hits": [],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-microservices/integrate-dapr-services",
+          "arm": "baseline",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 3,
+          "idiom_hits": [],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "baseline_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 0.0,
+        "anti_mean": 0.0
+      },
+      "skilled": [
+        {
+          "skill": "abp-microservices/integrate-dapr-services",
+          "arm": "skilled",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 1,
+          "idiom_tot": 3,
+          "idiom_hits": [
+            "ValidateDaprAppApiToken"
+          ],
+          "anti": 1,
+          "anti_hits": [
+            "[Topic]"
+          ]
+        },
+        {
+          "skill": "abp-microservices/integrate-dapr-services",
+          "arm": "skilled",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 1,
+          "idiom_tot": 3,
+          "idiom_hits": [
+            "ValidateDaprAppApiToken"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-microservices/integrate-dapr-services",
+          "arm": "skilled",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 1,
+          "idiom_tot": 3,
+          "idiom_hits": [
+            "ValidateDaprAppApiToken"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "skilled_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 1.0,
+        "anti_mean": 0.33
+      }
+    },
+    {
+      "skill": "abp-module-development/application-services",
+      "baseline": [
+        {
+          "skill": "abp-module-development/application-services",
+          "arm": "baseline",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 2,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "ApplicationService",
+            "IApplicationService"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-module-development/application-services",
+          "arm": "baseline",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 4,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "ApplicationService",
+            "IApplicationService",
+            "ObjectMapper",
+            "ConventionalControllers"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-module-development/application-services",
+          "arm": "baseline",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 4,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "ApplicationService",
+            "IApplicationService",
+            "ObjectMapper",
+            "ConventionalControllers"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "baseline_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 3.33,
+        "anti_mean": 0.0
+      },
+      "skilled": [
+        {
+          "skill": "abp-module-development/application-services",
+          "arm": "skilled",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 3,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "ApplicationService",
+            "IApplicationService",
+            "ObjectMapper"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-module-development/application-services",
+          "arm": "skilled",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 3,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "ApplicationService",
+            "IApplicationService",
+            "ObjectMapper"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-module-development/application-services",
+          "arm": "skilled",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 3,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "ApplicationService",
+            "IApplicationService",
+            "ObjectMapper"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "skilled_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 3.0,
+        "anti_mean": 0.0
+      }
+    },
+    {
+      "skill": "abp-module-development/build-crud-application-services",
+      "baseline": [
+        {
+          "skill": "abp-module-development/build-crud-application-services",
+          "arm": "baseline",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 1,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "CrudAppService"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-module-development/build-crud-application-services",
+          "arm": "baseline",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 2,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "CrudAppService",
+            "PagedAndSortedResultRequestDto"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-module-development/build-crud-application-services",
+          "arm": "baseline",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 1,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "CrudAppService"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "baseline_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 1.33,
+        "anti_mean": 0.0
+      },
+      "skilled": [
+        {
+          "skill": "abp-module-development/build-crud-application-services",
+          "arm": "skilled",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 4,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "CrudAppService",
+            "ICrudAppService",
+            "PagedAndSortedResultRequestDto",
+            "CreateFilteredQueryAsync"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-module-development/build-crud-application-services",
+          "arm": "skilled",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 4,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "CrudAppService",
+            "ICrudAppService",
+            "PagedAndSortedResultRequestDto",
+            "CreateFilteredQueryAsync"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-module-development/build-crud-application-services",
+          "arm": "skilled",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 4,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "CrudAppService",
+            "ICrudAppService",
+            "PagedAndSortedResultRequestDto",
+            "CreateFilteredQueryAsync"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "skilled_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 4.0,
+        "anti_mean": 0.0
+      }
+    },
+    {
+      "skill": "abp-module-development/create-plugin-modules",
+      "baseline": [
+        {
+          "skill": "abp-module-development/create-plugin-modules",
+          "arm": "baseline",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 1,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "AbpModule"
+          ],
+          "anti": 2,
+          "anti_hits": [
+            "AssemblyLoadContext",
+            "Directory.GetFiles"
+          ]
+        },
+        {
+          "skill": "abp-module-development/create-plugin-modules",
+          "arm": "baseline",
+          "run": 2,
+          "status": "no_code",
+          "build": "not_run",
+          "idiom": 0,
+          "anti": 0
+        },
+        {
+          "skill": "abp-module-development/create-plugin-modules",
+          "arm": "baseline",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 1,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "AbpModule"
+          ],
+          "anti": 2,
+          "anti_hits": [
+            "AssemblyLoadContext",
+            "Directory.GetFiles"
+          ]
+        }
+      ],
+      "baseline_agg": {
+        "runs": 3,
+        "scored": 2,
+        "build_pass": 0,
+        "idiom_mean": 1.0,
+        "anti_mean": 2.0
+      },
+      "skilled": [
+        {
+          "skill": "abp-module-development/create-plugin-modules",
+          "arm": "skilled",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 3,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "PlugInSources",
+            "AddFolder",
+            "AbpModule"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-module-development/create-plugin-modules",
+          "arm": "skilled",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 3,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "PlugInSources",
+            "AddFolder",
+            "AbpModule"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-module-development/create-plugin-modules",
+          "arm": "skilled",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 3,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "PlugInSources",
+            "AddFolder",
+            "AbpModule"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "skilled_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 3.0,
+        "anti_mean": 0.0
+      }
+    },
+    {
+      "skill": "abp-module-development/customize-application-modules",
+      "baseline": [
+        {
+          "skill": "abp-module-development/customize-application-modules",
+          "arm": "baseline",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 4,
+          "idiom_hits": [],
+          "anti": 1,
+          "anti_hits": [
+            "modelBuilder.Entity"
+          ]
+        },
+        {
+          "skill": "abp-module-development/customize-application-modules",
+          "arm": "baseline",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 4,
+          "idiom_hits": [],
+          "anti": 1,
+          "anti_hits": [
+            "services.Replace"
+          ]
+        },
+        {
+          "skill": "abp-module-development/customize-application-modules",
+          "arm": "baseline",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 4,
+          "idiom_hits": [],
+          "anti": 2,
+          "anti_hits": [
+            "modelBuilder.Entity",
+            ": IdentityUser"
+          ]
+        }
+      ],
+      "baseline_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 0.0,
+        "anti_mean": 1.33
+      },
+      "skilled": [
+        {
+          "skill": "abp-module-development/customize-application-modules",
+          "arm": "skilled",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 4,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "ObjectExtensionManager",
+            "MapEfCoreProperty",
+            "ReplaceServices",
+            "ExposeServices"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-module-development/customize-application-modules",
+          "arm": "skilled",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 4,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "ObjectExtensionManager",
+            "MapEfCoreProperty",
+            "ReplaceServices",
+            "ExposeServices"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-module-development/customize-application-modules",
+          "arm": "skilled",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 2,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "ObjectExtensionManager",
+            "MapEfCoreProperty"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "skilled_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 3.33,
+        "anti_mean": 0.0
+      }
+    },
+    {
+      "skill": "abp-module-development/define-application-modules",
+      "baseline": [
+        {
+          "skill": "abp-module-development/define-application-modules",
+          "arm": "baseline",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 4,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "AbpModule",
+            "DependsOn",
+            "ServiceConfigurationContext",
+            "OnApplicationInitialization"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-module-development/define-application-modules",
+          "arm": "baseline",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 4,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "AbpModule",
+            "DependsOn",
+            "ServiceConfigurationContext",
+            "OnApplicationInitialization"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-module-development/define-application-modules",
+          "arm": "baseline",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 4,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "AbpModule",
+            "DependsOn",
+            "ServiceConfigurationContext",
+            "OnApplicationInitialization"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "baseline_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 4.0,
+        "anti_mean": 0.0
+      },
+      "skilled": [
+        {
+          "skill": "abp-module-development/define-application-modules",
+          "arm": "skilled",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 4,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "AbpModule",
+            "DependsOn",
+            "ServiceConfigurationContext",
+            "OnApplicationInitialization"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-module-development/define-application-modules",
+          "arm": "skilled",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 4,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "AbpModule",
+            "DependsOn",
+            "ServiceConfigurationContext",
+            "OnApplicationInitialization"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-module-development/define-application-modules",
+          "arm": "skilled",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 4,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "AbpModule",
+            "DependsOn",
+            "ServiceConfigurationContext",
+            "OnApplicationInitialization"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "skilled_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 4.0,
+        "anti_mean": 0.0
+      }
+    },
+    {
+      "skill": "abp-module-development/extend-objects-with-extra-properties",
+      "baseline": [
+        {
+          "skill": "abp-module-development/extend-objects-with-extra-properties",
+          "arm": "baseline",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 4,
+          "idiom_hits": [],
+          "anti": 1,
+          "anti_hits": [
+            "modelBuilder.Entity"
+          ]
+        },
+        {
+          "skill": "abp-module-development/extend-objects-with-extra-properties",
+          "arm": "baseline",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 4,
+          "idiom_hits": [],
+          "anti": 1,
+          "anti_hits": [
+            "public string"
+          ]
+        },
+        {
+          "skill": "abp-module-development/extend-objects-with-extra-properties",
+          "arm": "baseline",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 4,
+          "idiom_hits": [],
+          "anti": 1,
+          "anti_hits": [
+            "modelBuilder.Entity"
+          ]
+        }
+      ],
+      "baseline_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 0.0,
+        "anti_mean": 1.0
+      },
+      "skilled": [
+        {
+          "skill": "abp-module-development/extend-objects-with-extra-properties",
+          "arm": "skilled",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 2,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "ObjectExtensionManager",
+            "MapEfCoreProperty"
+          ],
+          "anti": 1,
+          "anti_hits": [
+            "public string"
+          ]
+        },
+        {
+          "skill": "abp-module-development/extend-objects-with-extra-properties",
+          "arm": "skilled",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 4,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "IHasExtraProperties",
+            "ObjectExtensionManager",
+            "MapEfCoreProperty",
+            "SetProperty"
+          ],
+          "anti": 1,
+          "anti_hits": [
+            "public string"
+          ]
+        },
+        {
+          "skill": "abp-module-development/extend-objects-with-extra-properties",
+          "arm": "skilled",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 3,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "IHasExtraProperties",
+            "ObjectExtensionManager",
+            "MapEfCoreProperty"
+          ],
+          "anti": 1,
+          "anti_hits": [
+            "public string"
+          ]
+        }
+      ],
+      "skilled_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 3.0,
+        "anti_mean": 1.0
+      }
+    },
+    {
+      "skill": "abp-module-development/handle-validation-and-errors",
+      "baseline": [
+        {
+          "skill": "abp-module-development/handle-validation-and-errors",
+          "arm": "baseline",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 1,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "AbpValidationException"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-module-development/handle-validation-and-errors",
+          "arm": "baseline",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 3,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "BusinessException",
+            "UserFriendlyException",
+            "AbpValidationException"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-module-development/handle-validation-and-errors",
+          "arm": "baseline",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 1,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "BusinessException"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "baseline_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 1.67,
+        "anti_mean": 0.0
+      },
+      "skilled": [
+        {
+          "skill": "abp-module-development/handle-validation-and-errors",
+          "arm": "skilled",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 3,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "BusinessException",
+            "IValidationEnabled",
+            "AbpValidationException"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-module-development/handle-validation-and-errors",
+          "arm": "skilled",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 2,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "BusinessException",
+            "IValidationEnabled"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-module-development/handle-validation-and-errors",
+          "arm": "skilled",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 2,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "BusinessException",
+            "IValidationEnabled"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "skilled_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 2.33,
+        "anti_mean": 0.0
+      }
+    },
+    {
+      "skill": "abp-module-development/localize-applications",
+      "baseline": [
+        {
+          "skill": "abp-module-development/localize-applications",
+          "arm": "baseline",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 2,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "AbpLocalizationOptions",
+            "AddVirtualJson"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-module-development/localize-applications",
+          "arm": "baseline",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 1,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "AbpLocalizationOptions"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-module-development/localize-applications",
+          "arm": "baseline",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 2,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "AbpLocalizationOptions",
+            "AddVirtualJson"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "baseline_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 1.67,
+        "anti_mean": 0.0
+      },
+      "skilled": [
+        {
+          "skill": "abp-module-development/localize-applications",
+          "arm": "skilled",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 4,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "LocalizationResourceName",
+            "AbpLocalizationOptions",
+            "AddVirtualJson",
+            "AbpVirtualFileSystemOptions"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-module-development/localize-applications",
+          "arm": "skilled",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 4,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "LocalizationResourceName",
+            "AbpLocalizationOptions",
+            "AddVirtualJson",
+            "AbpVirtualFileSystemOptions"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-module-development/localize-applications",
+          "arm": "skilled",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 4,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "LocalizationResourceName",
+            "AbpLocalizationOptions",
+            "AddVirtualJson",
+            "AbpVirtualFileSystemOptions"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "skilled_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 4.0,
+        "anti_mean": 0.0
+      }
+    },
+    {
+      "skill": "abp-module-development/map-objects-and-dtos",
+      "baseline": [
+        {
+          "skill": "abp-module-development/map-objects-and-dtos",
+          "arm": "baseline",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 4,
+          "idiom_hits": [],
+          "anti": 2,
+          "anti_hits": [
+            "IMapper",
+            "_mapper.Map"
+          ]
+        },
+        {
+          "skill": "abp-module-development/map-objects-and-dtos",
+          "arm": "baseline",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 4,
+          "idiom_hits": [],
+          "anti": 1,
+          "anti_hits": [
+            "IMapper"
+          ]
+        },
+        {
+          "skill": "abp-module-development/map-objects-and-dtos",
+          "arm": "baseline",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 4,
+          "idiom_hits": [],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "baseline_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 0.0,
+        "anti_mean": 1.0
+      },
+      "skilled": [
+        {
+          "skill": "abp-module-development/map-objects-and-dtos",
+          "arm": "skilled",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 3,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "IObjectMapper",
+            "AbpAutoMapperOptions",
+            "AddMaps"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-module-development/map-objects-and-dtos",
+          "arm": "skilled",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 2,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "AbpAutoMapperOptions",
+            "AddMaps"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-module-development/map-objects-and-dtos",
+          "arm": "skilled",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 2,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "AbpAutoMapperOptions",
+            "AddMaps"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "skilled_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 2.33,
+        "anti_mean": 0.0
+      }
+    },
+    {
+      "skill": "abp-module-development/model-domain-aggregates",
+      "baseline": [
+        {
+          "skill": "abp-module-development/model-domain-aggregates",
+          "arm": "baseline",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 4,
+          "idiom_hits": [],
+          "anti": 1,
+          "anti_hits": [
+            "IEquatable"
+          ]
+        },
+        {
+          "skill": "abp-module-development/model-domain-aggregates",
+          "arm": "baseline",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 1,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "ValueObject"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-module-development/model-domain-aggregates",
+          "arm": "baseline",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 1,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "AggregateRoot"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "baseline_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 0.67,
+        "anti_mean": 0.33
+      },
+      "skilled": [
+        {
+          "skill": "abp-module-development/model-domain-aggregates",
+          "arm": "skilled",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 4,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "AggregateRoot",
+            "ValueObject",
+            "GetAtomicValues",
+            "AddLocalEvent"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-module-development/model-domain-aggregates",
+          "arm": "skilled",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 4,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "AggregateRoot",
+            "ValueObject",
+            "GetAtomicValues",
+            "AddLocalEvent"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-module-development/model-domain-aggregates",
+          "arm": "skilled",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 4,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "AggregateRoot",
+            "ValueObject",
+            "GetAtomicValues",
+            "AddLocalEvent"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "skilled_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 4.0,
+        "anti_mean": 0.0
+      }
+    },
+    {
+      "skill": "abp-module-development/register-and-replace-services",
+      "baseline": [
+        {
+          "skill": "abp-module-development/register-and-replace-services",
+          "arm": "baseline",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 4,
+          "idiom_hits": [],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-module-development/register-and-replace-services",
+          "arm": "baseline",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 4,
+          "idiom_hits": [],
+          "anti": 1,
+          "anti_hits": [
+            "ServiceDescriptor"
+          ]
+        },
+        {
+          "skill": "abp-module-development/register-and-replace-services",
+          "arm": "baseline",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 4,
+          "idiom_hits": [],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "baseline_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 0.0,
+        "anti_mean": 0.33
+      },
+      "skilled": [
+        {
+          "skill": "abp-module-development/register-and-replace-services",
+          "arm": "skilled",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 4,
+          "idiom_hits": [],
+          "anti": 1,
+          "anti_hits": [
+            "ServiceDescriptor"
+          ]
+        },
+        {
+          "skill": "abp-module-development/register-and-replace-services",
+          "arm": "skilled",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 3,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "ReplaceServices",
+            "ExposeServices",
+            "ITransientDependency"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-module-development/register-and-replace-services",
+          "arm": "skilled",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 2,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "ReplaceServices",
+            "ITransientDependency"
+          ],
+          "anti": 1,
+          "anti_hits": [
+            "ServiceDescriptor"
+          ]
+        }
+      ],
+      "skilled_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 1.67,
+        "anti_mean": 0.67
+      }
+    },
+    {
+      "skill": "abp-authorization/authorize-resources",
+      "baseline": [
+        {
+          "skill": "abp-authorization/authorize-resources",
+          "arm": "baseline",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 4,
+          "idiom_hits": [],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-authorization/authorize-resources",
+          "arm": "baseline",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 4,
+          "idiom_hits": [],
+          "anti": 1,
+          "anti_hits": [
+            "CreatorId =="
+          ]
+        },
+        {
+          "skill": "abp-authorization/authorize-resources",
+          "arm": "baseline",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 4,
+          "idiom_hits": [],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "baseline_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 0.0,
+        "anti_mean": 0.33
+      },
+      "skilled": [
+        {
+          "skill": "abp-authorization/authorize-resources",
+          "arm": "skilled",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 1,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "AddResourcePermission"
+          ],
+          "anti": 1,
+          "anti_hits": [
+            "CreatorId =="
+          ]
+        },
+        {
+          "skill": "abp-authorization/authorize-resources",
+          "arm": "skilled",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 1,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "AddResourcePermission"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-authorization/authorize-resources",
+          "arm": "skilled",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 2,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "AddResourcePermission",
+            "GetObjectKey"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "skilled_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 1.33,
+        "anti_mean": 0.33
+      }
+    },
+    {
+      "skill": "abp-authorization/permissions-and-authorization",
+      "baseline": [
+        {
+          "skill": "abp-authorization/permissions-and-authorization",
+          "arm": "baseline",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 1,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "ICurrentUser"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-authorization/permissions-and-authorization",
+          "arm": "baseline",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 3,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "PermissionDefinitionProvider",
+            "AddPermission",
+            "ICurrentUser"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-authorization/permissions-and-authorization",
+          "arm": "baseline",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 4,
+          "idiom_hits": [],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "baseline_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 1.33,
+        "anti_mean": 0.0
+      },
+      "skilled": [
+        {
+          "skill": "abp-authorization/permissions-and-authorization",
+          "arm": "skilled",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 2,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "PermissionDefinitionProvider",
+            "AddPermission"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-authorization/permissions-and-authorization",
+          "arm": "skilled",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 2,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "PermissionDefinitionProvider",
+            "AddPermission"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-authorization/permissions-and-authorization",
+          "arm": "skilled",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 2,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "PermissionDefinitionProvider",
+            "AddPermission"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "skilled_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 2.0,
+        "anti_mean": 0.0
+      }
+    },
+    {
+      "skill": "abp-api/configure-swagger-openapi",
+      "baseline": [
+        {
+          "skill": "abp-api/configure-swagger-openapi",
+          "arm": "baseline",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 1,
+          "idiom_tot": 3,
+          "idiom_hits": [
+            "AddAbpSwaggerGen"
+          ],
+          "anti": 3,
+          "anti_hits": [
+            "UseSwaggerUI",
+            "AddSecurityDefinition",
+            "OpenApiSecurityScheme"
+          ]
+        },
+        {
+          "skill": "abp-api/configure-swagger-openapi",
+          "arm": "baseline",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 3,
+          "idiom_hits": [],
+          "anti": 3,
+          "anti_hits": [
+            "AddSwaggerGen",
+            "AddSecurityDefinition",
+            "OpenApiSecurityScheme"
+          ]
+        },
+        {
+          "skill": "abp-api/configure-swagger-openapi",
+          "arm": "baseline",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 3,
+          "idiom_hits": [],
+          "anti": 3,
+          "anti_hits": [
+            "AddSwaggerGen",
+            "AddSecurityDefinition",
+            "OpenApiSecurityScheme"
+          ]
+        }
+      ],
+      "baseline_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 0.33,
+        "anti_mean": 3.0
+      },
+      "skilled": [
+        {
+          "skill": "abp-api/configure-swagger-openapi",
+          "arm": "skilled",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 2,
+          "idiom_tot": 3,
+          "idiom_hits": [
+            "UseAbpSwaggerUI",
+            "AddAbpSwaggerGenWithOAuth"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-api/configure-swagger-openapi",
+          "arm": "skilled",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 2,
+          "idiom_tot": 3,
+          "idiom_hits": [
+            "UseAbpSwaggerUI",
+            "AddAbpSwaggerGenWithOAuth"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-api/configure-swagger-openapi",
+          "arm": "skilled",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 3,
+          "idiom_tot": 3,
+          "idiom_hits": [
+            "AddAbpSwaggerGen",
+            "UseAbpSwaggerUI",
+            "AddAbpSwaggerGenWithOAuth"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "skilled_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 2.33,
+        "anti_mean": 0.0
+      }
+    },
+    {
+      "skill": "abp-api/consume-remote-services",
+      "baseline": [
+        {
+          "skill": "abp-api/consume-remote-services",
+          "arm": "baseline",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 4,
+          "idiom_hits": [],
+          "anti": 1,
+          "anti_hits": [
+            "IHttpClientFactory"
+          ]
+        },
+        {
+          "skill": "abp-api/consume-remote-services",
+          "arm": "baseline",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 4,
+          "idiom_hits": [],
+          "anti": 3,
+          "anti_hits": [
+            "HttpClient",
+            "IHttpClientFactory",
+            "AddHttpClient"
+          ]
+        },
+        {
+          "skill": "abp-api/consume-remote-services",
+          "arm": "baseline",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 1,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "AbpRemoteServiceOptions"
+          ],
+          "anti": 3,
+          "anti_hits": [
+            "HttpClient",
+            "IHttpClientFactory",
+            "AddHttpClient"
+          ]
+        }
+      ],
+      "baseline_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 0.33,
+        "anti_mean": 2.33
+      },
+      "skilled": [
+        {
+          "skill": "abp-api/consume-remote-services",
+          "arm": "skilled",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 3,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "AddHttpClientProxies",
+            "IRemoteService",
+            "AbpRemoteServiceOptions"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-api/consume-remote-services",
+          "arm": "skilled",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 2,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "AddHttpClientProxies",
+            "AbpRemoteServiceOptions"
+          ],
+          "anti": 1,
+          "anti_hits": [
+            "HttpClient"
+          ]
+        },
+        {
+          "skill": "abp-api/consume-remote-services",
+          "arm": "skilled",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 3,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "AddHttpClientProxies",
+            "AbpRemoteServiceOptions",
+            "AbpHttpClientModule"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "skilled_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 2.67,
+        "anti_mean": 0.33
+      }
+    },
+    {
+      "skill": "abp-api/expose-http-apis",
+      "baseline": [
+        {
+          "skill": "abp-api/expose-http-apis",
+          "arm": "baseline",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 4,
+          "idiom_hits": [],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-api/expose-http-apis",
+          "arm": "baseline",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 2,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "ConventionalControllers",
+            "AbpAspNetCoreMvcOptions"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-api/expose-http-apis",
+          "arm": "baseline",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 1,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "ConventionalControllers"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "baseline_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 1.0,
+        "anti_mean": 0.0
+      },
+      "skilled": [
+        {
+          "skill": "abp-api/expose-http-apis",
+          "arm": "skilled",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 2,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "ConventionalControllers",
+            "AbpAspNetCoreMvcOptions"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-api/expose-http-apis",
+          "arm": "skilled",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 2,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "ConventionalControllers",
+            "AbpAspNetCoreMvcOptions"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-api/expose-http-apis",
+          "arm": "skilled",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 2,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "ConventionalControllers",
+            "AbpAspNetCoreMvcOptions"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "skilled_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 2.0,
+        "anti_mean": 0.0
+      }
+    },
+    {
+      "skill": "abp-api/use-abp-standard-endpoints",
+      "baseline": [
+        {
+          "skill": "abp-api/use-abp-standard-endpoints",
+          "arm": "baseline",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 3,
+          "idiom_hits": [],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-api/use-abp-standard-endpoints",
+          "arm": "baseline",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 3,
+          "idiom_hits": [],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-api/use-abp-standard-endpoints",
+          "arm": "baseline",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 3,
+          "idiom_hits": [],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "baseline_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 0.0,
+        "anti_mean": 0.0
+      },
+      "skilled": [
+        {
+          "skill": "abp-api/use-abp-standard-endpoints",
+          "arm": "skilled",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 3,
+          "idiom_tot": 3,
+          "idiom_hits": [
+            "IApplicationConfigurationContributor",
+            "AbpApplicationConfigurationOptions",
+            "ApplicationConfigurationContributorContext"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-api/use-abp-standard-endpoints",
+          "arm": "skilled",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 3,
+          "idiom_tot": 3,
+          "idiom_hits": [
+            "IApplicationConfigurationContributor",
+            "AbpApplicationConfigurationOptions",
+            "ApplicationConfigurationContributorContext"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-api/use-abp-standard-endpoints",
+          "arm": "skilled",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 3,
+          "idiom_tot": 3,
+          "idiom_hits": [
+            "IApplicationConfigurationContributor",
+            "AbpApplicationConfigurationOptions",
+            "ApplicationConfigurationContributorContext"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "skilled_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 3.0,
+        "anti_mean": 0.0
+      }
+    },
+    {
+      "skill": "abp-api/version-http-apis",
+      "baseline": [
+        {
+          "skill": "abp-api/version-http-apis",
+          "arm": "baseline",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 3,
+          "idiom_hits": [],
+          "anti": 2,
+          "anti_hits": [
+            "AddApiVersioning",
+            "[HttpGet]"
+          ]
+        },
+        {
+          "skill": "abp-api/version-http-apis",
+          "arm": "baseline",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 3,
+          "idiom_hits": [],
+          "anti": 2,
+          "anti_hits": [
+            "AddApiVersioning",
+            "[HttpGet]"
+          ]
+        },
+        {
+          "skill": "abp-api/version-http-apis",
+          "arm": "baseline",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 1,
+          "idiom_tot": 3,
+          "idiom_hits": [
+            "ConventionalControllers"
+          ],
+          "anti": 2,
+          "anti_hits": [
+            "[ApiController]",
+            "[HttpGet]"
+          ]
+        }
+      ],
+      "baseline_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 0.33,
+        "anti_mean": 2.0
+      },
+      "skilled": [
+        {
+          "skill": "abp-api/version-http-apis",
+          "arm": "skilled",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 2,
+          "idiom_tot": 3,
+          "idiom_hits": [
+            "AddAbpApiVersioning",
+            "ConventionalControllers"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-api/version-http-apis",
+          "arm": "skilled",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 2,
+          "idiom_tot": 3,
+          "idiom_hits": [
+            "AddAbpApiVersioning",
+            "ConventionalControllers"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-api/version-http-apis",
+          "arm": "skilled",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 2,
+          "idiom_tot": 3,
+          "idiom_hits": [
+            "AddAbpApiVersioning",
+            "ConventionalControllers"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "skilled_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 2.0,
+        "anti_mean": 0.0
+      }
+    },
+    {
+      "skill": "abp-testing/test-abp-applications",
+      "baseline": [
+        {
+          "skill": "abp-testing/test-abp-applications",
+          "arm": "baseline",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 2,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "AbpIntegratedTest",
+            "ICurrentPrincipalAccessor"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-testing/test-abp-applications",
+          "arm": "baseline",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 2,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "ICurrentPrincipalAccessor",
+            "AbpClaimTypes"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-testing/test-abp-applications",
+          "arm": "baseline",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 2,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "AbpIntegratedTest",
+            "ICurrentPrincipalAccessor"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "baseline_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 2.0,
+        "anti_mean": 0.0
+      },
+      "skilled": [
+        {
+          "skill": "abp-testing/test-abp-applications",
+          "arm": "skilled",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 2,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "ICurrentPrincipalAccessor",
+            "AbpClaimTypes"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-testing/test-abp-applications",
+          "arm": "skilled",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 3,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "ICurrentPrincipalAccessor",
+            "AbpClaimTypes",
+            "AddAlwaysAllowAuthorization"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-testing/test-abp-applications",
+          "arm": "skilled",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 1,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "ICurrentPrincipalAccessor"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "skilled_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 2.0,
+        "anti_mean": 0.0
+      }
+    },
+    {
+      "skill": "abp-testing/test-angular-ui",
+      "baseline": [
+        {
+          "skill": "abp-testing/test-angular-ui",
+          "arm": "baseline",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 3,
+          "idiom_hits": [],
+          "anti": 1,
+          "anti_hits": [
+            "HttpClientTestingModule"
+          ]
+        },
+        {
+          "skill": "abp-testing/test-angular-ui",
+          "arm": "baseline",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 3,
+          "idiom_hits": [],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-testing/test-angular-ui",
+          "arm": "baseline",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 3,
+          "idiom_hits": [],
+          "anti": 2,
+          "anti_hits": [
+            "HttpClientTestingModule",
+            "HttpTestingController"
+          ]
+        }
+      ],
+      "baseline_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 0.0,
+        "anti_mean": 1.0
+      },
+      "skilled": [
+        {
+          "skill": "abp-testing/test-angular-ui",
+          "arm": "skilled",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 3,
+          "idiom_hits": [],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-testing/test-angular-ui",
+          "arm": "skilled",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 2,
+          "idiom_tot": 3,
+          "idiom_hits": [
+            "CoreTestingModule",
+            "ThemeSharedTestingModule"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-testing/test-angular-ui",
+          "arm": "skilled",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 3,
+          "idiom_tot": 3,
+          "idiom_hits": [
+            "CoreTestingModule",
+            "ThemeSharedTestingModule",
+            "clearPage"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "skilled_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 1.67,
+        "anti_mean": 0.0
+      }
+    },
+    {
+      "skill": "abp-testing/test-mvc-razor-ui",
+      "baseline": [
+        {
+          "skill": "abp-testing/test-mvc-razor-ui",
+          "arm": "baseline",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 3,
+          "idiom_hits": [],
+          "anti": 2,
+          "anti_hits": [
+            "IClassFixture",
+            "CustomWebApplicationFactory"
+          ]
+        },
+        {
+          "skill": "abp-testing/test-mvc-razor-ui",
+          "arm": "baseline",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 3,
+          "idiom_hits": [],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-testing/test-mvc-razor-ui",
+          "arm": "baseline",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 3,
+          "idiom_hits": [],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "baseline_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 0.0,
+        "anti_mean": 0.67
+      },
+      "skilled": [
+        {
+          "skill": "abp-testing/test-mvc-razor-ui",
+          "arm": "skilled",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 3,
+          "idiom_tot": 3,
+          "idiom_hits": [
+            "AbpWebApplicationFactoryIntegratedTest",
+            "FakeUserClaims",
+            "AbpAspNetCoreTestBaseModule"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-testing/test-mvc-razor-ui",
+          "arm": "skilled",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 3,
+          "idiom_tot": 3,
+          "idiom_hits": [
+            "AbpWebApplicationFactoryIntegratedTest",
+            "FakeUserClaims",
+            "AbpAspNetCoreTestBaseModule"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-testing/test-mvc-razor-ui",
+          "arm": "skilled",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 3,
+          "idiom_tot": 3,
+          "idiom_hits": [
+            "AbpWebApplicationFactoryIntegratedTest",
+            "FakeUserClaims",
+            "AbpAspNetCoreTestBaseModule"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "skilled_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 3.0,
+        "anti_mean": 0.0
+      }
+    },
+    {
+      "skill": "abp-ui/angular-ui",
+      "baseline": [
+        {
+          "skill": "abp-ui/angular-ui",
+          "arm": "baseline",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 4,
+          "idiom_hits": [],
+          "anti": 1,
+          "anti_hits": [
+            "HttpClient"
+          ]
+        },
+        {
+          "skill": "abp-ui/angular-ui",
+          "arm": "baseline",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 4,
+          "idiom_hits": [],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-ui/angular-ui",
+          "arm": "baseline",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 4,
+          "idiom_hits": [],
+          "anti": 3,
+          "anti_hits": [
+            "RouterModule.forChild",
+            "Routes",
+            "HttpClient"
+          ]
+        }
+      ],
+      "baseline_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 0.0,
+        "anti_mean": 1.33
+      },
+      "skilled": [
+        {
+          "skill": "abp-ui/angular-ui",
+          "arm": "skilled",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 2,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "RoutesService",
+            "eLayoutType"
+          ],
+          "anti": 1,
+          "anti_hits": [
+            "RouterModule.forChild"
+          ]
+        },
+        {
+          "skill": "abp-ui/angular-ui",
+          "arm": "skilled",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 2,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "RoutesService",
+            "eLayoutType"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-ui/angular-ui",
+          "arm": "skilled",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 2,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "RoutesService",
+            "eLayoutType"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "skilled_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 2.0,
+        "anti_mean": 0.33
+      }
+    },
+    {
+      "skill": "abp-ui/blazor-ui",
+      "baseline": [
+        {
+          "skill": "abp-ui/blazor-ui",
+          "arm": "baseline",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 1,
+          "idiom_tot": 3,
+          "idiom_hits": [
+            "AbpComponentBase"
+          ],
+          "anti": 1,
+          "anti_hits": [
+            "[Inject]"
+          ]
+        },
+        {
+          "skill": "abp-ui/blazor-ui",
+          "arm": "baseline",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 3,
+          "idiom_hits": [],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-ui/blazor-ui",
+          "arm": "baseline",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 3,
+          "idiom_hits": [],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "baseline_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 0.33,
+        "anti_mean": 0.33
+      },
+      "skilled": [
+        {
+          "skill": "abp-ui/blazor-ui",
+          "arm": "skilled",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 2,
+          "idiom_tot": 3,
+          "idiom_hits": [
+            "AbpComponentBase",
+            "LocalizationResource"
+          ],
+          "anti": 1,
+          "anti_hits": [
+            "[Inject]"
+          ]
+        },
+        {
+          "skill": "abp-ui/blazor-ui",
+          "arm": "skilled",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 2,
+          "idiom_tot": 3,
+          "idiom_hits": [
+            "AbpComponentBase",
+            "LocalizationResource"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-ui/blazor-ui",
+          "arm": "skilled",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 1,
+          "idiom_tot": 3,
+          "idiom_hits": [
+            "AbpComponentBase"
+          ],
+          "anti": 1,
+          "anti_hits": [
+            "[Inject]"
+          ]
+        }
+      ],
+      "skilled_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 1.67,
+        "anti_mean": 0.67
+      }
+    },
+    {
+      "skill": "abp-ui/build-angular-lists-and-forms",
+      "baseline": [
+        {
+          "skill": "abp-ui/build-angular-lists-and-forms",
+          "arm": "baseline",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 1,
+          "idiom_tot": 3,
+          "idiom_hits": [
+            "PagedResultDto"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-ui/build-angular-lists-and-forms",
+          "arm": "baseline",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 1,
+          "idiom_tot": 3,
+          "idiom_hits": [
+            "PagedResultDto"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-ui/build-angular-lists-and-forms",
+          "arm": "baseline",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 1,
+          "idiom_tot": 3,
+          "idiom_hits": [
+            "PagedResultDto"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "baseline_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 1.0,
+        "anti_mean": 0.0
+      },
+      "skilled": [
+        {
+          "skill": "abp-ui/build-angular-lists-and-forms",
+          "arm": "skilled",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 3,
+          "idiom_tot": 3,
+          "idiom_hits": [
+            "ListService",
+            "hookToQuery",
+            "PagedResultDto"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-ui/build-angular-lists-and-forms",
+          "arm": "skilled",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 3,
+          "idiom_tot": 3,
+          "idiom_hits": [
+            "ListService",
+            "hookToQuery",
+            "PagedResultDto"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-ui/build-angular-lists-and-forms",
+          "arm": "skilled",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 3,
+          "idiom_tot": 3,
+          "idiom_hits": [
+            "ListService",
+            "hookToQuery",
+            "PagedResultDto"
+          ],
+          "anti": 1,
+          "anti_hits": [
+            "HttpClient.get"
+          ]
+        }
+      ],
+      "skilled_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 3.0,
+        "anti_mean": 0.33
+      }
+    },
+    {
+      "skill": "abp-ui/build-mvc-widgets",
+      "baseline": [
+        {
+          "skill": "abp-ui/build-mvc-widgets",
+          "arm": "baseline",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 4,
+          "idiom_hits": [],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-ui/build-mvc-widgets",
+          "arm": "baseline",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 4,
+          "idiom_hits": [],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-ui/build-mvc-widgets",
+          "arm": "baseline",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 4,
+          "idiom_hits": [],
+          "anti": 2,
+          "anti_hits": [
+            "ViewComponent",
+            "<script src"
+          ]
+        }
+      ],
+      "baseline_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 0.0,
+        "anti_mean": 0.67
+      },
+      "skilled": [
+        {
+          "skill": "abp-ui/build-mvc-widgets",
+          "arm": "skilled",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 1,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "BundleContributor"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-ui/build-mvc-widgets",
+          "arm": "skilled",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 1,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "BundleContributor"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-ui/build-mvc-widgets",
+          "arm": "skilled",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 1,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "BundleContributor"
+          ],
+          "anti": 1,
+          "anti_hits": [
+            "ViewComponent"
+          ]
+        }
+      ],
+      "skilled_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 1.0,
+        "anti_mean": 0.33
+      }
+    },
+    {
+      "skill": "abp-ui/extend-angular-module-ui",
+      "baseline": [
+        {
+          "skill": "abp-ui/extend-angular-module-ui",
+          "arm": "baseline",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 4,
+          "idiom_hits": [],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-ui/extend-angular-module-ui",
+          "arm": "baseline",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 4,
+          "idiom_hits": [],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-ui/extend-angular-module-ui",
+          "arm": "baseline",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 4,
+          "idiom_hits": [],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "baseline_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 0.0,
+        "anti_mean": 0.0
+      },
+      "skilled": [
+        {
+          "skill": "abp-ui/extend-angular-module-ui",
+          "arm": "skilled",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 3,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "EntityProp",
+            "EntityAction",
+            "ePropType"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-ui/extend-angular-module-ui",
+          "arm": "skilled",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 3,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "EntityProp",
+            "EntityAction",
+            "ePropType"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-ui/extend-angular-module-ui",
+          "arm": "skilled",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 3,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "EntityProp",
+            "EntityAction",
+            "ePropType"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "skilled_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 3.0,
+        "anti_mean": 0.0
+      }
+    },
+    {
+      "skill": "abp-ui/extend-application-shell",
+      "baseline": [
+        {
+          "skill": "abp-ui/extend-application-shell",
+          "arm": "baseline",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 4,
+          "idiom_hits": [],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-ui/extend-application-shell",
+          "arm": "baseline",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 4,
+          "idiom_hits": [],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-ui/extend-application-shell",
+          "arm": "baseline",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 4,
+          "idiom_hits": [],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "baseline_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 0.0,
+        "anti_mean": 0.0
+      },
+      "skilled": [
+        {
+          "skill": "abp-ui/extend-application-shell",
+          "arm": "skilled",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 4,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "AbpLayoutHookOptions",
+            "LayoutHooks",
+            "IToolbarContributor",
+            "StandardToolbars"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-ui/extend-application-shell",
+          "arm": "skilled",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 2,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "AbpLayoutHookOptions",
+            "LayoutHooks"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-ui/extend-application-shell",
+          "arm": "skilled",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 4,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "AbpLayoutHookOptions",
+            "LayoutHooks",
+            "IToolbarContributor",
+            "StandardToolbars"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "skilled_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 3.33,
+        "anti_mean": 0.0
+      }
+    },
+    {
+      "skill": "abp-ui/menus-and-localization",
+      "baseline": [
+        {
+          "skill": "abp-ui/menus-and-localization",
+          "arm": "baseline",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 4,
+          "idiom_hits": [],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-ui/menus-and-localization",
+          "arm": "baseline",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 4,
+          "idiom_hits": [],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-ui/menus-and-localization",
+          "arm": "baseline",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 2,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "ApplicationMenuItem",
+            "AbpNavigationOptions"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "baseline_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 0.67,
+        "anti_mean": 0.0
+      },
+      "skilled": [
+        {
+          "skill": "abp-ui/menus-and-localization",
+          "arm": "skilled",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 4,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "IMenuContributor",
+            "ApplicationMenuItem",
+            "StandardMenus",
+            "AbpNavigationOptions"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-ui/menus-and-localization",
+          "arm": "skilled",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 4,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "IMenuContributor",
+            "ApplicationMenuItem",
+            "StandardMenus",
+            "AbpNavigationOptions"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-ui/menus-and-localization",
+          "arm": "skilled",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 4,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "IMenuContributor",
+            "ApplicationMenuItem",
+            "StandardMenus",
+            "AbpNavigationOptions"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "skilled_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 4.0,
+        "anti_mean": 0.0
+      }
+    },
+    {
+      "skill": "abp-ui/mvc-razor-ui",
+      "baseline": [
+        {
+          "skill": "abp-ui/mvc-razor-ui",
+          "arm": "baseline",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 1,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "AbpPageModel"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-ui/mvc-razor-ui",
+          "arm": "baseline",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 1,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "AbpPageModel"
+          ],
+          "anti": 1,
+          "anti_hits": [
+            "form-control"
+          ]
+        },
+        {
+          "skill": "abp-ui/mvc-razor-ui",
+          "arm": "baseline",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 1,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "AbpPageModel"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "baseline_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 1.0,
+        "anti_mean": 0.33
+      },
+      "skilled": [
+        {
+          "skill": "abp-ui/mvc-razor-ui",
+          "arm": "skilled",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 1,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "AbpPageModel"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-ui/mvc-razor-ui",
+          "arm": "skilled",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 1,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "AbpPageModel"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-ui/mvc-razor-ui",
+          "arm": "skilled",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 1,
+          "idiom_tot": 4,
+          "idiom_hits": [
+            "AbpPageModel"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "skilled_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 1.0,
+        "anti_mean": 0.0
+      }
+    },
+    {
+      "skill": "abp-ui/use-mvc-javascript-apis",
+      "baseline": [
+        {
+          "skill": "abp-ui/use-mvc-javascript-apis",
+          "arm": "baseline",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 3,
+          "idiom_hits": [],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-ui/use-mvc-javascript-apis",
+          "arm": "baseline",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 3,
+          "idiom_hits": [],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-ui/use-mvc-javascript-apis",
+          "arm": "baseline",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 0,
+          "idiom_tot": 3,
+          "idiom_hits": [],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "baseline_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 0.0,
+        "anti_mean": 0.0
+      },
+      "skilled": [
+        {
+          "skill": "abp-ui/use-mvc-javascript-apis",
+          "arm": "skilled",
+          "run": 1,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 3,
+          "idiom_tot": 3,
+          "idiom_hits": [
+            "abp.libs.datatables.createAjax",
+            "abp.auth.isGranted",
+            "abp.notify"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-ui/use-mvc-javascript-apis",
+          "arm": "skilled",
+          "run": 2,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 2,
+          "idiom_tot": 3,
+          "idiom_hits": [
+            "abp.auth.isGranted",
+            "abp.notify"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        },
+        {
+          "skill": "abp-ui/use-mvc-javascript-apis",
+          "arm": "skilled",
+          "run": 3,
+          "status": "ok",
+          "build": "skipped",
+          "idiom": 3,
+          "idiom_tot": 3,
+          "idiom_hits": [
+            "abp.libs.datatables.createAjax",
+            "abp.auth.isGranted",
+            "abp.notify"
+          ],
+          "anti": 0,
+          "anti_hits": []
+        }
+      ],
+      "skilled_agg": {
+        "runs": 3,
+        "scored": 3,
+        "build_pass": 0,
+        "idiom_mean": 2.67,
+        "anti_mean": 0.0
+      }
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <Compile Include="../../Skills/MapObjectsAndDtos.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Riok.Mapperly" />
+    <PackageReference Include="Volo.Abp.AutoMapper" />
+    <PackageReference Include="Volo.Abp.Core" />
+    <PackageReference Include="Volo.Abp.Mapperly" />
+    <PackageReference Include="Volo.Abp.ObjectExtending" />
+    <PackageReference Include="Volo.Abp.ObjectMapping" />
+  </ItemGroup>
+</Project>

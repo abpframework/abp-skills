@@ -1,0 +1,65 @@
+scenarios:
+  - name: "Propagate stock changes reliably between services"
+    prompt: "Design communication from Catalog to Ordering. Ordering needs immediate product details for one query, but stock changes should be propagated asynchronously and reliably. Define the integration-service boundary and an explicit stock-change ETO/handler, then configure an EF Core transactional outbox and inbox with idempotent handling."
+    expect_activation: true
+    assertions:
+      - type: "output_contains"
+        value: "[IntegrationService]"
+      - type: "output_contains"
+        value: "ExposeIntegrationServices"
+      - type: "output_contains"
+        value: "/integration-api"
+      - type: "output_contains"
+        value: "IDistributedEventBus"
+      - type: "output_contains"
+        value: "[EventName("
+      - type: "output_contains"
+        value: "IDistributedEventHandler"
+      - type: "output_contains"
+        value: "IHasEventOutbox"
+      - type: "output_contains"
+        value: "IHasEventInbox"
+      - type: "output_contains"
+        value: "ConfigureEventOutbox"
+      - type: "output_contains"
+        value: "ConfigureEventInbox"
+    rubric:
+      - "Uses an integration service only for the immediate-response query and distributed events for state-change propagation."
+      - "Treats the explicit event name and DTO as stable contracts, wires EF Core outbox/inbox records and model configuration, and calls for a migration."
+      - "Keeps handler effects idempotent even with inbox transport de-duplication."
+    timeout: 300
+
+  - name: "Design cross-module communication in a modular monolith"
+    prompt: "In my ABP modular monolith, the Ordering module needs product data owned by the Catalog module, and a report must join orders with catalog data. Design the module-to-module communication without Ordering referencing Catalog's entities or DbContext, and say where the cross-module reporting join should live."
+    expect_activation: true
+    assertions:
+      - type: "output_contains"
+        value: "[IntegrationService]"
+      - type: "output_contains"
+        value: "Contracts"
+      - type: "output_matches"
+        pattern: "(inject|dependency injection|direct DI|in-process)"
+      - type: "output_not_contains"
+        value: "ExposeIntegrationServices"
+      - type: "output_matches"
+        pattern: "(reporting|aggregation) module"
+    rubric:
+      - "For the in-process sync call, references the owner module's Application.Contracts and injects the integration-service interface directly via DI — no ExposeIntegrationServices, no /integration-api, no HTTP client proxy."
+      - "Injects the integration service in the Application layer (an app/integration service), not a Domain service — Domain must not depend on another module's Application.Contracts."
+      - "Puts the cross-module join in an explicit reporting/aggregation module that accepts DB coupling."
+    timeout: 240
+
+  - name: "Route Dapr sidecar transport setup to Dapr integration"
+    prompt: "Run existing ABP client proxies and distributed event handlers through Dapr service invocation and Dapr pub/sub. Configure Dapr app ids, the pubsub component, receive endpoints, and App API token validation."
+    expect_activation: false
+    assertions:
+      - type: "output_contains"
+        value: "AbpHttpClientDaprModule"
+      - type: "output_contains"
+        value: "AbpAspNetCoreMvcDaprEventBusModule"
+      - type: "output_contains"
+        value: "ValidateDaprAppApiToken"
+    rubric:
+      - "Routes Dapr-specific transport and sidecar wiring to integrate-dapr-services."
+      - "Does not reframe a transport setup request as a sync-versus-async architecture decision."
+    timeout: 120

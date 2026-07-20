@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <Compile Include="../../Skills/MvcRazorUi.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Bootstrap" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Bundling.Abstractions" />
+  </ItemGroup>
+</Project>

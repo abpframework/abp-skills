@@ -1,0 +1,40 @@
+scenarios:
+  - name: "Add correlation id middleware and configure header"
+    prompt: "Enable ABP correlation id propagation in my ASP.NET Core app: add the middleware and configure the header name and whether it's echoed on the response."
+    expect_activation: true
+    assertions:
+      - type: "output_contains"
+        value: "UseCorrelationId"
+      - type: "output_contains"
+        value: "AbpCorrelationIdOptions"
+      - type: "output_matches"
+        pattern: "(HttpHeaderName|SetResponseHeader)"
+      - type: "output_contains"
+        value: "X-Correlation-Id"
+    rubric:
+      - "Calls app.UseCorrelationId() in the pipeline."
+      - "Configures AbpCorrelationIdOptions.HttpHeaderName / SetResponseHeader."
+    timeout: 240
+  - name: "Read and temporarily change the correlation id"
+    prompt: "In an ABP service, read the current correlation id and temporarily override it for one operation, restoring the previous value afterward."
+    expect_activation: true
+    assertions:
+      - type: "output_contains"
+        value: "ICorrelationIdProvider"
+      - type: "output_matches"
+        pattern: "\\.Change\\("
+      - type: "output_matches"
+        pattern: "using\\s*(\\(|var)"
+    rubric:
+      - "Injects ICorrelationIdProvider and uses Get()."
+      - "Wraps Change(...) in a using block so the AsyncLocal value is restored."
+    timeout: 240
+  - name: "Configure OpenTelemetry trace spans"
+    prompt: "Set up OpenTelemetry distributed tracing with span exporters and sampling for my ABP services."
+    expect_activation: false
+    assertions:
+      - type: "output_matches"
+        pattern: "(OpenTelemetry|tracing|span)"
+    rubric:
+      - "Treats OpenTelemetry distributed tracing as out of scope for propagate-correlation-id; ABP ships no OpenTelemetry framework module, so it does not activate this skill."
+    timeout: 120

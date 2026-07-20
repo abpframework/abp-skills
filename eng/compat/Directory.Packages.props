@@ -1,0 +1,107 @@
+<Project>
+
+  <!--
+    ABP version this compile-smoke test is pinned to.
+    Bump AbpVersion to test the skills' APIs against a newer ABP release:
+    `dotnet build` failures pinpoint skills whose APIs went stale.
+  -->
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+    <AbpVersion>10.5.0</AbpVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageVersion Include="Volo.Abp.Core" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.Timing" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.Guids" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.Authorization" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.Authorization.Abstractions" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.UI.Navigation" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.Auditing" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.Auditing.Contracts" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.AspNetCore" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.ObjectExtending" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.Ddd.Domain" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.Security" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.Autofac" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.Caching" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.DistributedLocking.Abstractions" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.Data" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.Settings" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.Features" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.Validation" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.Validation.Abstractions" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.FeatureManagement.Domain" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.Imaging.Abstractions" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.Imaging.ImageSharp" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.Emailing" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.TextTemplating.Core" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.TextTemplating.Razor" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.TextTemplating.Scriban" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.MailKit" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.AspNetCore.Mvc" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.Swashbuckle" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.Sms" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.Json.Abstractions" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.Json.SystemTextJson" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.GlobalFeatures" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.Threading" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.AI" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.AI.Abstractions" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.Ddd.Application.Contracts" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.Uow" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.MultiTenancy.Abstractions" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.EntityFrameworkCore" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.EntityFrameworkCore.SqlServer" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.MongoDB" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.Dapper" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.Ddd.Application" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.ObjectMapping" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.ExceptionHandling" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.Localization" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.Localization.Abstractions" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.AutoMapper" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.Mapperly" Version="$(AbpVersion)" />
+    <PackageVersion Include="Riok.Mapperly" Version="4.3.1" />
+    <PackageVersion Include="Volo.Abp.Specifications" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.VirtualFileSystem" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.BlobStoring" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.AspNetCore.SignalR" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.TestBase" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.AspNetCore.TestBase" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.EventBus" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.EventBus.Abstractions" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.Dapr" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.EventBus.Dapr" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.DistributedLocking.Dapr" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.AspNetCore.Mvc.Dapr" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.AspNetCore.Mvc.UI" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.AspNetCore.Mvc.UI.Bundling.Abstractions" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.AspNetCore.Mvc.UI.Bootstrap" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.AspNetCore.Mvc.UI.Widgets" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.UI" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.AspNetCore.Components" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.Account.Application.Contracts" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.Identity.Application.Contracts" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.Identity.AspNetCore" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.Http.Client" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.Http.Client.IdentityModel" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.Http.Client.IdentityModel.Web" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.RemoteServices" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.AspNetCore.Mvc.Contracts" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.AspNetCore.Authentication.JwtBearer" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.OpenIddict.AspNetCore" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.OpenIddict.Domain" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.BackgroundJobs.Abstractions" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.BackgroundWorkers" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.AspNetCore.MultiTenancy" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.BlazoriseUI" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.SettingManagement.Domain" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.BlobStoring.Azure" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.BlobStoring.Aws" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.BlobStoring.Minio" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.BlobStoring.Database.Domain" Version="$(AbpVersion)" />
+  </ItemGroup>
+
+</Project>

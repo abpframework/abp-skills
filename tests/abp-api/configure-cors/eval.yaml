@@ -1,0 +1,32 @@
+scenarios:
+  - name: "Allow a browser SPA to call the ABP API via CORS"
+    prompt: "My Angular app at https://app.my-company.com and http://localhost:4200 get CORS errors calling my ABP API. Configure CORS on the API host to allow those origins plus any subdomain of my-company.com, with credentials, and place the middleware correctly."
+    expect_activation: true
+    assertions:
+      - type: "output_contains"
+        value: "App:CorsOrigins"
+      - type: "output_contains"
+        value: "AddCors"
+      - type: "output_contains"
+        value: "SetIsOriginAllowedToAllowWildcardSubdomains"
+      - type: "output_contains"
+        value: "UseCors"
+      - type: "output_matches"
+        pattern: "(WithAbpExposedHeaders|AllowCredentials)"
+    rubric:
+      - "Lists origins in App:CorsOrigins (comma-separated, no trailing slash), enables wildcard subdomains, and allows credentials with explicit origins (not a * origin)."
+      - "Places UseCors after UseRouting and before UseAuthentication."
+    timeout: 240
+
+  - name: "Route OAuth redirect URI to OpenIddict"
+    prompt: "After login my ABP app fails with an invalid redirect_uri and the login redirect is rejected. Fix the allowed redirect URIs for the OAuth client."
+    expect_activation: false
+    assertions:
+      - type: "output_matches"
+        pattern: "(redirect.?uri|RedirectUris|OpenIddict)"
+      - type: "output_not_contains"
+        value: "App:CorsOrigins"
+    rubric:
+      - "Routes a login redirect_uri problem to the OpenIddict client application's registered redirect URIs (set at client creation/seeding), not CORS."
+      - "Does not treat an OAuth redirect issue as a CORS / App:CorsOrigins problem."
+    timeout: 120

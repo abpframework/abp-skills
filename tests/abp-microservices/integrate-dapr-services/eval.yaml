@@ -1,0 +1,45 @@
+scenarios:
+  - name: "Use Dapr for proxy invocation pubsub and locking"
+    prompt: "Wire an ABP ASP.NET Core service to use Dapr for dynamic CSharp client-proxy invocation, publish and receive distributed events, and IAbpDistributedLock. The target app id is catalog-api, the pubsub component is pubsub, and the lock store is lockstore. Include the receive endpoints and App API token validation details."
+    expect_activation: true
+    assertions:
+      - type: "output_contains"
+        value: "AbpHttpClientDaprModule"
+      - type: "output_contains"
+        value: "AbpAspNetCoreMvcDaprEventBusModule"
+      - type: "output_contains"
+        value: "AbpDistributedLockingDaprModule"
+      - type: "output_contains"
+        value: "http://catalog-api/"
+      - type: "output_contains"
+        value: "PubSubName"
+      - type: "output_contains"
+        value: "StoreName"
+      - type: "output_contains"
+        value: "dapr/subscribe"
+      - type: "output_contains"
+        value: "api/abp/dapr/event"
+      - type: "output_contains"
+        value: "ValidateDaprAppApiToken"
+    rubric:
+      - "Selects the receive-capable ASP.NET Core Dapr event-bus module rather than the publish-only package alone."
+      - "Uses the Dapr app id as the remote-service base URL, configures pubsub and lock store names, and preserves ABP proxy/event/lock call sites."
+      - "Documents ABP's subscription/receive endpoints and validates the App API token on externally reachable Dapr callbacks."
+    timeout: 300
+
+  - name: "Route transport-independent communication design to microservice communication"
+    prompt: "Choose between synchronous integration services and asynchronous distributed events for two ABP services, define stable ETO contracts, and make delivery reliable with outbox/inbox and idempotent handlers. We have not selected Dapr or any other transport."
+    expect_activation: false
+    assertions:
+      - type: "output_contains"
+        value: "[IntegrationService]"
+      - type: "output_contains"
+        value: "IDistributedEventBus"
+      - type: "output_matches"
+        pattern: "(outbox|Outbox)"
+      - type: "output_matches"
+        pattern: "(idempotent|idempotency)"
+    rubric:
+      - "Routes transport-independent sync/async and reliability design to design-module-and-service-communication."
+      - "Does not add Dapr packages or sidecar configuration without a Dapr requirement."
+    timeout: 120

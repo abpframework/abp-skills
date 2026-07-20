@@ -1,0 +1,18 @@
+{
+ "abp-infrastructure/check-simple-state": "niche ABP abstraction; generic alt is ad-hoc inline if-checks, no stable anti token",
+ "abp-infrastructure/configure-logging": "ABP does not replace ILogger; Serilog bootstrap is host wiring, no code fork",
+ "abp-infrastructure/integrate-ai": "chat call uses Microsoft.Extensions.AI IChatClient in both; API version-unstable",
+ "abp-infrastructure/integrate-autofac": "one-line module/host wiring, config not a code fork",
+ "abp-infrastructure/read-configuration": "overlaps stock IConfiguration; same injected type, no distinctive fork",
+ "abp-infrastructure/toggle-global-features": "startup capability gating; no clean BCL alternative a naive model reaches for",
+ "abp-data-access/configure-connection-strings": "config-only (appsettings + options mapping), no generic-vs-ABP code fork",
+ "abp-runtime/configure-production-hosting": "release checklist over stock ASP.NET Core APIs; no ABP-specific code fork",
+ "abp-authentication/configure-openiddict-authentication": "setup via OpenIddict-native builder + options, no ABP-vs-generic fork",
+ "abp-authentication/configure-openiddict-validation": "OpenIddict-native validation wiring; AddAbpJwtBearer is a thin wrapper",
+ "abp-module-development/layered-architecture": "placement/reference-flow concept; markers owned by other skills",
+ "abp-api/configure-cors": "plain ASP.NET Core CORS wiring; only ABP token is a non-load-bearing helper",
+ "abp-cli/abp-cli-commands": "CLI commands, not generated code",
+ "abp-cli/choose-solution-architecture": "high-level decision skill, no code output",
+ "abp-upgrade/version-upgrade": "CLI/process workflow, not generated code",
+ "abp-module-development/separate-domain-and-application-logic": "decision guide for placing a rule in the domain vs application layer; correctness is about where logic goes, not a presence/absence marker fork"
+}

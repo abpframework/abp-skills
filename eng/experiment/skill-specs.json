@@ -1,0 +1,944 @@
+{
+ "abp-infrastructure/configure-audit-logging": {
+  "task": "Automatically keep a change-history log for an entity — who modified it, when, and the old/new value of each changed property — without hand-writing that tracking in every service.",
+  "lang": "csharp",
+  "idiom": [
+   "[Audited]",
+   "AbpAuditingOptions",
+   "IAuditingManager"
+  ],
+  "anti": [
+   "ChangeTracker.Entries",
+   "SaveChangesAsync",
+   "ISaveChangesInterceptor",
+   "EntityState.Modified"
+  ]
+ },
+ "abp-infrastructure/encrypt-strings": {
+  "task": "Reversibly encrypt a sensitive text value before storing it and decrypt it back later, using the application's shared configuration so any instance can read it.",
+  "lang": "csharp",
+  "idiom": [
+   "IStringEncryptionService",
+   "AbpStringEncryptionOptions"
+  ],
+  "anti": [
+   "Aes.Create",
+   "RijndaelManaged",
+   "Rfc2898DeriveBytes",
+   "System.Security.Cryptography"
+  ]
+ },
+ "abp-infrastructure/generate-guids": {
+  "task": "Generate a database-friendly, sequentially-ordered identifier for a new entity instead of a fully random one, so inserts don't fragment the clustered index.",
+  "lang": "csharp",
+  "idiom": [
+   "IGuidGenerator",
+   "SequentialGuidGenerator"
+  ],
+  "anti": [
+   "Guid.NewGuid",
+   "Guid.CreateVersion7"
+  ]
+ },
+ "abp-infrastructure/handle-dates-and-time": {
+  "task": "Stamp an entity with the current time in a way that respects the application's configured time/UTC policy and stays testable, rather than reading the machine clock directly.",
+  "lang": "csharp",
+  "idiom": [
+   "IClock",
+   "AbpClockOptions"
+  ],
+  "anti": [
+   "DateTime.Now",
+   "DateTime.UtcNow",
+   "TimeProvider"
+  ]
+ },
+ "abp-infrastructure/manage-settings-and-features": {
+  "task": "Define a configurable value (like an SMTP host) with a default that admins can change at runtime and can override per tenant or per user, then read the effective value in code.",
+  "lang": "csharp",
+  "idiom": [
+   "SettingDefinitionProvider",
+   "ISettingProvider"
+  ],
+  "anti": [
+   "IConfiguration",
+   "IOptions",
+   "appsettings.json"
+  ]
+ },
+ "abp-infrastructure/manipulate-images": {
+  "task": "Resize an uploaded image to thumbnail dimensions and compress it, while keeping the code independent of any specific image-processing library.",
+  "lang": "csharp",
+  "idiom": [
+   "IImageResizer",
+   "IImageCompressor",
+   "ImageResizeArgs"
+  ],
+  "anti": [
+   "SixLabors.ImageSharp",
+   "System.Drawing.Bitmap",
+   "SKBitmap",
+   "Image.Load"
+  ]
+ },
+ "abp-infrastructure/propagate-correlation-id": {
+  "task": "Read the identifier that ties together all log entries for the current request and include it on an outbound HTTP call to a downstream service.",
+  "lang": "csharp",
+  "idiom": [
+   "ICorrelationIdProvider",
+   "AbpCorrelationIdOptions"
+  ],
+  "anti": [
+   "HttpContext.TraceIdentifier",
+   "Activity.Current",
+   "IHttpContextAccessor"
+  ]
+ },
+ "abp-infrastructure/serialize-json": {
+  "task": "Serialize a payload object to a JSON string and later deserialize it back, in shared infrastructure code that should follow the application's JSON conventions.",
+  "lang": "csharp",
+  "idiom": [
+   "IJsonSerializer"
+  ],
+  "anti": [
+   "System.Text.Json.JsonSerializer",
+   "JsonSerializer.Serialize",
+   "JsonConvert",
+   "Newtonsoft"
+  ]
+ },
+ "abp-infrastructure/use-cancellation-tokens": {
+  "task": "In a helper class that is not handed a cancellation token as a parameter, obtain the current operation's cancellation token (tied to the aborting web request) and honor it.",
+  "lang": "csharp",
+  "idiom": [
+   "ICancellationTokenProvider"
+  ],
+  "anti": [
+   "IHttpContextAccessor",
+   "HttpContext.RequestAborted"
+  ]
+ },
+ "abp-infrastructure/use-interceptors-and-dynamic-proxy": {
+  "task": "Add reusable before-and-after behavior (for example, measuring and logging each call's execution time) around every call to a set of services, without editing each service's methods.",
+  "lang": "csharp",
+  "idiom": [
+   "IAbpInterceptor",
+   "AbpInterceptor",
+   "IAbpMethodInvocation"
+  ],
+  "anti": [
+   "Castle.DynamicProxy.IInterceptor",
+   "IInvocation",
+   "DispatchProxy"
+  ]
+ },
+ "abp-data-access/apply-data-filters": {
+  "task": "In one operation, read the rows that were previously soft-deleted (normally hidden from queries), then make sure subsequent queries hide them again as usual.",
+  "lang": "csharp",
+  "idiom": [
+   "IDataFilter",
+   "ISoftDelete",
+   "Disable<ISoftDelete>"
+  ],
+  "anti": [
+   "IgnoreQueryFilters",
+   ".Where(x => x.IsDeleted",
+   "HasQueryFilter"
+  ]
+ },
+ "abp-data-access/ef-core-integration": {
+  "task": "Set up the app's Entity Framework Core database context and register a custom repository for the Book entity that adds a 'list books by author id' query, keeping the domain project free of any EF Core references.",
+  "lang": "csharp",
+  "idiom": [
+   "AbpDbContext",
+   "AddAbpDbContext",
+   "EfCoreRepository",
+   "ConfigureByConvention"
+  ],
+  "anti": [
+   "AddDbContext",
+   ": DbContext",
+   "OnConfiguring"
+  ]
+ },
+ "abp-data-access/handle-optimistic-concurrency": {
+  "task": "Protect an entity so that if two users load the same record and both save, the second save is rejected instead of silently overwriting; carry the version token through the read DTO and the update DTO.",
+  "lang": "csharp",
+  "idiom": [
+   "IHasConcurrencyStamp",
+   "ConcurrencyStamp",
+   "AbpDbConcurrencyException"
+  ],
+  "anti": [
+   "[Timestamp]",
+   "RowVersion",
+   "IsRowVersion",
+   "DbUpdateConcurrencyException"
+  ]
+ },
+ "abp-data-access/manage-units-of-work": {
+  "task": "In a console/background worker (no web request), run several repository writes so they all commit together on success and all roll back if any step throws.",
+  "lang": "csharp",
+  "idiom": [
+   "IUnitOfWorkManager",
+   "CompleteAsync",
+   "requiresNew"
+  ],
+  "anti": [
+   "BeginTransactionAsync",
+   "TransactionScope",
+   "CommitAsync"
+  ]
+ },
+ "abp-data-access/mongodb-integration": {
+  "task": "Set up the app's MongoDB data context and add a custom repository for the Book entity with a 'list books by author id' query, keeping the domain project free of MongoDB driver references.",
+  "lang": "csharp",
+  "idiom": [
+   "AbpMongoDbContext",
+   "AddMongoDbContext",
+   "MongoDbRepository",
+   "MongoCollection"
+  ],
+  "anti": [
+   "new MongoClient",
+   "IMongoClient",
+   "GetDatabase",
+   "IMongoDatabase"
+  ]
+ },
+ "abp-data-access/query-with-dapper": {
+  "task": "Add a repository method that runs a hand-written SQL query for a hot read path, reusing the app's current database connection and transaction so it sees uncommitted changes and rolls back with everything else.",
+  "lang": "csharp",
+  "idiom": [
+   "DapperRepository",
+   "GetDbConnectionAsync",
+   "GetDbTransactionAsync"
+  ],
+  "anti": [
+   "new SqlConnection",
+   "OpenAsync",
+   "GetConnectionString"
+  ]
+ },
+ "abp-data-access/seed-application-data": {
+  "task": "On database setup, insert one default record only if that table/collection is empty, in a way that runs the same on both relational and document databases and is safe to re-run.",
+  "lang": "csharp",
+  "idiom": [
+   "IDataSeedContributor",
+   "DataSeedContext",
+   "IDataSeeder"
+  ],
+  "anti": [
+   "HasData",
+   "migrationBuilder.InsertData",
+   "Database.Migrate"
+  ]
+ },
+ "abp-data-access/use-abp-repositories": {
+  "task": "In an application service, return a paged, sorted list of an aggregate with its child collection eager-loaded, and run a filtered async LINQ query, without coupling the service to any specific database provider.",
+  "lang": "csharp",
+  "idiom": [
+   "IRepository",
+   "WithDetailsAsync",
+   "GetQueryableAsync",
+   "AsyncExecuter"
+  ],
+  "anti": [
+   "DbContext",
+   ".Include(",
+   "DbSet"
+  ]
+ },
+ "abp-files/manage-virtual-files": {
+  "task": "Embed a folder of static js/css assets into the assembly and read one of them at runtime by a virtual path, set up so another module can override a file by shipping one at the same path.",
+  "lang": "csharp",
+  "idiom": [
+   "IVirtualFileProvider",
+   "AbpVirtualFileSystemOptions",
+   "AddEmbedded"
+  ],
+  "anti": [
+   "GetManifestResourceStream",
+   "ManifestEmbeddedFileProvider",
+   "PhysicalFileProvider"
+  ]
+ },
+ "abp-files/store-blobs": {
+  "task": "Store a user's uploaded profile-picture bytes keyed by their user id and read them back later, using a storage backend (disk, database, or cloud) you can swap via configuration without changing this code; give this kind of file its own named container.",
+  "lang": "csharp",
+  "idiom": [
+   "IBlobContainer",
+   "GetAllBytesOrNullAsync",
+   "BlobContainerName"
+  ],
+  "anti": [
+   "File.WriteAllBytes",
+   "File.ReadAllBytes",
+   "Path.Combine",
+   "Directory.CreateDirectory"
+  ]
+ },
+ "abp-multitenancy/configure-multi-tenancy": {
+  "task": "Make an entity's rows automatically isolated per tenant, then write a host-side method that counts a single specified tenant's rows by temporarily acting as that tenant.",
+  "lang": "csharp",
+  "idiom": [
+   "IMultiTenant",
+   "ICurrentTenant",
+   ".Change("
+  ],
+  "anti": [
+   "TenantId == tenantId",
+   "HasQueryFilter",
+   ".Where(p => p.TenantId"
+  ]
+ },
+ "abp-runtime/background-jobs-and-events": {
+  "task": "Run a cleanup routine on a fixed recurring interval that the framework manages, and separately react to a domain record being created by handling it in a decoupled handler instead of calling the reacting code inline.",
+  "lang": "csharp",
+  "idiom": [
+   "AsyncPeriodicBackgroundWorkerBase",
+   "ILocalEventHandler",
+   "EntityCreatedEventData",
+   "IBackgroundJobManager"
+  ],
+  "anti": [
+   "IHostedService",
+   "BackgroundService",
+   "System.Threading.Timer",
+   "Task.Run",
+   "MediatR"
+  ]
+ },
+ "abp-runtime/cache-entities": {
+  "task": "Cache a frequently looked-up entity by its id so repeated reads skip the database, and make the cached copy refresh automatically whenever that entity is updated or deleted.",
+  "lang": "csharp",
+  "idiom": [
+   "IEntityCache",
+   "AddEntityCache"
+  ],
+  "anti": [
+   "IMemoryCache",
+   "IDistributedCache",
+   "MemoryCache",
+   "ConcurrentDictionary"
+  ]
+ },
+ "abp-runtime/configure-app-urls": {
+  "task": "Build an absolute password-reset link to embed in an email, using the app's configured public root so it resolves correctly per tenant instead of hard-coding a host.",
+  "lang": "csharp",
+  "idiom": [
+   "IAppUrlProvider",
+   "AppUrlOptions",
+   "GetUrlAsync"
+  ],
+  "anti": [
+   "LinkGenerator",
+   "IUrlHelper",
+   "Request.Scheme",
+   "Request.Host"
+  ]
+ },
+ "abp-runtime/distributed-caching-and-locking": {
+  "task": "Cache an expensive computed value so it is shared across all app instances, and guard a scheduled job so only one instance runs the critical section at a time in a multi-instance deployment.",
+  "lang": "csharp",
+  "idiom": [
+   "IDistributedCache<",
+   "GetOrAddAsync",
+   "IAbpDistributedLock",
+   "TryAcquireAsync"
+  ],
+  "anti": [
+   "IMemoryCache",
+   "SemaphoreSlim",
+   "lock (",
+   "Microsoft.Extensions.Caching.Distributed.IDistributedCache"
+  ]
+ },
+ "abp-runtime/render-text-templates": {
+  "task": "Render a named text template (such as an email body) merged with a model object into a final string, with per-culture localized content.",
+  "lang": "csharp",
+  "idiom": [
+   "ITemplateRenderer",
+   "TemplateDefinitionProvider",
+   "TemplateDefinition"
+  ],
+  "anti": [
+   "string.Format",
+   "RazorLight",
+   "Handlebars"
+  ]
+ },
+ "abp-runtime/secure-web-requests": {
+  "task": "Add standard browser security response headers (X-Frame-Options, X-Content-Type-Options, and a Content-Security-Policy) to every response across the app.",
+  "lang": "csharp",
+  "idiom": [
+   "UseAbpSecurityHeaders",
+   "AbpSecurityHeadersOptions"
+  ],
+  "anti": [
+   "Response.Headers.Append",
+   "Response.Headers.Add",
+   "app.Use(async",
+   "NWebsec"
+  ]
+ },
+ "abp-runtime/send-emails": {
+  "task": "Send an HTML confirmation email to a user from a service, and offer a variant that queues the send so the web request does not block on SMTP.",
+  "lang": "csharp",
+  "idiom": [
+   "IEmailSender",
+   "QueueAsync"
+  ],
+  "anti": [
+   "SmtpClient",
+   "MailMessage",
+   "System.Net.Mail"
+  ]
+ },
+ "abp-runtime/send-sms": {
+  "task": "Send an SMS verification code to a phone number from a service, keeping the sending code independent of the specific SMS gateway.",
+  "lang": "csharp",
+  "idiom": [
+   "ISmsSender",
+   "SmsMessage"
+  ],
+  "anti": [
+   "TwilioClient",
+   "MessageResource.Create",
+   "Twilio",
+   "HttpClient"
+  ]
+ },
+ "abp-runtime/use-hybrid-caching": {
+  "task": "Cache a hot typed value using both a fast local in-memory tier and a shared distributed tier, with protection against many concurrent misses all recomputing the same value.",
+  "lang": "csharp",
+  "idiom": [
+   "IHybridCache",
+   "GetOrCreateAsync",
+   "AbpHybridCacheOptions"
+  ],
+  "anti": [
+   "HybridCache",
+   "Microsoft.Extensions.Caching.Hybrid",
+   "IMemoryCache",
+   "IDistributedCache"
+  ]
+ },
+ "abp-authentication/configure-dynamic-claims": {
+  "task": "Add a custom claim to every authenticated user's identity, recomputed from current data on each request so a change to it takes effect without forcing the user to sign in again.",
+  "lang": "csharp",
+  "idiom": [
+   "IAbpDynamicClaimsPrincipalContributor",
+   "UseDynamicClaims",
+   "AbpClaimsPrincipalFactoryOptions"
+  ],
+  "anti": [
+   "IClaimsTransformation",
+   "OnValidatePrincipal",
+   "CookieAuthenticationEvents",
+   "ClaimsIdentity.AddClaim"
+  ]
+ },
+ "abp-realtime/add-signalr-realtime": {
+  "task": "Add a real-time server-push messaging endpoint clients connect to, where the server-side handler can read the current authenticated user.",
+  "lang": "csharp",
+  "idiom": [
+   "AbpHub",
+   "AbpAspNetCoreSignalRModule"
+  ],
+  "anti": [
+   "services.AddSignalR",
+   "MapHub",
+   "Microsoft.AspNetCore.SignalR.Hub"
+  ]
+ },
+ "abp-microservices/design-module-and-service-communication": {
+  "task": "Have one microservice announce that a record's state changed so other services react to it asynchronously, and expose a small query one service can call on another synchronously, without sharing databases or domain classes.",
+  "lang": "csharp",
+  "idiom": [
+   "IDistributedEventBus",
+   "IDistributedEventHandler",
+   "EventName",
+   "IntegrationService"
+  ],
+  "anti": [
+   "HttpClient",
+   "MediatR",
+   "MassTransit",
+   "IModel",
+   "BasicPublish"
+  ]
+ },
+ "abp-microservices/integrate-dapr-services": {
+  "task": "Route service-to-service calls and event pub/sub through a Dapr sidecar while keeping the existing application code, and secure the receive endpoints against arbitrary callers.",
+  "lang": "csharp",
+  "idiom": [
+   "IAbpDaprClientFactory",
+   "IDistributedEventBus",
+   "ValidateDaprAppApiToken"
+  ],
+  "anti": [
+   "DaprClient",
+   "PublishEventAsync",
+   "InvokeMethodAsync",
+   "MapSubscribeHandler",
+   "[Topic]"
+  ]
+ },
+ "abp-module-development/application-services": {
+  "task": "Implement a use-case service that accepts and returns data-transfer objects (never the entity itself) and is published as a REST endpoint automatically, without hand-writing a controller.",
+  "lang": "csharp",
+  "idiom": [
+   "ApplicationService",
+   "IApplicationService",
+   "ObjectMapper",
+   "ConventionalControllers"
+  ],
+  "anti": [
+   "ControllerBase",
+   "[ApiController]",
+   "[HttpPost]",
+   "services.AddScoped",
+   "IMapper"
+  ]
+ },
+ "abp-module-development/build-crud-application-services": {
+  "task": "Provide standard create/read/update/delete plus a filtered, sorted, paged list for an entity and its DTOs by reusing a framework base class instead of coding each operation by hand.",
+  "lang": "csharp",
+  "idiom": [
+   "CrudAppService",
+   "ICrudAppService",
+   "PagedAndSortedResultRequestDto",
+   "CreateFilteredQueryAsync"
+  ],
+  "anti": [
+   "ControllerBase",
+   "[HttpGet]",
+   "DbContext",
+   ".Take("
+  ]
+ },
+ "abp-module-development/create-plugin-modules": {
+  "task": "Load an add-on assembly from a folder at application startup so its services and pages register automatically, with no compile-time project reference.",
+  "lang": "csharp",
+  "idiom": [
+   "PlugInSources",
+   "FolderPlugInSource",
+   "AddFolder",
+   "AbpModule"
+  ],
+  "anti": [
+   "Assembly.LoadFrom",
+   "AssemblyLoadContext",
+   "Activator.CreateInstance",
+   "Directory.GetFiles"
+  ]
+ },
+ "abp-module-development/customize-application-modules": {
+  "task": "Add an extra persisted field to a pre-built user-management module's user as a real database column, expose it on that module's DTOs, and override one of the module's service methods, all without editing the module's source.",
+  "lang": "csharp",
+  "idiom": [
+   "ObjectExtensionManager",
+   "MapEfCoreProperty",
+   "ReplaceServices",
+   "ExposeServices"
+  ],
+  "anti": [
+   "services.AddScoped",
+   "services.Replace",
+   "modelBuilder.Entity",
+   ": IdentityUser"
+  ]
+ },
+ "abp-module-development/define-application-modules": {
+  "task": "Create a reusable module unit that declares its dependencies on other modules, registers its own services, configures an options object, and runs startup logic when the application boots.",
+  "lang": "csharp",
+  "idiom": [
+   "AbpModule",
+   "DependsOn",
+   "ServiceConfigurationContext",
+   "OnApplicationInitialization"
+  ],
+  "anti": [
+   "IHostedService",
+   "WebApplication.CreateBuilder",
+   "builder.Services.AddTransient"
+  ]
+ },
+ "abp-module-development/extend-objects-with-extra-properties": {
+  "task": "Add a runtime-defined extra field to your own entity and its DTO without declaring a CLR property for it, and persist that field as a real database column.",
+  "lang": "csharp",
+  "idiom": [
+   "IHasExtraProperties",
+   "ObjectExtensionManager",
+   "MapEfCoreProperty",
+   "SetProperty"
+  ],
+  "anti": [
+   "public string",
+   "modelBuilder.Entity",
+   "Dictionary<string, object>"
+  ]
+ },
+ "abp-module-development/handle-validation-and-errors": {
+  "task": "Validate an incoming request object automatically, and on a broken business rule raise a domain error that maps to a proper HTTP status and a message that can be localized by an error code.",
+  "lang": "csharp",
+  "idiom": [
+   "BusinessException",
+   "UserFriendlyException",
+   "IValidationEnabled",
+   "AbpValidationException"
+  ],
+  "anti": [
+   "if (!ModelState.IsValid)",
+   "return BadRequest",
+   "throw new ValidationException",
+   "throw new Exception"
+  ]
+ },
+ "abp-module-development/localize-applications": {
+  "task": "Set up application-wide translated text using per-culture files, a resource type you can inject to resolve strings in any layer, and a mapping so a business error's code resolves to a translation.",
+  "lang": "csharp",
+  "idiom": [
+   "LocalizationResourceName",
+   "AbpLocalizationOptions",
+   "AddVirtualJson",
+   "AbpVirtualFileSystemOptions"
+  ],
+  "anti": [
+   ".resx",
+   "ResourceManager",
+   "services.AddLocalization",
+   "ResourcesPath"
+  ]
+ },
+ "abp-module-development/map-objects-and-dtos": {
+  "task": "Convert entities to DTOs through a mapping abstraction so services don't depend on a concrete mapping library, and register the maps at the module level.",
+  "lang": "csharp",
+  "idiom": [
+   "IObjectMapper",
+   "ObjectMapper.Map",
+   "AbpAutoMapperOptions",
+   "AddMaps"
+  ],
+  "anti": [
+   "IMapper",
+   "services.AddAutoMapper",
+   "_mapper.Map"
+  ]
+ },
+ "abp-module-development/model-domain-aggregates": {
+  "task": "Model a business object with a generated GUID id, invariants enforced through methods rather than public setters, an immutable value object compared by its values, and a signal published when the object's state changes.",
+  "lang": "csharp",
+  "idiom": [
+   "AggregateRoot",
+   "ValueObject",
+   "GetAtomicValues",
+   "AddLocalEvent"
+  ],
+  "anti": [
+   "Guid.NewGuid()",
+   "event EventHandler",
+   "IEquatable"
+  ]
+ },
+ "abp-module-development/register-and-replace-services": {
+  "task": "Swap in your own implementation for an existing service registration using the framework's registration conventions, exposing it under the same interface that consumers already inject.",
+  "lang": "csharp",
+  "idiom": [
+   "ReplaceServices",
+   "ExposeServices",
+   "ITransientDependency",
+   "IncludeSelf"
+  ],
+  "anti": [
+   "services.AddTransient",
+   "services.Replace",
+   "ServiceDescriptor",
+   "services.AddSingleton"
+  ]
+ },
+ "abp-authorization/authorize-resources": {
+  "task": "Let a user act on one specific record they own or were granted (for example, edit this one document) rather than granting a blanket capability over every record, and check that per-instance access in code.",
+  "lang": "csharp",
+  "idiom": [
+   "AddResourcePermission",
+   "IResourcePermissionChecker",
+   "IResourcePermissionManager",
+   "GetObjectKey"
+  ],
+  "anti": [
+   "CreatorId ==",
+   "OwnerId ==",
+   "[Authorize(Roles",
+   "User.IsInRole"
+  ]
+ },
+ "abp-authorization/permissions-and-authorization": {
+  "task": "Define a named capability, protect a service method so only users granted it can call it, and also check whether the current user holds that capability programmatically.",
+  "lang": "csharp",
+  "idiom": [
+   "PermissionDefinitionProvider",
+   "IPermissionChecker",
+   "AddPermission",
+   "ICurrentUser"
+  ],
+  "anti": [
+   "[Authorize(Roles",
+   "User.IsInRole",
+   "AddPolicy",
+   "RequireClaim"
+  ]
+ },
+ "abp-api/configure-swagger-openapi": {
+  "task": "Add an interactive Swagger/OpenAPI UI to the API host with an Authorize button that logs the user in against the app's OAuth/OpenID Connect server.",
+  "lang": "csharp",
+  "idiom": [
+   "AddAbpSwaggerGen",
+   "UseAbpSwaggerUI",
+   "AddAbpSwaggerGenWithOAuth"
+  ],
+  "anti": [
+   "AddSwaggerGen",
+   "UseSwaggerUI",
+   "AddSecurityDefinition",
+   "OpenApiSecurityScheme"
+  ]
+ },
+ "abp-api/consume-remote-services": {
+  "task": "From one C# service, call another service's REST API over HTTP by injecting its interface and awaiting typed method calls, instead of building HTTP requests by hand.",
+  "lang": "csharp",
+  "idiom": [
+   "AddHttpClientProxies",
+   "IRemoteService",
+   "AbpRemoteServiceOptions",
+   "AbpHttpClientModule"
+  ],
+  "anti": [
+   "HttpClient",
+   "IHttpClientFactory",
+   "AddHttpClient",
+   "GetFromJsonAsync"
+  ]
+ },
+ "abp-api/expose-http-apis": {
+  "task": "Publish every application service in a project as REST endpoints without hand-writing controllers, following the app's routing conventions.",
+  "lang": "csharp",
+  "idiom": [
+   "ConventionalControllers",
+   "RemoteService",
+   "AbpAspNetCoreMvcOptions",
+   "IntegrationService"
+  ],
+  "anti": [
+   "[ApiController]",
+   "[HttpGet]",
+   "ControllerBase",
+   "[Route]"
+  ]
+ },
+ "abp-api/use-abp-standard-endpoints": {
+  "task": "Expose an extra server value (like the current deployment version) to all front-end clients by adding it to the data the app already sends clients at startup, instead of adding a new endpoint.",
+  "lang": "csharp",
+  "idiom": [
+   "IApplicationConfigurationContributor",
+   "AbpApplicationConfigurationOptions",
+   "ApplicationConfigurationContributorContext"
+  ],
+  "anti": [
+   "[ApiController]",
+   "[HttpGet]",
+   "app.MapGet",
+   "ControllerBase"
+  ]
+ },
+ "abp-api/version-http-apis": {
+  "task": "Add API versioning so v1 and v2 of the same auto-generated service endpoints can be served side by side.",
+  "lang": "csharp",
+  "idiom": [
+   "AddAbpApiVersioning",
+   "ConventionalControllers",
+   "ICurrentApiVersionInfo"
+  ],
+  "anti": [
+   "AddApiVersioning",
+   "Asp.Versioning",
+   "[ApiController]",
+   "[HttpGet]"
+  ]
+ },
+ "abp-testing/test-abp-applications": {
+  "task": "Write an integration test that runs a service method under a faked signed-in user and asserts the real authorization pipeline denies the call without the required permission.",
+  "lang": "csharp",
+  "idiom": [
+   "AbpIntegratedTest",
+   "ICurrentPrincipalAccessor",
+   "AbpClaimTypes",
+   "AddAlwaysAllowAuthorization"
+  ],
+  "anti": [
+   "WebApplicationFactory",
+   "Mock<",
+   "new ServiceCollection()",
+   "UseInMemoryDatabase"
+  ]
+ },
+ "abp-testing/test-angular-ui": {
+  "task": "Set up a unit test for an ABP Angular component so its TestBed boots and renders without calling any real backend.",
+  "lang": "ts",
+  "idiom": [
+   "CoreTestingModule",
+   "ThemeSharedTestingModule",
+   "clearPage"
+  ],
+  "anti": [
+   "HttpClientTestingModule",
+   "HttpTestingController",
+   "provideHttpClientTesting",
+   "jasmine.createSpyObj"
+  ]
+ },
+ "abp-testing/test-mvc-razor-ui": {
+  "task": "Write an in-process HTTP integration test that requests a Razor page and asserts an anonymous request is redirected while a signed-in one returns the page.",
+  "lang": "csharp",
+  "idiom": [
+   "AbpWebApplicationFactoryIntegratedTest",
+   "FakeUserClaims",
+   "AbpAspNetCoreTestBaseModule"
+  ],
+  "anti": [
+   "WebApplicationFactory<Program>",
+   "IClassFixture",
+   "CustomWebApplicationFactory",
+   "new HttpClient()"
+  ]
+ },
+ "abp-ui/angular-ui": {
+  "task": "Add a lazy-loaded feature route to the app's sidebar navigation that is hidden unless the user holds a given permission, and load its data from the backend through a typed client.",
+  "lang": "ts",
+  "idiom": [
+   "RoutesService",
+   "PermissionService",
+   "ConfigStateService",
+   "eLayoutType"
+  ],
+  "anti": [
+   "RouterModule.forChild",
+   "Routes",
+   "routerLink",
+   "HttpClient"
+  ]
+ },
+ "abp-ui/blazor-ui": {
+  "task": "Create a Blazor page that greets the current user by name with a localized title and calls a backend service, reusing the framework's injected services rather than injecting them yourself.",
+  "lang": "csharp",
+  "idiom": [
+   "AbpComponentBase",
+   "AbpCrudPageBase",
+   "LocalizationResource"
+  ],
+  "anti": [
+   "ComponentBase",
+   "@inject IStringLocalizer",
+   "@inject HttpClient",
+   "[Inject]"
+  ]
+ },
+ "abp-ui/build-angular-lists-and-forms": {
+  "task": "Build a server-side paged, sortable, searchable data table bound to a paged backend endpoint, with its subscriptions cleaned up when the component is destroyed.",
+  "lang": "ts",
+  "idiom": [
+   "ListService",
+   "hookToQuery",
+   "PagedResultDto"
+  ],
+  "anti": [
+   "MatTableDataSource",
+   "MatPaginator",
+   "HttpClient.get"
+  ]
+ },
+ "abp-ui/build-mvc-widgets": {
+  "task": "Build a reusable dashboard component that ships its own JavaScript and CSS so pages rendering it don't have to include those assets themselves, and can be refreshed client-side.",
+  "lang": "csharp",
+  "idiom": [
+   "[Widget]",
+   "AbpWidgetOptions",
+   "abp.WidgetManager",
+   "BundleContributor"
+  ],
+  "anti": [
+   "ViewComponent",
+   "<script src",
+   "<link href",
+   "@section scripts"
+  ]
+ },
+ "abp-ui/extend-angular-module-ui": {
+  "task": "Add an extra column and a custom row action to the shipped user-management grid, plus an extra field on its create form, without forking the module.",
+  "lang": "ts",
+  "idiom": [
+   "EntityProp",
+   "EntityAction",
+   "ePropType",
+   "EXTENSIONS_IDENTIFIER"
+  ],
+  "anti": []
+ },
+ "abp-ui/extend-application-shell": {
+  "task": "Inject an analytics script into every page's layout and add a notification bell to the app's top toolbar, without copying the theme's layout file.",
+  "lang": "csharp",
+  "idiom": [
+   "AbpLayoutHookOptions",
+   "LayoutHooks",
+   "IToolbarContributor",
+   "StandardToolbars"
+  ],
+  "anti": [
+   "@RenderSection"
+  ]
+ },
+ "abp-ui/menus-and-localization": {
+  "task": "Add a navigation menu item that links to a feature page and shows a label translated for the current culture.",
+  "lang": "csharp",
+  "idiom": [
+   "IMenuContributor",
+   "ApplicationMenuItem",
+   "StandardMenus",
+   "AbpNavigationOptions"
+  ],
+  "anti": [
+   "asp-page",
+   "nav-item"
+  ]
+ },
+ "abp-ui/mvc-razor-ui": {
+  "task": "Build a Razor Pages create form shown in a modal dialog using themed form controls, opened from JavaScript.",
+  "lang": "csharp",
+  "idiom": [
+   "AbpPageModel",
+   "abp-modal",
+   "abp.ModalManager",
+   "abp-input"
+  ],
+  "anti": [
+   "PageModel",
+   ".modal()",
+   "form-control"
+  ]
+ },
+ "abp-ui/use-mvc-javascript-apis": {
+  "task": "From page JavaScript, call a backend service to fill a server-side paged data grid and gate its delete action on the current user's permission.",
+  "lang": "ts",
+  "idiom": [
+   "abp.libs.datatables.createAjax",
+   "abp.auth.isGranted",
+   "abp.notify"
+  ],
+  "anti": [
+   "$.ajax",
+   "fetch(",
+   "axios"
+  ]
+ }
+}

@@ -1,0 +1,34 @@
+scenarios:
+  - name: "Resolve grouped module and tenant connection strings"
+    prompt: "Configure an ABP app so Identity and Permission Management share MySecondaryDb while the rest use Default. Bind ReportingDbContext to Reporting, use the async resolver API, and explain the resolution order for a tenant requesting a named connection when it has exact, mapped, and Default choices."
+    expect_activation: true
+    assertions:
+      - type: "output_contains"
+        value: "AbpDbConnectionOptions"
+      - type: "output_contains"
+        value: "MappedConnections"
+      - type: "output_matches"
+        pattern: "\\[ConnectionStringName\\(\"Reporting\"\\)\\]"
+      - type: "output_contains"
+        value: "ResolveAsync"
+      - type: "output_matches"
+        pattern: "exact.*mapped.*tenant.*Default.*global|tenant.*named.*mapped.*Default.*global"
+    rubric:
+      - "Maps module connection names to one database and annotates the DbContext with the named connection."
+      - "Explains the tenant named-resolution chain as exact tenant name, tenant mapped database, tenant Default, then base/global resolution, and does not recommend obsolete Resolve."
+    timeout: 240
+
+  - name: "Route DbContext provider setup to EF Core integration"
+    prompt: "Register BookStoreDbContext with AddAbpDbContext, configure SQL Server through AbpDbContextOptions, map Book with IEntityTypeConfiguration, and enable default repositories."
+    expect_activation: false
+    assertions:
+      - type: "output_contains"
+        value: "AddAbpDbContext"
+      - type: "output_contains"
+        value: "UseSqlServer"
+      - type: "output_contains"
+        value: "AddDefaultRepositories"
+    rubric:
+      - "Routes EF Core DbContext registration and entity mapping to ef-core-integration."
+      - "Does not turn provider registration into connection-string resolution logic."
+    timeout: 120

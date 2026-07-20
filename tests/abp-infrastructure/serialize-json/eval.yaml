@@ -1,0 +1,53 @@
+scenarios:
+  - name: "Serialize with the ABP abstraction"
+    prompt: "In provider-independent ABP infrastructure code, serialize an object to JSON and deserialize it back, using ABP's abstraction and its camelCase/indented flags."
+    expect_activation: true
+    assertions:
+      - type: "output_contains"
+        value: "IJsonSerializer"
+      - type: "output_matches"
+        pattern: "(Serialize|Deserialize)"
+      - type: "output_matches"
+        pattern: "(camelCase|indented)"
+    rubric:
+      - "Injects IJsonSerializer and uses Serialize/Deserialize with camelCase/indented flags."
+      - "Does not call System.Text.Json.JsonSerializer directly in provider-independent code."
+    timeout: 180
+  - name: "Configure default STJ provider and date formats"
+    prompt: "Configure ABP's default System.Text.Json serializer to ignore null values on write and set custom DateTime input/output formats."
+    expect_activation: true
+    assertions:
+      - type: "output_contains"
+        value: "AbpSystemTextJsonSerializerOptions"
+      - type: "output_contains"
+        value: "AbpJsonOptions"
+      - type: "output_matches"
+        pattern: "(InputDateTimeFormats|OutputDateTimeFormat)"
+    rubric:
+      - "Configures AbpSystemTextJsonSerializerOptions.JsonSerializerOptions and AbpJsonOptions date formats."
+      - "Configures options during module service configuration, before serializers cache cloned options."
+    timeout: 180
+  - name: "Route encrypting a serialized value to encrypt-strings"
+    prompt: "Before writing a serialized access token to the database, encrypt it at rest with ABP's built-in reversible encryption and decrypt it when reading it back."
+    expect_activation: false
+    assertions:
+      - type: "output_contains"
+        value: "IStringEncryptionService"
+      - type: "output_not_contains"
+        value: "AbpSystemTextJsonSerializerOptions"
+    rubric:
+      - "Routes to encrypt-strings for reversible encryption of the value, out of scope for serialize-json."
+      - "Does not answer with serialize-json's serializer options."
+    timeout: 120
+  - name: "Route to MVC formatter config"
+    prompt: "Change the JSON response formatting for my ASP.NET Core MVC controllers' HTTP responses."
+    expect_activation: false
+    assertions:
+      - type: "output_contains"
+        value: "JsonOptions"
+      - type: "output_not_contains"
+        value: "AbpSystemTextJsonSerializerOptions"
+    rubric:
+      - "Routes to ASP.NET Core JsonOptions HTTP formatter configuration, out of scope for serialize-json."
+      - "Does not answer with serialize-json's AbpSystemTextJsonSerializerOptions."
+    timeout: 120

@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <Compile Include="../../Skills/SendEmails.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.Emailing" />
+    <PackageReference Include="Volo.Abp.MailKit" />
+    <PackageReference Include="Volo.Abp.TextTemplating.Core" />
+  </ItemGroup>
+</Project>

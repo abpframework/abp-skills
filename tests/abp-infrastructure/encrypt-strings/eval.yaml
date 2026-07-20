@@ -1,0 +1,38 @@
+scenarios:
+  - name: "Encrypt and decrypt a value with IStringEncryptionService"
+    prompt: "Create an ABP service that reversibly protects and unprotects a string using ABP's built-in encryption service. Inject the right abstraction and account for its null behavior."
+    expect_activation: true
+    assertions:
+      - type: "output_contains"
+        value: "IStringEncryptionService"
+      - type: "output_contains"
+        value: "Encrypt"
+      - type: "output_contains"
+        value: "Decrypt"
+    rubric:
+      - "Injects IStringEncryptionService and calls Encrypt/Decrypt, aware Encrypt(null)/Decrypt(null) return null."
+    timeout: 240
+  - name: "Configure encryption options consistently across instances"
+    prompt: "Configure AbpStringEncryptionOptions so all app instances share compatible passphrase, salt, IV, and key size, and set the StringEncryption configuration keys from a secret provider instead of the built-in default passphrase."
+    expect_activation: true
+    assertions:
+      - type: "output_contains"
+        value: "AbpStringEncryptionOptions"
+      - type: "output_contains"
+        value: "DefaultPassPhrase"
+      - type: "output_contains"
+        value: "InitVectorBytes"
+      - type: "output_matches"
+        pattern: "(Keysize|KeySize|StringEncryption)"
+    rubric:
+      - "Configures AbpStringEncryptionOptions (DefaultPassPhrase, DefaultSalt, InitVectorBytes, Keysize) and replaces the built-in DefaultPassPhrase via a secret provider."
+    timeout: 240
+  - name: "Route password hashing away"
+    prompt: "Hash a user's password securely for login verification in my ABP identity setup."
+    expect_activation: false
+    assertions:
+      - type: "output_matches"
+        pattern: "(password hasher|IPasswordHasher|identity)"
+    rubric:
+      - "Routes to the identity password hasher instead; reversible encryption is not password hashing."
+    timeout: 120

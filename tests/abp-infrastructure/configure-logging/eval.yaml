@@ -1,0 +1,40 @@
+scenarios:
+  - name: "Wire the Serilog startup-template bridge"
+    prompt: "Set up the ABP host Program.cs so the static bootstrap Serilog logger is created before building the host and the host is bridged to Serilog. Make sure HostAbortedException is rethrown instead of logged as fatal and buffered sinks are flushed."
+    expect_activation: true
+    assertions:
+      - type: "output_contains"
+        value: "UseSerilog"
+      - type: "output_contains"
+        value: "HostAbortedException"
+      - type: "output_contains"
+        value: "Log.CloseAndFlush()"
+      - type: "output_contains"
+        value: "AddApplicationAsync"
+    rubric:
+      - "Creates the bootstrap logger before host construction and calls UseSerilog() before AddApplicationAsync/build."
+      - "Rethrows HostAbortedException and calls Log.CloseAndFlush() in finally."
+    timeout: 240
+  - name: "Early init logging and ABP exception logging"
+    prompt: "In an ABP module I need to log during service registration before the final service provider exists, and elsewhere log a caught ABP exception once with its error metadata. Show the correct ABP APIs."
+    expect_activation: true
+    assertions:
+      - type: "output_contains"
+        value: "GetInitLogger<"
+      - type: "output_contains"
+        value: "IInitLoggerFactory"
+      - type: "output_contains"
+        value: "LogException"
+    rubric:
+      - "Uses GetInitLogger<T>()/IInitLoggerFactory for early logging and LogException for the caught exception."
+      - "Avoids a second LogError for the same exception."
+    timeout: 240
+  - name: "Route audit logging away"
+    prompt: "Persist audit logs for entity changes and configure audit-log contributors and entity change history for my ABP app."
+    expect_activation: false
+    assertions:
+      - type: "output_matches"
+        pattern: "(audit|configure-audit-logging|AbpAuditingOptions)"
+    rubric:
+      - "Routes to configure-audit-logging instead; audit records use a separate pipeline and storage model."
+    timeout: 120

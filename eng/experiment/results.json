@@ -1,0 +1,2860 @@
+{
+  "provenance": {
+    "abp_version": "10.5.0",
+    "repo_commit": "a2f6cb3df07a2755d8629e01f8e896a08d5ff079",
+    "dotnet_version": "10.0.301",
+    "codex_version": "codex-cli 0.144.5",
+    "timestamp": "2026-07-17T06:24:53.741850+00:00",
+    "model": "gpt-5.6-sol",
+    "reasoning_effort": "medium"
+  },
+  "results": [
+    {
+      "skill": "abp-infrastructure/handle-dates-and-time",
+      "baseline": [
+        {
+          "status": "build_pass",
+          "agent_status": "agent_ok",
+          "build_status": "build_pass",
+          "agent": {
+            "status": "agent_ok",
+            "exit_code": 0,
+            "exception": null,
+            "duration_seconds": 127.233856583,
+            "command": [
+              "codex",
+              "exec",
+              "--ephemeral",
+              "--skip-git-repo-check",
+              "--sandbox",
+              "workspace-write",
+              "--color",
+              "never",
+              "--cd",
+              "/tmp/abp-exp-qi2v6cbz",
+              "-c",
+              "model_reasoning_effort=\"medium\"",
+              "--model",
+              "gpt-5.6-sol",
+              "-"
+            ]
+          },
+          "build": {
+            "status": "build_pass",
+            "ran": true,
+            "exit_code": 0,
+            "exception": null,
+            "duration_seconds": 0.49572945799999957,
+            "command": [
+              "dotnet",
+              "build",
+              "-v",
+              "q",
+              "-nologo"
+            ]
+          },
+          "has_added_code": true,
+          "scoring_eligible": true,
+          "idiom": 3,
+          "anti": 0,
+          "idiom_hits": [
+            "IClock",
+            "AbpClockOptions",
+            "Normalize"
+          ],
+          "anti_hits": [],
+          "idiom_tot": 3,
+          "artifact_dir": "eng/experiment/runs/abp-infrastructure/handle-dates-and-time/baseline/1"
+        },
+        {
+          "status": "build_pass",
+          "agent_status": "agent_ok",
+          "build_status": "build_pass",
+          "agent": {
+            "status": "agent_ok",
+            "exit_code": 0,
+            "exception": null,
+            "duration_seconds": 76.282809375,
+            "command": [
+              "codex",
+              "exec",
+              "--ephemeral",
+              "--skip-git-repo-check",
+              "--sandbox",
+              "workspace-write",
+              "--color",
+              "never",
+              "--cd",
+              "/tmp/abp-exp-3un47t4d",
+              "-c",
+              "model_reasoning_effort=\"medium\"",
+              "--model",
+              "gpt-5.6-sol",
+              "-"
+            ]
+          },
+          "build": {
+            "status": "build_pass",
+            "ran": true,
+            "exit_code": 0,
+            "exception": null,
+            "duration_seconds": 0.4774914170000102,
+            "command": [
+              "dotnet",
+              "build",
+              "-v",
+              "q",
+              "-nologo"
+            ]
+          },
+          "has_added_code": true,
+          "scoring_eligible": true,
+          "idiom": 3,
+          "anti": 0,
+          "idiom_hits": [
+            "IClock",
+            "AbpClockOptions",
+            "Normalize"
+          ],
+          "anti_hits": [],
+          "idiom_tot": 3,
+          "artifact_dir": "eng/experiment/runs/abp-infrastructure/handle-dates-and-time/baseline/2"
+        },
+        {
+          "status": "build_pass",
+          "agent_status": "agent_ok",
+          "build_status": "build_pass",
+          "agent": {
+            "status": "agent_ok",
+            "exit_code": 0,
+            "exception": null,
+            "duration_seconds": 76.09360091600001,
+            "command": [
+              "codex",
+              "exec",
+              "--ephemeral",
+              "--skip-git-repo-check",
+              "--sandbox",
+              "workspace-write",
+              "--color",
+              "never",
+              "--cd",
+              "/tmp/abp-exp-wbpdgg7x",
+              "-c",
+              "model_reasoning_effort=\"medium\"",
+              "--model",
+              "gpt-5.6-sol",
+              "-"
+            ]
+          },
+          "build": {
+            "status": "build_pass",
+            "ran": true,
+            "exit_code": 0,
+            "exception": null,
+            "duration_seconds": 0.4760770839999964,
+            "command": [
+              "dotnet",
+              "build",
+              "-v",
+              "q",
+              "-nologo"
+            ]
+          },
+          "has_added_code": true,
+          "scoring_eligible": true,
+          "idiom": 3,
+          "anti": 0,
+          "idiom_hits": [
+            "IClock",
+            "AbpClockOptions",
+            "Normalize"
+          ],
+          "anti_hits": [],
+          "idiom_tot": 3,
+          "artifact_dir": "eng/experiment/runs/abp-infrastructure/handle-dates-and-time/baseline/3"
+        }
+      ],
+      "skilled": [
+        {
+          "status": "build_pass",
+          "agent_status": "agent_ok",
+          "build_status": "build_pass",
+          "agent": {
+            "status": "agent_ok",
+            "exit_code": 0,
+            "exception": null,
+            "duration_seconds": 55.992774541,
+            "command": [
+              "codex",
+              "exec",
+              "--ephemeral",
+              "--skip-git-repo-check",
+              "--sandbox",
+              "workspace-write",
+              "--color",
+              "never",
+              "--cd",
+              "/tmp/abp-exp-3ubyzuxf",
+              "-c",
+              "model_reasoning_effort=\"medium\"",
+              "--model",
+              "gpt-5.6-sol",
+              "-"
+            ]
+          },
+          "build": {
+            "status": "build_pass",
+            "ran": true,
+            "exit_code": 0,
+            "exception": null,
+            "duration_seconds": 0.4987700830000108,
+            "command": [
+              "dotnet",
+              "build",
+              "-v",
+              "q",
+              "-nologo"
+            ]
+          },
+          "has_added_code": true,
+          "scoring_eligible": true,
+          "idiom": 3,
+          "anti": 0,
+          "idiom_hits": [
+            "IClock",
+            "AbpClockOptions",
+            "Normalize"
+          ],
+          "anti_hits": [],
+          "idiom_tot": 3,
+          "artifact_dir": "eng/experiment/runs/abp-infrastructure/handle-dates-and-time/skilled/1"
+        },
+        {
+          "status": "build_pass",
+          "agent_status": "agent_ok",
+          "build_status": "build_pass",
+          "agent": {
+            "status": "agent_ok",
+            "exit_code": 0,
+            "exception": null,
+            "duration_seconds": 56.49669641599996,
+            "command": [
+              "codex",
+              "exec",
+              "--ephemeral",
+              "--skip-git-repo-check",
+              "--sandbox",
+              "workspace-write",
+              "--color",
+              "never",
+              "--cd",
+              "/tmp/abp-exp-mz9j87nx",
+              "-c",
+              "model_reasoning_effort=\"medium\"",
+              "--model",
+              "gpt-5.6-sol",
+              "-"
+            ]
+          },
+          "build": {
+            "status": "build_pass",
+            "ran": true,
+            "exit_code": 0,
+            "exception": null,
+            "duration_seconds": 0.48255858400000307,
+            "command": [
+              "dotnet",
+              "build",
+              "-v",
+              "q",
+              "-nologo"
+            ]
+          },
+          "has_added_code": true,
+          "scoring_eligible": true,
+          "idiom": 3,
+          "anti": 0,
+          "idiom_hits": [
+            "IClock",
+            "AbpClockOptions",
+            "Normalize"
+          ],
+          "anti_hits": [],
+          "idiom_tot": 3,
+          "artifact_dir": "eng/experiment/runs/abp-infrastructure/handle-dates-and-time/skilled/2"
+        },
+        {
+          "status": "build_pass",
+          "agent_status": "agent_ok",
+          "build_status": "build_pass",
+          "agent": {
+            "status": "agent_ok",
+            "exit_code": 0,
+            "exception": null,
+            "duration_seconds": 73.31225749999999,
+            "command": [
+              "codex",
+              "exec",
+              "--ephemeral",
+              "--skip-git-repo-check",
+              "--sandbox",
+              "workspace-write",
+              "--color",
+              "never",
+              "--cd",
+              "/tmp/abp-exp-xbnwz1wu",
+              "-c",
+              "model_reasoning_effort=\"medium\"",
+              "--model",
+              "gpt-5.6-sol",
+              "-"
+            ]
+          },
+          "build": {
+            "status": "build_pass",
+            "ran": true,
+            "exit_code": 0,
+            "exception": null,
+            "duration_seconds": 0.46790479099996674,
+            "command": [
+              "dotnet",
+              "build",
+              "-v",
+              "q",
+              "-nologo"
+            ]
+          },
+          "has_added_code": true,
+          "scoring_eligible": true,
+          "idiom": 3,
+          "anti": 0,
+          "idiom_hits": [
+            "IClock",
+            "AbpClockOptions",
+            "Normalize"
+          ],
+          "anti_hits": [],
+          "idiom_tot": 3,
+          "artifact_dir": "eng/experiment/runs/abp-infrastructure/handle-dates-and-time/skilled/3"
+        }
+      ],
+      "baseline_agg": {
+        "runs": 3,
+        "agent_ok": 3,
+        "agent_error": 0,
+        "agent_timeout": 0,
+        "build_eligible_runs": 3,
+        "build_pass": 3,
+        "build_fail": 0,
+        "build_pass_rate": 1.0,
+        "scored_runs": 3,
+        "idiom": 3.0,
+        "anti": 0,
+        "idiom_tot": 3
+      },
+      "skilled_agg": {
+        "runs": 3,
+        "agent_ok": 3,
+        "agent_error": 0,
+        "agent_timeout": 0,
+        "build_eligible_runs": 3,
+        "build_pass": 3,
+        "build_fail": 0,
+        "build_pass_rate": 1.0,
+        "scored_runs": 3,
+        "idiom": 3.0,
+        "anti": 0,
+        "idiom_tot": 3
+      }
+    },
+    {
+      "skill": "abp-module-development/register-and-replace-services",
+      "baseline": [
+        {
+          "status": "build_pass",
+          "agent_status": "agent_ok",
+          "build_status": "build_pass",
+          "agent": {
+            "status": "agent_ok",
+            "exit_code": 0,
+            "exception": null,
+            "duration_seconds": 166.28079970800002,
+            "command": [
+              "codex",
+              "exec",
+              "--ephemeral",
+              "--skip-git-repo-check",
+              "--sandbox",
+              "workspace-write",
+              "--color",
+              "never",
+              "--cd",
+              "/tmp/abp-exp-f8fpxffc",
+              "-c",
+              "model_reasoning_effort=\"medium\"",
+              "--model",
+              "gpt-5.6-sol",
+              "-"
+            ]
+          },
+          "build": {
+            "status": "build_pass",
+            "ran": true,
+            "exit_code": 0,
+            "exception": null,
+            "duration_seconds": 0.5099030000000084,
+            "command": [
+              "dotnet",
+              "build",
+              "-v",
+              "q",
+              "-nologo"
+            ]
+          },
+          "has_added_code": true,
+          "scoring_eligible": true,
+          "idiom": 3,
+          "anti": 0,
+          "idiom_hits": [
+            "ReplaceServices",
+            "ExposeServices",
+            "ITransientDependency"
+          ],
+          "anti_hits": [],
+          "idiom_tot": 3,
+          "artifact_dir": "eng/experiment/runs/abp-module-development/register-and-replace-services/baseline/1"
+        },
+        {
+          "status": "build_pass",
+          "agent_status": "agent_ok",
+          "build_status": "build_pass",
+          "agent": {
+            "status": "agent_ok",
+            "exit_code": 0,
+            "exception": null,
+            "duration_seconds": 396.47051420800005,
+            "command": [
+              "codex",
+              "exec",
+              "--ephemeral",
+              "--skip-git-repo-check",
+              "--sandbox",
+              "workspace-write",
+              "--color",
+              "never",
+              "--cd",
+              "/tmp/abp-exp-kf51wf_n",
+              "-c",
+              "model_reasoning_effort=\"medium\"",
+              "--model",
+              "gpt-5.6-sol",
+              "-"
+            ]
+          },
+          "build": {
+            "status": "build_pass",
+            "ran": true,
+            "exit_code": 0,
+            "exception": null,
+            "duration_seconds": 0.5641484999998738,
+            "command": [
+              "dotnet",
+              "build",
+              "-v",
+              "q",
+              "-nologo"
+            ]
+          },
+          "has_added_code": true,
+          "scoring_eligible": true,
+          "idiom": 3,
+          "anti": 0,
+          "idiom_hits": [
+            "ReplaceServices",
+            "ExposeServices",
+            "ITransientDependency"
+          ],
+          "anti_hits": [],
+          "idiom_tot": 3,
+          "artifact_dir": "eng/experiment/runs/abp-module-development/register-and-replace-services/baseline/2"
+        },
+        {
+          "status": "build_pass",
+          "agent_status": "agent_ok",
+          "build_status": "build_pass",
+          "agent": {
+            "status": "agent_ok",
+            "exit_code": 0,
+            "exception": null,
+            "duration_seconds": 423.18868974999987,
+            "command": [
+              "codex",
+              "exec",
+              "--ephemeral",
+              "--skip-git-repo-check",
+              "--sandbox",
+              "workspace-write",
+              "--color",
+              "never",
+              "--cd",
+              "/tmp/abp-exp-knm2yesq",
+              "-c",
+              "model_reasoning_effort=\"medium\"",
+              "--model",
+              "gpt-5.6-sol",
+              "-"
+            ]
+          },
+          "build": {
+            "status": "build_pass",
+            "ran": true,
+            "exit_code": 0,
+            "exception": null,
+            "duration_seconds": 0.4856512080000357,
+            "command": [
+              "dotnet",
+              "build",
+              "-v",
+              "q",
+              "-nologo"
+            ]
+          },
+          "has_added_code": true,
+          "scoring_eligible": true,
+          "idiom": 1,
+          "anti": 0,
+          "idiom_hits": [
+            "ITransientDependency"
+          ],
+          "anti_hits": [],
+          "idiom_tot": 3,
+          "artifact_dir": "eng/experiment/runs/abp-module-development/register-and-replace-services/baseline/3"
+        }
+      ],
+      "skilled": [
+        {
+          "status": "build_fail",
+          "agent_status": "agent_ok",
+          "build_status": "build_fail",
+          "agent": {
+            "status": "agent_ok",
+            "exit_code": 0,
+            "exception": null,
+            "duration_seconds": 235.6568352910001,
+            "command": [
+              "codex",
+              "exec",
+              "--ephemeral",
+              "--skip-git-repo-check",
+              "--sandbox",
+              "workspace-write",
+              "--color",
+              "never",
+              "--cd",
+              "/tmp/abp-exp-3vcz_n62",
+              "-c",
+              "model_reasoning_effort=\"medium\"",
+              "--model",
+              "gpt-5.6-sol",
+              "-"
+            ]
+          },
+          "build": {
+            "status": "build_fail",
+            "ran": true,
+            "exit_code": 1,
+            "exception": null,
+            "duration_seconds": 0.09373654200010151,
+            "command": [
+              "dotnet",
+              "build",
+              "-v",
+              "q",
+              "-nologo"
+            ]
+          },
+          "has_added_code": true,
+          "scoring_eligible": true,
+          "idiom": 1,
+          "anti": 0,
+          "idiom_hits": [
+            "ITransientDependency"
+          ],
+          "anti_hits": [],
+          "idiom_tot": 3,
+          "artifact_dir": "eng/experiment/runs/abp-module-development/register-and-replace-services/skilled/1"
+        },
+        {
+          "status": "build_pass",
+          "agent_status": "agent_ok",
+          "build_status": "build_pass",
+          "agent": {
+            "status": "agent_ok",
+            "exit_code": 0,
+            "exception": null,
+            "duration_seconds": 457.1546264169999,
+            "command": [
+              "codex",
+              "exec",
+              "--ephemeral",
+              "--skip-git-repo-check",
+              "--sandbox",
+              "workspace-write",
+              "--color",
+              "never",
+              "--cd",
+              "/tmp/abp-exp-xpe395yv",
+              "-c",
+              "model_reasoning_effort=\"medium\"",
+              "--model",
+              "gpt-5.6-sol",
+              "-"
+            ]
+          },
+          "build": {
+            "status": "build_pass",
+            "ran": true,
+            "exit_code": 0,
+            "exception": null,
+            "duration_seconds": 0.4873558750000484,
+            "command": [
+              "dotnet",
+              "build",
+              "-v",
+              "q",
+              "-nologo"
+            ]
+          },
+          "has_added_code": true,
+          "scoring_eligible": true,
+          "idiom": 1,
+          "anti": 0,
+          "idiom_hits": [
+            "ITransientDependency"
+          ],
+          "anti_hits": [],
+          "idiom_tot": 3,
+          "artifact_dir": "eng/experiment/runs/abp-module-development/register-and-replace-services/skilled/2"
+        },
+        {
+          "status": "build_pass",
+          "agent_status": "agent_ok",
+          "build_status": "build_pass",
+          "agent": {
+            "status": "agent_ok",
+            "exit_code": 0,
+            "exception": null,
+            "duration_seconds": 325.98847212500004,
+            "command": [
+              "codex",
+              "exec",
+              "--ephemeral",
+              "--skip-git-repo-check",
+              "--sandbox",
+              "workspace-write",
+              "--color",
+              "never",
+              "--cd",
+              "/tmp/abp-exp-tn5vd19i",
+              "-c",
+              "model_reasoning_effort=\"medium\"",
+              "--model",
+              "gpt-5.6-sol",
+              "-"
+            ]
+          },
+          "build": {
+            "status": "build_pass",
+            "ran": true,
+            "exit_code": 0,
+            "exception": null,
+            "duration_seconds": 0.503595832999963,
+            "command": [
+              "dotnet",
+              "build",
+              "-v",
+              "q",
+              "-nologo"
+            ]
+          },
+          "has_added_code": true,
+          "scoring_eligible": true,
+          "idiom": 3,
+          "anti": 0,
+          "idiom_hits": [
+            "ReplaceServices",
+            "ExposeServices",
+            "ITransientDependency"
+          ],
+          "anti_hits": [],
+          "idiom_tot": 3,
+          "artifact_dir": "eng/experiment/runs/abp-module-development/register-and-replace-services/skilled/3"
+        }
+      ],
+      "baseline_agg": {
+        "runs": 3,
+        "agent_ok": 3,
+        "agent_error": 0,
+        "agent_timeout": 0,
+        "build_eligible_runs": 3,
+        "build_pass": 3,
+        "build_fail": 0,
+        "build_pass_rate": 1.0,
+        "scored_runs": 3,
+        "idiom": 2.3333333333333335,
+        "anti": 0,
+        "idiom_tot": 3
+      },
+      "skilled_agg": {
+        "runs": 3,
+        "agent_ok": 3,
+        "agent_error": 0,
+        "agent_timeout": 0,
+        "build_eligible_runs": 3,
+        "build_pass": 2,
+        "build_fail": 1,
+        "build_pass_rate": 0.6666666666666666,
+        "scored_runs": 3,
+        "idiom": 1.6666666666666667,
+        "anti": 0,
+        "idiom_tot": 3
+      }
+    },
+    {
+      "skill": "abp-data-access/apply-data-filters",
+      "baseline": [
+        {
+          "status": "build_pass",
+          "agent_status": "agent_ok",
+          "build_status": "build_pass",
+          "agent": {
+            "status": "agent_ok",
+            "exit_code": 0,
+            "exception": null,
+            "duration_seconds": 120.55833624999968,
+            "command": [
+              "codex",
+              "exec",
+              "--ephemeral",
+              "--skip-git-repo-check",
+              "--sandbox",
+              "workspace-write",
+              "--color",
+              "never",
+              "--cd",
+              "/tmp/abp-exp-50e3dzfr",
+              "-c",
+              "model_reasoning_effort=\"medium\"",
+              "--model",
+              "gpt-5.6-sol",
+              "-"
+            ]
+          },
+          "build": {
+            "status": "build_pass",
+            "ran": true,
+            "exit_code": 0,
+            "exception": null,
+            "duration_seconds": 0.4762968329996511,
+            "command": [
+              "dotnet",
+              "build",
+              "-v",
+              "q",
+              "-nologo"
+            ]
+          },
+          "has_added_code": true,
+          "scoring_eligible": true,
+          "idiom": 3,
+          "anti": 0,
+          "idiom_hits": [
+            "IDataFilter",
+            "ISoftDelete",
+            "HardDeleteAsync"
+          ],
+          "anti_hits": [],
+          "idiom_tot": 3,
+          "artifact_dir": "eng/experiment/runs/abp-data-access/apply-data-filters/baseline/1"
+        },
+        {
+          "status": "build_pass",
+          "agent_status": "agent_ok",
+          "build_status": "build_pass",
+          "agent": {
+            "status": "agent_ok",
+            "exit_code": 0,
+            "exception": null,
+            "duration_seconds": 83.60527324999975,
+            "command": [
+              "codex",
+              "exec",
+              "--ephemeral",
+              "--skip-git-repo-check",
+              "--sandbox",
+              "workspace-write",
+              "--color",
+              "never",
+              "--cd",
+              "/tmp/abp-exp-tkna_8do",
+              "-c",
+              "model_reasoning_effort=\"medium\"",
+              "--model",
+              "gpt-5.6-sol",
+              "-"
+            ]
+          },
+          "build": {
+            "status": "build_pass",
+            "ran": true,
+            "exit_code": 0,
+            "exception": null,
+            "duration_seconds": 0.4880830000001879,
+            "command": [
+              "dotnet",
+              "build",
+              "-v",
+              "q",
+              "-nologo"
+            ]
+          },
+          "has_added_code": true,
+          "scoring_eligible": true,
+          "idiom": 3,
+          "anti": 0,
+          "idiom_hits": [
+            "IDataFilter",
+            "ISoftDelete",
+            "HardDeleteAsync"
+          ],
+          "anti_hits": [],
+          "idiom_tot": 3,
+          "artifact_dir": "eng/experiment/runs/abp-data-access/apply-data-filters/baseline/2"
+        },
+        {
+          "status": "build_pass",
+          "agent_status": "agent_ok",
+          "build_status": "build_pass",
+          "agent": {
+            "status": "agent_ok",
+            "exit_code": 0,
+            "exception": null,
+            "duration_seconds": 100.6647816249997,
+            "command": [
+              "codex",
+              "exec",
+              "--ephemeral",
+              "--skip-git-repo-check",
+              "--sandbox",
+              "workspace-write",
+              "--color",
+              "never",
+              "--cd",
+              "/tmp/abp-exp-8xaay0ob",
+              "-c",
+              "model_reasoning_effort=\"medium\"",
+              "--model",
+              "gpt-5.6-sol",
+              "-"
+            ]
+          },
+          "build": {
+            "status": "build_pass",
+            "ran": true,
+            "exit_code": 0,
+            "exception": null,
+            "duration_seconds": 0.5057393749998482,
+            "command": [
+              "dotnet",
+              "build",
+              "-v",
+              "q",
+              "-nologo"
+            ]
+          },
+          "has_added_code": true,
+          "scoring_eligible": true,
+          "idiom": 3,
+          "anti": 0,
+          "idiom_hits": [
+            "IDataFilter",
+            "ISoftDelete",
+            "HardDeleteAsync"
+          ],
+          "anti_hits": [],
+          "idiom_tot": 3,
+          "artifact_dir": "eng/experiment/runs/abp-data-access/apply-data-filters/baseline/3"
+        }
+      ],
+      "skilled": [
+        {
+          "status": "build_pass",
+          "agent_status": "agent_ok",
+          "build_status": "build_pass",
+          "agent": {
+            "status": "agent_ok",
+            "exit_code": 0,
+            "exception": null,
+            "duration_seconds": 108.19226983299995,
+            "command": [
+              "codex",
+              "exec",
+              "--ephemeral",
+              "--skip-git-repo-check",
+              "--sandbox",
+              "workspace-write",
+              "--color",
+              "never",
+              "--cd",
+              "/tmp/abp-exp-s343nvdf",
+              "-c",
+              "model_reasoning_effort=\"medium\"",
+              "--model",
+              "gpt-5.6-sol",
+              "-"
+            ]
+          },
+          "build": {
+            "status": "build_pass",
+            "ran": true,
+            "exit_code": 0,
+            "exception": null,
+            "duration_seconds": 0.4951568340002268,
+            "command": [
+              "dotnet",
+              "build",
+              "-v",
+              "q",
+              "-nologo"
+            ]
+          },
+          "has_added_code": true,
+          "scoring_eligible": true,
+          "idiom": 3,
+          "anti": 0,
+          "idiom_hits": [
+            "IDataFilter",
+            "ISoftDelete",
+            "HardDeleteAsync"
+          ],
+          "anti_hits": [],
+          "idiom_tot": 3,
+          "artifact_dir": "eng/experiment/runs/abp-data-access/apply-data-filters/skilled/1"
+        },
+        {
+          "status": "build_pass",
+          "agent_status": "agent_ok",
+          "build_status": "build_pass",
+          "agent": {
+            "status": "agent_ok",
+            "exit_code": 0,
+            "exception": null,
+            "duration_seconds": 69.89388749999989,
+            "command": [
+              "codex",
+              "exec",
+              "--ephemeral",
+              "--skip-git-repo-check",
+              "--sandbox",
+              "workspace-write",
+              "--color",
+              "never",
+              "--cd",
+              "/tmp/abp-exp-t7ufo9sr",
+              "-c",
+              "model_reasoning_effort=\"medium\"",
+              "--model",
+              "gpt-5.6-sol",
+              "-"
+            ]
+          },
+          "build": {
+            "status": "build_pass",
+            "ran": true,
+            "exit_code": 0,
+            "exception": null,
+            "duration_seconds": 0.4768278750002537,
+            "command": [
+              "dotnet",
+              "build",
+              "-v",
+              "q",
+              "-nologo"
+            ]
+          },
+          "has_added_code": true,
+          "scoring_eligible": true,
+          "idiom": 3,
+          "anti": 0,
+          "idiom_hits": [
+            "IDataFilter",
+            "ISoftDelete",
+            "HardDeleteAsync"
+          ],
+          "anti_hits": [],
+          "idiom_tot": 3,
+          "artifact_dir": "eng/experiment/runs/abp-data-access/apply-data-filters/skilled/2"
+        },
+        {
+          "status": "build_pass",
+          "agent_status": "agent_ok",
+          "build_status": "build_pass",
+          "agent": {
+            "status": "agent_ok",
+            "exit_code": 0,
+            "exception": null,
+            "duration_seconds": 92.64685637499997,
+            "command": [
+              "codex",
+              "exec",
+              "--ephemeral",
+              "--skip-git-repo-check",
+              "--sandbox",
+              "workspace-write",
+              "--color",
+              "never",
+              "--cd",
+              "/tmp/abp-exp-5qx4iprs",
+              "-c",
+              "model_reasoning_effort=\"medium\"",
+              "--model",
+              "gpt-5.6-sol",
+              "-"
+            ]
+          },
+          "build": {
+            "status": "build_pass",
+            "ran": true,
+            "exit_code": 0,
+            "exception": null,
+            "duration_seconds": 0.5104987909999181,
+            "command": [
+              "dotnet",
+              "build",
+              "-v",
+              "q",
+              "-nologo"
+            ]
+          },
+          "has_added_code": true,
+          "scoring_eligible": true,
+          "idiom": 3,
+          "anti": 0,
+          "idiom_hits": [
+            "IDataFilter",
+            "ISoftDelete",
+            "HardDeleteAsync"
+          ],
+          "anti_hits": [],
+          "idiom_tot": 3,
+          "artifact_dir": "eng/experiment/runs/abp-data-access/apply-data-filters/skilled/3"
+        }
+      ],
+      "baseline_agg": {
+        "runs": 3,
+        "agent_ok": 3,
+        "agent_error": 0,
+        "agent_timeout": 0,
+        "build_eligible_runs": 3,
+        "build_pass": 3,
+        "build_fail": 0,
+        "build_pass_rate": 1.0,
+        "scored_runs": 3,
+        "idiom": 3.0,
+        "anti": 0,
+        "idiom_tot": 3
+      },
+      "skilled_agg": {
+        "runs": 3,
+        "agent_ok": 3,
+        "agent_error": 0,
+        "agent_timeout": 0,
+        "build_eligible_runs": 3,
+        "build_pass": 3,
+        "build_fail": 0,
+        "build_pass_rate": 1.0,
+        "scored_runs": 3,
+        "idiom": 3.0,
+        "anti": 0,
+        "idiom_tot": 3
+      }
+    },
+    {
+      "skill": "abp-data-access/ef-core-integration",
+      "baseline": [
+        {
+          "status": "build_pass",
+          "agent_status": "agent_ok",
+          "build_status": "build_pass",
+          "agent": {
+            "status": "agent_ok",
+            "exit_code": 0,
+            "exception": null,
+            "duration_seconds": 133.025050792,
+            "command": [
+              "codex",
+              "exec",
+              "--ephemeral",
+              "--skip-git-repo-check",
+              "--sandbox",
+              "workspace-write",
+              "--color",
+              "never",
+              "--cd",
+              "/tmp/abp-exp-o28rkkfp",
+              "-c",
+              "model_reasoning_effort=\"medium\"",
+              "--model",
+              "gpt-5.6-sol",
+              "-"
+            ]
+          },
+          "build": {
+            "status": "build_pass",
+            "ran": true,
+            "exit_code": 0,
+            "exception": null,
+            "duration_seconds": 0.5086835409997548,
+            "command": [
+              "dotnet",
+              "build",
+              "-v",
+              "q",
+              "-nologo"
+            ]
+          },
+          "has_added_code": true,
+          "scoring_eligible": true,
+          "idiom": 2,
+          "anti": 0,
+          "idiom_hits": [
+            "AggregateRoot",
+            "EfCoreRepository"
+          ],
+          "anti_hits": [],
+          "idiom_tot": 3,
+          "artifact_dir": "eng/experiment/runs/abp-data-access/ef-core-integration/baseline/1"
+        },
+        {
+          "status": "build_pass",
+          "agent_status": "agent_ok",
+          "build_status": "build_pass",
+          "agent": {
+            "status": "agent_ok",
+            "exit_code": 0,
+            "exception": null,
+            "duration_seconds": 218.994624209,
+            "command": [
+              "codex",
+              "exec",
+              "--ephemeral",
+              "--skip-git-repo-check",
+              "--sandbox",
+              "workspace-write",
+              "--color",
+              "never",
+              "--cd",
+              "/tmp/abp-exp-pie4409t",
+              "-c",
+              "model_reasoning_effort=\"medium\"",
+              "--model",
+              "gpt-5.6-sol",
+              "-"
+            ]
+          },
+          "build": {
+            "status": "build_pass",
+            "ran": true,
+            "exit_code": 0,
+            "exception": null,
+            "duration_seconds": 0.49342541699979847,
+            "command": [
+              "dotnet",
+              "build",
+              "-v",
+              "q",
+              "-nologo"
+            ]
+          },
+          "has_added_code": true,
+          "scoring_eligible": true,
+          "idiom": 2,
+          "anti": 0,
+          "idiom_hits": [
+            "IRepository",
+            "EfCoreRepository"
+          ],
+          "anti_hits": [],
+          "idiom_tot": 3,
+          "artifact_dir": "eng/experiment/runs/abp-data-access/ef-core-integration/baseline/2"
+        },
+        {
+          "status": "build_pass",
+          "agent_status": "agent_ok",
+          "build_status": "build_pass",
+          "agent": {
+            "status": "agent_ok",
+            "exit_code": 0,
+            "exception": null,
+            "duration_seconds": 130.41008333400032,
+            "command": [
+              "codex",
+              "exec",
+              "--ephemeral",
+              "--skip-git-repo-check",
+              "--sandbox",
+              "workspace-write",
+              "--color",
+              "never",
+              "--cd",
+              "/tmp/abp-exp-ozw0224w",
+              "-c",
+              "model_reasoning_effort=\"medium\"",
+              "--model",
+              "gpt-5.6-sol",
+              "-"
+            ]
+          },
+          "build": {
+            "status": "build_pass",
+            "ran": true,
+            "exit_code": 0,
+            "exception": null,
+            "duration_seconds": 0.48787191700012045,
+            "command": [
+              "dotnet",
+              "build",
+              "-v",
+              "q",
+              "-nologo"
+            ]
+          },
+          "has_added_code": true,
+          "scoring_eligible": true,
+          "idiom": 1,
+          "anti": 0,
+          "idiom_hits": [
+            "EfCoreRepository"
+          ],
+          "anti_hits": [],
+          "idiom_tot": 3,
+          "artifact_dir": "eng/experiment/runs/abp-data-access/ef-core-integration/baseline/3"
+        }
+      ],
+      "skilled": [
+        {
+          "status": "build_pass",
+          "agent_status": "agent_ok",
+          "build_status": "build_pass",
+          "agent": {
+            "status": "agent_ok",
+            "exit_code": 0,
+            "exception": null,
+            "duration_seconds": 135.1405084170001,
+            "command": [
+              "codex",
+              "exec",
+              "--ephemeral",
+              "--skip-git-repo-check",
+              "--sandbox",
+              "workspace-write",
+              "--color",
+              "never",
+              "--cd",
+              "/tmp/abp-exp-k17shwty",
+              "-c",
+              "model_reasoning_effort=\"medium\"",
+              "--model",
+              "gpt-5.6-sol",
+              "-"
+            ]
+          },
+          "build": {
+            "status": "build_pass",
+            "ran": true,
+            "exit_code": 0,
+            "exception": null,
+            "duration_seconds": 0.4790939999998045,
+            "command": [
+              "dotnet",
+              "build",
+              "-v",
+              "q",
+              "-nologo"
+            ]
+          },
+          "has_added_code": true,
+          "scoring_eligible": true,
+          "idiom": 2,
+          "anti": 0,
+          "idiom_hits": [
+            "IRepository",
+            "EfCoreRepository"
+          ],
+          "anti_hits": [],
+          "idiom_tot": 3,
+          "artifact_dir": "eng/experiment/runs/abp-data-access/ef-core-integration/skilled/1"
+        },
+        {
+          "status": "build_pass",
+          "agent_status": "agent_ok",
+          "build_status": "build_pass",
+          "agent": {
+            "status": "agent_ok",
+            "exit_code": 0,
+            "exception": null,
+            "duration_seconds": 141.26212179200002,
+            "command": [
+              "codex",
+              "exec",
+              "--ephemeral",
+              "--skip-git-repo-check",
+              "--sandbox",
+              "workspace-write",
+              "--color",
+              "never",
+              "--cd",
+              "/tmp/abp-exp-jdnf6jmi",
+              "-c",
+              "model_reasoning_effort=\"medium\"",
+              "--model",
+              "gpt-5.6-sol",
+              "-"
+            ]
+          },
+          "build": {
+            "status": "build_pass",
+            "ran": true,
+            "exit_code": 0,
+            "exception": null,
+            "duration_seconds": 0.48602766600015457,
+            "command": [
+              "dotnet",
+              "build",
+              "-v",
+              "q",
+              "-nologo"
+            ]
+          },
+          "has_added_code": true,
+          "scoring_eligible": true,
+          "idiom": 2,
+          "anti": 0,
+          "idiom_hits": [
+            "IRepository",
+            "EfCoreRepository"
+          ],
+          "anti_hits": [],
+          "idiom_tot": 3,
+          "artifact_dir": "eng/experiment/runs/abp-data-access/ef-core-integration/skilled/2"
+        },
+        {
+          "status": "build_pass",
+          "agent_status": "agent_ok",
+          "build_status": "build_pass",
+          "agent": {
+            "status": "agent_ok",
+            "exit_code": 0,
+            "exception": null,
+            "duration_seconds": 265.31697325000005,
+            "command": [
+              "codex",
+              "exec",
+              "--ephemeral",
+              "--skip-git-repo-check",
+              "--sandbox",
+              "workspace-write",
+              "--color",
+              "never",
+              "--cd",
+              "/tmp/abp-exp-dto1865j",
+              "-c",
+              "model_reasoning_effort=\"medium\"",
+              "--model",
+              "gpt-5.6-sol",
+              "-"
+            ]
+          },
+          "build": {
+            "status": "build_pass",
+            "ran": true,
+            "exit_code": 0,
+            "exception": null,
+            "duration_seconds": 0.5819075419999535,
+            "command": [
+              "dotnet",
+              "build",
+              "-v",
+              "q",
+              "-nologo"
+            ]
+          },
+          "has_added_code": true,
+          "scoring_eligible": true,
+          "idiom": 2,
+          "anti": 0,
+          "idiom_hits": [
+            "IRepository",
+            "EfCoreRepository"
+          ],
+          "anti_hits": [],
+          "idiom_tot": 3,
+          "artifact_dir": "eng/experiment/runs/abp-data-access/ef-core-integration/skilled/3"
+        }
+      ],
+      "baseline_agg": {
+        "runs": 3,
+        "agent_ok": 3,
+        "agent_error": 0,
+        "agent_timeout": 0,
+        "build_eligible_runs": 3,
+        "build_pass": 3,
+        "build_fail": 0,
+        "build_pass_rate": 1.0,
+        "scored_runs": 3,
+        "idiom": 1.6666666666666667,
+        "anti": 0,
+        "idiom_tot": 3
+      },
+      "skilled_agg": {
+        "runs": 3,
+        "agent_ok": 3,
+        "agent_error": 0,
+        "agent_timeout": 0,
+        "build_eligible_runs": 3,
+        "build_pass": 3,
+        "build_fail": 0,
+        "build_pass_rate": 1.0,
+        "scored_runs": 3,
+        "idiom": 2.0,
+        "anti": 0,
+        "idiom_tot": 3
+      }
+    },
+    {
+      "skill": "abp-infrastructure/use-interceptors-and-dynamic-proxy",
+      "baseline": [
+        {
+          "status": "build_pass",
+          "agent_status": "agent_ok",
+          "build_status": "build_pass",
+          "agent": {
+            "status": "agent_ok",
+            "exit_code": 0,
+            "exception": null,
+            "duration_seconds": 93.89970420899954,
+            "command": [
+              "codex",
+              "exec",
+              "--ephemeral",
+              "--skip-git-repo-check",
+              "--sandbox",
+              "workspace-write",
+              "--color",
+              "never",
+              "--cd",
+              "/tmp/abp-exp-6dg8nxtw",
+              "-c",
+              "model_reasoning_effort=\"medium\"",
+              "--model",
+              "gpt-5.6-sol",
+              "-"
+            ]
+          },
+          "build": {
+            "status": "build_pass",
+            "ran": true,
+            "exit_code": 0,
+            "exception": null,
+            "duration_seconds": 0.5293952920001175,
+            "command": [
+              "dotnet",
+              "build",
+              "-v",
+              "q",
+              "-nologo"
+            ]
+          },
+          "has_added_code": true,
+          "scoring_eligible": true,
+          "idiom": 3,
+          "anti": 0,
+          "idiom_hits": [
+            "AbpInterceptor",
+            "ProceedAsync",
+            "IAbpMethodInvocation"
+          ],
+          "anti_hits": [],
+          "idiom_tot": 4,
+          "artifact_dir": "eng/experiment/runs/abp-infrastructure/use-interceptors-and-dynamic-proxy/baseline/1"
+        },
+        {
+          "status": "build_pass",
+          "agent_status": "agent_ok",
+          "build_status": "build_pass",
+          "agent": {
+            "status": "agent_ok",
+            "exit_code": 0,
+            "exception": null,
+            "duration_seconds": 82.9589875419997,
+            "command": [
+              "codex",
+              "exec",
+              "--ephemeral",
+              "--skip-git-repo-check",
+              "--sandbox",
+              "workspace-write",
+              "--color",
+              "never",
+              "--cd",
+              "/tmp/abp-exp-nxg0x9q0",
+              "-c",
+              "model_reasoning_effort=\"medium\"",
+              "--model",
+              "gpt-5.6-sol",
+              "-"
+            ]
+          },
+          "build": {
+            "status": "build_pass",
+            "ran": true,
+            "exit_code": 0,
+            "exception": null,
+            "duration_seconds": 0.4877378339997449,
+            "command": [
+              "dotnet",
+              "build",
+              "-v",
+              "q",
+              "-nologo"
+            ]
+          },
+          "has_added_code": true,
+          "scoring_eligible": true,
+          "idiom": 3,
+          "anti": 0,
+          "idiom_hits": [
+            "AbpInterceptor",
+            "ProceedAsync",
+            "IAbpMethodInvocation"
+          ],
+          "anti_hits": [],
+          "idiom_tot": 4,
+          "artifact_dir": "eng/experiment/runs/abp-infrastructure/use-interceptors-and-dynamic-proxy/baseline/2"
+        },
+        {
+          "status": "build_pass",
+          "agent_status": "agent_ok",
+          "build_status": "build_pass",
+          "agent": {
+            "status": "agent_ok",
+            "exit_code": 0,
+            "exception": null,
+            "duration_seconds": 90.22388720800063,
+            "command": [
+              "codex",
+              "exec",
+              "--ephemeral",
+              "--skip-git-repo-check",
+              "--sandbox",
+              "workspace-write",
+              "--color",
+              "never",
+              "--cd",
+              "/tmp/abp-exp-vp2261fx",
+              "-c",
+              "model_reasoning_effort=\"medium\"",
+              "--model",
+              "gpt-5.6-sol",
+              "-"
+            ]
+          },
+          "build": {
+            "status": "build_pass",
+            "ran": true,
+            "exit_code": 0,
+            "exception": null,
+            "duration_seconds": 0.5001013749997583,
+            "command": [
+              "dotnet",
+              "build",
+              "-v",
+              "q",
+              "-nologo"
+            ]
+          },
+          "has_added_code": true,
+          "scoring_eligible": true,
+          "idiom": 3,
+          "anti": 0,
+          "idiom_hits": [
+            "AbpInterceptor",
+            "ProceedAsync",
+            "IAbpMethodInvocation"
+          ],
+          "anti_hits": [],
+          "idiom_tot": 4,
+          "artifact_dir": "eng/experiment/runs/abp-infrastructure/use-interceptors-and-dynamic-proxy/baseline/3"
+        }
+      ],
+      "skilled": [
+        {
+          "status": "build_pass",
+          "agent_status": "agent_ok",
+          "build_status": "build_pass",
+          "agent": {
+            "status": "agent_ok",
+            "exit_code": 0,
+            "exception": null,
+            "duration_seconds": 83.79592424999919,
+            "command": [
+              "codex",
+              "exec",
+              "--ephemeral",
+              "--skip-git-repo-check",
+              "--sandbox",
+              "workspace-write",
+              "--color",
+              "never",
+              "--cd",
+              "/tmp/abp-exp-qmkvp3rq",
+              "-c",
+              "model_reasoning_effort=\"medium\"",
+              "--model",
+              "gpt-5.6-sol",
+              "-"
+            ]
+          },
+          "build": {
+            "status": "build_pass",
+            "ran": true,
+            "exit_code": 0,
+            "exception": null,
+            "duration_seconds": 0.4893206659999123,
+            "command": [
+              "dotnet",
+              "build",
+              "-v",
+              "q",
+              "-nologo"
+            ]
+          },
+          "has_added_code": true,
+          "scoring_eligible": true,
+          "idiom": 3,
+          "anti": 0,
+          "idiom_hits": [
+            "AbpInterceptor",
+            "ProceedAsync",
+            "IAbpMethodInvocation"
+          ],
+          "anti_hits": [],
+          "idiom_tot": 4,
+          "artifact_dir": "eng/experiment/runs/abp-infrastructure/use-interceptors-and-dynamic-proxy/skilled/1"
+        },
+        {
+          "status": "build_pass",
+          "agent_status": "agent_ok",
+          "build_status": "build_pass",
+          "agent": {
+            "status": "agent_ok",
+            "exit_code": 0,
+            "exception": null,
+            "duration_seconds": 93.81193583299955,
+            "command": [
+              "codex",
+              "exec",
+              "--ephemeral",
+              "--skip-git-repo-check",
+              "--sandbox",
+              "workspace-write",
+              "--color",
+              "never",
+              "--cd",
+              "/tmp/abp-exp-9vdmwlti",
+              "-c",
+              "model_reasoning_effort=\"medium\"",
+              "--model",
+              "gpt-5.6-sol",
+              "-"
+            ]
+          },
+          "build": {
+            "status": "build_pass",
+            "ran": true,
+            "exit_code": 0,
+            "exception": null,
+            "duration_seconds": 0.47545583299961436,
+            "command": [
+              "dotnet",
+              "build",
+              "-v",
+              "q",
+              "-nologo"
+            ]
+          },
+          "has_added_code": true,
+          "scoring_eligible": true,
+          "idiom": 3,
+          "anti": 0,
+          "idiom_hits": [
+            "AbpInterceptor",
+            "ProceedAsync",
+            "IAbpMethodInvocation"
+          ],
+          "anti_hits": [],
+          "idiom_tot": 4,
+          "artifact_dir": "eng/experiment/runs/abp-infrastructure/use-interceptors-and-dynamic-proxy/skilled/2"
+        },
+        {
+          "status": "build_pass",
+          "agent_status": "agent_ok",
+          "build_status": "build_pass",
+          "agent": {
+            "status": "agent_ok",
+            "exit_code": 0,
+            "exception": null,
+            "duration_seconds": 101.94034399999964,
+            "command": [
+              "codex",
+              "exec",
+              "--ephemeral",
+              "--skip-git-repo-check",
+              "--sandbox",
+              "workspace-write",
+              "--color",
+              "never",
+              "--cd",
+              "/tmp/abp-exp-nxpgpvej",
+              "-c",
+              "model_reasoning_effort=\"medium\"",
+              "--model",
+              "gpt-5.6-sol",
+              "-"
+            ]
+          },
+          "build": {
+            "status": "build_pass",
+            "ran": true,
+            "exit_code": 0,
+            "exception": null,
+            "duration_seconds": 0.4753530829993906,
+            "command": [
+              "dotnet",
+              "build",
+              "-v",
+              "q",
+              "-nologo"
+            ]
+          },
+          "has_added_code": true,
+          "scoring_eligible": true,
+          "idiom": 3,
+          "anti": 0,
+          "idiom_hits": [
+            "AbpInterceptor",
+            "ProceedAsync",
+            "IAbpMethodInvocation"
+          ],
+          "anti_hits": [],
+          "idiom_tot": 4,
+          "artifact_dir": "eng/experiment/runs/abp-infrastructure/use-interceptors-and-dynamic-proxy/skilled/3"
+        }
+      ],
+      "baseline_agg": {
+        "runs": 3,
+        "agent_ok": 3,
+        "agent_error": 0,
+        "agent_timeout": 0,
+        "build_eligible_runs": 3,
+        "build_pass": 3,
+        "build_fail": 0,
+        "build_pass_rate": 1.0,
+        "scored_runs": 3,
+        "idiom": 3.0,
+        "anti": 0,
+        "idiom_tot": 4
+      },
+      "skilled_agg": {
+        "runs": 3,
+        "agent_ok": 3,
+        "agent_error": 0,
+        "agent_timeout": 0,
+        "build_eligible_runs": 3,
+        "build_pass": 3,
+        "build_fail": 0,
+        "build_pass_rate": 1.0,
+        "scored_runs": 3,
+        "idiom": 3.0,
+        "anti": 0,
+        "idiom_tot": 4
+      }
+    },
+    {
+      "skill": "abp-module-development/model-domain-aggregates",
+      "baseline": [
+        {
+          "status": "build_pass",
+          "agent_status": "agent_ok",
+          "build_status": "build_pass",
+          "agent": {
+            "status": "agent_ok",
+            "exit_code": 0,
+            "exception": null,
+            "duration_seconds": 123.60236333299963,
+            "command": [
+              "codex",
+              "exec",
+              "--ephemeral",
+              "--skip-git-repo-check",
+              "--sandbox",
+              "workspace-write",
+              "--color",
+              "never",
+              "--cd",
+              "/tmp/abp-exp-ojdrm_mp",
+              "-c",
+              "model_reasoning_effort=\"medium\"",
+              "--model",
+              "gpt-5.6-sol",
+              "-"
+            ]
+          },
+          "build": {
+            "status": "build_pass",
+            "ran": true,
+            "exit_code": 0,
+            "exception": null,
+            "duration_seconds": 0.49896487499972864,
+            "command": [
+              "dotnet",
+              "build",
+              "-v",
+              "q",
+              "-nologo"
+            ]
+          },
+          "has_added_code": true,
+          "scoring_eligible": true,
+          "idiom": 3,
+          "anti": 0,
+          "idiom_hits": [
+            "AggregateRoot",
+            "AddLocalEvent",
+            "protected "
+          ],
+          "anti_hits": [],
+          "idiom_tot": 3,
+          "artifact_dir": "eng/experiment/runs/abp-module-development/model-domain-aggregates/baseline/1"
+        },
+        {
+          "status": "build_pass",
+          "agent_status": "agent_ok",
+          "build_status": "build_pass",
+          "agent": {
+            "status": "agent_ok",
+            "exit_code": 0,
+            "exception": null,
+            "duration_seconds": 130.3283764580001,
+            "command": [
+              "codex",
+              "exec",
+              "--ephemeral",
+              "--skip-git-repo-check",
+              "--sandbox",
+              "workspace-write",
+              "--color",
+              "never",
+              "--cd",
+              "/tmp/abp-exp-z94ehddr",
+              "-c",
+              "model_reasoning_effort=\"medium\"",
+              "--model",
+              "gpt-5.6-sol",
+              "-"
+            ]
+          },
+          "build": {
+            "status": "build_pass",
+            "ran": true,
+            "exit_code": 0,
+            "exception": null,
+            "duration_seconds": 0.5021360419996199,
+            "command": [
+              "dotnet",
+              "build",
+              "-v",
+              "q",
+              "-nologo"
+            ]
+          },
+          "has_added_code": true,
+          "scoring_eligible": true,
+          "idiom": 3,
+          "anti": 0,
+          "idiom_hits": [
+            "AggregateRoot",
+            "AddLocalEvent",
+            "protected "
+          ],
+          "anti_hits": [],
+          "idiom_tot": 3,
+          "artifact_dir": "eng/experiment/runs/abp-module-development/model-domain-aggregates/baseline/2"
+        },
+        {
+          "status": "build_pass",
+          "agent_status": "agent_ok",
+          "build_status": "build_pass",
+          "agent": {
+            "status": "agent_ok",
+            "exit_code": 0,
+            "exception": null,
+            "duration_seconds": 203.68806245799988,
+            "command": [
+              "codex",
+              "exec",
+              "--ephemeral",
+              "--skip-git-repo-check",
+              "--sandbox",
+              "workspace-write",
+              "--color",
+              "never",
+              "--cd",
+              "/tmp/abp-exp-mgstz1_y",
+              "-c",
+              "model_reasoning_effort=\"medium\"",
+              "--model",
+              "gpt-5.6-sol",
+              "-"
+            ]
+          },
+          "build": {
+            "status": "build_pass",
+            "ran": true,
+            "exit_code": 0,
+            "exception": null,
+            "duration_seconds": 0.4817535419997512,
+            "command": [
+              "dotnet",
+              "build",
+              "-v",
+              "q",
+              "-nologo"
+            ]
+          },
+          "has_added_code": true,
+          "scoring_eligible": true,
+          "idiom": 3,
+          "anti": 0,
+          "idiom_hits": [
+            "AggregateRoot",
+            "AddLocalEvent",
+            "protected "
+          ],
+          "anti_hits": [],
+          "idiom_tot": 3,
+          "artifact_dir": "eng/experiment/runs/abp-module-development/model-domain-aggregates/baseline/3"
+        }
+      ],
+      "skilled": [
+        {
+          "status": "build_pass",
+          "agent_status": "agent_ok",
+          "build_status": "build_pass",
+          "agent": {
+            "status": "agent_ok",
+            "exit_code": 0,
+            "exception": null,
+            "duration_seconds": 167.93762245900052,
+            "command": [
+              "codex",
+              "exec",
+              "--ephemeral",
+              "--skip-git-repo-check",
+              "--sandbox",
+              "workspace-write",
+              "--color",
+              "never",
+              "--cd",
+              "/tmp/abp-exp-myurvm40",
+              "-c",
+              "model_reasoning_effort=\"medium\"",
+              "--model",
+              "gpt-5.6-sol",
+              "-"
+            ]
+          },
+          "build": {
+            "status": "build_pass",
+            "ran": true,
+            "exit_code": 0,
+            "exception": null,
+            "duration_seconds": 0.4973820830000477,
+            "command": [
+              "dotnet",
+              "build",
+              "-v",
+              "q",
+              "-nologo"
+            ]
+          },
+          "has_added_code": true,
+          "scoring_eligible": true,
+          "idiom": 3,
+          "anti": 0,
+          "idiom_hits": [
+            "AggregateRoot",
+            "AddLocalEvent",
+            "protected "
+          ],
+          "anti_hits": [],
+          "idiom_tot": 3,
+          "artifact_dir": "eng/experiment/runs/abp-module-development/model-domain-aggregates/skilled/1"
+        },
+        {
+          "status": "build_pass",
+          "agent_status": "agent_ok",
+          "build_status": "build_pass",
+          "agent": {
+            "status": "agent_ok",
+            "exit_code": 0,
+            "exception": null,
+            "duration_seconds": 97.86644066600002,
+            "command": [
+              "codex",
+              "exec",
+              "--ephemeral",
+              "--skip-git-repo-check",
+              "--sandbox",
+              "workspace-write",
+              "--color",
+              "never",
+              "--cd",
+              "/tmp/abp-exp-zvid_6am",
+              "-c",
+              "model_reasoning_effort=\"medium\"",
+              "--model",
+              "gpt-5.6-sol",
+              "-"
+            ]
+          },
+          "build": {
+            "status": "build_pass",
+            "ran": true,
+            "exit_code": 0,
+            "exception": null,
+            "duration_seconds": 0.5193996669995613,
+            "command": [
+              "dotnet",
+              "build",
+              "-v",
+              "q",
+              "-nologo"
+            ]
+          },
+          "has_added_code": true,
+          "scoring_eligible": true,
+          "idiom": 3,
+          "anti": 0,
+          "idiom_hits": [
+            "AggregateRoot",
+            "AddLocalEvent",
+            "protected "
+          ],
+          "anti_hits": [],
+          "idiom_tot": 3,
+          "artifact_dir": "eng/experiment/runs/abp-module-development/model-domain-aggregates/skilled/2"
+        },
+        {
+          "status": "build_pass",
+          "agent_status": "agent_ok",
+          "build_status": "build_pass",
+          "agent": {
+            "status": "agent_ok",
+            "exit_code": 0,
+            "exception": null,
+            "duration_seconds": 118.52866133400039,
+            "command": [
+              "codex",
+              "exec",
+              "--ephemeral",
+              "--skip-git-repo-check",
+              "--sandbox",
+              "workspace-write",
+              "--color",
+              "never",
+              "--cd",
+              "/tmp/abp-exp-_5agylty",
+              "-c",
+              "model_reasoning_effort=\"medium\"",
+              "--model",
+              "gpt-5.6-sol",
+              "-"
+            ]
+          },
+          "build": {
+            "status": "build_pass",
+            "ran": true,
+            "exit_code": 0,
+            "exception": null,
+            "duration_seconds": 0.5235345000000962,
+            "command": [
+              "dotnet",
+              "build",
+              "-v",
+              "q",
+              "-nologo"
+            ]
+          },
+          "has_added_code": true,
+          "scoring_eligible": true,
+          "idiom": 3,
+          "anti": 0,
+          "idiom_hits": [
+            "AggregateRoot",
+            "AddLocalEvent",
+            "protected "
+          ],
+          "anti_hits": [],
+          "idiom_tot": 3,
+          "artifact_dir": "eng/experiment/runs/abp-module-development/model-domain-aggregates/skilled/3"
+        }
+      ],
+      "baseline_agg": {
+        "runs": 3,
+        "agent_ok": 3,
+        "agent_error": 0,
+        "agent_timeout": 0,
+        "build_eligible_runs": 3,
+        "build_pass": 3,
+        "build_fail": 0,
+        "build_pass_rate": 1.0,
+        "scored_runs": 3,
+        "idiom": 3.0,
+        "anti": 0,
+        "idiom_tot": 3
+      },
+      "skilled_agg": {
+        "runs": 3,
+        "agent_ok": 3,
+        "agent_error": 0,
+        "agent_timeout": 0,
+        "build_eligible_runs": 3,
+        "build_pass": 3,
+        "build_fail": 0,
+        "build_pass_rate": 1.0,
+        "scored_runs": 3,
+        "idiom": 3.0,
+        "anti": 0,
+        "idiom_tot": 3
+      }
+    },
+    {
+      "skill": "abp-infrastructure/generate-guids",
+      "baseline": [
+        {
+          "status": "build_pass",
+          "agent_status": "agent_ok",
+          "build_status": "build_pass",
+          "agent": {
+            "status": "agent_ok",
+            "exit_code": 0,
+            "exception": null,
+            "duration_seconds": 68.8858002500001,
+            "command": [
+              "codex",
+              "exec",
+              "--ephemeral",
+              "--skip-git-repo-check",
+              "--sandbox",
+              "workspace-write",
+              "--color",
+              "never",
+              "--cd",
+              "/tmp/abp-exp-ha7w2_s6",
+              "-c",
+              "model_reasoning_effort=\"medium\"",
+              "--model",
+              "gpt-5.6-sol",
+              "-"
+            ]
+          },
+          "build": {
+            "status": "build_pass",
+            "ran": true,
+            "exit_code": 0,
+            "exception": null,
+            "duration_seconds": 0.4878660839995064,
+            "command": [
+              "dotnet",
+              "build",
+              "-v",
+              "q",
+              "-nologo"
+            ]
+          },
+          "has_added_code": true,
+          "scoring_eligible": true,
+          "idiom": 1,
+          "anti": 0,
+          "idiom_hits": [
+            "GuidGenerator.Create"
+          ],
+          "anti_hits": [],
+          "idiom_tot": 2,
+          "artifact_dir": "eng/experiment/runs/abp-infrastructure/generate-guids/baseline/1"
+        },
+        {
+          "status": "build_pass",
+          "agent_status": "agent_ok",
+          "build_status": "build_pass",
+          "agent": {
+            "status": "agent_ok",
+            "exit_code": 0,
+            "exception": null,
+            "duration_seconds": 71.2527386669999,
+            "command": [
+              "codex",
+              "exec",
+              "--ephemeral",
+              "--skip-git-repo-check",
+              "--sandbox",
+              "workspace-write",
+              "--color",
+              "never",
+              "--cd",
+              "/tmp/abp-exp-y2krplpq",
+              "-c",
+              "model_reasoning_effort=\"medium\"",
+              "--model",
+              "gpt-5.6-sol",
+              "-"
+            ]
+          },
+          "build": {
+            "status": "build_pass",
+            "ran": true,
+            "exit_code": 0,
+            "exception": null,
+            "duration_seconds": 0.5014487920007014,
+            "command": [
+              "dotnet",
+              "build",
+              "-v",
+              "q",
+              "-nologo"
+            ]
+          },
+          "has_added_code": true,
+          "scoring_eligible": true,
+          "idiom": 1,
+          "anti": 0,
+          "idiom_hits": [
+            "GuidGenerator.Create"
+          ],
+          "anti_hits": [],
+          "idiom_tot": 2,
+          "artifact_dir": "eng/experiment/runs/abp-infrastructure/generate-guids/baseline/2"
+        },
+        {
+          "status": "build_pass",
+          "agent_status": "agent_ok",
+          "build_status": "build_pass",
+          "agent": {
+            "status": "agent_ok",
+            "exit_code": 0,
+            "exception": null,
+            "duration_seconds": 70.6498825409999,
+            "command": [
+              "codex",
+              "exec",
+              "--ephemeral",
+              "--skip-git-repo-check",
+              "--sandbox",
+              "workspace-write",
+              "--color",
+              "never",
+              "--cd",
+              "/tmp/abp-exp-0mhjtwj3",
+              "-c",
+              "model_reasoning_effort=\"medium\"",
+              "--model",
+              "gpt-5.6-sol",
+              "-"
+            ]
+          },
+          "build": {
+            "status": "build_pass",
+            "ran": true,
+            "exit_code": 0,
+            "exception": null,
+            "duration_seconds": 0.5001867910004876,
+            "command": [
+              "dotnet",
+              "build",
+              "-v",
+              "q",
+              "-nologo"
+            ]
+          },
+          "has_added_code": true,
+          "scoring_eligible": true,
+          "idiom": 1,
+          "anti": 0,
+          "idiom_hits": [
+            "GuidGenerator.Create"
+          ],
+          "anti_hits": [],
+          "idiom_tot": 2,
+          "artifact_dir": "eng/experiment/runs/abp-infrastructure/generate-guids/baseline/3"
+        }
+      ],
+      "skilled": [
+        {
+          "status": "build_pass",
+          "agent_status": "agent_ok",
+          "build_status": "build_pass",
+          "agent": {
+            "status": "agent_ok",
+            "exit_code": 0,
+            "exception": null,
+            "duration_seconds": 59.94977191700036,
+            "command": [
+              "codex",
+              "exec",
+              "--ephemeral",
+              "--skip-git-repo-check",
+              "--sandbox",
+              "workspace-write",
+              "--color",
+              "never",
+              "--cd",
+              "/tmp/abp-exp-3czzaep7",
+              "-c",
+              "model_reasoning_effort=\"medium\"",
+              "--model",
+              "gpt-5.6-sol",
+              "-"
+            ]
+          },
+          "build": {
+            "status": "build_pass",
+            "ran": true,
+            "exit_code": 0,
+            "exception": null,
+            "duration_seconds": 0.48425554200002807,
+            "command": [
+              "dotnet",
+              "build",
+              "-v",
+              "q",
+              "-nologo"
+            ]
+          },
+          "has_added_code": true,
+          "scoring_eligible": true,
+          "idiom": 1,
+          "anti": 0,
+          "idiom_hits": [
+            "GuidGenerator.Create"
+          ],
+          "anti_hits": [],
+          "idiom_tot": 2,
+          "artifact_dir": "eng/experiment/runs/abp-infrastructure/generate-guids/skilled/1"
+        },
+        {
+          "status": "build_pass",
+          "agent_status": "agent_ok",
+          "build_status": "build_pass",
+          "agent": {
+            "status": "agent_ok",
+            "exit_code": 0,
+            "exception": null,
+            "duration_seconds": 99.57026466699972,
+            "command": [
+              "codex",
+              "exec",
+              "--ephemeral",
+              "--skip-git-repo-check",
+              "--sandbox",
+              "workspace-write",
+              "--color",
+              "never",
+              "--cd",
+              "/tmp/abp-exp-skqz7vsw",
+              "-c",
+              "model_reasoning_effort=\"medium\"",
+              "--model",
+              "gpt-5.6-sol",
+              "-"
+            ]
+          },
+          "build": {
+            "status": "build_pass",
+            "ran": true,
+            "exit_code": 0,
+            "exception": null,
+            "duration_seconds": 0.5172855829996479,
+            "command": [
+              "dotnet",
+              "build",
+              "-v",
+              "q",
+              "-nologo"
+            ]
+          },
+          "has_added_code": true,
+          "scoring_eligible": true,
+          "idiom": 1,
+          "anti": 0,
+          "idiom_hits": [
+            "GuidGenerator.Create"
+          ],
+          "anti_hits": [],
+          "idiom_tot": 2,
+          "artifact_dir": "eng/experiment/runs/abp-infrastructure/generate-guids/skilled/2"
+        },
+        {
+          "status": "build_pass",
+          "agent_status": "agent_ok",
+          "build_status": "build_pass",
+          "agent": {
+            "status": "agent_ok",
+            "exit_code": 0,
+            "exception": null,
+            "duration_seconds": 80.16654825000023,
+            "command": [
+              "codex",
+              "exec",
+              "--ephemeral",
+              "--skip-git-repo-check",
+              "--sandbox",
+              "workspace-write",
+              "--color",
+              "never",
+              "--cd",
+              "/tmp/abp-exp-ik2o0o0m",
+              "-c",
+              "model_reasoning_effort=\"medium\"",
+              "--model",
+              "gpt-5.6-sol",
+              "-"
+            ]
+          },
+          "build": {
+            "status": "build_pass",
+            "ran": true,
+            "exit_code": 0,
+            "exception": null,
+            "duration_seconds": 3.2425262919996385,
+            "command": [
+              "dotnet",
+              "build",
+              "-v",
+              "q",
+              "-nologo"
+            ]
+          },
+          "has_added_code": true,
+          "scoring_eligible": true,
+          "idiom": 1,
+          "anti": 0,
+          "idiom_hits": [
+            "GuidGenerator.Create"
+          ],
+          "anti_hits": [],
+          "idiom_tot": 2,
+          "artifact_dir": "eng/experiment/runs/abp-infrastructure/generate-guids/skilled/3"
+        }
+      ],
+      "baseline_agg": {
+        "runs": 3,
+        "agent_ok": 3,
+        "agent_error": 0,
+        "agent_timeout": 0,
+        "build_eligible_runs": 3,
+        "build_pass": 3,
+        "build_fail": 0,
+        "build_pass_rate": 1.0,
+        "scored_runs": 3,
+        "idiom": 1.0,
+        "anti": 0,
+        "idiom_tot": 2
+      },
+      "skilled_agg": {
+        "runs": 3,
+        "agent_ok": 3,
+        "agent_error": 0,
+        "agent_timeout": 0,
+        "build_eligible_runs": 3,
+        "build_pass": 3,
+        "build_fail": 0,
+        "build_pass_rate": 1.0,
+        "scored_runs": 3,
+        "idiom": 1.0,
+        "anti": 0,
+        "idiom_tot": 2
+      }
+    },
+    {
+      "skill": "abp-data-access/seed-application-data",
+      "baseline": [
+        {
+          "status": "build_pass",
+          "agent_status": "agent_ok",
+          "build_status": "build_pass",
+          "agent": {
+            "status": "agent_ok",
+            "exit_code": 0,
+            "exception": null,
+            "duration_seconds": 93.86444549999942,
+            "command": [
+              "codex",
+              "exec",
+              "--ephemeral",
+              "--skip-git-repo-check",
+              "--sandbox",
+              "workspace-write",
+              "--color",
+              "never",
+              "--cd",
+              "/tmp/abp-exp-xka3obvz",
+              "-c",
+              "model_reasoning_effort=\"medium\"",
+              "--model",
+              "gpt-5.6-sol",
+              "-"
+            ]
+          },
+          "build": {
+            "status": "build_pass",
+            "ran": true,
+            "exit_code": 0,
+            "exception": null,
+            "duration_seconds": 0.5779804999992848,
+            "command": [
+              "dotnet",
+              "build",
+              "-v",
+              "q",
+              "-nologo"
+            ]
+          },
+          "has_added_code": true,
+          "scoring_eligible": true,
+          "idiom": 3,
+          "anti": 0,
+          "idiom_hits": [
+            "IDataSeedContributor",
+            "DataSeedContext",
+            "SeedAsync"
+          ],
+          "anti_hits": [],
+          "idiom_tot": 3,
+          "artifact_dir": "eng/experiment/runs/abp-data-access/seed-application-data/baseline/1"
+        },
+        {
+          "status": "build_pass",
+          "agent_status": "agent_ok",
+          "build_status": "build_pass",
+          "agent": {
+            "status": "agent_ok",
+            "exit_code": 0,
+            "exception": null,
+            "duration_seconds": 51.245406125000045,
+            "command": [
+              "codex",
+              "exec",
+              "--ephemeral",
+              "--skip-git-repo-check",
+              "--sandbox",
+              "workspace-write",
+              "--color",
+              "never",
+              "--cd",
+              "/tmp/abp-exp-mgjyzji8",
+              "-c",
+              "model_reasoning_effort=\"medium\"",
+              "--model",
+              "gpt-5.6-sol",
+              "-"
+            ]
+          },
+          "build": {
+            "status": "build_pass",
+            "ran": true,
+            "exit_code": 0,
+            "exception": null,
+            "duration_seconds": 0.49160208300054364,
+            "command": [
+              "dotnet",
+              "build",
+              "-v",
+              "q",
+              "-nologo"
+            ]
+          },
+          "has_added_code": true,
+          "scoring_eligible": true,
+          "idiom": 3,
+          "anti": 0,
+          "idiom_hits": [
+            "IDataSeedContributor",
+            "DataSeedContext",
+            "SeedAsync"
+          ],
+          "anti_hits": [],
+          "idiom_tot": 3,
+          "artifact_dir": "eng/experiment/runs/abp-data-access/seed-application-data/baseline/2"
+        },
+        {
+          "status": "build_pass",
+          "agent_status": "agent_ok",
+          "build_status": "build_pass",
+          "agent": {
+            "status": "agent_ok",
+            "exit_code": 0,
+            "exception": null,
+            "duration_seconds": 63.30041387499932,
+            "command": [
+              "codex",
+              "exec",
+              "--ephemeral",
+              "--skip-git-repo-check",
+              "--sandbox",
+              "workspace-write",
+              "--color",
+              "never",
+              "--cd",
+              "/tmp/abp-exp-254blm1z",
+              "-c",
+              "model_reasoning_effort=\"medium\"",
+              "--model",
+              "gpt-5.6-sol",
+              "-"
+            ]
+          },
+          "build": {
+            "status": "build_pass",
+            "ran": true,
+            "exit_code": 0,
+            "exception": null,
+            "duration_seconds": 0.4847907920002399,
+            "command": [
+              "dotnet",
+              "build",
+              "-v",
+              "q",
+              "-nologo"
+            ]
+          },
+          "has_added_code": true,
+          "scoring_eligible": true,
+          "idiom": 3,
+          "anti": 0,
+          "idiom_hits": [
+            "IDataSeedContributor",
+            "DataSeedContext",
+            "SeedAsync"
+          ],
+          "anti_hits": [],
+          "idiom_tot": 3,
+          "artifact_dir": "eng/experiment/runs/abp-data-access/seed-application-data/baseline/3"
+        }
+      ],
+      "skilled": [
+        {
+          "status": "build_pass",
+          "agent_status": "agent_ok",
+          "build_status": "build_pass",
+          "agent": {
+            "status": "agent_ok",
+            "exit_code": 0,
+            "exception": null,
+            "duration_seconds": 73.51934370799972,
+            "command": [
+              "codex",
+              "exec",
+              "--ephemeral",
+              "--skip-git-repo-check",
+              "--sandbox",
+              "workspace-write",
+              "--color",
+              "never",
+              "--cd",
+              "/tmp/abp-exp-chbbjatk",
+              "-c",
+              "model_reasoning_effort=\"medium\"",
+              "--model",
+              "gpt-5.6-sol",
+              "-"
+            ]
+          },
+          "build": {
+            "status": "build_pass",
+            "ran": true,
+            "exit_code": 0,
+            "exception": null,
+            "duration_seconds": 0.5625027500000215,
+            "command": [
+              "dotnet",
+              "build",
+              "-v",
+              "q",
+              "-nologo"
+            ]
+          },
+          "has_added_code": true,
+          "scoring_eligible": true,
+          "idiom": 3,
+          "anti": 0,
+          "idiom_hits": [
+            "IDataSeedContributor",
+            "DataSeedContext",
+            "SeedAsync"
+          ],
+          "anti_hits": [],
+          "idiom_tot": 3,
+          "artifact_dir": "eng/experiment/runs/abp-data-access/seed-application-data/skilled/1"
+        },
+        {
+          "status": "build_pass",
+          "agent_status": "agent_ok",
+          "build_status": "build_pass",
+          "agent": {
+            "status": "agent_ok",
+            "exit_code": 0,
+            "exception": null,
+            "duration_seconds": 59.070052125000075,
+            "command": [
+              "codex",
+              "exec",
+              "--ephemeral",
+              "--skip-git-repo-check",
+              "--sandbox",
+              "workspace-write",
+              "--color",
+              "never",
+              "--cd",
+              "/tmp/abp-exp-di6teq6v",
+              "-c",
+              "model_reasoning_effort=\"medium\"",
+              "--model",
+              "gpt-5.6-sol",
+              "-"
+            ]
+          },
+          "build": {
+            "status": "build_pass",
+            "ran": true,
+            "exit_code": 0,
+            "exception": null,
+            "duration_seconds": 0.4876203750000059,
+            "command": [
+              "dotnet",
+              "build",
+              "-v",
+              "q",
+              "-nologo"
+            ]
+          },
+          "has_added_code": true,
+          "scoring_eligible": true,
+          "idiom": 3,
+          "anti": 0,
+          "idiom_hits": [
+            "IDataSeedContributor",
+            "DataSeedContext",
+            "SeedAsync"
+          ],
+          "anti_hits": [],
+          "idiom_tot": 3,
+          "artifact_dir": "eng/experiment/runs/abp-data-access/seed-application-data/skilled/2"
+        },
+        {
+          "status": "build_pass",
+          "agent_status": "agent_ok",
+          "build_status": "build_pass",
+          "agent": {
+            "status": "agent_ok",
+            "exit_code": 0,
+            "exception": null,
+            "duration_seconds": 64.2779649590002,
+            "command": [
+              "codex",
+              "exec",
+              "--ephemeral",
+              "--skip-git-repo-check",
+              "--sandbox",
+              "workspace-write",
+              "--color",
+              "never",
+              "--cd",
+              "/tmp/abp-exp-g9z09ztt",
+              "-c",
+              "model_reasoning_effort=\"medium\"",
+              "--model",
+              "gpt-5.6-sol",
+              "-"
+            ]
+          },
+          "build": {
+            "status": "build_pass",
+            "ran": true,
+            "exit_code": 0,
+            "exception": null,
+            "duration_seconds": 0.4736420420003924,
+            "command": [
+              "dotnet",
+              "build",
+              "-v",
+              "q",
+              "-nologo"
+            ]
+          },
+          "has_added_code": true,
+          "scoring_eligible": true,
+          "idiom": 3,
+          "anti": 0,
+          "idiom_hits": [
+            "IDataSeedContributor",
+            "DataSeedContext",
+            "SeedAsync"
+          ],
+          "anti_hits": [],
+          "idiom_tot": 3,
+          "artifact_dir": "eng/experiment/runs/abp-data-access/seed-application-data/skilled/3"
+        }
+      ],
+      "baseline_agg": {
+        "runs": 3,
+        "agent_ok": 3,
+        "agent_error": 0,
+        "agent_timeout": 0,
+        "build_eligible_runs": 3,
+        "build_pass": 3,
+        "build_fail": 0,
+        "build_pass_rate": 1.0,
+        "scored_runs": 3,
+        "idiom": 3.0,
+        "anti": 0,
+        "idiom_tot": 3
+      },
+      "skilled_agg": {
+        "runs": 3,
+        "agent_ok": 3,
+        "agent_error": 0,
+        "agent_timeout": 0,
+        "build_eligible_runs": 3,
+        "build_pass": 3,
+        "build_fail": 0,
+        "build_pass_rate": 1.0,
+        "scored_runs": 3,
+        "idiom": 3.0,
+        "anti": 0,
+        "idiom_tot": 3
+      }
+    }
+  ]
+}

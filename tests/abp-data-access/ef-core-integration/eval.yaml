@@ -1,0 +1,65 @@
+scenarios:
+  - name: "Create an ABP DbContext and repository registration"
+    prompt: "Create src/EntityFrameworkCore/BookStoreDbContext.cs and src/EntityFrameworkCore/BookStoreEntityFrameworkCoreModule.cs for a Book aggregate. Use ABP conventions and register default repositories, including non-aggregate entities. Summarize the mapping and repository registration calls."
+    expect_activation: true
+    assertions:
+      - type: "file_exists"
+        path: "src/EntityFrameworkCore/BookStoreDbContext.cs"
+      - type: "file_exists"
+        path: "src/EntityFrameworkCore/BookStoreEntityFrameworkCoreModule.cs"
+      - type: "output_contains"
+        value: "ConfigureByConvention"
+      - type: "output_matches"
+        pattern: 'AddDefaultRepositories\s*\(\s*includeAllEntities\s*:\s*true'
+    rubric:
+      - "Derives the context from AbpDbContext<TDbContext> and calls base.OnModelCreating before entity mappings."
+      - "Maps Book with ConfigureByConvention and a concrete table name."
+      - "Registers the context through AddAbpDbContext and opts into repositories for all entities."
+    timeout: 240
+
+  - name: "Keep a custom EF Core repository in the infrastructure layer"
+    prompt: "Design IBookRepository and EfCoreBookRepository with a GetListByAuthorAsync method. Explain which projects contain the interface and implementation and use ABP's current async repository accessors."
+    expect_activation: true
+    assertions:
+      - type: "output_contains"
+        value: "EfCoreRepository"
+      - type: "output_contains"
+        value: "IDbContextProvider"
+      - type: "output_matches"
+        pattern: "(GetDbSetAsync|GetQueryableAsync|GetDbContextAsync)"
+    rubric:
+      - "Places the EF-free repository interface in Domain and the implementation in EntityFrameworkCore."
+      - "Derives from EfCoreRepository<TDbContext, TEntity, TKey> and injects IDbContextProvider<TDbContext>."
+      - "Uses async accessors instead of obsolete synchronous DbSet or DbContext members."
+    timeout: 180
+
+  - name: "Switch the DBMS provider to PostgreSQL"
+    prompt: "Our ABP layered solution was created with SQL Server. Switch the *.EntityFrameworkCore project to PostgreSQL: which NuGet package and ABP module replace the SQL Server ones, what UseXxx() call goes in the module, and how do we handle the existing migrations?"
+    expect_activation: true
+    assertions:
+      - type: "output_contains"
+        value: "UseNpgsql"
+      - type: "output_contains"
+        value: "AbpEntityFrameworkCorePostgreSqlModule"
+      - type: "output_contains"
+        value: "Volo.Abp.EntityFrameworkCore.PostgreSql"
+      - type: "output_matches"
+        pattern: "(Migrations|migration)"
+    rubric:
+      - "Replaces the Volo.Abp.EntityFrameworkCore.SqlServer package/module with Volo.Abp.EntityFrameworkCore.PostgreSql and AbpEntityFrameworkCorePostgreSqlModule in [DependsOn]."
+      - "Uses UseNpgsql() (not the obsolete UsePostgreSql or UseSqlServer) inside Configure<AbpDbContextOptions> and in the design-time DbContext factory."
+      - "Explains that provider-specific migrations must be regenerated, and scopes deleting the Migrations folder to a new/undeployed project — an existing deployed database needs a backup and a planned data migration, not an unconditional delete of the migration history."
+    timeout: 180
+
+  - name: "Route MongoDB persistence to its provider skill"
+    prompt: "Replace EF Core with MongoDB for this ABP module. Define the Mongo DbContext collection mappings and register MongoDB repositories."
+    expect_activation: false
+    assertions:
+      - type: "output_matches"
+        pattern: "(AbpMongoDbContext|MongoDbContext|MongoDB)"
+      - type: "output_matches"
+        pattern: "(collection|repository)"
+    rubric:
+      - "Routes the provider-specific request to mongodb-integration."
+      - "Does not suggest AbpDbContext or EF Core migrations for a MongoDB implementation."
+    timeout: 120

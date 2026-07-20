@@ -1,0 +1,36 @@
+scenarios:
+  - name: "Refresh claims locally and in a tiered UI"
+    prompt: "Configure ABP so changed roles and email claims apply without re-login. Show the authentication-server setting, middleware order, a full RemoteRefreshUrl for a separate MVC UI, and explain whether permission claims are refreshed by default."
+    expect_activation: true
+    assertions:
+      - type: "output_matches"
+        pattern: "IsDynamicClaimsEnabled\\s*=\\s*true"
+      - type: "output_matches"
+        pattern: "UseDynamicClaims\\(\\)[\\s\\S]*UseAuthorization\\(\\)"
+      - type: "output_contains"
+        value: "RemoteRefreshUrl"
+      - type: "output_matches"
+        pattern: "(not|does not|aren't|are not).*permission|permission.*(not|does not|aren't|are not)"
+      - type: "output_contains"
+        value: "/api/account/dynamic-claims/refresh"
+    rubric:
+      - "Enables the principal factory option and places UseDynamicClaims before UseAuthorization in every authenticating app."
+      - "Uses a full auth-server refresh URL in the tiered UI and states that permissions are not in the default DynamicClaims set."
+    timeout: 240
+
+  - name: "Route token lifetime and certificates to OpenIddict"
+    prompt: "Set the OpenIddict access-token and refresh-token lifetimes, require offline_access for refresh tokens, and replace development signing credentials with a production PFX."
+    expect_activation: false
+    assertions:
+      - type: "output_contains"
+        value: "OpenIddictServerBuilder"
+      - type: "output_contains"
+        value: "SetAccessTokenLifetime"
+      - type: "output_contains"
+        value: "offline_access"
+      - type: "output_contains"
+        value: "AddProductionEncryptionAndSigningCertificate"
+    rubric:
+      - "Routes OAuth/OIDC server lifetimes, grants, scopes, and certificates to configure-openiddict-authentication."
+      - "Does not introduce UseDynamicClaims for a token-server configuration request."
+    timeout: 120

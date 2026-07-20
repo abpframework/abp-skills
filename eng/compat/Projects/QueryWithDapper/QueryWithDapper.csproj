@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <Compile Include="../../Skills/QueryWithDapper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.Core" />
+    <PackageReference Include="Volo.Abp.Dapper" />
+    <PackageReference Include="Volo.Abp.EntityFrameworkCore" />
+  </ItemGroup>
+</Project>

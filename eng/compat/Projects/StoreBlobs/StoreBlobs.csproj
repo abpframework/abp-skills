@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <Compile Include="../../Skills/StoreBlobs.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.BlobStoring" />
+    <PackageReference Include="Volo.Abp.BlobStoring.Aws" />
+    <PackageReference Include="Volo.Abp.BlobStoring.Azure" />
+    <PackageReference Include="Volo.Abp.BlobStoring.Database.Domain" />
+    <PackageReference Include="Volo.Abp.BlobStoring.Minio" />
+    <PackageReference Include="Volo.Abp.Core" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <Compile Include="../../Skills/SeedApplicationData.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.Core" />
+    <PackageReference Include="Volo.Abp.Data" />
+    <PackageReference Include="Volo.Abp.Ddd.Domain" />
+    <PackageReference Include="Volo.Abp.Guids" />
+    <PackageReference Include="Volo.Abp.MultiTenancy.Abstractions" />
+    <PackageReference Include="Volo.Abp.Uow" />
+  </ItemGroup>
+</Project>

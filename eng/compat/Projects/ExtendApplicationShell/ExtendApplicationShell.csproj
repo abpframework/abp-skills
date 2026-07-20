@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <Compile Include="../../Skills/ExtendApplicationShell.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared" />
+    <PackageReference Include="Volo.Abp.Authorization" />
+    <PackageReference Include="Volo.Abp.UI" />
+  </ItemGroup>
+</Project>

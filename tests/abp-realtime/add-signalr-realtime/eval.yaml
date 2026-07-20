@@ -1,0 +1,36 @@
+scenarios:
+  - name: "Add an authorized conventionally mapped chat hub"
+    prompt: "Add an authorized ABP SignalR ChatHub with a strongly typed client, CurrentUser access, and private delivery through Clients.User. Show the conventional route and a JavaScript client connection. Keep automatic DI registration and endpoint mapping."
+    expect_activation: true
+    assertions:
+      - type: "output_contains"
+        value: "AbpAspNetCoreSignalRModule"
+      - type: "output_contains"
+        value: "AbpHub<IChatClient>"
+      - type: "output_contains"
+        value: "[Authorize]"
+      - type: "output_contains"
+        value: "Clients.User"
+      - type: "output_contains"
+        value: "/signalr-hubs/chat"
+      - type: "output_contains"
+        value: "HubConnectionBuilder"
+      - type: "output_contains"
+        value: "UseConfiguredEndpoints"
+    rubric:
+      - "Uses ABP's SignalR module and AbpHub base, relies on conventional mapping, and identifies the kebab-case route with the Hub suffix removed."
+      - "Secures the hub, uses CurrentUser-backed user targeting, and connects with the standard SignalR client."
+    timeout: 240
+
+  - name: "Route a normal request-response API to HTTP API guidance"
+    prompt: "Expose a non-realtime Books application service as conventional REST endpoints with correct HTTP verbs and OpenAPI metadata. No server push, hub, or persistent client connection is needed."
+    expect_activation: false
+    assertions:
+      - type: "output_contains"
+        value: "ConventionalControllers"
+      - type: "output_matches"
+        pattern: "(HTTP verb|HttpGet|HttpPost|REST)"
+    rubric:
+      - "Routes ordinary request-response HTTP endpoint work to expose-http-apis."
+      - "Does not introduce a SignalR hub when no realtime behavior was requested."
+    timeout: 120

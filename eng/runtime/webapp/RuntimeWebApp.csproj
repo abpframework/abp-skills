@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <!--
+    A minimal ABP MVC web app used ONLY as the system-under-test for the runtime
+    WebApplicationFactory tests (test-mvc-razor-ui). Being a separate Web SDK project
+    referenced by the test project lets Microsoft.AspNetCore.Mvc.Testing generate the
+    content-root attribute, which an in-test-assembly host cannot get without a solution.
+  -->
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.AspNetCore.Mvc" />
+    <PackageReference Include="Volo.Abp.AspNetCore.TestBase" />
+    <PackageReference Include="Volo.Abp.Autofac" />
+    <PackageReference Include="Volo.Abp.Ddd.Application" />
+  </ItemGroup>
+
+</Project>

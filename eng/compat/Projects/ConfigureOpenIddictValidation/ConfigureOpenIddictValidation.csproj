@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <Compile Include="../../Skills/ConfigureOpenIddictValidation.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.AspNetCore.Authentication.JwtBearer" />
+    <PackageReference Include="Volo.Abp.Identity.AspNetCore" />
+    <PackageReference Include="Volo.Abp.OpenIddict.AspNetCore" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,48 @@
+scenarios:
+  - name: "Add automatic DTO validation"
+    prompt: "Create src/Application.Contracts/Books/CreateBookDto.cs with required name, bounded length, positive price, and a cross-field rule. Explain when ABP validates it, the interception requirement for a custom IValidationEnabled service, and the HTTP response on failure."
+    expect_activation: true
+    assertions:
+      - type: "file_exists"
+        path: "src/Application.Contracts/Books/CreateBookDto.cs"
+      - type: "output_contains"
+        value: "IValidatableObject"
+      - type: "output_contains"
+        value: "AbpValidationException"
+      - type: "output_matches"
+        pattern: "(HTTP )?400|BadRequest"
+    rubric:
+      - "Uses data annotations for property rules and IValidatableObject only for the cross-field rule."
+      - "Explains that application services are validation-enabled and that custom intercepted services need a virtual method or interface call."
+      - "States that validation errors populate the standard remote error response and map to HTTP 400."
+    timeout: 210
+
+  - name: "Localize and remap a business error"
+    prompt: "Show an ABP BusinessException for duplicate ISBN using code BookStore:010001 and a data parameter. Configure code-namespace localization and override only this error code to HTTP 409. Explain what clients receive if the localization key is missing."
+    expect_activation: true
+    assertions:
+      - type: "output_contains"
+        value: "BusinessException"
+      - type: "output_contains"
+        value: "MapCodeNamespace"
+      - type: "output_contains"
+        value: "AbpExceptionHttpStatusCodeOptions"
+      - type: "output_matches"
+        pattern: "(Conflict|409)"
+    rubric:
+      - "Uses WithData for the message parameter and maps the BookStore code namespace to a localization resource."
+      - "Uses AbpExceptionHttpStatusCodeOptions.Map for the single code and states that a missing localized code gets ABP's default client message, not the exception Message."
+    timeout: 180
+
+  - name: "Route authorization policy work away from error handling"
+    prompt: "Define Books.Create and Books.Delete permissions in a PermissionDefinitionProvider, localize their display names, protect application-service methods with [Authorize], and explain role grants."
+    expect_activation: false
+    assertions:
+      - type: "output_contains"
+        value: "PermissionDefinitionProvider"
+      - type: "output_matches"
+        pattern: '\[Authorize\('
+    rubric:
+      - "Routes named permission definition and grant checks to permissions-and-authorization."
+      - "Does not model expected authorization denial as a validation or business-error concern."
+    timeout: 120

@@ -1,0 +1,34 @@
+scenarios:
+  - name: "Configure and use AutoMapper through IObjectMapper"
+    prompt: "Create src/Application/BookStoreApplicationAutoMapperProfile.cs and show module registration plus application code that maps Book to BookDto and UpdateBookDto onto an existing Book. Book is a simple CRUD entity (public setters, no invariants). Both types are extensible, so carry ExtraProperties and validate the profile at startup."
+    expect_activation: true
+    assertions:
+      - type: "file_exists"
+        path: "src/Application/BookStoreApplicationAutoMapperProfile.cs"
+      - type: "output_contains"
+        value: "CreateMap<Book, BookDto>"
+      - type: "output_contains"
+        value: "MapExtraProperties"
+      - type: "output_matches"
+        pattern: 'AddMaps<[^>]+>\(validate:\s*true\)'
+      - type: "output_matches"
+        pattern: "ObjectMapper\\.Map<UpdateBookDto, Book>\\(input, book\\)"
+    rubric:
+      - "Defines the exact mappings before using IObjectMapper and maps the update DTO onto the existing entity."
+      - "Explicitly maps extra properties and enables AutoMapper configuration validation."
+    timeout: 240
+
+  - name: "Route adding Identity extra properties to module customization"
+    prompt: "Add SocialSecurityNumber to the pre-built IdentityUser entity, its create/update/output DTOs, a dedicated EF Core column, and the generated module UI without editing the Identity module source."
+    expect_activation: false
+    assertions:
+      - type: "output_contains"
+        value: "ObjectExtensionManager"
+      - type: "output_contains"
+        value: "MapEfCoreProperty"
+      - type: "output_matches"
+        pattern: "IdentityUser(Create|Update)?Dto"
+    rubric:
+      - "Routes extension of a consumed pre-built module to customize-application-modules."
+      - "Does not treat defining an AutoMapper map as sufficient to add or persist a new module property."
+    timeout: 120

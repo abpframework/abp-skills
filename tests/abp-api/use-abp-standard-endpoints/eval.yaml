@@ -1,0 +1,43 @@
+scenarios:
+  - name: "Explain the application-configuration endpoint contents"
+    prompt: "In an ABP host, which built-in HTTP endpoint returns the current user's info and granted permissions for a custom client to consume? Give the route and verb, name the app service behind it, and list the main sections of what it returns (current user, granted policies, settings, features, multi-tenancy, timing)."
+    expect_activation: true
+    assertions:
+      - type: "output_contains"
+        value: "application-configuration"
+      - type: "output_contains"
+        value: "AbpApplicationConfigurationAppService"
+      - type: "output_matches"
+        pattern: "(GrantedPolicies|granted policies|grantedPolicies)"
+    rubric:
+      - "Names the route /api/abp/application-configuration served over HTTP GET."
+      - "Attributes it to AbpApplicationConfigurationAppService returning ApplicationConfigurationDto."
+      - "Lists the real sections: Auth/GrantedPolicies, CurrentUser, Setting, Features, MultiTenancy, CurrentTenant, Timing/Clock."
+    timeout: 180
+
+  - name: "Extend the configuration endpoint with a contributor"
+    prompt: "Add a custom value (a deployment version) to ABP's /api/abp/application-configuration response in an ABP app. Create src/Web/MyApplicationConfigurationContributor.cs implementing the contributor, and show how to register it. Explain which interface and options type are involved."
+    expect_activation: true
+    assertions:
+      - type: "file_exists"
+        path: "src/Web/MyApplicationConfigurationContributor.cs"
+      - type: "output_contains"
+        value: "IApplicationConfigurationContributor"
+      - type: "output_contains"
+        value: "AbpApplicationConfigurationOptions"
+    rubric:
+      - "Implements IApplicationConfigurationContributor with ContributeAsync(ApplicationConfigurationContributorContext context)."
+      - "Uses context.ApplicationConfiguration.SetProperty to add the value into ExtraProperties."
+      - "Registers the contributor in AbpApplicationConfigurationOptions.Contributors, not a fabricated IAbpApplicationConfigurationContributor."
+    timeout: 240
+
+  - name: "Route client-side config consumption to a UI skill"
+    prompt: "In my Angular ABP app I need to read the granted permissions and current user on startup and react to them in components. How do I consume that application config on the client?"
+    expect_activation: false
+    assertions:
+      - type: "output_matches"
+        pattern: "(Angular|ConfigStateService|abp-ui|menus-and-localization|UI skill)"
+    rubric:
+      - "Routes to the abp-ui skills (e.g. menus-and-localization / angular-ui) for client-side consumption."
+      - "Does not teach hitting the raw /api/abp/application-configuration endpoint or writing a server contributor."
+    timeout: 120

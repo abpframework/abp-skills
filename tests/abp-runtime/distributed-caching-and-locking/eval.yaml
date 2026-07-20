@@ -1,0 +1,37 @@
+scenarios:
+  - name: "Cache products and serialize a cross-instance report"
+    prompt: "Implement an ABP application service that caches ProductCacheItem values for 30 minutes in a typed distributed cache and a report generator that only one application instance can enter at a time. Use the ABP cache and distributed-lock abstractions, handle a failed lock acquisition, and release the handle correctly."
+    expect_activation: true
+    assertions:
+      - type: "output_contains"
+        value: "IDistributedCache<ProductCacheItem>"
+      - type: "output_contains"
+        value: "GetOrAddAsync"
+      - type: "output_contains"
+        value: "IAbpDistributedLock"
+      - type: "output_contains"
+        value: "TryAcquireAsync"
+      - type: "output_contains"
+        value: "await using"
+      - type: "output_matches"
+        pattern: "(handle is null|handle == null|handle != null)"
+    rubric:
+      - "Uses the typed ABP distributed cache with an explicit DistributedCacheEntryOptions expiration factory."
+      - "Treats a null lock handle as acquisition failure and asynchronously disposes a successful handle."
+      - "Calls out that real cross-instance behavior needs shared cache and lock providers such as Redis-backed providers."
+    timeout: 240
+
+  - name: "Route automatic entity-by-id caching to entity cache"
+    prompt: "Cache ProductDto by Product Guid using the repository-backed ABP entity cache, batch several ids, and automatically invalidate cached values when Product is updated or deleted."
+    expect_activation: false
+    assertions:
+      - type: "output_contains"
+        value: "AddEntityCache<Product, ProductDto, Guid>"
+      - type: "output_contains"
+        value: "IEntityCache<ProductDto, Guid>"
+      - type: "output_matches"
+        pattern: "(GetManyAsync|FindManyAsync)"
+    rubric:
+      - "Routes repository-backed entity caching and automatic invalidation to cache-entities."
+      - "Does not replace IEntityCache with manually managed distributed-cache keys."
+    timeout: 120

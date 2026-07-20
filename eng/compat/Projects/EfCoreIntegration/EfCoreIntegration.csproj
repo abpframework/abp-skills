@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <Compile Include="../../Skills/EfCoreIntegration.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.Data" />
+    <PackageReference Include="Volo.Abp.Ddd.Domain" />
+    <PackageReference Include="Volo.Abp.EntityFrameworkCore" />
+    <PackageReference Include="Volo.Abp.EntityFrameworkCore.SqlServer" />
+  </ItemGroup>
+</Project>

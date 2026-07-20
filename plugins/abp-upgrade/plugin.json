@@ -1,0 +1,8 @@
+{
+  "name": "abp-upgrade",
+  "version": "1.0.0",
+  "description": "Upgrading ABP applications across versions: the abp CLI update flow, migration guides, and handling breaking changes.",
+  "skills": [
+    "./skills/"
+  ]
+}

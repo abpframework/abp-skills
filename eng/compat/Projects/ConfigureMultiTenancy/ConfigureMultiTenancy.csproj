@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <Compile Include="../../Skills/ConfigureMultiTenancy.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.AspNetCore.MultiTenancy" />
+    <PackageReference Include="Volo.Abp.BackgroundJobs.Abstractions" />
+    <PackageReference Include="Volo.Abp.Data" />
+    <PackageReference Include="Volo.Abp.Ddd.Domain" />
+    <PackageReference Include="Volo.Abp.MultiTenancy.Abstractions" />
+  </ItemGroup>
+</Project>

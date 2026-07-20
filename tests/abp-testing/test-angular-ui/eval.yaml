@@ -1,0 +1,40 @@
+scenarios:
+  - name: "Unit-test an ABP Angular component with the testing modules"
+    prompt: "Write a Vitest unit test for an ABP Angular standalone BooksComponent. Boot a TestBed with ABP's testing modules so nothing hits a backend, mock AuthService, and clean up modal DOM between tests."
+    expect_activation: true
+    assertions:
+      - type: "output_contains"
+        value: "CoreTestingModule.withConfig"
+      - type: "output_matches"
+        pattern: "@abp/ng.core/testing"
+      - type: "output_contains"
+        value: "TestBed.configureTestingModule"
+      - type: "output_contains"
+        value: "clearPage"
+      - type: "output_matches"
+        pattern: "(vitest|vi\\.fn)"
+    rubric:
+      - "Uses CoreTestingModule (and ThemeSharedTestingModule) so the TestBed boots without a real backend."
+      - "Puts the standalone component in imports and mocks AuthService."
+      - "Cleans body-level UI with clearPage and uses the Vitest runner, not Jest/Karma."
+    timeout: 240
+
+  - name: "Route server-side test to test-abp-applications"
+    prompt: "Write an integration test for my ABP BookAppService that resolves the real service and asserts against seeded data through the *TestBase chain."
+    expect_activation: false
+    assertions:
+      - type: "output_matches"
+        pattern: "(test-abp-applications|AbpIntegratedTest|GetRequiredService)"
+    rubric:
+      - "Server-side application/repository tests are test-abp-applications, not Angular component tests."
+    timeout: 120
+
+  - name: "Route MVC page test to test-mvc-razor-ui"
+    prompt: "Write a test that requests an ABP Razor page over HTTP and asserts on the returned HTML."
+    expect_activation: false
+    assertions:
+      - type: "output_matches"
+        pattern: "(test-mvc-razor-ui|AbpWebApplicationFactoryIntegratedTest|GetResponseAsStringAsync)"
+    rubric:
+      - "HTTP/Razor page tests are test-mvc-razor-ui, not Angular component tests."
+    timeout: 120

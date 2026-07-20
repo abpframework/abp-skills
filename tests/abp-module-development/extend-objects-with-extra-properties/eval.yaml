@@ -1,0 +1,38 @@
+scenarios:
+  - name: "Add extra property to entity and DTO with EF Core"
+    prompt: "Add a runtime-defined ManufacturerCode extra property to my own Product aggregate root and its ProductDto, persist it with EF Core, and map it between entity and DTO."
+    expect_activation: true
+    assertions:
+      - type: "output_contains"
+        value: "ObjectExtensionManager"
+      - type: "output_matches"
+        pattern: "(AddOrUpdateProperty|SetProperty|GetProperty)"
+      - type: "output_contains"
+        value: "IHasExtraProperties"
+      - type: "output_contains"
+        value: "MapExtraProperties"
+    rubric:
+      - "Defines the property via ObjectExtensionManager.Instance.AddOrUpdateProperty for both types."
+      - "Uses SetProperty/GetProperty and MapExtraProperties, with ConfigureByConvention for EF Core."
+    timeout: 200
+  - name: "Promote extra property to a dedicated EF Core column"
+    prompt: "I want one of my ABP entity's extra properties stored in a real dedicated database column instead of the JSON ExtraProperties column. How do I do this with EF Core?"
+    expect_activation: true
+    assertions:
+      - type: "output_contains"
+        value: "MapEfCoreProperty"
+      - type: "output_contains"
+        value: "ExtraProperties"
+    rubric:
+      - "Uses ObjectExtensionManager.Instance.MapEfCoreProperty and mentions adding a migration."
+      - "Notes the JSON copy no longer duplicates the promoted column."
+    timeout: 180
+  - name: "Route replacing a pre-built module service to customize-application-modules"
+    prompt: "Without editing the module source, replace the installed ABP Identity module's IdentityUserManager with my own subclass so I can run custom logic when a user is created."
+    expect_activation: false
+    assertions:
+      - type: "output_contains"
+        value: "customize-application-modules"
+    rubric:
+      - "Routes to the customize-application-modules skill for replacing/overriding a pre-built module service."
+    timeout: 120

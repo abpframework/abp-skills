@@ -1,0 +1,17 @@
+<Project>
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <IsPackable>false</IsPackable>
+    <NoWarn>$(NoWarn);CS0169;CS0414;CS0649;CS8321;CS0219;IDE0051;IDE0060</NoWarn>
+    <WarningsAsErrors>$(WarningsAsErrors);CS0618</WarningsAsErrors>
+  </PropertyGroup>
+
+  <!-- The next-ABP build passes -p:AbpNext=true (alongside -p:AbpVersion=10.6.0-rc.1) to
+       compile the ABP_NEXT-guarded, version-specific API references. The stable build leaves
+       AbpNext unset, so those blocks are excluded and 10.5 stays green. -->
+  <PropertyGroup Condition="'$(AbpNext)' == 'true'">
+    <DefineConstants>$(DefineConstants);ABP_NEXT</DefineConstants>
+  </PropertyGroup>
+</Project>

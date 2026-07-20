@@ -1,0 +1,38 @@
+scenarios:
+  - name: "Configure production tokens refresh and certificates"
+    prompt: "Configure an ABP AuthServer module for 30-minute access tokens and 14-day refresh tokens. Enable refresh tokens correctly for an MVC client, disable development certificates, load openiddict.pfx for signing and encryption, and keep HTTPS required outside development."
+    expect_activation: true
+    assertions:
+      - type: "output_contains"
+        value: "PreConfigure<OpenIddictServerBuilder>"
+      - type: "output_contains"
+        value: "SetAccessTokenLifetime"
+      - type: "output_contains"
+        value: "SetRefreshTokenLifetime"
+      - type: "output_contains"
+        value: "OpenIddictConstants.GrantTypes.RefreshToken"
+      - type: "output_matches"
+        pattern: "Scope\\.Add\\(\"offline_access\"\\)"
+      - type: "output_matches"
+        pattern: "AddDevelopmentEncryptionAndSigningCertificate\\s*=\\s*false"
+      - type: "output_contains"
+        value: "AddProductionEncryptionAndSigningCertificate"
+    rubric:
+      - "Configures builder options in PreConfigureServices and enables refresh tokens on both sides: the seeded client grant and the requested offline_access scope."
+      - "Disables ABP development certificates in production, registers the PFX for signing and encryption, and does not disable transport security globally."
+    timeout: 240
+
+  - name: "Route mid-session role refresh to dynamic claims"
+    prompt: "Make a user's changed roles and profile claims take effect on the next authenticated request without requiring login again. Wire the middleware in the right order and support a separate UI app calling the auth server refresh endpoint."
+    expect_activation: false
+    assertions:
+      - type: "output_contains"
+        value: "IsDynamicClaimsEnabled"
+      - type: "output_matches"
+        pattern: "UseDynamicClaims\\(\\).*UseAuthorization\\(\\)"
+      - type: "output_contains"
+        value: "RemoteRefreshUrl"
+    rubric:
+      - "Routes request-time claim refresh to configure-dynamic-claims."
+      - "Does not treat refresh_token lifetime configuration as the mechanism for rebuilding role claims on each request."
+    timeout: 120

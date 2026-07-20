@@ -1,0 +1,26 @@
+scenarios:
+  - name: "Call an app service from browser JS and wire a DataTable"
+    prompt: "In an ABP MVC/Razor Pages app, call the server BookAppService.getList from browser JavaScript and bind the results to an ABP DataTable with server-side paging, sorting, and a delete row action. Explain how the proxy is loaded and how paging/sorting is adapted."
+    expect_activation: true
+    assertions:
+      - type: "output_matches"
+        pattern: "(ServiceProxyScript|generate-proxy -t js)"
+      - type: "output_contains"
+        value: "abp.libs.datatables.createAjax"
+      - type: "output_matches"
+        pattern: "(rowAction|dataFormat|normalizeConfiguration)"
+    rubric:
+      - "Loads the dynamic JS proxy from /Abp/ServiceProxyScript (or a generated static proxy), not a hand-written fetch/ajax call."
+      - "Uses abp.libs.datatables.createAjax to bridge ABP and DataTables paging/sorting/response shapes rather than passing the proxy straight to DataTables."
+      - "Notes that a proxy method returns a jQuery Deferred and its last argument is extra AJAX options, not a business parameter."
+    timeout: 180
+
+  - name: "Route C# client proxy consumption elsewhere"
+    prompt: "From a C# background service, call a remote ABP HTTP API using a strongly-typed client proxy with retry via AbpHttpClientBuilderOptions."
+    expect_activation: false
+    assertions:
+      - type: "output_not_contains"
+        value: "abp.libs.datatables.createAjax"
+    rubric:
+      - "Server-side C# client proxy consumption is consume-remote-services, not browser JavaScript proxies; the DataTables adapter should not appear."
+    timeout: 120

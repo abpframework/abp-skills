@@ -1,0 +1,71 @@
+scenarios:
+  - name: "Define localized permissions and protect services"
+    prompt: "Create src/Application.Contracts/Permissions/BookStorePermissionDefinitionProvider.cs for a BookStore group with Books parent plus Create, Edit, and Delete children. Localize display names, make an Administration permission host-only, and show declarative protection on BookAppService."
+    expect_activation: true
+    assertions:
+      - type: "file_exists"
+        path: "src/Application.Contracts/Permissions/BookStorePermissionDefinitionProvider.cs"
+      - type: "output_contains"
+        value: "PermissionDefinitionProvider"
+      - type: "output_contains"
+        value: "AddGroup"
+      - type: "output_contains"
+        value: "AddChild"
+      - type: "output_contains"
+        value: "MultiTenancySides.Host"
+      - type: "output_matches"
+        pattern: '\[Authorize\('
+    rubric:
+      - "Uses stable permission constants and LocalizableString resource keys rather than scattered magic strings."
+      - "Defines the host-only permission with MultiTenancySides.Host and protects the service or method with the matching named permission."
+      - "Does not claim that defining or nesting a permission grants it to a user."
+    timeout: 240
+
+  - name: "Check grants and current user safely"
+    prompt: "Explain how an ABP application service checks Books.Delete without throwing, enforces Books.Edit by throwing when denied, reads the authenticated user's id and roles, and handles an unknown or disabled permission. Distinguish permission definitions from role/user/client grants."
+    expect_activation: true
+    assertions:
+      - type: "output_contains"
+        value: "IsGrantedAsync"
+      - type: "output_contains"
+        value: "CheckAsync"
+      - type: "output_contains"
+        value: "ICurrentUser"
+      - type: "output_matches"
+        pattern: "(RolePermissionValueProvider|UserPermissionValueProvider|ClientPermissionValueProvider|role/user/client)"
+    rubric:
+      - "Guards nullable user data with IsAuthenticated and uses the standard authorization APIs for checks."
+      - "States that unknown, disabled, or wrong-side permissions produce false for IsGrantedAsync."
+      - "Explains that grants are evaluated through role, user, or client providers rather than created by the definition provider."
+    timeout: 180
+
+  - name: "Route instance-specific access to resource authorization"
+    prompt: "Authorize editing one Document instance based on its id and owner, define a resource permission, and check the current user's grant for that exact document rather than a global Documents.Edit permission."
+    expect_activation: false
+    assertions:
+      - type: "output_matches"
+        pattern: "(resource permission|resourceName|resourceKey|Document)"
+      - type: "output_matches"
+        pattern: "(owner|instance|specific document)"
+    rubric:
+      - "Routes entity-instance authorization to authorize-resources."
+      - "Does not flatten ownership of a specific document into only a global named permission."
+    timeout: 120
+
+  - name: "Run a code block as a different principal"
+    prompt: "In an ABP service, I need to run a block of background code as a specific user (given their user id and user name) so that ICurrentUser and permission checks see that user, then restore the original principal afterward. Show how to build the principal and switch it for just that scope."
+    expect_activation: true
+    assertions:
+      - type: "output_contains"
+        value: "ICurrentPrincipalAccessor"
+      - type: "output_contains"
+        value: "Change"
+      - type: "output_matches"
+        pattern: "using\\s*\\(.*Change\\("
+      - type: "output_contains"
+        value: "AbpClaimTypes"
+    rubric:
+      - "Injects ICurrentPrincipalAccessor and calls Change with a constructed ClaimsPrincipal inside a using block so the original principal is restored on dispose."
+      - "Builds claims using AbpClaimTypes constants (e.g. UserId, UserName) rather than hard-coded claim type strings."
+      - "Explains the scope is AsyncLocal-based and does not sign the user in or issue a token — it only changes the ambient principal for that block."
+    timeout: 180

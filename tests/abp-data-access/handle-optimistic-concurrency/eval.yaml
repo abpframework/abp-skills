@@ -1,0 +1,34 @@
+scenarios:
+  - name: "Flow and refresh an EF Core concurrency stamp"
+    prompt: "Implement an ABP Book update flow where Book derives from AggregateRoot<Guid>. Include BookDto and UpdateBookDto, reject a stale second update, flush so the response carries the regenerated stamp, and explain who generates that stamp."
+    expect_activation: true
+    assertions:
+      - type: "output_contains"
+        value: "ConcurrencyStamp"
+      - type: "output_matches"
+        pattern: "book\\.ConcurrencyStamp\\s*=\\s*input\\.ConcurrencyStamp"
+      - type: "output_matches"
+        pattern: 'UpdateAsync\([^\n]*autoSave\s*:\s*true'
+      - type: "output_contains"
+        value: "AbpDbConcurrencyException"
+      - type: "output_matches"
+        pattern: "Guid\\.NewGuid\\(\\)\\.ToString\\(\"N\"\\)|ABP.*generates.*stamp"
+    rubric:
+      - "Carries the stamp on both output and update DTOs, copies the client's stamp onto the entity, and flushes EF Core before mapping the new stamp."
+      - "Explains that ABP generates a new stamp at SaveChanges and that a stale update surfaces AbpDbConcurrencyException rather than silently overwriting."
+    timeout: 240
+
+  - name: "Route transaction boundaries to unit of work management"
+    prompt: "A worker already has an ambient unit of work. Start a new transaction for every tenant, commit each one independently, and make sure a failure in tenant B does not roll back tenant A."
+    expect_activation: false
+    assertions:
+      - type: "output_contains"
+        value: "IUnitOfWorkManager"
+      - type: "output_matches"
+        pattern: 'requiresNew\s*:\s*true'
+      - type: "output_contains"
+        value: "CompleteAsync"
+    rubric:
+      - "Routes transaction scoping and independent commits to manage-units-of-work."
+      - "Does not introduce concurrency stamps when the request concerns transaction boundaries."
+    timeout: 120

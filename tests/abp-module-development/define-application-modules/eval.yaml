@@ -1,0 +1,69 @@
+scenarios:
+  - name: "Define a module with dependencies options and lifecycle"
+    prompt: "Create src/BlogModule.cs for an ABP module that directly depends on AbpAutofacModule and AbpAspNetCoreMvcModule, configures BlogOptions, conventionally registers BlogIndexer as scoped, and resolves it during application initialization. Explain when PreConfigureServices runs relative to ConfigureServices across modules."
+    expect_activation: true
+    assertions:
+      - type: "file_exists"
+        path: "src/BlogModule.cs"
+      - type: "output_contains"
+        value: "AbpModule"
+      - type: "output_matches"
+        pattern: "\\[DependsOn\\("
+      - type: "output_matches"
+        pattern: "Configure<BlogOptions>"
+      - type: "output_contains"
+        value: "IScopedDependency"
+      - type: "output_contains"
+        value: "OnApplicationInitialization"
+    rubric:
+      - "Declares direct module dependencies and uses ABP's option helpers and conventional lifetime interfaces correctly."
+      - "States that PreConfigureServices runs before ConfigureServices methods of all modules, and resolves runtime services only after the service provider is ready."
+    timeout: 240
+
+  - name: "Route project placement to layered architecture"
+    prompt: "Tell me which projects should contain a Book aggregate, IBookRepository, BookDto, BookAppService, EfCoreBookRepository, HTTP controller, and client proxy in a layered ABP solution."
+    expect_activation: false
+    assertions:
+      - type: "output_matches"
+        pattern: "Domain.*Application\\.Contracts.*Application|Application\\.Contracts.*EntityFrameworkCore"
+      - type: "output_contains"
+        value: "EntityFrameworkCore"
+    rubric:
+      - "Routes project and type placement to layered-architecture."
+      - "Does not require an AbpModule implementation when the user only asks about layer ownership."
+    timeout: 120
+
+  - name: "Options producer and consumer with pre-configuration"
+    prompt: "I'm building a reusable ABP module that exposes an ImportOptions class. Dependent modules must be able to influence a value during dependency injection registration so my module can decide which importer service to register. Show how a dependent sets the pre-configured value, how my module reads it back while registering services, and how a runtime service later consumes the finalized options. Explain the ordering that makes this work."
+    expect_activation: true
+    assertions:
+      - type: "output_matches"
+        pattern: "PreConfigure<"
+      - type: "output_contains"
+        value: "ExecutePreConfiguredActions"
+      - type: "output_matches"
+        pattern: "IOptions<"
+      - type: "output_contains"
+        value: "PreConfigureServices"
+    rubric:
+      - "Uses PreConfigure<TOptions> in PreConfigureServices and reads values back via context.Services.ExecutePreConfiguredActions<TOptions>() in ConfigureServices."
+      - "Consumes finalized options at runtime by injecting IOptions<TOptions> and reading .Value."
+      - "States that all modules' PreConfigureServices run before any ConfigureServices, which is why the producer can read pre-configured values during registration."
+    timeout: 240
+
+  - name: "Bootstrap the ABP application container"
+    prompt: "In a plain .NET console app with no ASP.NET Core host, how do I create and start the ABP application from my root module MyConsoleModule and then shut it down cleanly? Also explain how this differs from an ASP.NET Core app where the host manages the lifetime."
+    expect_activation: true
+    assertions:
+      - type: "output_matches"
+        pattern: "AbpApplicationFactory"
+      - type: "output_matches"
+        pattern: "InitializeAsync|InitializeApplicationAsync"
+      - type: "output_contains"
+        value: "AddApplicationAsync"
+      - type: "output_contains"
+        value: "ShutdownAsync"
+    rubric:
+      - "Creates the container with AbpApplicationFactory.CreateAsync<MyConsoleModule>() and initializes with InitializeAsync(), disposing/shutting down explicitly."
+      - "Distinguishes manually-managed console lifetime from the ASP.NET Core hosted path using AddApplicationAsync and app.InitializeApplicationAsync() where the host drives shutdown."
+    timeout: 240

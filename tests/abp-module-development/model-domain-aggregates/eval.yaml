@@ -1,0 +1,48 @@
+scenarios:
+  - name: "Model an aggregate with invariants and a domain event"
+    prompt: "Create src/Domain/Orders/Order.cs for an ABP Order aggregate. Generate its Guid outside the aggregate with IGuidGenerator, keep setters non-public, mutate lines through aggregate methods, reference Product by ProductId, and raise a local OrderCompletedEvent when completed. Explain the AggregateRoot<Guid> facilities used."
+    expect_activation: true
+    assertions:
+      - type: "file_exists"
+        path: "src/Domain/Orders/Order.cs"
+      - type: "output_contains"
+        value: "AggregateRoot<Guid>"
+      - type: "output_contains"
+        value: "AddLocalEvent"
+      - type: "output_contains"
+        value: "IGuidGenerator"
+    rubric:
+      - "Keeps construction and state transitions valid through a protected ORM constructor, non-public setters, and aggregate methods."
+      - "Treats OrderLine as part of the Order boundary and references the separate Product aggregate by ProductId."
+      - "Explains that AggregateRoot<Guid> supplies ExtraProperties and ConcurrencyStamp while domain events are queued on the aggregate."
+    timeout: 240
+
+  - name: "Choose value object and domain service building blocks"
+    prompt: "Design an immutable ShippingAddress value object and an OrderManager domain service that enforces a cross-order customer limit through a repository. Show the important ABP base types, equality members, and service boundary."
+    expect_activation: true
+    assertions:
+      - type: "output_contains"
+        value: "ValueObject"
+      - type: "output_contains"
+        value: "GetAtomicValues"
+      - type: "output_matches"
+        pattern: "(DomainService|IDomainService)"
+      - type: "output_matches"
+        pattern: "OrderManager"
+    rubric:
+      - "Models ShippingAddress as immutable value semantics and yields every equality component from GetAtomicValues."
+      - "Uses a Manager-suffixed domain service for repository-dependent business logic and keeps DTO/presentation concerns outside it."
+    timeout: 180
+
+  - name: "Route EF persistence mapping away from domain modeling"
+    prompt: "Configure BookStoreDbContext with ConfigureByConvention, table mappings, indexes, AddAbpDbContext, default repositories, and an EF Core migration."
+    expect_activation: false
+    assertions:
+      - type: "output_contains"
+        value: "ConfigureByConvention"
+      - type: "output_matches"
+        pattern: "(AddAbpDbContext|AddDefaultRepositories)"
+    rubric:
+      - "Routes the provider-specific request to ef-core-integration instead of treating persistence mapping as aggregate design."
+      - "Keeps DbContext, repository registration, and migrations in the EF Core infrastructure concern."
+    timeout: 120

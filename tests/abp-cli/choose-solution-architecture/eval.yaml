@@ -1,0 +1,30 @@
+scenarios:
+  - name: "Choose an architecture before creating the solution"
+    prompt: "I'm starting a new ABP business app. Microservices might be needed later but not now. Which solution architecture and template should I create, and how do I keep a future microservice split cheap? I'll run the CLI afterward."
+    expect_activation: true
+    assertions:
+      - type: "output_matches"
+        pattern: "(modular monolith|layered)"
+      - type: "output_contains"
+        value: "Contracts"
+      - type: "output_matches"
+        pattern: "(integration service|distributed event)"
+      - type: "output_contains"
+        value: "abp-cli-commands"
+    rubric:
+      - "Recommends a modular monolith (layered app + modules) over day-one microservices, and reserves Contracts + integration services + distributed events + per-module DB ownership for a cheap later split."
+      - "Routes the actual creation command to abp-cli-commands rather than listing abp new parameters."
+    timeout: 240
+
+  - name: "Route the abp new command syntax to the CLI skill"
+    prompt: "Give me the exact abp new command and its parameters to scaffold a layered Angular solution with MongoDB."
+    expect_activation: false
+    assertions:
+      - type: "output_contains"
+        value: "abp new"
+      - type: "output_matches"
+        pattern: "(--ui-framework|--database-provider|-u angular|-d mongodb)"
+    rubric:
+      - "A request for the concrete abp new command and parameters belongs to abp-cli-commands, not the architecture-choice skill."
+      - "Provides the actual command rather than only a decision discussion."
+    timeout: 120

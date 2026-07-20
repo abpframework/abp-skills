@@ -1,0 +1,49 @@
+scenarios:
+  - name: "Create an independent transactional unit of work"
+    prompt: "Create src/Workers/TenantInvoiceProcessor.cs for code that already runs inside an ambient ABP unit of work but must commit each tenant independently. Use IUnitOfWorkManager correctly and explain requiresNew, transactional behavior, completion, and disposal on failure."
+    expect_activation: true
+    assertions:
+      - type: "file_exists"
+        path: "src/Workers/TenantInvoiceProcessor.cs"
+      - type: "output_contains"
+        value: "IUnitOfWorkManager"
+      - type: "output_matches"
+        pattern: 'requiresNew\s*:\s*true'
+      - type: "output_matches"
+        pattern: 'isTransactional\s*:\s*true'
+      - type: "output_contains"
+        value: "CompleteAsync"
+    rubric:
+      - "Starts a fresh unit of work because Begin without requiresNew would join the ambient scope."
+      - "Calls CompleteAsync only after the tenant work succeeds and does not claim Dispose commits the transaction."
+    timeout: 240
+
+  - name: "Explain HTTP transaction defaults and mid-scope flushing"
+    prompt: "Explain which HTTP methods are transactional under UnitOfWorkTransactionBehavior.Auto, how NonTransactionalUrls changes that, and when SaveChangesAsync is useful inside an application service with an int identity key. Clarify whether flushing commits the unit of work."
+    expect_activation: true
+    assertions:
+      - type: "output_contains"
+        value: "UnitOfWorkTransactionBehavior.Auto"
+      - type: "output_contains"
+        value: "NonTransactionalUrls"
+      - type: "output_contains"
+        value: "SaveChangesAsync"
+      - type: "output_matches"
+        pattern: '(GET|HttpMethod\.Get).*(non-transactional|without a transaction)|non-transactional.*GET'
+    rubric:
+      - "States that only GET is non-transactional by default, so POST, PUT, DELETE, PATCH, and QUERY are transactional when supported."
+      - "Uses SaveChangesAsync only to flush for the generated integer id and explains that a later transactional failure can still roll it back."
+    timeout: 180
+
+  - name: "Route soft-delete visibility to data filters"
+    prompt: "Return soft-deleted Books for one repository query, restore the previous filter state afterward, and show how to check whether ISoftDelete filtering is enabled."
+    expect_activation: false
+    assertions:
+      - type: "output_matches"
+        pattern: "Disable<ISoftDelete>|IDataFilter<ISoftDelete>"
+      - type: "output_matches"
+        pattern: "IsEnabled(<ISoftDelete>)?"
+    rubric:
+      - "Routes query visibility and scoped filter toggling to apply-data-filters."
+      - "Does not present transaction boundaries as the mechanism for including soft-deleted rows."
+    timeout: 120

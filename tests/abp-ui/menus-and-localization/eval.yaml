@@ -1,0 +1,42 @@
+scenarios:
+  - name: "Contribute a localized main-menu item"
+    prompt: "Add a Books item to the ABP main navigation menu, ordered before default order, visible only when BookStore.Books is granted. Define MyProjectResource, register its virtual JSON resource, and show matching en.json and de.json entries for Menu:Books plus CSharp consumption through L."
+    expect_activation: true
+    assertions:
+      - type: "output_contains"
+        value: "IMenuContributor"
+      - type: "output_contains"
+        value: "StandardMenus.Main"
+      - type: "output_contains"
+        value: "context.IsGrantedAsync"
+      - type: "output_contains"
+        value: "ApplicationMenuItem"
+      - type: "output_contains"
+        value: "AbpNavigationOptions"
+      - type: "output_contains"
+        value: "LocalizationResourceName(\"MyProject\")"
+      - type: "output_contains"
+        value: "AddVirtualJson"
+      - type: "output_contains"
+        value: "Menu:Books"
+      - type: "output_contains"
+        value: "Bücher"
+    rubric:
+      - "Gates contribution to StandardMenus.Main, checks the permission before adding a uniquely named item, and registers the contributor."
+      - "Defines and registers the localization resource and provides real culture-specific values in both requested JSON files."
+    timeout: 240
+
+  - name: "Route Angular route and pipe wiring to Angular UI"
+    prompt: "In an ABP Angular app, register a lazy-loaded Books feature route through RoutesService with its parent, icon, and order, guard it with requiredPolicy, and show its already-translated label through the abpLocalization pipe."
+    expect_activation: false
+    assertions:
+      - type: "output_contains"
+        value: "RoutesService"
+      - type: "output_contains"
+        value: "requiredPolicy"
+      - type: "output_contains"
+        value: "abpLocalization"
+    rubric:
+      - "Routes Angular framework wiring (RoutesService, requiredPolicy, abpLocalization pipe) to angular-ui."
+      - "Does not answer with an IMenuContributor for an Angular-specific routing request."
+    timeout: 120

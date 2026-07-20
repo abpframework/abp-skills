@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <Compile Include="../../Skills/CheckSimpleState.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.Authorization" />
+    <PackageReference Include="Volo.Abp.Authorization.Abstractions" />
+    <PackageReference Include="Volo.Abp.Core" />
+  </ItemGroup>
+</Project>

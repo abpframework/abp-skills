@@ -1,0 +1,38 @@
+scenarios:
+  - name: "Configure request auditing and entity change history"
+    prompt: "Configure ABP auditing to persist authenticated GET request logs, opt Book into entity change history while excluding Password changes, ignore /health URLs, and enrich each audit record with a custom claim. State the relevant defaults and storage requirement."
+    expect_activation: true
+    assertions:
+      - type: "output_contains"
+        value: "UseAuditing"
+      - type: "output_contains"
+        value: "AbpAuditingOptions"
+      - type: "output_matches"
+        pattern: "IsEnabledForAnonymousUsers\\s*=\\s*false"
+      - type: "output_matches"
+        pattern: "IsEnabledForGetRequests\\s*=\\s*true"
+      - type: "output_contains"
+        value: "EntityHistorySelectors"
+      - type: "output_contains"
+        value: "DisableAuditing"
+      - type: "output_contains"
+        value: "AuditLogContributor"
+      - type: "output_contains"
+        value: "IgnoredUrls"
+    rubric:
+      - "Configures request filters, URL exclusions, an entity-history opt-in, a property exclusion, and a registered contributor through the documented options."
+      - "States that entity change history is off by default and that persistence needs an IAuditingStore such as the Audit Logging module rather than SimpleLogAuditingStore alone."
+    timeout: 240
+
+  - name: "Route background execution to jobs and events"
+    prompt: "Create a retryable background job for invoice generation, enqueue it after an order event, and choose between a local event and a distributed event with outbox/inbox delivery."
+    expect_activation: false
+    assertions:
+      - type: "output_matches"
+        pattern: "AsyncBackgroundJob|IBackgroundJobManager"
+      - type: "output_matches"
+        pattern: "ILocalEventBus|IDistributedEventBus|outbox|inbox"
+    rubric:
+      - "Routes job execution and event delivery to background-jobs-and-events."
+      - "Does not substitute an audit scope for a background-job or event-bus implementation."
+    timeout: 120

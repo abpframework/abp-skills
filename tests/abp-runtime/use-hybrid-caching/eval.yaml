@@ -1,0 +1,46 @@
+scenarios:
+  - name: "Two-tier product cache with stampede protection"
+    prompt: "Implement an ABP application service that caches ProductCacheItem values in a two-tier cache (fast in-memory L1 plus a shared distributed L2) so frequent reads are served locally and the L2 is the source of truth on a miss, and so concurrent cache misses for the same id only run the factory once. Expire entries after 30 minutes using the ABP hybrid cache abstraction."
+    expect_activation: true
+    assertions:
+      - type: "output_contains"
+        value: "IHybridCache<ProductCacheItem>"
+      - type: "output_contains"
+        value: "GetOrCreateAsync"
+      - type: "output_matches"
+        pattern: "HybridCacheEntryOptions"
+    rubric:
+      - "Injects the typed ABP hybrid cache and uses GetOrCreateAsync with a factory for the miss path."
+      - "Supplies an expiration via HybridCacheEntryOptions and notes the L1/L2 (in-memory + distributed) tiers plus stampede protection."
+      - "Does not substitute IDistributedCache<T>/GetOrAddAsync for the hybrid-cache requirement."
+    timeout: 240
+
+  - name: "Configure and remove typed hybrid cache entries"
+    prompt: "Using ABP's hybrid cache, configure a global default expiration and a per-type expiration for a SessionCacheItem via AbpHybridCacheOptions, then show how to set a value and remove several keys at once with the typed hybrid cache."
+    expect_activation: true
+    assertions:
+      - type: "output_contains"
+        value: "AbpHybridCacheOptions"
+      - type: "output_contains"
+        value: "SetAsync"
+      - type: "output_matches"
+        pattern: "(RemoveManyAsync|RemoveAsync)"
+    rubric:
+      - "Configures AbpHybridCacheOptions (global and/or per-cache entry options) in a module Configure block."
+      - "Uses the typed hybrid cache SetAsync and a remove method (RemoveManyAsync for batches) with correct signatures."
+    timeout: 180
+
+  - name: "Plain single-tier distributed cache routes elsewhere"
+    prompt: "I just need a plain typed distributed cache for CountryCacheItem backed by Redis, using GetOrAddAsync to return a cached value or compute it on a miss. I do not need any local in-memory tier. Which ABP abstraction should I use?"
+    expect_activation: false
+    assertions:
+      - type: "output_contains"
+        value: "IDistributedCache<CountryCacheItem>"
+      - type: "output_contains"
+        value: "GetOrAddAsync"
+      - type: "output_matches"
+        pattern: "distributed-caching-and-locking"
+    rubric:
+      - "Routes a plain single-tier distributed cache request to the distributed-caching-and-locking skill."
+      - "Uses IDistributedCache<T> with GetOrAddAsync rather than the hybrid cache abstraction."
+    timeout: 120

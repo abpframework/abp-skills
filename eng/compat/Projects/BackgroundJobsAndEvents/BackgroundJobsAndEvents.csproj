@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <Compile Include="../../Skills/BackgroundJobsAndEvents.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.BackgroundJobs.Abstractions" />
+    <PackageReference Include="Volo.Abp.BackgroundWorkers" />
+    <PackageReference Include="Volo.Abp.Core" />
+    <PackageReference Include="Volo.Abp.Ddd.Domain" />
+    <PackageReference Include="Volo.Abp.EventBus.Abstractions" />
+    <PackageReference Include="Volo.Abp.Threading" />
+  </ItemGroup>
+</Project>
