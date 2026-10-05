@@ -68,3 +68,16 @@ scenarios:
       - "Routes cross-instance mutual exclusion and typed caching to distributed-caching-and-locking."
       - "Does not use a background job or event handler as a substitute for a distributed critical section."
     timeout: 120
+  - name: "Use a handler's services after commit"
+    prompt: "My ABP ILocalEventHandler registers an OnCompleted callback on the current unit of work. The callback reads a Lazy<INotificationSender> injected into the handler, and it throws ObjectDisposedException after the transaction commits. Why, and how do I fix it?"
+    expect_activation: true
+    assertions:
+      - type: "output_contains"
+        value: "OnCompleted"
+      - type: "output_contains"
+        value: "ObjectDisposedException"
+    rubric:
+      - "Explains that ABP disposes the handler's scope when HandleEventAsync returns, before the unit of work commits."
+      - "Does not treat reading the Lazy value early as a general fix, because the service itself or a dependency it uses may still be disposed with the handler's scope."
+      - "Passes plain values to the callback, including the tenant id, and resolves the sender from a new scope created with IServiceScopeFactory inside the callback, changing CurrentTenant to the event's tenant first, since the callback does not keep it."
+    timeout: 200

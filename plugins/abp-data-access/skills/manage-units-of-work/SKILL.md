@@ -154,10 +154,54 @@ public class CategoryAppService : ApplicationService, ICategoryAppService
 ### Useful `IUnitOfWork` members
 
 - `CompleteAsync()` / `RollbackAsync()` — commit or roll back a manually-started UOW.
-- `OnCompleted(Func<Task>)` — run a callback after the UOW successfully completes (changes are guaranteed saved).
+- `OnCompleted(Func<Task>)` — run a callback after the UOW successfully completes (changes are guaranteed saved). See the callback pattern below.
 - `Failed` / `Disposed` events — react to failure or disposal.
 - `Items` — a `Dictionary<string, object>` to stash arbitrary state scoped to this UOW.
 - `Options`, `Outer` — the options it was started with and the enclosing UOW (if nested).
+
+### Writing an `OnCompleted` callback
+
+The callback runs right after the commit, inside whatever DI scope and `CurrentTenant` are active when `CompleteAsync` runs; it keeps nothing from the moment it was registered. That matters when the code that registered it has already finished. A DI-registered local event handler is the common case: an event published inside a unit of work is handled during `CompleteAsync`, and the handler's scope is disposed and its event tenant restored before the commit. A disposed scope has disposed the disposable transient and scoped services it created (singletons are not), and a `Lazy<T>` built in it throws `ObjectDisposedException` on its first read. In such a callback, pass plain values, including the tenant id, and resolve services in a new scope:
+
+```csharp
+public class OrderShippedHandler : ILocalEventHandler<OrderShippedEto>, ITransientDependency
+{
+    private readonly IUnitOfWorkManager _unitOfWorkManager;
+    private readonly ICurrentTenant _currentTenant;
+    private readonly IServiceScopeFactory _scopeFactory;
+
+    public OrderShippedHandler(
+        IUnitOfWorkManager unitOfWorkManager,
+        ICurrentTenant currentTenant,
+        IServiceScopeFactory scopeFactory)
+    {
+        _unitOfWorkManager = unitOfWorkManager;
+        _currentTenant = currentTenant;
+        _scopeFactory = scopeFactory;
+    }
+
+    public Task HandleEventAsync(OrderShippedEto eventData)
+    {
+        var orderId = eventData.OrderId;
+        var tenantId = _currentTenant.Id; // the event's tenant while the handler runs
+
+        _unitOfWorkManager.Current!.OnCompleted(async () =>
+        {
+            using var scope = _scopeFactory.CreateScope();
+            var currentTenant = scope.ServiceProvider.GetRequiredService<ICurrentTenant>();
+            using (currentTenant.Change(tenantId))
+            {
+                var notifier = scope.ServiceProvider.GetRequiredService<IOrderNotifier>();
+                await notifier.NotifyShippedAsync(orderId);
+            }
+        });
+
+        return Task.CompletedTask;
+    }
+}
+```
+
+The handler relies on the event being published inside a unit of work (the default `PublishAsync` queues it there); `Current` is `null` when there is none. `IServiceScopeFactory` is a singleton with the Autofac integration, so a factory injected into a short-lived service still works inside the callback.
 
 ### ASP.NET Core
 
@@ -178,3 +222,4 @@ The UOW system is fully integrated via action/page filters — normally zero con
 - **`[UnitOfWork]` not intercepted** — the method must be `async` (`Task`/`Task<T>`), and `virtual` when the service is not injected over an interface.
 - **Over-calling `SaveChangesAsync()`** — changes flush automatically when the UOW ends; with a `Guid` PK you never need it just to read the id.
 - **`IUnitOfWorkManager.Current` is `null` when no UOW surrounds the call** — guard for it outside conventional scopes.
+- **Relying on a scope or tenant change that has already ended inside an `OnCompleted` callback** — a local event handler's scope and event tenant end before the commit, so its callback fails or runs as the tenant active at completion after the data is committed. Pass plain values and use a new scope with the tenant restored.

@@ -58,6 +58,8 @@ public class StockCountChangedHandler
 
 A single class can implement multiple `ILocalEventHandler<T>` interfaces.
 
+ABP resolves each DI-registered handler in a new DI scope and disposes that scope as soon as `HandleEventAsync` returns. While the handler runs, `CurrentTenant` is the event's tenant (from `IMultiTenant.TenantId` when the event carries one), and it is restored when the handler returns. Inside a unit of work both happen before the commit, so an `OnCompleted` callback the handler registers runs after its scope is gone and in the tenant active when the unit of work completes, not the event's tenant; write it as shown in manage-units-of-work.
+
 ### Entity change events
 
 ABP automatically publishes local events when entities are created/updated/deleted through a repository. Handle them with the generic event data types from `Volo.Abp.Domain.Entities.Events`. The changed entity is on the `.Entity` property:
@@ -305,6 +307,7 @@ The other providers (Quartz/TickerQ for jobs, Azure Service Bus/Rebus for the ev
 ## Common Pitfalls
 
 - **Implementing the handler interface is not enough** — the event bus only subscribes handlers already registered in DI. Add `ITransientDependency` or register the class explicitly, or it never fires.
+- **Using the handler's scope or tenant after commit** — an `OnCompleted` callback runs after the handler's scope is disposed and does not keep the event's tenant; pass it plain values and follow the callback pattern in manage-units-of-work.
 - **Resolving scoped services from a background worker's constructor** — each `DoWorkAsync` run gets a fresh scope; resolve scoped services from `workerContext.ServiceProvider`, not the constructor.
 - **Relying on CLR type names for distributed events** — producer and consumer must agree on a stable `[EventName]` on the ETO, or delivery breaks when type names differ across services.
 - **Running background jobs without a persistent store** — the in-memory store is only the framework *fallback* used when neither the Background Jobs module nor a custom `IBackgroundJobStore` is installed. The startup template already installs the module with a database store (per your ORM), which **is** production-usable; Hangfire/Quartz/RabbitMQ are optional alternative providers, not a requirement. In a **cluster**, still configure a distributed lock so jobs execute on one instance.

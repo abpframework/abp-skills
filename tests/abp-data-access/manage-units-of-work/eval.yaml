@@ -47,3 +47,15 @@ scenarios:
       - "Routes query visibility and scoped filter toggling to apply-data-filters."
       - "Does not present transaction boundaries as the mechanism for including soft-deleted rows."
     timeout: 120
+  - name: "Resolve services in an OnCompleted callback"
+    prompt: "A local event handler in my ABP app registers IUnitOfWorkManager.Current.OnCompleted to send an email after commit. Inside the callback it uses an IEmailSender that the handler had already resolved. Sometimes it throws ObjectDisposedException after the data is saved. What is wrong and how should the callback get its services?"
+    expect_activation: true
+    assertions:
+      - type: "output_contains"
+        value: "OnCompleted"
+      - type: "output_contains"
+        value: "IServiceScopeFactory"
+    rubric:
+      - "Explains that the callback runs after the commit, when the handler's DI scope and the disposable transient or scoped services it created are already disposed, and that the callback does not keep the handler's event tenant."
+      - "Passes plain values including the tenant id to the callback, creates a new scope inside it, changes CurrentTenant to that tenant, and resolves IEmailSender there instead of reusing the handler's instance."
+    timeout: 200

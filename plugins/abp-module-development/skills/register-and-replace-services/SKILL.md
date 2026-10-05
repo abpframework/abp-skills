@@ -2,7 +2,7 @@
 name: register-and-replace-services
 description: >
   Apply ABP's advanced dependency-injection conventions and controlled service customization.
-  USE FOR: precise conventional exposure and lifetime rules; ExposeServices and Dependency attributes; replacing registrations; OnExposing, OnRegistered, and OnActivated callbacks; LazyServiceProvider/IAbpLazyServiceProvider; IObjectAccessor; keyed or string-named services; preserving lifetimes while decorating a service.
+  USE FOR: precise conventional exposure and lifetime rules; ExposeServices and Dependency attributes; replacing registrations; OnExposing, OnRegistered, and OnActivated callbacks; LazyServiceProvider/IAbpLazyServiceProvider; keeping constructor graphs cheap with Lazy dependencies; IObjectAccessor; keyed or string-named services; preserving lifetimes while decorating a service.
   DO NOT USE FOR: defining an AbpModule, its dependencies, and basic lifecycle or lifetime-marker registration (use define-application-modules); adding cross-cutting method interception (use use-interceptors-and-dynamic-proxy); replacing services specifically inside an installed pre-built module together with its entity/UI extensions (use customize-application-modules).
 license: MIT
 ---
@@ -137,6 +137,36 @@ public class ReportBuilder : ITransientDependency
 
 Prefer constructor injection when the dependency is required. Lazy lookup hides dependencies and can defer lifetime/cycle failures until runtime.
 
+### Keep constructor graphs cheap
+
+A transient service is built again on every path that reaches it, together with its own constructor dependencies. When application services, managers, and registries inject each other, one request can build the same services many times over. Under load that can show up as high allocation and garbage-collection pauses that slow every endpoint at once, rather than as one slow query.
+
+- Inject a dependency that only some methods use lazily. With the Autofac integration (`UseAutofac()`), a `Lazy<T>` constructor parameter builds `T` on the first `.Value`, and later reads on the same holder reuse that instance. For a transient `T`, another holder builds its own; a scoped or singleton `T` keeps its registered sharing.
+- An injected `IEnumerable<T>` has already built every implementation before the constructor runs; enumerating it later saves nothing. Inject `Lazy<IEnumerable<T>>` when the collection is only needed on some paths.
+- Do not change a service to singleton or scoped only to save allocations; that changes its behavior, not just its cost.
+- Do not inject another application service to call one method. Move the shared part into a smaller class in the layer it belongs to (see separate-domain-and-application-logic).
+
+```csharp
+public class InvoiceAppService : ApplicationService, IInvoiceAppService
+{
+    private readonly IRepository<Invoice, Guid> _invoices;
+    private readonly Lazy<IInvoicePdfRenderer> _pdfRenderer; // only ExportAsync needs it
+
+    public InvoiceAppService(IRepository<Invoice, Guid> invoices, Lazy<IInvoicePdfRenderer> pdfRenderer)
+    {
+        _invoices = invoices;
+        _pdfRenderer = pdfRenderer;
+    }
+
+    public async Task<byte[]> ExportAsync(Guid id)
+    {
+        return await _pdfRenderer.Value.RenderAsync(await _invoices.GetAsync(id));
+    }
+}
+```
+
+A lazy dependency resolves from the scope that built its holder. Read it while that scope is still alive; see manage-units-of-work for callbacks that run after commit.
+
 ### Share an object with `IObjectAccessor<T>`
 
 ```csharp
@@ -204,6 +234,7 @@ Do not apply this exact pattern to factory, instance, or keyed descriptors; thei
 - Inspect `IServiceCollection` after configuration to confirm replacement count and lifetime.
 - For singleton/scoped services exposed through multiple types, verify all paths resolve the same instance within the expected scope.
 - Verify lazy/cached resolution twice, especially if the underlying service is transient.
+- For a `Lazy<T>` dependency, count constructions in a test: resolving the holder and calling methods that do not need it build nothing, and the first method that needs it builds it once.
 - For decoration, test behavior, exception propagation, and preservation of the original lifetime.
 
 ## Common Pitfalls
@@ -213,5 +244,7 @@ Do not apply this exact pattern to factory, instance, or keyed descriptors; thei
 - **Replacing under the wrong service type** — replace every injection path that consumers actually use.
 - **Treating `IAbpLazyServiceProvider` as a fresh resolve each time** — it caches resolved services, including transients.
 - **Using service location for required dependencies** — constructor injection makes requirements and cycles visible at startup.
+- **Injecting heavy services that most methods never use** — every transient in the graph is built on every resolve; make rarely used dependencies `Lazy<T>`.
+- **Expecting a late loop over an injected `IEnumerable<T>` to defer construction** — the container builds every element when it builds the holder; use `Lazy<IEnumerable<T>>`.
 - **Expecting a keyed-only class to resolve unkeyed** — add `[ExposeServices]` explicitly if both forms are required.
 - **Decorating a factory/instance descriptor as if it had `ImplementationType`** — branch by descriptor shape or use container-specific decoration.

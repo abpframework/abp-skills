@@ -36,3 +36,15 @@ scenarios:
     rubric:
       - "Routes to the use-interceptors-and-dynamic-proxy skill for method interception."
     timeout: 120
+  - name: "Keep a heavy constructor graph cheap"
+    prompt: "My ABP application service injects six other services, but only one of its methods uses a heavy PDF renderer. Profiling shows the service graph is rebuilt on every request. How should I inject the renderer so the other methods do not build it?"
+    expect_activation: true
+    assertions:
+      - type: "output_contains"
+        value: "Lazy<"
+      - type: "output_contains"
+        value: ".Value"
+    rubric:
+      - "Injects the rarely used dependency as Lazy<T> and reads .Value only in the method that needs it, noting that constructor Lazy<T> relies on the Autofac integration (UseAutofac)."
+      - "Explains that a transient dependency is built on every resolve of its holder."
+    timeout: 200
